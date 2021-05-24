@@ -1,4 +1,4 @@
-const viewReducer = (state = 'admin', action) => {
+const viewReducer = (state = 'login', action) => {
   switch (action.type) {
     case 'GET_VIEW': {
       return {

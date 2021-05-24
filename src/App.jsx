@@ -15,26 +15,83 @@ const App = () => {
   // const timeOff = useSelector(state => state.timeOffReducer.timeOff);
   const dispatch = useDispatch();
 
+  const admin = true
+  const name = 'Steve'
+
   console.log(schedule, view)
 
   useEffect(() => {
     dispatch(fetchSchedule());
-    dispatch(fetchView('employees'));
+    dispatch(fetchView('calendar'));
     // dispatch(fetchEmployees());
     // dispatch(fetchTimeOff());
   }, []);
 
-  if (view === 'admin') {
+/*
+=================
+***LOGIN PAGE***
+=================
+*/
+  if (view === 'login') {
     return (
       <>
-      Admin
+      login
       </>
     );
   }
-  if (view === 'employees') {
+
+/*
+===================
+***SCHEDULE PAGE***
+===================
+*/
+  if (view === 'schedule') { //Ramisa's
+    if (admin) {
+      return (
+        <>
+        schedule
+        </>
+      );
+
+    } else {
+      return (
+        <>
+        YOU CAN'T SEE ME
+        </>
+      )
+    }
+  }
+
+/*
+====================
+***EMPLOYEES PAGE***
+====================
+*/
+  if (view === 'employees') { //Tyler's
+    if (admin) {
+      return (
+        <>
+        Employee
+        </>
+      );
+    } else {
+      return  (
+        <>
+        NOT ADMIN
+        </>
+      )
+    }
+  }
+
+/*
+====================
+***CALENDAR PAGE***
+====================
+*/
+  if (view === 'calendar') { //Tomas's & Amber's
     return (
       <>
-      Employee
+      Calendar
       </>
     );
   }
