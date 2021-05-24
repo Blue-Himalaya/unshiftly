@@ -6,6 +6,7 @@ const db = require('../database/index.js');
 const moment = require('moment');
 const helperFunctions = require('./helperFunctions.js')
 
+
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
@@ -17,7 +18,7 @@ app.use(bodyParser.json());
 app.get('/adminSchedule', (req, res) => {
   const { dateStart, dateEnd } = req.params
   db.getAdminSchedule([dateStart, dateEnd], (results) => {
-    res.send(results)
+    res.send(results);
   })
 })
 
