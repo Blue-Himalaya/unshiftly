@@ -4,7 +4,8 @@
   "description": "Restaurant Scheduling Web App",
   "main": "server/start.js",
   "scripts": {
-    "test": "test",
+    "test": "npx jest",
+    "test:watch": "npx jest --watch --detectOpenHandles",
     "build": "npx webpack --watch",
     "server": "npx nodemon server/start.js"
   },

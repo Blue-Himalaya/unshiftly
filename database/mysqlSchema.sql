@@ -107,6 +107,8 @@ ALTER TABLE `employee_roles` ADD FOREIGN KEY (id_role) REFERENCES `roles` (`id`)
 ALTER TABLE `employee_schedule` ADD FOREIGN KEY (employee_role) REFERENCES `employee_roles` (`id`);
 ALTER TABLE `time_off` ADD FOREIGN KEY (id_employee) REFERENCES `employees` (`id`);
 ALTER TABLE `activity` ADD FOREIGN KEY (shift) REFERENCES `employee_schedule` (`id`);
+ALTER TABLE `employee_schedule` ADD FOREIGN KEY (employee_role_one) REFERENCES `employee_roles` (id);
+ALTER TABLE `employee_schedule` ADD FOREIGN KEY (employee_role_two) REFERENCES `employee_roles` (id);
 
 -- ---
 -- Table Properties
