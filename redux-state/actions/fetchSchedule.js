@@ -1,9 +1,17 @@
+const axios = require('axios');
 export const fetchSchedule = () => {
   return (dispatch) => {
-    dispatch({
-      type: 'GET_SCHEDULE',
-    });
-  }
+    axios.get('/scheduletest')
+      .then((res) => {
+        dispatch({
+          type: 'GET_SCHEDULE',
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 };
 
 export default fetchSchedule;

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 const db = require('../database/index.js');
+const moment = require('moment');
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -13,7 +14,7 @@ app.use(bodyParser.json());
 app.get('/adminSchedule', (req, res) => {
   const { dateStart, dateEnd } = req.params
   db.getAdminSchedule([dateStart, dateEnd], (results) => {
-    res.send(results)
+    res.send(results);
   })
 })
 
@@ -46,6 +47,10 @@ app.get('/scheduletest', (req, res) => {
       res.status(500);
       res.end();
     } else {
+      results.forEach((sched) => {
+        sched.day = moment(sched.datetime).format('dddd');
+        sched.datetime = moment(sched.datetime).format('MMMM Do YYYY, h:mm:ss a');
+      })
       res.send(results);
       res.status(200);
       res.end();
