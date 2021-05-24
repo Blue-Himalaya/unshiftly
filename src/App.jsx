@@ -1,30 +1,30 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import getFullSchedule from '../'
+import React, { useState, useEffect } from 'react';
+import { bindActionCreators } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
+import fetchSchedule from '../redux-state/actions/fetchSchedule.js';
+import fetchEmployees from '../redux-state/actions/fetchEmployees.js';
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const schedule = useSelector(state => state.scheduleReducers.fullSchedule);
-  const employees = useSelector(state => state.employeeReducers.name);
+  const schedule = useSelector(state => state.scheduleReducer.schedule);
+  const employees = useSelector(state => state.employeeReducer.employees);
+  const dispatch = useDispatch();
 
-
+  console.log(schedule, employees)
 
   useEffect(() => {
-    // fire off action to get schedule
-    getAuth();
-    getFullSchedule();
-    getEmployees();
-    getActivities();
+    dispatch(fetchSchedule());
+    dispatch(fetchEmployees());
   }, []);
 
-  if (isLoading) {
-    return <div></div>
-  }
   return (
     <>
     Hello
     </>
   )
 }
+
+// const App = () => {
+
+// }
 
 export default App;
