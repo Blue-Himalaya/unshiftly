@@ -4,30 +4,23 @@ const app = express();
 const path = require('path');
 const db = require('../database/index.js');
 const moment = require('moment');
+const helperFunctions = require('./helperFunctions.js')
+
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-//initial admin page load request
-  //query params need start and end date
-    //ASK RAYMOND WHAT DATES HE WANTS TO SEE WHEN HE LOADS THE PAGE
+//page first loads - admin
+  //dates of week, in the request params (start, end)
+  //shifts for each day
+    //name, time, color coded, employee phone number
+  //activity log (limit last 20)
 app.get('/adminSchedule', (req, res) => {
   const { dateStart, dateEnd } = req.params
   db.getAdminSchedule([dateStart, dateEnd], (results) => {
     res.send(results);
   })
 })
-
-//initial employee page load request
-app.get('/employeeSchedule', (req, res) => {
-  const { employeeID, dateStart, dateEnd } = req.params
-  db.getEmployeeSchedule([employeeID, dateStart, dateEnd], (results) => {
-    res.send(results)
-  })
-})
-
-//employee edit schedule view
-
 
 
 //employee shift give up/pick up
@@ -40,18 +33,15 @@ app.put('/employeeShiftUpdate', (req, res) => {
 
 
 app.get('/scheduletest', (req, res) => {
-  db.query(`select es.datetime, e.name, r.role from employee_schedule es, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id and es.datetime between '2020-10-11' and '2020-10-17' order by es.datetime asc`,
+  db.query(`select es.datetime, e.name, r.role, e.phone from employee_schedule es, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id and es.datetime between '2020-10-11' and '2020-10-17' order by es.datetime asc`,
   (error, results, fields) => {
     if (error) {
       res.send(error);
       res.status(500);
       res.end();
     } else {
-      results.forEach((sched) => {
-        sched.day = moment(sched.datetime).format('dddd');
-        sched.datetime = moment(sched.datetime).format('MMMM Do YYYY, h:mm:ss a');
-      })
-      res.send(results);
+      var final = helperFunctions.adminScheduleFormatting(results)
+      res.send(final);
       res.status(200);
       res.end();
     }
