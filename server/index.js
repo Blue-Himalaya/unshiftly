@@ -10,11 +10,9 @@ const helperFunctions = require('./helperFunctions.js')
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-//page first loads - admin
-  //dates of week, in the request params (start, end)
-  //shifts for each day
-    //name, time, color coded, employee phone number
-  //activity log (limit last 20)
+//initial admin page load request
+  //query params need start and end date
+    //ASK RAYMOND WHAT DATES HE WANTS TO SEE WHEN HE LOADS THE PAGE
 app.get('/adminSchedule', (req, res) => {
   const { dateStart, dateEnd } = req.params
   db.getAdminSchedule([dateStart, dateEnd], (results) => {
@@ -22,6 +20,15 @@ app.get('/adminSchedule', (req, res) => {
   })
 })
 
+//initial employee page load request
+app.get('/employeeSchedule', (req, res) => {
+  const { employeeID, dateStart, dateEnd } = req.params
+  db.getEmployeeSchedule([employeeID, dateStart, dateEnd], (results) => {
+    res.send(results)
+  })
+})
+
+//employee edit schedule view
 
 //employee shift give up/pick up
 app.put('/employeeShiftUpdate', (req, res) => {
