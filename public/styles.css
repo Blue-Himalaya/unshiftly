@@ -1,0 +1,19 @@
+#calendar-container {
+  display: grid;
+  grid-template-columns: 0.75fr 0.25fr;
+  grid-template-areas:
+  "a a a b"
+  "c c c b";
+  grid-area: a;
+
+}
+
+#calendar-contents {
+  display: grid;
+  grid-area: c;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+#activtyLog {
+  grid-area: b;
+}

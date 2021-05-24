@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
+import Calendar from './components/Calendar/Calendar.jsx';
 import fetchView from '../redux-state/actions/fetchView.js';
 import fetchSchedule from '../redux-state/actions/fetchSchedule.js';
 import fetchTimeOff from '../redux-state/actions/fetchTimeoff.js';
@@ -91,7 +92,7 @@ const App = () => {
   if (view === 'calendar') { //Tomas's & Amber's
     return (
       <>
-      Calendar
+      <Calendar />
       </>
     );
   }
