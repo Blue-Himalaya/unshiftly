@@ -5,7 +5,11 @@ const path = require('path');
 const db = require('../database/index.js');
 const moment = require('moment');
 const helperFunctions = require('./helperFunctions.js')
+<<<<<<< HEAD
 const dbHelpers = require('../database/queries.js')
+=======
+
+>>>>>>> 7b310cf5213b62bf2613b0bd446c619f6a4d82e6
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -16,6 +20,15 @@ app.use(bodyParser.json());
     //name, time, color coded, employee phone number
   //activity log (limit last 20)
 
+//initial employee page load request
+app.get('/employeeSchedule', (req, res) => {
+  const { employeeID, dateStart, dateEnd } = req.params
+  db.getEmployeeSchedule([employeeID, dateStart, dateEnd], (results) => {
+    res.send(results)
+  })
+})
+
+//employee edit schedule view
 
 //employee shift give up/pick up
 app.put('/employeeShiftUpdate', (req, res) => {
