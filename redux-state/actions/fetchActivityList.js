@@ -1,9 +1,10 @@
-// export const fetchEmployees = () => {
+// const const axios = require('axios');
+// export const fetchActivityList = () => {
 //   return (dispatch) => {
-//     axios.get('/')
+//     axios.get('/activityList')
 //       .then((res) => {
 //         dispatch({
-//           type: 'GET_EMPLOYEES',
+//           type: 'GET_ACTIVITIES',
 //           payload: res.data,
 //         });
 //       })
@@ -13,4 +14,4 @@
 //   };
 // };
 
-// export default fetchEmployees;
+// export default fetchActivityList;
