@@ -22,7 +22,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchSchedule());
-    dispatch(fetchView('calendar'));
+    dispatch(fetchView('schedule'));
     // dispatch(fetchEmployees());
     // dispatch(fetchTimeOff());
   }, []);
