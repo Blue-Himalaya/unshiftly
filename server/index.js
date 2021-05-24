@@ -5,11 +5,7 @@ const path = require('path');
 const db = require('../database/index.js');
 const moment = require('moment');
 const helperFunctions = require('./helperFunctions.js')
-<<<<<<< HEAD
 const dbHelpers = require('../database/queries.js')
-=======
-
->>>>>>> 7b310cf5213b62bf2613b0bd446c619f6a4d82e6
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
