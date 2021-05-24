@@ -5,5 +5,9 @@ const timeOffReducer = (state = [], action) => {
         timeOff: action.payload,
       }
     }
+    default:
+      return state
   }
 };
+
+export default timeOffReducer
