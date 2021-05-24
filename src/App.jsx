@@ -6,26 +6,50 @@ import fetchSchedule from '../redux-state/actions/fetchSchedule.js';
 import fetchTimeOff from '../redux-state/actions/fetchTimeoff.js';
 import fetchEmployees from '../redux-state/actions/fetchEmployees.js';
 import fetchActivityList from '../redux-state/actions/fetchActivityList.js';
+import fetchRoles from '../redux-state/actions/fetchRoles.js';
+import fetchAdmin from '../redux-state/actions/fetchAdmin.js';
+
+import Schedule from './components/Schedule/Schedule.jsx'
+import Header from './Header.jsx'
 
 const App = () => {
   const schedule = useSelector(state => state.scheduleReducer.schedule);
   // const activityList = useSelector(state => state.activityListReducer.activityList);
   const view = useSelector(state => state.viewReducer.view);
-  // const employees = useSelector(state => state.employeeReducer.employees);
-  // const timeOff = useSelector(state => state.timeOffReducer.timeOff);
+  const admin = useSelector(state => state.adminReducer.admin);
+  const employees = useSelector(state => state.employeeReducer.employees);
+  const timeOff = useSelector(state => state.timeOffReducer.timeOff);
+  const roles = useSelector(state => state.rolesReducer.roles);
   const dispatch = useDispatch();
 
-  const admin = true
+  // const admin = true
   const name = 'Steve'
 
-  console.log(schedule, view)
+  if (schedule && employees && timeOff && roles && admin) {
+    console.log('SCHEDULE:', schedule)
+    console.log('TIMEOFF:', timeOff)
+    console.log('EMPLOYEES:', employees)
+    console.log('ROLES:', roles)
+    console.log('ADMIN:', admin)
+  }
 
   useEffect(() => {
     dispatch(fetchSchedule());
-    dispatch(fetchView('schedule'));
-    // dispatch(fetchEmployees());
-    // dispatch(fetchTimeOff());
+    dispatch(fetchEmployees());
+    dispatch(fetchTimeOff());
+    dispatch(fetchRoles())
+    dispatch(fetchView('calendar'));
+    dispatch(fetchAdmin(true));
   }, []);
+
+  if (!view || !schedule || !employees || !timeOff || !roles) {
+    return (
+      <>
+      <Header/>
+      Loading...
+      </>
+    );
+  }
 
 /*
 =================
@@ -35,6 +59,7 @@ const App = () => {
   if (view === 'login') {
     return (
       <>
+      <Header/>
       login
       </>
     );
@@ -49,13 +74,15 @@ const App = () => {
     if (admin) {
       return (
         <>
-        schedule
+          <Header/>
+          <Schedule />
         </>
       );
 
     } else {
       return (
         <>
+        <Header/>
         YOU CAN'T SEE ME
         </>
       )
@@ -71,12 +98,14 @@ const App = () => {
     if (admin) {
       return (
         <>
+        <Header/>
         Employee
         </>
       );
     } else {
       return  (
         <>
+        <Header/>
         NOT ADMIN
         </>
       )
@@ -91,13 +120,15 @@ const App = () => {
   if (view === 'calendar') { //Tomas's & Amber's
     return (
       <>
+      <Header/>
       Calendar
       </>
     );
   }
   return (
     <div>
-      Hey
+      <Header/>
+      Loading...
     </div>
   );
 }
