@@ -4,14 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import fetchSchedule from '../../../redux-state/actions/fetchSchedule.js';
 
 const Schedule = () => {
-  const schedule = useSelector(state => state.scheduleReducer.schedule);
-  const dispatch = useDispatch();
+  // const schedule = useSelector(state => state.scheduleReducer.schedule);
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchSchedule());
-    // page load, then immediate schedule view
-    //
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchSchedule());
+  //   // page load, then immediate schedule view
+  //   //
+  // }, []);
 }
 // const schedule_example_two =
 // [

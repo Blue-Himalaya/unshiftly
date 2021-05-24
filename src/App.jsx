@@ -7,14 +7,14 @@ import fetchEmployees from '../redux-state/actions/fetchEmployees.js';
 
 const App = () => {
   const schedule = useSelector(state => state.scheduleReducer.schedule);
-  const employees = useSelector(state => state.employeeReducer.employees);
+  // const employees = useSelector(state => state.employeeReducer.employees);
   const dispatch = useDispatch();
 
-  console.log(schedule, employees)
+  console.log(schedule)
 
   useEffect(() => {
     dispatch(fetchSchedule());
-    dispatch(fetchEmployees());
+    // dispatch(fetchEmployees());
   }, []);
 
   return (
