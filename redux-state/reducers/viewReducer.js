@@ -1,8 +1,10 @@
 const initialState = {
   view: 'login',
-  isAuthenticated: false,
+  isAuthenticated: '',
+  admin: '',
 }
 const viewReducer = (state = initialState, action) => {
+  console.log(action.type)
   switch (action.type) {
     case 'GET_VIEW': {
       return {
@@ -14,6 +16,7 @@ const viewReducer = (state = initialState, action) => {
       return {
         view: 'calendar',
         isAuthenticated: true,
+        admin: action.payload === 'manager',
       }
     }
     case 'AUTH_REQUESTED': {

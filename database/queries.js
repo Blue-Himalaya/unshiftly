@@ -41,19 +41,21 @@ const updateActivities = (id, type, callback) => {
    getActivities(callback);
 }
 
-// const authenticateUser = (username, password, callback) => {
-//   const mockQuery = {
-//     username: 'example@email.com',
-//     password: '$2b$05$rcLWLmTW19u0nhsNZuV6C.uDeNv2fYGLDqxFK/7nuttuY6/x99N2W',
-//   }
-//   bcrypt.compare(password, password, function(err, result) {
-//     if (err) throw err;
-//     if (result === false) {
-//       callback('INVALID COMBINATION');
-//     }
-//     callback(err, result);
-//   });
-// };
+const authenticateUser = (username, callback) => {
+  const queryString = `SELECT * FROM employees WHERE name = '${username}'`;
+  connection.query(queryString, (err, results) => {
+    callback(null, results);
+  });
+};
+
+const checkIfAdmin = (id, callback) => {
+  const queryString = `SELECT role FROM roles r INNER JOIN employee_roles er ON r.id = er.id_role WHERE id_employee = ${id} `;
+  connection.query(queryString, (err, results) => {
+    callback(null, results[0].role);
+  });
+};
+
+
 
 // const updateSchedule = () => {
 
@@ -77,7 +79,9 @@ module.exports ={
   getRolesWithColors,
   getActivities,
   updateActivities,
-  // authenticateUser,
+  authenticateUser,
+  checkIfAdmin,
 }
 
+// INSERT INTO employees (name, phone, birthday, password) VALUES ('example@email.com', 5166660124, '1997-01-06', '$2y$10$niNB9kx6k.lnLgbLn8yfr.oUzIM4xYV90I6nma3qED3nifn6oWdkK')
 

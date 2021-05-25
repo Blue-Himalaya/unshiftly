@@ -1,11 +1,10 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const logger = ('morgan');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const LocalStrategy = require('passport-local');
-const passportJWT = require('passport-jwt');
-const jwt = require('jsonwebtoken');
+const passportLocal = require('passport-local').Strategy;
+const expressSession = require('express-session');
 const app = express();
 const path = require('path');
 const db = require('../database/index.js');
@@ -16,63 +15,44 @@ const dotenv = require('dotenv');
 const bcrypt = require('bcrypt');
 dotenv.config();
 
-const user = {
-  id: '1',
-  email: 'example@email.com',
-  password: 'password',
-};
-
-app.use(cookieParser());
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-JWTStrategy = passportJWT.Strategy;
+app.use(cors({
+  origin: 'http://localhost:8080',
+  credentials: true,
+}));
 
+app.use(expressSession({
+  secret: process.env.secretOrKey,
+  resave: true,
+  saveUninitialized: true,
+}));
+
+app.use(cookieParser(process.env.secretOrKey));
 app.use(passport.initialize());
+app.use(passport.session());
+const passportAuth = require('./passportConfig');
+passportAuth(passport);
 
-passport.use(new LocalStrategy({
-  usernameField: 'email',
-}, (email, password, done) => {
-  if (email === user.email && password === user.password) {
-    return done(null, user);
-  }
-}));
+app.post('/login', (req, res, next) => {
+  console.log(req)
+  passport.authenticate('local', (err, user, info) => {
+    console.log(err, user, info)
+    if (err) throw err;
+    if (!user) res.send('No User Exists');
+    else {
+      req.logIn(user, err => {
+        if (err) throw err;
+        res.send({auth: 'success!', role: user[0].role});
+      });
+    }
+  })(req, res, next);
+});
 
-passport.use(new JWTStrategy({
-  jwtFromRequest: passportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.secretOrKey,
-}, (jwt_payload, done) => {
-  if (user.id === jwt_payload.user._id) {
-    return done(null, user)
-  }
-  return done(null, false, {
-    message: 'Token not matched'
-  });
-}));
-
-// app.post('/login', (req, res) => {
-//   const { username, password } = req.body;
-
-  // bcrypt.genSalt(5, function(err, salt) {
-  //   bcrypt.hash(password, salt, function(err, hash) {
-  //     // passport.authenticate('local', (err, { username, password }) => {
-  //       dbHelpers.authenticateUser(username, hash, (err, isAuth) => {
-  //         if (err) {
-  //           console.log(err)
-  //         }
-  //         console.log(password)
-  //       })
-  //     // })
-  //    });
-  // });
-// })
-
-app.get('/secret', passport.authenticate('jwt', { session: false }), (req, res) => {
-  if (!req.user) {
-    res.send('nothing');
-  }
+app.get('/user', (req, res) => {
   res.send(req.user);
-})
+});
 
 //page first loads - admin
   //dates of week, in the request params (start, end)
@@ -146,10 +126,6 @@ app.put('/updateActivities', (req, res) => {
     res.send(results);
   });
 })
-
-
-
-
 
 
 module.exports = app;

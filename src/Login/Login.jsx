@@ -1,26 +1,16 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import userLoggedIn from '../../redux-state/actions/loginActivity.js';
 
 const Login = () => {
+  const authenticated = useSelector(state => state.viewReducer.isAuthenticated);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(userLoggedIn(e.target.email.value, e.target.password.value));
   }
-// create user
-  // when
-// login user
-  // send request to server to
-  // check if user exists
-  // if user exists, log them in
-  // with relative credentials
-  // (update redux state to some shit)
-  // if user does not exist
-  // throw err; user does not exist
   return (
     <div>
       <h1>Login</h1>
@@ -34,6 +24,7 @@ const Login = () => {
             Password:
             <input name="password" type="password" placeholder="Password" />
           </label>
+          {authenticated === false ? 'INVALID COMBO' : <></>}
         </div>
         <button type="submit">Log in</button>
       </form>

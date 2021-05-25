@@ -17,15 +17,10 @@ const ActivityList = () => {
       );
     }
 
-
   const dispatch = useDispatch();
 
-  console.log(Object.values(schedule));
-  console.log(activities)
-
   const pickUpShift = (e) => {
-    dispatch(updateActivities(e.target.name, 'pending'));
-    e.target.innerHTML = 'Pending';
+    dispatch(updateActivities(e.target.name, 'scheduled'));
     e.target.disabled = true;
   };
 
@@ -35,10 +30,7 @@ const ActivityList = () => {
         Loading...
       </div>
     );
-  }
-
-  // don't know if i should make a
-  // table for notifications
+  };
 
   if (admin === true) {
     return (
@@ -57,7 +49,6 @@ const ActivityList = () => {
           Phone: {shift.phone}
           <br />
           <div id="pickup-shift-btn">
-          {/** activity.pending ?  <button disabled={true} name={shift.name} onClick={(e) => pickUpShift(e)}>Pick Up Shift</button> : <button disabled={false} name={shift.name} onClick={(e) => pickUpShift(e)}>Pick Up Shift</button> */}
           <button disabled={false} name={shift.name} onClick={(e) => pickUpShift(e)}>Pick Up Shift</button>
           </div>
           </li>
@@ -97,8 +88,6 @@ const ActivityList = () => {
   // for (const x in schedule) {
   //   getProps(x);
   // }
-
-
 
   // if admin view
   // alerts should be present...

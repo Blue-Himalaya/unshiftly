@@ -7,26 +7,22 @@ const userLoggedIn = (username, password) => {
     });
     axios.post('/login', { username, password })
       .then((res) => {
-        console.log(res)
-        // localStorage.setItem('token', res.data.token);
-        // dispatch({
-        //   type: 'IS_AUTHENTICATED',
-        //   payload: {
-        //     is_authenticated: true,
-        //     view: 'calendar',
-        //     admin: res.data.admin,
-        //   }
-        // })
+        if (res.data.auth === 'success!') {
+          dispatch({
+            type: 'IS_AUTHENTICATED',
+            payload: res.data.role,
+          });
+        }
+        if (res.data === 'No User Exists') {
+          dispatch({
+            type: 'AUTH_FAILED',
+          });
+        }
       })
       .catch((err) => {
-        dispatch({
-          type: 'AUTH_FAILED',
-          payload: {
-            view: 'login',
-          }
-        })
-      })
-  }
-}
+        throw err;
+      });
+  };
+};
 
 export default userLoggedIn;
