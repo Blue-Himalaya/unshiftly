@@ -45,9 +45,14 @@ body, html {
 #columns {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 50px repeat(auto-fit);
+  /* grid-template-rows: 50px repeat(auto-fit); */
 }
 
 #activtyLog {
   grid-area: b;
+}
+
+.shift-block {
+  width: 100px;
+  height: 100px;
 }
