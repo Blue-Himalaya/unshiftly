@@ -8,7 +8,7 @@ $colors: (
 
 $desktop: 840px;
 
-@mixin desktop {
+@mixin mobile {
   @media (max-width: #{$desktop}) {
     @content;
   }
@@ -32,9 +32,25 @@ body {
   font-size: xx-large;
 }
 
-.day-table:not(.today),
-.table-elem-top.column:not(.today) {
-  @include desktop {
-    display: none;
-  }
+.schedule {
+
+  // --------
+  // ALL VIEW
+  // --------
+
+  // ------------
+  // DESKTOP VIEW
+  // ------------
+
+  // -----------
+  // MOBILE VIEW
+  // -----------
+
+  // .day-table:not(.today),
+  // .table-elem-top.column:not(.today) {
+  //   @include mobile {
+  //     display: none;
+  //   }
+  // }
 }
+

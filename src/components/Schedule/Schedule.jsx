@@ -1,8 +1,23 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useLayoutEffect} from 'react'
 import EmployeeRow from './EmployeeRow.jsx'
 import { useSelector, useDispatch } from 'react-redux';
 
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+  return size;
+}
+
 const Schedule = (props) => {
+
+  // INFORMATION FROM THE DATABASE
   const [table, updateTable] = useState(null)
   const [colors, updateColors] = useState(null)
   const schedule = useSelector(state => state.scheduleReducer.schedule);
@@ -20,6 +35,9 @@ const Schedule = (props) => {
   const columnDays = ['Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu']
   var columnDates = ['11', '12', '13', '14', '15', '16', '17']
 
+  // WINDOW SIZE
+  const [width, height] = useWindowSize();
+
   // LIST OF THREE DAY VIEW FOR MOBILE
   var threeDays = []
   if (today.getDay() < 2 || today.getDay() > 4) {
@@ -29,9 +47,7 @@ const Schedule = (props) => {
     threeDays = days.slice(4, 7)
   }
 
-
-
-
+  // CREATE DATA STRUCTURE FOR THE CALENDAR ONLY WHEN ALL DATA EXISTS
   useEffect(() => {
     if (schedule && employees && timeOff && roles) {
 
@@ -65,7 +81,6 @@ const Schedule = (props) => {
         })
       }
 
-
       // SET COLORS FROM ARRAY OF OBJECT TO OBJECT OF COLORS
       var newColors = {}
       roles.map(role => {
@@ -81,67 +96,40 @@ const Schedule = (props) => {
     }
   }, [])
 
+  var gridTemplateColumns = (width > props.mobileWidth)
+  ? '1fr 1fr 1fr 1fr 1fr 1fr 1fr'
+  : '1fr 1fr 1fr'
+
+  var gridTemplateColumnsTable = (width > props.mobileWidth)
+  ? '1fr 7fr'
+  : 'auto'
+
   return (
     <>
     {table !== null ?
-    <div>
+    <div className='schedule'>
       <div className='month'> {'<'} Oct 2019 {'>'}</div>
 
-      <div className='table'>
-        <div className='table-elem-top'></div>
+      <div className='table'
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr ' + gridTemplateColumns
+      }}>
+        {width > props.mobileWidth ? <div className='table-elem-top'></div> : null}
 
         {columnDays.map((day, i) => {
-          var isToday = ''
-          if (threeDays.indexOf(days[i]) !== -1) {
-            isToday = 'today'
+          if ( width > props.mobileWidth || threeDays.indexOf(days[i]) !== -1) {
+            return(
+              <div key={`table-elem-top-${day}`} className={`table-elem-top column`}>
+                <div className='col-day'>{day}</div>
+                <div className='col-date'>{columnDates[i]}</div>
+              </div>
+            ) // END OF COLUMN HEADER RETURN
           }
 
-          return(
-            <div key={`table-elem-top-${day}`} className={`table-elem-top column ${isToday}`}>
-              <div className='col-day'>{day}</div>
-              <div className='col-date'>{columnDates[i]}</div>
-            </div>
-
-          )
-
         })}
-        {/*
 
-        <div className='table-elem-top column'>
-          <div className='col-day'>Fri</div>
-          <div className='col-date'>11</div>
-        </div>
-
-        <div className='table-elem-top column'>
-          <div className='col-day'>Sat</div>
-          <div className='col-date'>12</div>
-        </div>
-
-        <div className='table-elem-top column'>
-          <div className='col-day'>Sun</div>
-          <div className='col-date'>13</div>
-        </div>
-
-        <div className='table-elem-top column'>
-          <div className='col-day'>Mon</div>
-          <div className='col-date'>14</div>
-        </div>
-
-        <div className='table-elem-top column'>
-          <div className='col-day'>Tue</div>
-          <div className='col-date'>15</div>
-        </div>
-
-        <div className='table-elem-top column'>
-          <div className='col-day'>Wed</div>
-          <div className='col-date'>16</div>
-        </div>
-
-        <div className='table-elem-top column'>
-          <div className='col-day'>Thu</div>
-          <div className='col-date'>17</div>
-        </div> */}
-      </div>
+      </div> {/* END OF COLUMN HEADERS */}
 
       {employees.map((employee) => {
         return <EmployeeRow
@@ -152,13 +140,22 @@ const Schedule = (props) => {
         days={days}
         times={times}
         threeDays={threeDays}
+        width={width}
+        mobileWidth={props.mobileWidth}
+        gridTemplateColumns={gridTemplateColumns}
+        gridTemplateColumnsTable={gridTemplateColumnsTable}
         />
       })}
 
-      <div className='publish'><div className='button'><button>Publish</button></div></div>
+      {/* PUBLISH BUTTON */}
+      <div className='publish'>
+        <div className='button'>
+          <button>Publish</button>
+        </div>
+      </div>
 
-    </div>
-    : <div>NO</div>}
+    </div> // END OF SCHEDULE PAGE
+    : <div>Loading...</div>}
     </>
   )
 }

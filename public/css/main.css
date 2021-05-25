@@ -15,11 +15,4 @@ body {
   color: white;
   font-size: xx-large;
 }
-
-@media (max-width: 840px) {
-  .day-table:not(.today),
-  .table-elem-top.column:not(.today) {
-    display: none;
-  }
-}
 /*# sourceMappingURL=main.css.map */
