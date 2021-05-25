@@ -1,67 +1,68 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const Shifts = () => {
   const schedule = useSelector(state => state.scheduleReducer.schedule[0]);
-  console.log(schedule);
+  console.log(schedule)
 
-  let friShifts = schedule.Friday.map((shift) => {
-    return [shift.datetime, shift.name, shift.phone, shift.role]
-  });
+  // Get shifts into an object of arrays
+  // let getShifts = () => {
+  //   var allShifts = {
+  //     'Friday': [],
+  //     'Saturday': [],
+  //     'Sunday': [],
+  //     'Monday': [],
+  //     'Tuesday': [],
+  //     'Wednesday': [],
+  //     'Thursday': []
+  //   };
+  //   for (var day in schedule) {
+  //     var shifts = schedule[day];
+  //     shifts.forEach((shift) => {
+  //       allShifts[day].push([shift.datetime, shift.name, shift.role])
+  //     })
+  //   }
+  //   return allShifts;
+  // }
+  // let shifts = getShifts();
+  // // console.log(shifts)
 
-  let satShifts = schedule.Saturday.map((shift) => {
-    return [shift.datetime, shift.name, shift.phone, shift.role]
-  });
+  const handleClick = (e) => {
+    // e.stopPropagation();
+    console.log(e.target);
+    console.log(e.target.value)
+  }
 
-  let sunShifts = schedule.Sunday.map((shift) => {
-    return [shift.datetime, shift.name, shift.phone, shift.role]
-  });
-
-  let monShifts = schedule.Monday.map((shift) => {
-    return [shift.datetime, shift.name, shift.phone, shift.role]
-  });
-
-  let tueShifts = schedule.Tuesday.map((shift) => {
-    return [shift.datetime, shift.name, shift.phone, shift.role]
-  });
-
-  let wedShifts = schedule.Wednesday.map((shift) => {
-    return [shift.datetime, shift.name, shift.phone, shift.role]
-  });
-
-  let thuShifts = schedule.Thursday.map((shift) => {
-    return [shift.datetime, shift.name, shift.phone, shift.role]
-  });
-  console.log(friShifts);
 
   return(
     <div id="columns">
       <div>
-        {friShifts}
+        {schedule.Friday.map((shift) => (
+          <div onClick={(e) => handleClick(e)} value={shift.phone}>
+            {shift.datetime} <br/>
+            {shift.name} <br />
+          </div>
+        ))}
       </div>
       <div>
-        {satShifts}
+        {/* {shifts.Saturday.map(shift =>
+          <div>{shift}</div>)} */}
       </div>
-      {/* <div>Sat=========================</div> */}
-      {/* <div>Sun=========================</div> */}
       <div>
-        {sunShifts}
+        {/* {shifts.Sunday} */}
       </div>
-      {/* <div>Mon=========================</div> */}
       <div>
-        {monShifts}
+        {/* {shifts.Monday} */}
       </div>
-      {/* <div>Tue=========================</div> */}
       <div>
-        {tueShifts}
+        {/* {shifts.Tuesday} */}
       </div>
-      {/* <div>Wed=========================</div> */}
       <div>
-        {wedShifts}
+        {/* {shifts.Wednesday} */}
       </div>
-      {/* <div>Thu=========================</div> */}
       <div>
-        {thuShifts}
+        {/* {shifts.Thursday} */}
       </div>
     </div>
   )
