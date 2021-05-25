@@ -24,9 +24,18 @@ const getRolesWithColors = (callback) => {
   })
 }
 
+const changeRoleColor = (roleColorObj, callback) => {
+  const queryString = `update roles set color = '${roleColorObj.color}' where role = '${roleColorObj.role}'`
+  connection.query(queryString, (err, response) => {
+    if(err) console.log(err)
+    else callback(response)
+  })
+}
+
 
 module.exports ={
   getAllActiveEmployees,
   getAllRecurringTimeOff,
-  getRolesWithColors
+  getRolesWithColors,
+  changeRoleColor
 }
