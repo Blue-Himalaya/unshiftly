@@ -26,13 +26,14 @@ const App = () => {
 
   // const admin = true
   const name = 'Steve'
+  const mobileWidth = 500
 
   if (schedule && employees && timeOff && roles && admin) {
-    console.log('SCHEDULE:', schedule)
-    console.log('TIMEOFF:', timeOff)
-    console.log('EMPLOYEES:', employees)
-    console.log('ROLES:', roles)
-    console.log('ADMIN:', admin)
+    // console.log('SCHEDULE:', schedule)
+    // console.log('TIMEOFF:', timeOff)
+    // console.log('EMPLOYEES:', employees)
+    // console.log('ROLES:', roles)
+    // console.log('ADMIN:', admin)
   }
 
   useEffect(() => {
@@ -78,7 +79,7 @@ const App = () => {
       return (
         <>
           <Header/>
-          <Schedule />
+          <Schedule mobileWidth={mobileWidth}/>
         </>
       );
 
