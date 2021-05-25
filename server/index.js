@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 const db = require('../database/index.js');
-const q = require('../database/query.js');
 const moment = require('moment');
 const helperFunctions = require('./helperFunctions.js')
 const dbHelpers = require('../database/queries.js')
