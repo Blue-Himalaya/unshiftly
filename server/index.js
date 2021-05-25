@@ -43,16 +43,14 @@ app.post('/login', (req, res, next) => {
     if (!user) res.send('No User Exists');
     else {
       req.logIn(user, err => {
+        console.log(user)
         if (err) throw err;
-        res.send({ auth: 'success!', role: user[0].role });
+        res.send({ auth: 'success!', role: user[0].role, user: user[0].name });
       });
     }
   })(req, res, next);
 });
 
-app.get('/user', (req, res) => {
-  res.send(req.user);
-});
 
 //page first loads - admin
   //dates of week, in the request params (start, end)
@@ -120,7 +118,7 @@ app.post('/schedule', (req, res) => {
   })
 })
 
-module.exports = app;
+// module.exports = app;
 app.get('/allActiveEmployees', (req, res) => {
   dbHelpers.getAllActiveEmployees((results) => {
     var final = helperFunctions.employeeRolesFormatting(results)
