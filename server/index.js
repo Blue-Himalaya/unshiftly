@@ -59,6 +59,7 @@ app.get('/allRolesAndColors', (req, res) => {
   })
 })
 
+app.get('/login', (req, res) => {
 
 //attach role: role, color: new_color_name to params
 app.put('/updateRoleColor', (req, res) => {
