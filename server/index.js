@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 const db = require('../database/index.js');
+const q = require('../database/query.js');
 const moment = require('moment');
 const helperFunctions = require('./helperFunctions.js')
 const dbHelpers = require('../database/queries.js')
@@ -40,6 +41,15 @@ app.get('/scheduletest', (req, res) => {
   })
 })
 
+app.post('/schedule', (req, res) => {
+  dbHelpers.postSchedule(req.body, (resultsFromSched) => {
+    res.send(resultsFromSched);
+    res.status(200);
+    res.end();
+  })
+})
+
+module.exports = app;
 app.get('/allActiveEmployees', (req, res) => {
   dbHelpers.getAllActiveEmployees((results) => {
     var final = helperFunctions.employeeRolesFormatting(results)
@@ -58,8 +68,6 @@ app.get('/allRolesAndColors', (req, res) => {
     res.send(results)
   })
 })
-
-app.get('/login', (req, res) => {
 
 //attach role: role, color: new_color_name to params
 app.put('/updateRoleColor', (req, res) => {
