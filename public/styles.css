@@ -1,17 +1,51 @@
-#calendar-container {
-  display: grid;
-  grid-template-columns: 0.75fr 0.25fr;
-  grid-template-areas:
-  "a a a b"
-  "c c c b";
-  grid-area: a;
-
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
 }
 
-#calendar-contents {
+.header {
+  padding: 17px 25px;
+  height: 41px;
+  background-color:rgb(29, 44, 103);
+  color: white;
+  font-size: xx-large;
+}
+
+.view-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.cal-container {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 100%;
+}
+
+.cal-contents-cont {
+  display: block;
+}
+
+.activity-grid {
   display: grid;
-  grid-area: c;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+  "a a a a a a a b"
+  "c c c c c c c b";
+}
+
+.activity-log-container {
+  display: flex;
+  width: 30%;
+  margin-left: 50px;
+}
+
+#calendar-dates {
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 50px repeat(auto-fit);
 }
 
 #activtyLog {

@@ -8,18 +8,29 @@ const Calendar = () => {
   console.log(schedule)
 
   return (
-    <div id="calendar-container">
-      <h1>Calendar</h1>
-      <div id="calendar-contents">
-        <div>Fri</div>
-        <div>Sat</div>
-        <div>Sun</div>
-        <div>Mon</div>
-        <div>Tue</div>
-        <div>Wed</div>
-        <div>Thu</div>
+    <div className="view-container">
+      <div className="cal-container">
+        <h1>Calendar</h1>
+        <div className="cal-contents-cont">
+            <div id="calendar-dates">
+              <div>Fri</div>
+              <div>Sat</div>
+              <div>Sun</div>
+              <div>Mon</div>
+              <div>Tue</div>
+              <div>Wed</div>
+              <div>Thu</div>
+            </div>
+            <div>shifts</div>
+          </div>
       </div>
-      <ActivityList />
+
+        <div className="activity-log-container">
+          <div className="activity-grid">
+            <ActivityList />
+          </div>
+        </div>
+
     </div>
   );
 }

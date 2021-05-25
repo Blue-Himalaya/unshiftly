@@ -70,7 +70,9 @@ app.get('/allRolesAndColors', (req, res) => {
   })
 })
 
+app.get('/login', (req, res) => {
 
+});
 
 
 

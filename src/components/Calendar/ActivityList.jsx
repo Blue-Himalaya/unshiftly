@@ -5,8 +5,8 @@ const ActivityList = () => {
   const schedule = useSelector(state => state.scheduleReducer.schedule);
 
   const addShift = (e) => {
-    console.log(e.target.name)
-  }
+    console.log(e.target.name);
+  };
 
   if (schedule === undefined) {
     return (
