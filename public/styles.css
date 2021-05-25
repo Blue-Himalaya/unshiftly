@@ -42,7 +42,7 @@ body, html {
   margin-left: 50px;
 }
 
-#calendar-dates {
+#columns {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 50px repeat(auto-fit);
