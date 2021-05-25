@@ -3,4 +3,3 @@ public/bundle.js
 package-lock.json
 .env
 node_modules
-scheduleData

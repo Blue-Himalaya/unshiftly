@@ -79,7 +79,21 @@ CREATE TABLE `time_off` (
   `id_employee` INTEGER,
   `date` DATE,
   `morning` TINYINT,
-  `night` TINYINT,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'recurring_time_off'
+--
+-- ---
+
+DROP TABLE IF EXISTS `recurring_time_off`;
+
+CREATE TABLE `recurring_time_off`(
+  `id` INTEGER AUTO_INCREMENT,
+  `id_employee` INTEGER,
+  `day` varchar(10),
+  `morning` TINYINT,
   PRIMARY KEY (`id`)
 );
 
@@ -94,7 +108,7 @@ CREATE TABLE `activity` (
   `id` INTEGER AUTO_INCREMENT,
   `shift` INTEGER,
   `time_of_activity` DATETIME,
-  `type_of_activity` VARCHAR, -- as in, take or drop
+  `type_of_activity` VARCHAR(100),
   PRIMARY KEY (`id`)
 );
 
@@ -109,6 +123,7 @@ ALTER TABLE `time_off` ADD FOREIGN KEY (id_employee) REFERENCES `employees` (`id
 ALTER TABLE `activity` ADD FOREIGN KEY (shift) REFERENCES `employee_schedule` (`id`);
 ALTER TABLE `employee_schedule` ADD FOREIGN KEY (employee_role_one) REFERENCES `employee_roles` (id);
 ALTER TABLE `employee_schedule` ADD FOREIGN KEY (employee_role_two) REFERENCES `employee_roles` (id);
+ALTER TABLE `recurring_time_off` ADD FOREIGN KEY (id_employee) REFERENCES `employees` (`id`);
 
 -- ---
 -- Table Properties

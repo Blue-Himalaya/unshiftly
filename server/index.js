@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 const db = require('../database/index.js');
+const q = require('../database/query.js');
 const moment = require('moment');
 const helperFunctions = require('./helperFunctions.js')
 const dbHelpers = require('../database/queries.js')
@@ -10,13 +11,6 @@ const dbHelpers = require('../database/queries.js')
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-//page first loads - admin
-  //dates of week, in the request params (start, end)
-  //shifts for each day
-    //name, time, color coded, employee phone number
-  //activity log (limit last 20)
-
-//initial employee page load request
 app.get('/employeeSchedule', (req, res) => {
   const { employeeID, dateStart, dateEnd } = req.params
   db.getEmployeeSchedule([employeeID, dateStart, dateEnd], (results) => {
@@ -24,19 +18,15 @@ app.get('/employeeSchedule', (req, res) => {
   })
 })
 
-//employee edit schedule view
-
-//employee shift give up/pick up
 app.put('/employeeShiftUpdate', (req, res) => {
   const { employeeID, shiftDate, giveUpPickUp} = req.params
   db.updateEmployeeShiftSwap([employeeID, shiftDate, giveUpPickUp], (results) => {
     res.send(results)
   })
 })
-// es.employee_role_one, employee_role_two
 
 app.get('/scheduletest', (req, res) => {
-  db.query(`select es.datetime, e.name, r.role, e.phone from employee_schedule es, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id and es.datetime between '2020-10-11' and '2020-10-17' order by es.datetime asc`,
+  db.query(`select es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id and es.datetime between '2020-10-11' and '2020-10-17' order by es.datetime asc`,
   (error, results, fields) => {
     if (error) {
       res.send(error);
@@ -51,6 +41,15 @@ app.get('/scheduletest', (req, res) => {
   })
 })
 
+app.post('/schedule', (req, res) => {
+  dbHelpers.postSchedule(req.body, (resultsFromSched) => {
+    res.send(resultsFromSched);
+    res.status(200);
+    res.end();
+  })
+})
+
+module.exports = app;
 app.get('/allActiveEmployees', (req, res) => {
   dbHelpers.getAllActiveEmployees((results) => {
     var final = helperFunctions.employeeRolesFormatting(results)
@@ -70,13 +69,12 @@ app.get('/allRolesAndColors', (req, res) => {
   })
 })
 
-app.get('/login', (req, res) => {
-
-});
-
-
-
-
-
+//attach role: role, color: new_color_name to params
+app.put('/updateRoleColor', (req, res) => {
+  const roleColorObj = req.query
+  dbHelpers.changeRoleColor(roleColorObj, (results) => {
+    res.send(results)
+  })
+})
 
 module.exports = app;
