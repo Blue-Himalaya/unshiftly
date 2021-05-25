@@ -4,6 +4,14 @@ import ActivityList from './ActivityList.jsx';
 import Shifts from './shifts.jsx';
 
 const Calendar = () => {
+  const employees = useSelector(state => state.employeeReducer.employees);
+  const timeOff = useSelector(state => state.timeOffReducer.timeOff);
+  const roles = useSelector(state => state.rolesReducer.roles);
+
+  console.log('roles: ', roles);
+  console.log('timeoff: ', timeOff);
+  console.log('employees: ', employees);
+
 
   return (
     <div>
