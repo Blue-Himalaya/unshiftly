@@ -1,7 +1,7 @@
 const connection = require('./index.js')
 
 const getAllActiveEmployees = (callback) => {
-  const queryString = 'select e.id, e.name, e.phone, e.birthday, e.start_date, e.password, e.is_active, r.role from employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role'
+  const queryString = 'select e.id, e.name, e.phone, e.birthday, e.start_date, e.password, e.is_active, r.role from employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where e.is_active = 1'
   connection.query(queryString, (err, response) => {
     if(err) console.log(err)
     else callback(response)
@@ -24,9 +24,18 @@ const getRolesWithColors = (callback) => {
   })
 }
 
+const changeRoleColor = (roleColorObj, callback) => {
+  const queryString = `update roles set color = '${roleColorObj.color}' where role = '${roleColorObj.role}'`
+  connection.query(queryString, (err, response) => {
+    if(err) console.log(err)
+    else callback(response)
+  })
+}
+
 
 module.exports ={
   getAllActiveEmployees,
   getAllRecurringTimeOff,
-  getRolesWithColors
+  getRolesWithColors,
+  changeRoleColor
 }
