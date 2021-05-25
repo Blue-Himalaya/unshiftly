@@ -1,23 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import fetchSchedule from '../../../redux-state/actions/fetchEmployees.js';
 
+
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+  return size;
+}
+
 const EmployeeList = () => {
+
+  //EMPLOYEE DATA
   const employees = useSelector(state => state.employeeReducer.employees);
-  const dispatch = useDispatch();
+  console.log(employees)
+        // const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchSchedule());
-    // page load, then immediate schedule view
-    //
+          // dispatch(fetchSchedule());
+          // page load, then immediate schedule view
+          //
+
+
+
   }, []);
 
+
+  // WINDOW SIZE
+  const [width, height] = useWindowSize();
+
   return (
-    <div className="view-container">
-      <div className="cal-container">
-        <h1>EmployeeList</h1>
-        <div className="cal-contents-cont">
+    <div className="employeeList">
+      <div className="list">
+        Employee List
+        <div className="employee-names">
             <div id="calendar-dates">
               <div>Fri</div>
               <div>Sat</div>
