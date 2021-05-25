@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import fetchSchedule from '../../../redux-state/actions/fetchEmployees.js';
 
-const Schedule = () => {
-  const schedule = useSelector(state => state.employeeReducer.employees);
+const EmployeeList = () => {
+  const employees = useSelector(state => state.employeeReducer.employees);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -12,29 +12,33 @@ const Schedule = () => {
     // page load, then immediate schedule view
     //
   }, []);
-}
-// const schedule_example_two =
-// [
-//   {
-//     "friday": [
-//       {
-//         date: "2021-05-25T11:00:000Z",
-//         employee: "emma3",
-//         role_one: "server",
-//         role_two: ""
-//       },
-//       {
-//         dateTime: "2021-05-25T17:00:00Z",
-//         employee: "emma 2",
-//         role_one: "bartender",
-//         role_two: ""
-//       }
-//     ],
-//     "saturday":
-//     [
-//       {
 
-//       }
-//     ]
-//  }
-// ]
+  return (
+    <div className="view-container">
+      <div className="cal-container">
+        <h1>EmployeeList</h1>
+        <div className="cal-contents-cont">
+            <div id="calendar-dates">
+              <div>Fri</div>
+              <div>Sat</div>
+              <div>Sun</div>
+              <div>Mon</div>
+              <div>Tue</div>
+              <div>Wed</div>
+              <div>Thu</div>
+            </div>
+            <div>shifts</div>
+          </div>
+      </div>
+
+        <div className="activity-log-container">
+          <div className="activity-grid">
+          </div>
+        </div>
+
+    </div>
+  );
+};
+
+
+export default EmployeeList;

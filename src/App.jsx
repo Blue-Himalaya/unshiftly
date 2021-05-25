@@ -12,6 +12,7 @@ import fetchAdmin from '../redux-state/actions/fetchAdmin.js';
 
 import Schedule from './components/Schedule/Schedule.jsx'
 import Header from './Header.jsx'
+import EmployeeList from './components/EmployeeList/EmployeeList.jsx'
 
 const App = () => {
   const schedule = useSelector(state => state.scheduleReducer.schedule);
@@ -39,7 +40,7 @@ const App = () => {
     dispatch(fetchEmployees());
     dispatch(fetchTimeOff());
     dispatch(fetchRoles())
-    dispatch(fetchView('calendar'));
+    dispatch(fetchView('employees'));
     dispatch(fetchAdmin(true));
   }, []);
 
@@ -100,7 +101,7 @@ const App = () => {
       return (
         <>
         <Header />
-        Employee
+        <EmployeeList/>
         </>
       );
     } else {
