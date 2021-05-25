@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import ActivityList from './ActivityList.jsx';
+import ActivityList from './ActivityList/ActivityList.jsx';
 
 const Calendar = () => {
   const schedule = useSelector(state => state.scheduleReducer.schedule);
