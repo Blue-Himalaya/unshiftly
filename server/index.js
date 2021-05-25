@@ -54,8 +54,9 @@ app.get('/allActiveEmployees', (req, res) => {
   })
 })
 
-app.get('/allRecurringTimeOff', (req, res) => {
-  dbHelpers.getAllRecurringTimeOff((results) => {
+app.get('/allSingleTimeOff', (req, res) => {
+  const dateObj = req.query
+  dbHelpers.getAllSingleTimeOff(dateObj,(results) => {
     res.send(results)
   })
 })
@@ -71,6 +72,33 @@ app.put('/updateRoleColor', (req, res) => {
   const roleColorObj = req.query
   dbHelpers.changeRoleColor(roleColorObj, (results) => {
     res.send(results)
+  })
+})
+
+app.get('/recurringTimeOff', (req, res) => {
+  dbHelpers.getAllRecurringTimeOff((results) => {
+    res.send(results)
+  })
+})
+
+/*
+
+example params for requestSingleDayOff:
+
+ {
+   date: 2019-10-22,
+   morning: 1,
+   empId: 4,
+   empName: "Danielle"
+ }
+
+ */
+
+app.post('/requestSingleDayOff', (req, res) => {
+  const requestObj = req.query
+  // console.log("reqest obj", requestObj)
+  dbHelpers.requestSingleDayOff(requestObj, (results) => {
+    res.status(200).send('created')
   })
 })
 

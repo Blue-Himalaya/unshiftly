@@ -8,8 +8,16 @@ const getAllActiveEmployees = (callback) => {
   })
 }
 
+const getAllSingleTimeOff = (dateObj, callback) => {
+  const queryString = `select t.date, t.morning, e.name, e.id from time_off t  join employees e where t.id_employee = e.id and t.date between '${dateObj.startDate}' and '${dateObj.endDate}' order by t.date asc`;
+  connection.query(queryString, (err, response) => {
+    if(err) console.log(err)
+    else callback(response)
+  })
+}
+
 const getAllRecurringTimeOff = (callback) => {
-  const queryString = 'select t.date, t.morning, e.name from time_off t  join employees e where t.id_employee = e.id'
+  const queryString = `select r.day, r.morning, e.name, e.id from recurring_time_off r join employees e where r.id_employee = e.id`;
   connection.query(queryString, (err, response) => {
     if(err) console.log(err)
     else callback(response)
@@ -17,7 +25,7 @@ const getAllRecurringTimeOff = (callback) => {
 }
 
 const getRolesWithColors = (callback) => {
-  const queryString = 'select r.role, r.color from roles r'
+  const queryString = 'select r.role, r.color from roles r';
   connection.query(queryString, (err, response) => {
     if(err) console.log(err)
     else callback(response)
@@ -25,7 +33,7 @@ const getRolesWithColors = (callback) => {
 }
 
 const changeRoleColor = (roleColorObj, callback) => {
-  const queryString = `update roles set color = '${roleColorObj.color}' where role = '${roleColorObj.role}'`
+  const queryString = `update roles set color = '${roleColorObj.color}' where role = '${roleColorObj.role}'`;
   connection.query(queryString, (err, response) => {
     if(err) console.log(err)
     else callback(response)
@@ -101,12 +109,30 @@ const getSchedule = (dateObj, callback) => {
   })
 }
 
+const requestSingleDayOff = (requestObj, callback) => {
+  /*
+  date
+  morning
+  empId
+  empName
+  */
+  const {date, morning, empId, empName} = requestObj;
+  const shift = morning ? 'morning' : 'evening';
+  const queryString = `insert into time_off (id_employee, date, morning) values ('${empId}', '${date}', '${morning}'); insert into activity (time_of_activity, type_of_activity) values (now(), '${empName} has requested the ${shift} off on the date of ${date}')`;
+  connection.query(queryString, (err, results) => {
+    if(err) console.log(err)
+    else callback(results)
+  })
+}
+
 
 module.exports ={
   getAllActiveEmployees,
-  getAllRecurringTimeOff,
+  getAllSingleTimeOff,
   getRolesWithColors,
   changeRoleColor,
   postSchedule,
   getSchedule,
+  getAllRecurringTimeOff,
+  requestSingleDayOff
 }
