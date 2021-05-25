@@ -5,22 +5,11 @@ const path = require('path');
 const db = require('../database/index.js');
 const moment = require('moment');
 const helperFunctions = require('./helperFunctions.js')
-<<<<<<< HEAD
 const dbHelpers = require('../database/queries.js')
-=======
-
->>>>>>> 7b310cf5213b62bf2613b0bd446c619f6a4d82e6
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-//page first loads - admin
-  //dates of week, in the request params (start, end)
-  //shifts for each day
-    //name, time, color coded, employee phone number
-  //activity log (limit last 20)
-
-//initial employee page load request
 app.get('/employeeSchedule', (req, res) => {
   const { employeeID, dateStart, dateEnd } = req.params
   db.getEmployeeSchedule([employeeID, dateStart, dateEnd], (results) => {
@@ -28,16 +17,12 @@ app.get('/employeeSchedule', (req, res) => {
   })
 })
 
-//employee edit schedule view
-
-//employee shift give up/pick up
 app.put('/employeeShiftUpdate', (req, res) => {
   const { employeeID, shiftDate, giveUpPickUp} = req.params
   db.updateEmployeeShiftSwap([employeeID, shiftDate, giveUpPickUp], (results) => {
     res.send(results)
   })
 })
-// es.employee_role_one, employee_role_two
 
 app.get('/scheduletest', (req, res) => {
   db.query(`select es.datetime, e.name, r.role, e.phone from employee_schedule es, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id and es.datetime between '2020-10-11' and '2020-10-17' order by es.datetime asc`,
@@ -73,12 +58,5 @@ app.get('/allRolesAndColors', (req, res) => {
     res.send(results)
   })
 })
-
-
-
-
-
-
-
 
 module.exports = app;
