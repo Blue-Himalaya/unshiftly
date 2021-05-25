@@ -88,7 +88,7 @@ const Schedule = (props) => {
       })
 
       //SET MORE COLORS
-      newColors.none = 'white'
+      newColors.none = 'rgba(255, 255, 255, 0)'
       newColors.off = 'gray'
 
       updateTable(table)
@@ -113,9 +113,9 @@ const Schedule = (props) => {
       <div className='table'
       style={{
         display: 'grid',
-        gridTemplateColumns: '1fr ' + gridTemplateColumns
+        gridTemplateColumns: (width > props.mobileWidth ? '1fr ' : '') + gridTemplateColumns
       }}>
-        {width > props.mobileWidth ? <div className='table-elem-top'></div> : null}
+        {width > props.mobileWidth ? <div className='table-elem-empty'></div> : null}
 
         {columnDays.map((day, i) => {
           if ( width > props.mobileWidth || threeDays.indexOf(days[i]) !== -1) {

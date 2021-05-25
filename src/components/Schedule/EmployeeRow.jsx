@@ -20,7 +20,7 @@ const EmployeeRow = (props) => {
         {/* FIRST BLOCK IN GRID */}
         <div className='table-elem emp-block'>
           <div className='employee-name'>
-            {props.name}
+            {props.width > props.mobileWidth ? props.name.substring(0,8) : props.name}
           </div>
         </div>
 
@@ -54,7 +54,7 @@ const EmployeeRow = (props) => {
                       role2 = role1
                     }
                     return (
-                      <div key={`table-elem-${day}-${time}`} className={'table-elem role1-' + role1 + ' role2-' + role2}
+                      <div key={`table-elem-${day}-${time}`} className={'table-elem shift noselect'}
                         style={{
                           background: `linear-gradient(0.375turn, ${props.colors[role1]} 50%, ${props.colors[role2]} 50%)`,
                           color: 'white',

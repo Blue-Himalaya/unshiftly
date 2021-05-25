@@ -25,7 +25,7 @@ const App = () => {
 
   // const admin = true
   const name = 'Steve'
-  const mobileWidth = 500
+  const mobileWidth = 840
 
   if (schedule && employees && timeOff && roles && admin) {
     // console.log('SCHEDULE:', schedule)
