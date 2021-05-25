@@ -1,17 +1,18 @@
 const axios = require('axios');
-export const fetchEmployees = () => {
+
+export const fetchTimeOff = () => {
   return (dispatch) => {
-    axios.get('/allActiveEmployees')
+    axios.get('/allRecurringTimeOff')
       .then((res) => {
         dispatch({
-          type: 'GET_EMPLOYEES',
-          payload: res.data
+          type: 'GET_TIMEOFF',
+          payload: res.data,
         });
       })
       .catch((err) => {
         console.log(err);
       });
-  };
+  }
 };
 
-export default fetchEmployees;
+export default fetchTimeOff;

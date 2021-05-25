@@ -1,40 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { bindActionCreators } from 'redux';
+import React, {useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import fetchSchedule from '../../../redux-state/actions/fetchSchedule.js';
 
-const Schedule = () => {
-  // const schedule = useSelector(state => state.scheduleReducer.schedule);
-  // const dispatch = useDispatch();
+const Schedule = (props) => {
+  const [table, updateTable] = useState({})
+  const schedule = useSelector(state => state.scheduleReducer.schedule);
+  const employees = useSelector(state => state.employeeReducer.employees);
+  const timeOff = useSelector(state => state.timeOffReducer.timeOff);
+  const roles = useSelector(state => state.rolesReducer.roles);
+  useEffect(() => {
+    if (schedule && employees && timeOff && roles) {
+      console.log('SCHEDULE:', schedule)
+      console.log('TIMEOFF:', timeOff)
+      console.log('EMPLOYEES:', employees)
+      console.log('ROLES:', roles)
+    }
+  })
 
-  // useEffect(() => {
-  //   dispatch(fetchSchedule());
-  //   // page load, then immediate schedule view
-  //   //
-  // }, []);
+  return (
+    <div>Schedule</div>
+  )
 }
-// const schedule_example_two =
-// [
-//   {
-//     "friday": [
-//       {
-//         date: "2021-05-25T11:00:000Z",
-//         employee: "emma3",
-//         role_one: "server",
-//         role_two: ""
-//       },
-//       {
-//         dateTime: "2021-05-25T17:00:00Z",
-//         employee: "emma 2",
-//         role_one: "bartender",
-//         role_two: ""
-//       }
-//     ],
-//     "saturday":
-//     [
-//       {
 
-//       }
-//     ]
-//  }
-// ]
+export default Schedule

@@ -1,13 +1,13 @@
-// const employeeReducer = (state = [employees:{}], action) => {
-//   switch (action.type) {
-//     case 'GET_EMPLOYEES': {
-//       return [
-//         employees: action.payload,
-//       ]
-//     }
-//     default:
-//       return state
-//   }
-// };
+const employeeReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'GET_EMPLOYEES': {
+      return {
+        employees: action.payload,
+      }
+    }
+    default:
+      return state
+  }
+};
 
-// export default employeeReducer;
+export default employeeReducer;
