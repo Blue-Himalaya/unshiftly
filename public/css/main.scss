@@ -1,0 +1,40 @@
+$colors: (
+  dark: rgb(29, 44, 103)
+);
+
+@function color($color-name) {
+  @return map-get($colors, $color-name)
+};
+
+$desktop: 840px;
+
+@mixin desktop {
+  @media (max-width: #{$desktop}) {
+    @content;
+  }
+};
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.header {
+  padding: 17px 25px;
+  height: 41px;
+  background-color: color(dark);
+  color: white;
+  font-size: xx-large;
+}
+
+.day-table:not(.today),
+.table-elem-top.column:not(.today) {
+  @include desktop {
+    display: none;
+  }
+}

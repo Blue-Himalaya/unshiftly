@@ -1,0 +1,25 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.header {
+  padding: 17px 25px;
+  height: 41px;
+  background-color: #1d2c67;
+  color: white;
+  font-size: xx-large;
+}
+
+@media (max-width: 840px) {
+  .day-table:not(.today),
+  .table-elem-top.column:not(.today) {
+    display: none;
+  }
+}
+/*# sourceMappingURL=main.css.map */

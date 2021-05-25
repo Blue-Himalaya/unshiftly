@@ -26,11 +26,11 @@ const App = () => {
   const name = 'Steve'
 
   if (schedule && employees && timeOff && roles && admin) {
-    console.log('SCHEDULE:', schedule)
-    console.log('TIMEOFF:', timeOff)
-    console.log('EMPLOYEES:', employees)
-    console.log('ROLES:', roles)
-    console.log('ADMIN:', admin)
+    // console.log('SCHEDULE:', schedule)
+    // console.log('TIMEOFF:', timeOff)
+    // console.log('EMPLOYEES:', employees)
+    // console.log('ROLES:', roles)
+    // console.log('ADMIN:', admin)
   }
 
   useEffect(() => {
