@@ -16,6 +16,7 @@ const Header = (props) => {
         <button onClick={() => {dispatch(fetchView('schedule'))}}>Edit Schedule</button>
         <button onClick={() => {dispatch(fetchView('employees'))}}>Edit Employees</button>
         <button onClick={() => {dispatch(fetchView('calendar'))}}>Go to Calendar</button>
+        {/* <button onClick={() => {dispatch(logOut())}}>Log Out</button> */}
       </div>
     )
   }
