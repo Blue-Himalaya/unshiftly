@@ -10,12 +10,6 @@ const dbHelpers = require('../database/queries.js')
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-app.get('/employeeSchedule', (req, res) => {
-  const { employeeID, dateStart, dateEnd } = req.params
-  db.getEmployeeSchedule([employeeID, dateStart, dateEnd], (results) => {
-    res.send(results)
-  })
-})
 
 app.put('/employeeShiftUpdate', (req, res) => {
   const { employeeID, shiftDate, giveUpPickUp} = req.params
@@ -24,20 +18,24 @@ app.put('/employeeShiftUpdate', (req, res) => {
   })
 })
 
-app.get('/scheduletest', (req, res) => {
-  db.query(`select es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id and es.datetime between '2020-10-11' and '2020-10-17' order by es.datetime asc`,
-  (error, results, fields) => {
-    if (error) {
-      res.send(error);
-      res.status(500);
-      res.end();
+/*
+this route gets the schedule for the week by dates
+you must put startDate and endDate in the params
+due to MySql, you must ADD ONE DATE TO THE END DATE!
+
+eg: you need the schedule for 10-11-2020 to 10-17-2020
+
+eg params: { startDate: 2020-10-11, endDate: 2020-10-18 }
+*/
+app.get('/schedule', (req, res) => {
+  const dateObj = req.query
+  dbHelpers.getSchedule(dateObj, (err, results) => {
+    if(err){
+      console.log("server err", err)
     } else {
-      var final = helperFunctions.adminScheduleFormatting(results)
-      res.send(final);
-      res.status(200);
-      res.end();
-    }
-  })
+       var final = helperFunctions.adminScheduleFormatting(results)
+       res.send(final)
+  }})
 })
 
 app.post('/schedule', (req, res) => {
@@ -56,8 +54,9 @@ app.get('/allActiveEmployees', (req, res) => {
   })
 })
 
-app.get('/allRecurringTimeOff', (req, res) => {
-  dbHelpers.getAllRecurringTimeOff((results) => {
+app.get('/allSingleTimeOff', (req, res) => {
+  const dateObj = req.query
+  dbHelpers.getAllSingleTimeOff(dateObj,(results) => {
     res.send(results)
   })
 })
@@ -73,6 +72,33 @@ app.put('/updateRoleColor', (req, res) => {
   const roleColorObj = req.query
   dbHelpers.changeRoleColor(roleColorObj, (results) => {
     res.send(results)
+  })
+})
+
+app.get('/recurringTimeOff', (req, res) => {
+  dbHelpers.getAllRecurringTimeOff((results) => {
+    res.send(results)
+  })
+})
+
+/*
+
+example params for requestSingleDayOff:
+
+ {
+   date: 2019-10-22,
+   morning: 1,
+   empId: 4,
+   empName: "Danielle"
+ }
+
+ */
+
+app.post('/requestSingleDayOff', (req, res) => {
+  const requestObj = req.query
+  // console.log("reqest obj", requestObj)
+  dbHelpers.requestSingleDayOff(requestObj, (results) => {
+    res.status(200).send('created')
   })
 })
 
