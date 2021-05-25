@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 const db = require('../database/index.js');
+const q = require('../database/query.js');
 const moment = require('moment');
 const helperFunctions = require('./helperFunctions.js')
 
@@ -47,5 +48,13 @@ app.get('/scheduletest', (req, res) => {
     }
   })
 })
+
+app.post('/scheduletest', (req, res) => {
+  q.postSchedule(req.body, (sched) => {
+    res.send(sched);
+    res.status(200);
+    res.end();
+  });
+});
 
 module.exports = app;
