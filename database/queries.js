@@ -33,14 +33,6 @@ const getRolesWithColors = (callback) => {
   })
 }
 
-// const dropShift = (shift_id, callback) => {
-//   const queryString = `INSERT INTO activity (shift, time_of_activity, type_of_activity) VALUES (${shift_id}, (SELECT datetime FROM employee_schedule WHERE id=${shift_id}), 'active')`;
-//   connection.query(queryString, (err, results) => {
-//     if (err) throw err;
-//     callback(results);
-//   });
-// };
-
 const getActivities = (callback) => {
   const queryString = `select a.type_of_activity, es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es join activity a on a.shift = es.id, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id `;
   connection.query(queryString, (err, response) => {
@@ -167,7 +159,7 @@ const createEmployee = (employeeData, callback) => {
   const { name, phone, birthday, password, start_date, role } = employeeData;
   bcrypt.hash(password, bcrypt.genSaltSync(10), (err, hashedPwd) => {
     //*** Don't know if this works yet! ***/
-    const queryStr = `INSERT INTO employees (name, phone, birthday, password, start_date, is_active) VALUES (${name}, ${phone}, ${birthday}, ${hashedPwd}, ${start_date}); INSERT INTO employee_roles (id_employee, id_role) VALUES ((SELECT id FROM employee WHERE name = ${name}), (SELECT id FROM roles where name=${role}))`
+    const queryStr = `insert into employees (name, phone, birthday, password, start_date, is_active) values ('${name}', ${phone}, '${birthday}', '${hashedPwd}', '${start_date}'); insert into employee_roles (id_employee, id_role) values ((select id from employee where name = '${name}'), (select id from roles where name='${role}'))`
   });
 }
 

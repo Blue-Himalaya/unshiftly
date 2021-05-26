@@ -6,6 +6,7 @@ const AdminNotifications = () => {
   const activities = useSelector(state => state.scheduleReducer.activities);
   const timeOff = useSelector(state => state.timeOffReducer.timeOff);
   const [view, setView] = useState('adminNotifs');
+  const [removeTO, setRemoveTO] = useState('')
   const dispatch = useDispatch();
 
   if (view === 'activityLog') {
@@ -17,6 +18,8 @@ const AdminNotifications = () => {
   }
 
   const approveTimeOff = (e) => {
+    axios.post('/')
+
     e.target.disabled = true;
     e.target.innerHTML = 'Time Off Approved';
   }

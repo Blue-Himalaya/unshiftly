@@ -89,7 +89,6 @@ body, html {
   grid-area: b;
 }
 
-<<<<<<< HEAD
 #activityLogContainer {
   display: grid;
   grid-template-rows: 0.2fr 0.5fr;
@@ -139,10 +138,8 @@ body, html {
   overflow-y: scroll;
 }
 
-=======
 .shift-block {
   width: fit-content;
   height: fit-content;
   margin-bottom: 10px;
 }
->>>>>>> 10f2441bde7d34a5b4e625d0cac100542a406fc3

@@ -194,7 +194,7 @@ app.post('/requestSingleDayOff', (req, res) => {
   });
 });
 
-app.post('/newEmployee', (req, res) => {
+app.post('/employees', (req, res) => {
   dbHelpers.createEmployee(req.body, (results) => {
     // I will probably need these results
     // to update state ~
