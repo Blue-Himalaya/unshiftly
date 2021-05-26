@@ -3,7 +3,7 @@ export const fetchActivityList = () => {
   return (dispatch) => {
     axios.get('/getActivities')
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         dispatch({
           type: 'GET_ACTIVITIES',
           payload: res.data,
