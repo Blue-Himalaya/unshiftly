@@ -145,19 +145,18 @@ body {
         border-left: solid 1px color(scheBborder);
         height: 49px;
         /* border-right: solid 1px rgb(213, 213, 213); */
-        background: linear-gradient(to left, $nightBG 50%, white 50%);
+        // background: linear-gradient(to left, $nightBG 50%, white 50%);
 
         .shift {
           min-width: 50px;
           padding: 15px 0;
-          transition: background-color 0.25s ease-in-out;
         }
         .shift:hover {
-          background: rgba(255, 255, 255, 0) !important;
-          // transition: background 2s ease-out 100ms;
-          background-color: rgb(118, 118, 118) !important;
-          transition: background-color 0.25s ease-in-out;
-          // transition-duration: 1s;
+          opacity: 50%;
+        }
+        .no-shift:hover {
+          background-image: none !important;
+          background-color: gray;
         }
       }
     }

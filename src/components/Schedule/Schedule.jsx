@@ -23,7 +23,7 @@ const Schedule = (props) => {
 
   // INFORMATION FROM THE DATABASE
   const [table, updateTable] = useState(null)
-  const [colors, updateColors] = useState(null)
+  // const [colors, updateColors] = useState(null)
   const schedule = useSelector(state => state.scheduleReducer.schedule);
   const employees = useSelector(state => state.employeeReducer.employees);
   const timeOff = useSelector(state => state.timeOffReducer.timeOff);
@@ -86,18 +86,7 @@ const Schedule = (props) => {
         })
       }
 
-      // SET COLORS FROM ARRAY OF OBJECT TO OBJECT OF COLORS
-      var newColors = {}
-      roles.map(role => {
-        newColors[role.role] = role.color
-      })
-
-      //SET MORE COLORS
-      newColors.none = 'rgba(255, 255, 255, 0)'
-      newColors.off = 'gray'
-
       updateTable(table)
-      updateColors(newColors)
     }
   }, [])
 
@@ -113,10 +102,10 @@ const Schedule = (props) => {
     <>
     {table !== null ?
     <div className='schedule'>
-      {/* <UpdateShiftModal
+      <UpdateShiftModal
       show={shiftShow}
       toggleShiftShow={toggleShiftShow}
-      /> */}
+      />
       <div className='month'> {'<'} Oct 2019 {'>'}</div>
 
       <div className='table'
@@ -143,7 +132,7 @@ const Schedule = (props) => {
       {employees.map((employee) => {
         return <EmployeeRow
         key={employee.name}
-        colors={colors}
+        colors={roles}
         name={employee.name}
         row={table[employee.name]}
         days={days}

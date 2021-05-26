@@ -113,22 +113,20 @@ body {
   border-left: solid 1px #d5d5d5;
   height: 49px;
   /* border-right: solid 1px rgb(213, 213, 213); */
-  background: -webkit-gradient(linear, right top, left top, color-stop(50%, whitesmoke), color-stop(50%, white));
-  background: linear-gradient(to left, whitesmoke 50%, white 50%);
 }
 
 .schedule .employee-row .employee-schedule .day-table .shift {
   min-width: 50px;
   padding: 15px 0;
-  -webkit-transition: background-color 0.25s ease-in-out;
-  transition: background-color 0.25s ease-in-out;
 }
 
 .schedule .employee-row .employee-schedule .day-table .shift:hover {
-  background: rgba(255, 255, 255, 0) !important;
-  background-color: #767676 !important;
-  -webkit-transition: background-color 0.25s ease-in-out;
-  transition: background-color 0.25s ease-in-out;
+  opacity: 50%;
+}
+
+.schedule .employee-row .employee-schedule .day-table .no-shift:hover {
+  background-image: none !important;
+  background-color: gray;
 }
 
 .schedule .publish {
