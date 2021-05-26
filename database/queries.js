@@ -34,7 +34,8 @@ const getRolesWithColors = (callback) => {
 }
 
 const getActivities = (callback) => {
-  const queryString = `select a.type_of_activity, es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es join activity a on a.shift = es.id, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id `;
+  // const queryString = `select a.type_of_activity, es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es join activity a on a.shift = es.id, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id `;
+  const queryString = `select * from activity`;
   connection.query(queryString, (err, response) => {
     if (err) console.log(err)
     else callback(response);

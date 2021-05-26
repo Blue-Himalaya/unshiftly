@@ -143,3 +143,25 @@ body, html {
   height: fit-content;
   margin-bottom: 10px;
 }
+
+.emp-info-modal-bg {
+  position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(126, 126, 126, 0.509);
+	z-index: 1000;
+}
+
+.emp-info-modal {
+  position: fixed;
+	width: 200px;
+	height: 200px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #f5f5f5;
+	padding: 50px;
+	z-index: 1000;
+}
