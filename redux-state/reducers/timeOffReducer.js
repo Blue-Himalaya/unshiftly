@@ -10,10 +10,10 @@ const timeOffReducer = (state = [], action) => {
         timeOff: action.payload,
       }
     }
-    case 'REQ_TIMEOFF': {
+    case 'GET_SINGLE_TIMEOFF': {
       return {
         ...state,
-        reqTimeOff: action.payload,
+        singleTimeOff: action.payload,
       }
     }
     default:
@@ -21,4 +21,4 @@ const timeOffReducer = (state = [], action) => {
   }
 };
 
-export default timeOffReducer
+export default timeOffReducer;

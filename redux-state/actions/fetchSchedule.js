@@ -18,9 +18,22 @@ export const fetchSchedule = (date) => {
 
   //GET LIST OF DAYS IN THE WEEK
   var dates = []
+  var datesFull =[]
   for (var i = 0; i < 7; i++) {
-      dates.push(startDate2.getUTCDate())
-      startDate2.setDate(startDate2.getUTCDate());
+    dates.push(startDate2.getUTCDate())
+    var year = startDate2.getUTCFullYear().toString()
+    var month = (startDate2.getUTCMonth() + 1).toString()
+    var day = startDate2.getUTCDate().toString()
+
+    if (month.length === 1) {
+        month = '0' + month
+    }
+
+    if (day.length === 1) {
+        day = '0' + day
+    }
+    datesFull.push([year, month, day].join('-'))
+    startDate2.setDate(startDate2.getUTCDate());
   }
 
   return (dispatch) => {
@@ -33,11 +46,11 @@ export const fetchSchedule = (date) => {
       .then((res) => {
         dispatch({
           type: 'GET_SCHEDULE',
-          payload: [res.data, date, startDate, endDate, dates],
+          payload: [res.data, date, startDate, endDate, dates, datesFull],
         });
       })
       .catch((err) => {
-        console.log(err);
+        throw err;
       });
   };
 };

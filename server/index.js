@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 app.use(cors({
   origin: 'http://localhost:8080',
-  credentials: true,
+  credentials: true
 }));
 
 app.use(expressSession({
@@ -35,45 +35,38 @@ app.use(passport.session());
 const passportAuth = require('./passportConfig');
 passportAuth(passport);
 
+/*
+======================================================
+        AUTH
+======================================================
+*/
+
 app.post('/login', (req, res, next) => {
-  console.log(req)
+  //console.log(req)
   passport.authenticate('local', (err, user, info) => {
-    console.log(err, user, info)
     if (err) throw err;
     if (!user) res.send('No User Exists');
     else {
       req.logIn(user, err => {
-        console.log(user)
         if (err) throw err;
-        res.send({ auth: 'success!', role: user[0].role, user: user[0].name });
+        console.log('USER: ', req.user, 'INFO: ', info)
+        res.send({ auth: 'success!', role: user[0].role, user: [user[0].id, user[0].name] });
       });
     }
   })(req, res, next);
 });
 
+app.get('/logOut', (req, res) => {
+  req.logout();
+  console.log('after: ', req);
+  res.send('loggedOut');
+});
 
-//page first loads - admin
-  //dates of week, in the request params (start, end)
-  //shifts for each day
-    //name, time, color coded, employee phone number
-  //activity log (limit last 20)
-
-//initial employee page load request
-app.get('/employeeSchedule', (req, res) => {
-  const { employeeID, dateStart, dateEnd } = req.params
-  db.getEmployeeSchedule([employeeID, dateStart, dateEnd], (results) => {
-    res.send(results)
-  })
-})
-
-app.get('/logout')
-
-app.put('/employeeShiftUpdate', (req, res) => {
-  const { employeeID, shiftDate, giveUpPickUp} = req.params
-  db.updateEmployeeShiftSwap([employeeID, shiftDate, giveUpPickUp], (results) => {
-    res.send(results)
-  })
-})
+/*
+======================================================
+        ALL SCHEDULE ENDPOINTS
+======================================================
+*/
 
 /*
 this route gets the schedule for the week by dates
@@ -90,26 +83,9 @@ app.get('/schedule', (req, res) => {
     if(err){
       console.log("server err", err)
     } else {
-      var final = helperFunctions.adminScheduleFormatting(results)
-      res.send(final)
-    }
-  })
-})
-
-app.get('/scheduletest', (req, res) => {
-  db.query(`select es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id and es.datetime between '2020-10-11' and '2020-10-17' order by es.datetime asc`,
-  (error, results, fields) => {
-    if (error) {
-      res.send(error);
-      res.status(500);
-      res.end();
-    } else {
-      var final = helperFunctions.adminScheduleFormatting(results)
-      res.send(final);
-      res.status(200);
-      res.end();
-    }
-  })
+       var final = helperFunctions.adminScheduleFormatting(results)
+       res.send(final)
+  }})
 })
 
 app.post('/schedule', (req, res) => {
@@ -119,20 +95,128 @@ app.post('/schedule', (req, res) => {
     res.end();
   })
 })
+/*
+Example Body Info For A Employee To Release A Shift
+{
+  shiftId: [shift-id], <-- provided on schedule return body
+  empName: [employee name],
+  role: [name of role of shift],
+  empId: [employeeId of person picking up shift]
+  date: [day of week],
+  morning: [boolean]
+}
+*/
 
-// module.exports = app;
+app.put('/releaseShift', (req, res) => {
+  const reqObj = req.body;
+  //console.log('reqobj', reqObj);
+  dbHelpers.releaseShift(reqObj, (results) => {
+    res.status(200).send('Shift has been released to the people.')
+  })
+})
+
+/*
+put body requirements:
+{
+  shiftId: [shift-id], <-- provided on schedule return body
+  role: [name of role of shift],
+  empName: [employee name],
+  empId: [employeeId of person picking up shift],
+  date: [shift date],
+  morning: [boolean]
+}
+*/
+
+app.put('/pickUpShift', (req, res) => {
+  const reqObj = req.body;
+  dbHelpers.pickUpShift(reqObj, (results) => {
+    res.status(200).send('Shift successfully picked up').end();
+  })
+})
+
+/*
+======================================================
+        TIME OFF - SINGLE
+======================================================
+*/
+
+app.get('/allSingleTimeOff', (req, res) => {
+  const dateObj = req.query;
+  dbHelpers.getAllSingleTimeOff(dateObj,(results) => {
+    res.send(results)
+  })
+})
+
+/*
+example body for requestSingleDayOff:
+ {
+   date: 2019-10-22,
+   morning: 1,
+   empId: 4,
+   empName: "Danielle"
+ }
+ */
+
+app.post('/requestSingleDayOff', (req, res) => {
+  const requestObj = req.body
+  dbHelpers.requestSingleDayOff(requestObj, (results) => {
+    res.status(200).send('created')
+  })
+})
+
+app.put('/singleTimeOff', (req, res) => {
+  const reqId = req.body.id;
+  dbHelpers.removeSingleTimeOff(reqId, (results) => {
+    res.status(201).send('removed').end();
+  })
+})
+
+/*
+======================================================
+        TIME OFF - RECURRING
+======================================================
+*/
+
+app.get('/recurringTimeOff', (req, res) => {
+  dbHelpers.getAllRecurringTimeOff((results) => {
+    res.send(results)
+  })
+})
+
+/*
+Example Body For Employee Recurring Time-Off-Request Info Object
+{
+  employeeName: 'Danielle',
+  employeeId: 4,
+  dayOfWeek: "Tuesday",
+  morning: 0 || 1
+}
+*/
+
+app.post('/recurringTimeOff', (req, res) => {
+  const requestInfo = req.body
+  dbHelpers.addNewRecurringTimeOff(requestInfo, (results) => {
+    res.status(200).send('time off request recieved')
+  })
+})
+
+app.put('/recurringTimeOff', (req, res) => {
+  const reqObj = req.body;
+  dbHelpers.revokeRecurringTimeOff(reqObj, (result) => {
+    res.status(204).send('time off revoked').end();
+  })
+})
+
+/*
+======================================================
+      EMPLOYEE INFORMATION
+======================================================
+*/
+
 app.get('/allActiveEmployees', (req, res) => {
   dbHelpers.getAllActiveEmployees((results) => {
     var final = helperFunctions.employeeRolesFormatting(results)
     res.send(final)
-  })
-})
-
-
-app.get('/allSingleTimeOff', (req, res) => {
-  const dateObj = req.query
-  dbHelpers.getAllSingleTimeOff(dateObj,(results) => {
-    res.send(results)
   })
 })
 
@@ -142,6 +226,34 @@ app.get('/allRolesAndColors', (req, res) => {
   })
 })
 
+/*
+Change information about employees
+Endpoint needs the following in the form of a body from the
+axios put request:
+{id: [employee id],
+name: [employee name],
+phone: [employee phone],
+birthday: [employee birthday],
+startDate: [employee start date],
+isActive: 0 if employee is inactive, 1 if they are active}
+
+All of these values should be what the employee information should reflect AFTER put request.
+The only variable which is needed, and cannot be changed is the id.
+i.e. if you want to update the isActive, but nothing else, the endpoint still needs the old information for all other fields
+*/
+
+app.put('/employees', (req, res) => {
+  dbHelpers.editEmployee(req.body, (results) => {
+    res.status(204).end();
+  });
+})
+
+/*
+==============================================
+      MISC
+==============================================
+*/
+
 app.get('/getActivities', (req, res) => {
   dbHelpers.getActivities((results) => {
     res.send(results);
@@ -149,13 +261,20 @@ app.get('/getActivities', (req, res) => {
 });
 
 app.put('/updateActivities', (req, res) => {
-  const { id, type } = req.body;
-  dbHelpers.updateActivities(1, type, (results) => {
+  const { id, name, type } = req.body;
+  dbHelpers.updateActivities(id, name, type, (results) => {
     res.send(results);
   });
 })
 
-//attach role: role, color: new_color_name to params
+/*
+example role color params object:
+{
+  role: [example role],
+  color: [new color name]
+}
+*/
+
 app.put('/updateRoleColor', (req, res) => {
   const roleColorObj = req.query
   dbHelpers.changeRoleColor(roleColorObj, (results) => {
@@ -163,32 +282,6 @@ app.put('/updateRoleColor', (req, res) => {
   })
 })
 
-app.get('/recurringTimeOff', (req, res) => {
-  dbHelpers.getAllRecurringTimeOff((results) => {
-    res.send(results)
-  })
-})
-
-/*
-
-example params for requestSingleDayOff:
-
- {
-   date: 2019-10-22,
-   morning: 1,
-   empId: 4,
-   empName: "Danielle"
- }
-
- */
-
-app.post('/requestSingleDayOff', (req, res) => {
-  const requestObj = req.query
-  // console.log("reqest obj", requestObj)
-  dbHelpers.requestSingleDayOff(requestObj, (results) => {
-    res.status(200).send('created')
-  })
-})
-
 
 module.exports = app;
+

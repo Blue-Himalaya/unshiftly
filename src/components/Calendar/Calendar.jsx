@@ -42,6 +42,9 @@ const Calendar = () => {
       -The calendar should reflect for both the admin
        and the employee who requested greyed out blocks
   */
+  // console.log('roles: ', roles);
+  // console.log('timeoff: ', timeOff);
+  // console.log('employees: ', employees);
 
   const sendTimeOffReq  = (date, morning, empId, empName) => {
     // submit req func

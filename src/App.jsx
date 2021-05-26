@@ -5,6 +5,7 @@ import Calendar from './components/Calendar/Calendar.jsx';
 import fetchView from '../redux-state/actions/fetchView.js';
 import fetchSchedule from '../redux-state/actions/fetchSchedule.js';
 import fetchTimeOff from '../redux-state/actions/fetchTimeoff.js';
+import fetchSingleTimeOff from '../redux-state/actions/fetchSingleTimeoff.js';
 import fetchEmployees from '../redux-state/actions/fetchEmployees.js';
 import fetchActivityList from '../redux-state/actions/fetchActivityList.js';
 import fetchRoles from '../redux-state/actions/fetchRoles.js';
@@ -13,6 +14,7 @@ import Login from './Login/Login.jsx';
 
 import Schedule from './components/Schedule/Schedule.jsx'
 import Header from './Header.jsx'
+import EmployeeList from './components/EmployeeList/EmployeeList.jsx'
 
 const App = () => {
   const schedule = useSelector(state => state.scheduleReducer.schedule);
@@ -37,10 +39,11 @@ const App = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchSchedule('2019-10-15'));
+    dispatch(fetchSchedule('2019-10-11'));
     dispatch(fetchActivityList());
     dispatch(fetchEmployees());
     dispatch(fetchTimeOff());
+    dispatch(fetchSingleTimeOff());
     dispatch(fetchRoles());
     dispatch(fetchView('login'));
     dispatch(fetchAdmin(true));
@@ -103,7 +106,7 @@ const App = () => {
       return (
         <>
         <Header />
-        Employee
+        <EmployeeList/>
         </>
       );
     } else {

@@ -6,7 +6,13 @@ const UpdateShiftModal = (props) => {
     return (
       <div className='update-shift-modal-outside'>
         <div className='update-shift-modal'>
-          HELLO
+          <div onClick={() => {
+            props.toggleShiftShow(!props.show)
+            props.updateEmployee('')
+            props.updateDay('')
+            props.updateMeridian('')
+            }}>x</div>
+          HELLO {props.currentDay} {props.currentMeridian} {JSON.stringify(props.currentEmployee)}
         </div>
       </div>
     )

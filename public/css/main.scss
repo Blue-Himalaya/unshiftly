@@ -93,8 +93,8 @@ body {
       width: 500px;
       margin-left: auto;
       margin-right: auto;
-      margin-top: 50%;
-      transform: translateY(-50%);
+      margin-top: calc((100vh - 500px)/2);
+      // transform: translateY(-50%);
       border: 1px solid color(scheBborder);
       border-radius: 10px;
     }
@@ -107,9 +107,9 @@ body {
     border-bottom: 1px solid color(scheBborder)
   }
 
-  .table {
-    // margin: 0 60px;
-  }
+  // .table {
+  //   // margin: 0 60px;
+  // }
 
   .table-elem, .table-elem-top, .table-elem-empty {
     align-self: center;
@@ -281,3 +281,67 @@ body {
   }
 }
 
+.employeeList {
+  display: grid;
+  grid-template-columns: 0.2fr 0.7fr 0.2fr 2.9fr 0.1fr;
+  grid-template-rows: 0.2fr 2.4fr 0.4fr;
+  grid-template-areas:
+    ". . . . ."
+    ". employee-list-container . employee-edit-container ."
+    ". employee-add-button . employee-remove-button .";
+
+  .employee-list-container {
+    grid-area: employee-list-container;
+    background-color: grey;
+  }
+
+  .employee-list-title {
+    text-align-last: center;
+  }
+
+  .employee-names {
+    color: orange;
+  }
+
+
+  .employee-name-entry {
+    padding-bottom: 25px;
+  }
+
+  .employee-edit-container {
+    grid-area: employee-edit-container;
+    background-color: red;
+  }
+
+  .employee-add-button {
+    grid-area: employee-add-button;
+    background-color: yellow;
+  }
+
+  .employee-remove-button {
+    grid-area: employee-remove-button;
+    background-color:aqua;
+  }
+
+}
+
+.employeeAdd {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 50; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+  .employeeAdd-container {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%; /* Could be more or less, depending on screen size */
+  }
+}
