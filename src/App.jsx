@@ -14,6 +14,7 @@ import Login from './Login/Login.jsx';
 
 import Schedule from './components/Schedule/Schedule.jsx'
 import Header from './Header.jsx'
+import EmployeeList from './components/EmployeeList/EmployeeList.jsx'
 
 const App = () => {
   const schedule = useSelector(state => state.scheduleReducer.schedule);
@@ -105,7 +106,7 @@ const App = () => {
       return (
         <>
         <Header />
-        Employee
+        <EmployeeList/>
         </>
       );
     } else {
