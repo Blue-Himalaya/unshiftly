@@ -9,7 +9,11 @@ const scheduleReducer = (state = initialState, action) => {
     case 'GET_SCHEDULE': {
       return {
         ...state,
-        schedule: action.payload,
+        schedule: action.payload[0],
+        currentDate: action.payload[1],
+        startDate: action.payload[2],
+        endDate: action.payload[3],
+        listOfDays: action.payload[4]
       }
     }
     case 'GET_ACTIVITIES': {

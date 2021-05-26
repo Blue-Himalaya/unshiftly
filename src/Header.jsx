@@ -26,6 +26,7 @@ const Header = (props) => {
     )
   } else {
     return (
+      <>
       <div className='header'>
         UNSHIFTLY
         <button onClick={() => {dispatch(fetchView('schedule'))}}>Edit Schedule</button>
@@ -35,6 +36,8 @@ const Header = (props) => {
         {' '}
         <span>Welcome {user}</span>
       </div>
+      <div className='header-buffer'>&nbsp;</div>
+      </>
     )
   }
 

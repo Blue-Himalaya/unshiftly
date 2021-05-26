@@ -93,9 +93,11 @@ app.get('/schedule', (req, res) => {
     if(err){
       console.log("server err", err)
     } else {
-       var final = helperFunctions.adminScheduleFormatting(results)
-       res.send(final)
-  }});
+      var final = helperFunctions.adminScheduleFormatting(results)
+      res.send(final)
+    }
+  })
+})
 
 app.get('/scheduletest', (req, res) => {
   db.query(`select es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id and es.datetime between '2020-10-11' and '2020-10-17' order by es.datetime asc`,
@@ -135,7 +137,6 @@ app.get('/allSingleTimeOff', (req, res) => {
   dbHelpers.getAllSingleTimeOff(dateObj,(results) => {
     res.send(results)
   })
-})
 })
 
 app.get('/allRolesAndColors', (req, res) => {
