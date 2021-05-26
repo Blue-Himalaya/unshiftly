@@ -31,7 +31,7 @@ const ActivityList = () => {
     // how? ? ? ? ...
     e.target.disabled = true;
     e.target.innerHTML = 'YOU PICKED UP THIS SHIFT';
-    dispatch(updateActivities(e.target.id, user, 'scheduled'));
+    // dispatch(updateActivities(e.target.id, user, `${user} picked up`));
   };
 
   if (activities === undefined) {
@@ -50,18 +50,13 @@ const ActivityList = () => {
       <div id="activityLog">
         <ul>
         {activities.map((activity) => (
-        <div id="activityListItem">
-          <li key={activity.id}> Date: {moment(activity.datetime).format('MMMM Do YYYY, h:mm:ss a')}
+        <div id="activityListItem" key={activity.id}>
+          <li key={activity.id}> Activity on: {moment(activity.datetime).format('MMMM Do YYYY, h:mm:ss a')}
             <br />
-            Name: {activity.name}
+          {activity.type_of_activity}
             <br />
-            Role: {activity.role}
-            <br />
-            Phone: {activity.phone}
-            <br />
-            {activity.type_of_activity === 'active' ? <div id="pickup-shift-btn">
-            <button disabled={false} id={activity.id} onClick={(e) => pickUpShift(e)}>Pick Up Shift</button>
-            </div> : <em>Picked up by {user}</em>}
+            <button>Approve</button>
+            <button>Deny</button>
             </li>
             <br />
           </div>
@@ -78,24 +73,20 @@ const ActivityList = () => {
         <div id="activityLog">
           <ul>
           {activities.map((activity) => (
-            <div id="activityListItem">
-              <li key={activity.id}> Date: {moment(activity.datetime).format('MMMM Do YYYY, h:mm:ss a')}
-                <br />
-                Name: {activity.name}
-                <br />
-                Role: {activity.role}
-                <br />
-                Phone: {activity.phone}
-                <br />
-                {activity.type_of_activity === 'active' ? <div id="pickup-shift-btn">
-                 <button disabled={false} id={activity.id} onClick={(e) => pickUpShift(e)}>Pick Up Shift</button>
-                 </div> : <em>Picked up by {user}</em>}
-                </li>
-                <br />
-              </div>
+            <div key={activity.shift} id="activityListItem">
+              <li key={activity.id}> Activity on: {moment(activity.datetime).format('MMMM Do YYYY, h:mm:ss a')}
+              <br />
+              {activity.type_of_activity}
+              <br />
+              {activity.type_of_activity.split(' ').slice(1, 3).join(' ') === 'has requested' ? <div id="pickup-shift-btn">
+                <button disabled={false} id={activity.id} onClick={(e) => pickUpShift(e)}>Pick Up Shift</button>
+                </div> : <></>}
+              </li>
+              <br />
+            </div>
             ))}
           </ul>
-          </div>
+        </div>
       </div>
     );
 };

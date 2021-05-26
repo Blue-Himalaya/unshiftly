@@ -1,8 +1,8 @@
 const initialState = {
   timeOff: [],
-  singleTimeOff: [],
+  reqTimeOff: [],
 }
-const timeOffReducer = (state = initialState, action) => {
+const timeOffReducer = (state = [], action) => {
   switch (action.type) {
     case 'GET_TIMEOFF': {
       return {

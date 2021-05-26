@@ -49,7 +49,8 @@ app.post('/login', (req, res, next) => {
     else {
       req.logIn(user, err => {
         if (err) throw err;
-        res.send({ auth: 'success!', role: user[0].role, user: user[0].name });
+        console.log('USER: ', req.user, 'INFO: ', info)
+        res.send({ auth: 'success!', role: user[0].role, user: [user[0].id, user[0].name] });
       });
     }
   })(req, res, next);
@@ -108,7 +109,7 @@ Example Body Info For A Employee To Release A Shift
 
 app.put('/releaseShift', (req, res) => {
   const reqObj = req.body;
-  console.log('reqobj', reqObj);
+  //console.log('reqobj', reqObj);
   dbHelpers.releaseShift(reqObj, (results) => {
     res.status(200).send('Shift has been released to the people.')
   })
@@ -283,3 +284,4 @@ app.put('/updateRoleColor', (req, res) => {
 
 
 module.exports = app;
+

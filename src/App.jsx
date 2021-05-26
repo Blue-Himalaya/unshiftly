@@ -35,11 +35,11 @@ const App = () => {
     // console.log('TIMEOFF:', timeOff)
     // console.log('EMPLOYEES:', employees)
     // console.log('ROLES:', roles)
-    // console.log('ADMIN:', admin)
+    // console.log('ADMIN:', admin) // it's a boolean
   }
 
   useEffect(() => {
-    dispatch(fetchSchedule('2019-10-11'));
+    dispatch(fetchSchedule('2019-10-15'));
     dispatch(fetchActivityList());
     dispatch(fetchEmployees());
     dispatch(fetchTimeOff());

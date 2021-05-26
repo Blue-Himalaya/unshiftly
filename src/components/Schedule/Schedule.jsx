@@ -40,6 +40,9 @@ const Schedule = (props) => {
   const days = ['Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
   const times = ['am', 'pm']
 
+  // PUBLISH BUTTON
+  const [publish, togglePublish] = useState(true)
+
   // WINDOW SIZE
   const [width, height] = useWindowSize();
 
@@ -92,6 +95,10 @@ const Schedule = (props) => {
       // [TIME, ROLE1, ROLE2]
       for(var day in schedule[0]) {
         schedule[0][day].map((shift) => {
+
+          // DEACTIVATE PUBLISH BUTTON
+
+          togglePublish(false)
           // [..., TIME, AM/PM]
           var time = shift.datetime.split(' ')
 
@@ -126,6 +133,7 @@ const Schedule = (props) => {
       currentMeridian={currentMeridian}
       currentDay={currentDay}
       currentEmployee={currentEmployee}
+      publish={publish}
       />
 
 
@@ -189,7 +197,8 @@ const Schedule = (props) => {
         days={days} // Friday-Thursday
         times={times} // AM-PM
         indexOfDay={index} // Which day of the week is the current day
-        threeDays={threeDays} // Three days to render in mobile view]
+        threeDays={threeDays}
+        today={today}
 
         width={width} // Width of the window
         mobileWidth={props.mobileWidth} // Width of mobile
@@ -198,9 +207,9 @@ const Schedule = (props) => {
 
         shiftShow={shiftShow} // show modal
         toggleShiftShow={toggleShiftShow} // update whether modal shows
-        updateDay={updateDay} // update the day within modal
-        updateMeridian={updateMeridian} // update am/pm within modal
-        updateEmployee={updateEmployee} // update employee info within modal
+        updateDay={updateDay}
+        updateMeridian={updateMeridian}
+        updateEmployee={updateEmployee}
         />
       })}
 
@@ -209,11 +218,14 @@ const Schedule = (props) => {
       {/* =========================
       ========== PUBLISH ==========
       ========================== */}
+      {publish === true ?
       <div className='publish'>
-        <div className='button'>
-          <button>Publish</button>
+        <div className='button'>{publish}
+          <button>Publish </button>
         </div>
       </div>
+      : null
+      }
 
     </div> // END OF SCHEDULE PAGE
     : <div>Loading...</div>}

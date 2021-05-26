@@ -230,9 +230,17 @@ const getAllActiveEmployees = (callback) => {
 
 const createEmployee = (employeeData, callback) => {
   const { name, phone, birthday, password, start_date, role } = employeeData;
+  console.log(name, phone, birthday, password, start_date, role)
   bcrypt.hash(password, bcrypt.genSaltSync(10), (err, hashedPwd) => {
+    console.log(hashedPwd);
     //*** Don't know if this works yet! ***/
-    const queryStr = `insert into employees (name, phone, birthday, password, start_date, is_active) values ('${name}', ${phone}, '${birthday}', '${hashedPwd}', '${start_date}'); insert into employee_roles (id_employee, id_role) values ((select id from employee where name = '${name}'), (select id from roles where name='${role}'))`
+    // const queryString = `insert into employees (name, phone, birthday, password, start_date, is_active) values ('${name}', ${phone}, '${birthday}', '${hashedPwd}', '${start_date}', 1)`;
+    // insert into employee_roles (id_employee, id_role) values ((select id from employee where name = '${name}'), (select id from roles where name='${role}'))`;
+
+    // connection.query(queryString, (err, results) => {
+    //   if (err) throw err;
+    //   console.log(results);
+    // });
   });
 }
 
@@ -266,12 +274,13 @@ const changeRoleColor = (roleColorObj, callback) => {
   })
 }
 
+
+
 module.exports ={
   getAllActiveEmployees,
   getAllSingleTimeOff,
   getRolesWithColors,
   getActivities,
-  updateActivities,
   authenticateUser,
   checkIfAdmin,
   changeRoleColor,

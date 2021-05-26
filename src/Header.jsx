@@ -26,6 +26,8 @@ const Header = (props) => {
       <div className='header'>
         UNSHIFTLY {props.admin}
         <button onClick={() => {dispatch(logOut())}}>Log Out</button>
+        {' '}
+        <span>Welcome {user[1]}</span>
       </div>
       <div className='header-buffer'>&nbsp;</div>
       </>
@@ -40,7 +42,7 @@ const Header = (props) => {
         <button onClick={() => {dispatch(fetchView('calendar'))}}>Go to Calendar</button>
         <button onClick={() => {dispatch(logOut())}}>Log Out</button>
         {' '}
-        <span>Welcome {user}</span>
+        <span>Welcome {user[1]}</span>
       </div>
       <div className='header-buffer'>&nbsp;</div>
       </>
