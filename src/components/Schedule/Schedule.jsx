@@ -20,17 +20,20 @@ const Schedule = (props) => {
 
   // MODAL STATES
   const [shiftShow, toggleShiftShow] = useState(false)
-  const [currentDay, updateDay] = useState('')
-  const [currentDate, updateDate] = useState('')
+  const [currentDay, updateDay] = useState('') // fri-thu
+  const [currentMeridian, updateMeridian] = useState('') // whole date 2019-10-15
+  const [currentEmployee, updateEmployee] = useState('')
 
   // INFORMATION FROM THE DATABASE
   const [table, updateTable] = useState(null)
   const schedule = useSelector(state => state.scheduleReducer.schedule);
-  const columnDates = useSelector(state => state.scheduleReducer.listOfDays);
-  const currentDateInfo = useSelector(state => state.scheduleReducer.currentDate).split('-');
+  const columnDates = useSelector(state => state.scheduleReducer.listOfDays); // 11-17
+  const columnDatesFull = useSelector(state => state.scheduleReducer.listOfFullDays); // 2019-10-11 - 2019-10-17
+  const currentDateInfo = useSelector(state => state.scheduleReducer.currentDate).split('-'); // ['2019', '10', '15']
   const employees = useSelector(state => state.employeeReducer.employees);
   const timeOff = useSelector(state => state.timeOffReducer.timeOff);
   const roles = useSelector(state => state.rolesReducer.roles);
+  const today = new Date(currentDateInfo.join('-')).getTime() // date version of current day
 
   // LIST OF CALENDAR INFO
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -45,9 +48,23 @@ const Schedule = (props) => {
   var index = columnDates.indexOf(parseInt(currentDateInfo[2]))
   if (index < 5) {
     threeDays = days.slice(index, index + 3)
-  } else {
+  } else if (index >= 5 && index < 7) {
     threeDays = days.slice(4, 7)
+  } else {
+    threeDays = days.slice(0, 3)
   }
+
+  // NUMBER OF DAYS SHOWN DEPENDING ON MOBILE VIEW
+  var gridTemplateColumns = (width > props.mobileWidth)
+  ? '1fr 1fr 1fr 1fr 1fr 1fr 1fr'
+  : '1fr 1fr 1fr'
+  var gridTemplateColumnsTable = (width > props.mobileWidth)
+  ? '1fr 7fr'
+  : 'auto'
+
+  /* ===========================================================
+    COMPONENT DID MOUNT ========================================
+  ============================================================= */
 
   // CREATE DATA STRUCTURE FOR THE CALENDAR ONLY WHEN ALL DATA EXISTS
   useEffect(() => {
@@ -88,66 +105,110 @@ const Schedule = (props) => {
     }
   }, [])
 
-  var gridTemplateColumns = (width > props.mobileWidth)
-  ? '1fr 1fr 1fr 1fr 1fr 1fr 1fr'
-  : '1fr 1fr 1fr'
 
-  var gridTemplateColumnsTable = (width > props.mobileWidth)
-  ? '1fr 7fr'
-  : 'auto'
-
+  /* ===========================================================
+    RENDER =====================================================
+  ============================================================= */
   return (
     <>
     {table !== null ?
     <div className='schedule'>
+
+      {/* =========================
+      =========== MODAL ===========
+      ========================== */}
       <UpdateShiftModal
       show={shiftShow}
       toggleShiftShow={toggleShiftShow}
+      updateMeridian={updateMeridian}
+      updateDay={updateDay}
+      updateEmployee={updateEmployee}
+      currentMeridian={currentMeridian}
+      currentDay={currentDay}
+      currentEmployee={currentEmployee}
       />
+
+
+      {/* =========================
+      =========== MONTH ===========
+      ========================== */}
       <div className='month'> {'<'} {months[parseInt(currentDateInfo[1])-1]} {currentDateInfo[0]} {'>'}</div>
+
+
+
+      {/* =========================
+      =========== DATES ===========
+      ========================== */}
 
       <div className='table'
       style={{
         display: 'grid',
         gridTemplateColumns: (width > props.mobileWidth ? '1fr ' : '') + gridTemplateColumns
       }}>
+
+        {/* ADD DIV IF NOT MOBILE TO FILLE EMPTY GRID SPACE AT THE BEGINNING */}
         {width > props.mobileWidth ? <div className='table-elem-empty'></div> : null}
 
+        {/* MAP THROUGH FRIDAY-THURSDAY */}
+        {/* i WILL BE THE SAME FOR DAYS, COLUMNDATES, COLUMNDATESFULL */}
         {days.map((day, i) => {
+
+          //RENDER ALL IF WIDTH IS GREATER. OTHERWISE RENDER ONLY THE THREEDAYS
           if ( width > props.mobileWidth || threeDays.indexOf(days[i]) !== -1) {
-            var isToday = columnDates[i] === parseInt(currentDateInfo[2]) ? 'highlight-today' : ''
-            var pastToday = columnDates[i] < parseInt(currentDateInfo[2]) ? 'past-today' : ''
+
+            //CLASSES FOR CONDITIONAL STYLING
+            var iterationDate = new Date(columnDatesFull[i]).getTime()
+            var isToday = iterationDate === today ? 'highlight-today' : ''
+            var pastToday = iterationDate < today ? 'past-today' : ''
+
+            //RENDER COLUMN NAMES
             return(
               <div key={`table-elem-top-${day}`} className={`table-elem-top column ${isToday} ${pastToday}`}>
                 <div className='col-day'>{day.substring(0, 3)}</div>
                 <div className={`col-date ${isToday}`}>{columnDates[i]}</div>
               </div>
-            ) // END OF COLUMN HEADER RETURN
-          }
-        })}
+            )
+          } // END FOR RENDER CONDITION
+        })} {/* END FOR DAYS MAP */}
 
       </div> {/* END OF COLUMN HEADERS */}
+
+
+
+      {/* =========================
+      ========= EMPLOYEES =========
+      ========================== */}
 
       {employees.map((employee) => {
         return <EmployeeRow
         key={employee.name}
         colors={roles}
         name={employee.name}
-        row={table[employee.name]}
-        days={days}
-        times={times}
-        indexOfDay={index}
-        threeDays={threeDays}
-        width={width}
-        mobileWidth={props.mobileWidth}
-        gridTemplateColumns={gridTemplateColumns}
-        gridTemplateColumnsTable={gridTemplateColumnsTable}
-        shiftShow={shiftShow}
-        toggleShiftShow={toggleShiftShow}
+        row={table[employee.name]} // Includes information
+
+        days={days} // Friday-Thursday
+        times={times} // AM-PM
+        indexOfDay={index} // Which day of the week is the current day
+        threeDays={threeDays} // Three days to render in mobile view]
+
+        width={width} // Width of the window
+        mobileWidth={props.mobileWidth} // Width of mobile
+        gridTemplateColumns={gridTemplateColumns} // How many days to render
+        gridTemplateColumnsTable={gridTemplateColumnsTable} // Where to render employee in respect to schedule
+
+        shiftShow={shiftShow} // show modal
+        toggleShiftShow={toggleShiftShow} // update whether modal shows
+        updateDay={updateDay} // update the day within modal
+        updateMeridian={updateMeridian} // update am/pm within modal
+        updateEmployee={updateEmployee} // update employee info within modal
         />
       })}
 
-      {/* PUBLISH BUTTON */}
+
+
+      {/* =========================
+      ========== PUBLISH ==========
+      ========================== */}
       <div className='publish'>
         <div className='button'>
           <button>Publish</button>
