@@ -190,7 +190,15 @@ app.post('/requestSingleDayOff', (req, res) => {
   // console.log("reqest obj", requestObj)
   dbHelpers.requestSingleDayOff(requestObj, (results) => {
     res.status(200).send('created')
-  })
+  });
+});
+
+app.post('/newEmployee', (req, res) => {
+  dbHelpers.createEmployee(req.body, (results) => {
+    // I will probably need these results
+    // to update state ~
+    // res.status(200).send('created');
+  });
 })
 
 

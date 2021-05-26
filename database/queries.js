@@ -181,6 +181,14 @@ const requestSingleDayOff = (requestObj, callback) => {
   })
 }
 
+const createEmployee = (employeeData, callback) => {
+  const { name, phone, birthday, password, start_date, role } = employeeData;
+  bcrypt.hash(password, bcrypt.genSaltSync(10), (err, hashedPwd) => {
+    //*** Don't know if this works yet! ***/
+    const queryStr = `INSERT INTO employees (name, phone, birthday, password, start_date, is_active) VALUES (${name}, ${phone}, ${birthday}, ${hashedPwd}, ${start_date}); INSERT INTO employee_roles (id_employee, id_role) VALUES ((SELECT id FROM employee WHERE name = ${name}), (SELECT id FROM roles where name=${role}))`
+  });
+};
+
 
 module.exports ={
   getAllActiveEmployees,
@@ -194,7 +202,8 @@ module.exports ={
   postSchedule,
   getSchedule,
   getAllRecurringTimeOff,
-  requestSingleDayOff
+  requestSingleDayOff,
+  createEmployee,
 }
 
 // INSERT INTO employees (name, phone, birthday, password) VALUES ('example@email.com', 5166660124, '1997-01-06', '$2y$10$niNB9kx6k.lnLgbLn8yfr.oUzIM4xYV90I6nma3qED3nifn6oWdkK')

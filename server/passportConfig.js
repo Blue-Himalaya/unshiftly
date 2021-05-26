@@ -25,9 +25,6 @@ const passportAuth = (passport) => {
   );
 
   passport.serializeUser((user, cb) => {
-    // is it okay that this is using the user id off of the object?
-    // maybe trace it back and determine if and why it's
-    // returning the user from the query.
     cb(null, user[0].id);
   });
   passport.deserializeUser((id, cb) => {
