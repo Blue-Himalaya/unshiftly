@@ -85,6 +85,8 @@ body, html {
   width: fit-content;
 }
 
+/** ACTIVITY LOG **/
+
 #activtyLog {
   grid-area: b;
 }
@@ -104,6 +106,7 @@ body, html {
   height: 75vh;
   min-height: 25vh;
   overflow-y: scroll;
+  width: 20vw;
 }
 
 #activityListItem {
@@ -137,6 +140,8 @@ body, html {
   min-height: 25vh;
   overflow-y: scroll;
 }
+
+/** END OF ACTIVITY LOG **/
 
 .shift-block {
   width: fit-content;
