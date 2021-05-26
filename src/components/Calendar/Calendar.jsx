@@ -1,34 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import Shifts from './shifts.jsx';
 import ActivityList from './ActivityList/ActivityList.jsx';
 
+
 const Calendar = () => {
-  const schedule = useSelector(state => state.scheduleReducer.schedule);
+  const employees = useSelector(state => state.employeeReducer.employees);
+  const timeOff = useSelector(state => state.timeOffReducer.timeOff);
+  const roles = useSelector(state => state.rolesReducer.roles);
+
+  console.log('roles: ', roles);
+  console.log('timeoff: ', timeOff);
+  console.log('employees: ', employees);
+
+
 
   return (
-    <div className="view-container">
-      <div className="cal-container">
-        <h1>Calendar</h1>
-        <div className="cal-contents-cont">
-            <div id="calendar-dates">
-              <div>Fri</div>
-              <div>Sat</div>
-              <div>Sun</div>
-              <div>Mon</div>
-              <div>Tue</div>
-              <div>Wed</div>
-              <div>Thu</div>
+    <div>
+      <div className="view-container">
+        <div className="cal-container">
+          <div className="title-container">
+            <h1 className="cal-title">{'<'} Current Week {'>'}</h1>
+          </div>
+          <div className="cal-contents-cont">
+              <div id="daysOfWeek">
+                <div className="date-container">
+                  <div className="day">
+                    Fri
+                    <div className="date">11</div>
+                  </div>
+                </div>
+                <div>Sat</div>
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+              </div>
+              <Shifts />
             </div>
-            <div>shifts</div>
-          </div>
-      </div>
-
-        <div className="activity-log-container">
-          <div className="activity-grid">
-            <ActivityList />
-          </div>
         </div>
 
+          <div className="activity-log-container">
+            <div className="activity-grid">
+              <ActivityList />
+            </div>
+          </div>
+      </div>
+      <button type="click">Edit Calendar</button>
+      <button type="click">Edit Employees</button>
     </div>
   );
 }
