@@ -2,6 +2,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import fetchSchedule from '../../../redux-state/actions/fetchEmployees.js';
+import EmployeeAdd from '../EmployeeList/EmployeeAdd.jsx'
 
 
 function useWindowSize() {
@@ -26,14 +27,14 @@ const EmployeeList = () => {
   const employees = useSelector(state => state.employeeReducer.employees);
   const [currentEmployee, updateCurrentEmployee] = useState(employees[0])
 
-        // const dispatch = useDispatch();
+  //MODAL
+  const [showModal, updateShowModal] = useState(false);
+
+
 
   useEffect(() => {
     if (employees) {
-
-          // dispatch(fetchSchedule());
-          // page load, then immediate schedule view
-          //
+      // UPDATES ACTUAL LIST WITH EMPLOYEE'S NAMES
       let employeeNames = []
 
       employees.map((employee) => {
@@ -48,6 +49,7 @@ const EmployeeList = () => {
   // WINDOW SIZE
   const [width, height] = useWindowSize();
 
+  // CHANGES CURRENTLY VIEWED EMPLOYEE
   function changeCurrent(e) {
     for (let i = 0; i < employees.length; i++) {
       if (employees[i].name === e.target.innerHTML) {
@@ -56,6 +58,11 @@ const EmployeeList = () => {
     }
   };
 
+  //ALLOWS FOR MODAL TO BE OPENED AND CLOSED
+  function setShowModal(e) {
+    updateShowModal(!showModal)
+    console.log(showModal)
+  }
 
   return (
     <div className="employeeList">
@@ -86,14 +93,15 @@ const EmployeeList = () => {
             <div className="employee-edit-phone">Phone Number: {currentEmployee.phone}</div>
             <div className="employee-edit-birthday">Birthday: {currentEmployee.birthday}</div>
             <div className="employee-edit-roles">Roles:{currentEmployee.roles.map((role) => {
-              return (<div>{role.role}</div>)
+              return (<div key={role.role}>{role.role}</div>)
             })}</div>
             <div className="employee-edit-startDate">Start Date: {currentEmployee.start_date}</div>
           </div>
         : <div> NOT DONE</div>}
       </div>
       <div className="employee-add-button">
-          <button></button>
+      <button onClick={e => {setShowModal(e)}}></button>
+      <EmployeeAdd onClose = {setShowModal} showModal={showModal}/>
       </div>
       <div className="employee-remove-button">
           <button></button>
