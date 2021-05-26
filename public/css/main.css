@@ -38,11 +38,7 @@ body {
   height: 75px;
 }
 
-.schedule {
-  min-width: 300px;
-}
-
-.schedule .update-shift-modal-outside {
+.modal-outer {
   position: fixed;
   z-index: 1;
   width: 100vw;
@@ -56,7 +52,7 @@ body {
   backdrop-filter: blur(6px);
 }
 
-.schedule .update-shift-modal-outside .update-shift-modal {
+.modal-outer .modal-inner {
   background-color: white;
   height: 500px;
   width: 500px;
@@ -65,6 +61,10 @@ body {
   margin-top: calc((100vh - 500px)/2);
   border: 1px solid #d5d5d5;
   border-radius: 10px;
+}
+
+.schedule {
+  min-width: 300px;
 }
 
 .schedule .month {
@@ -163,7 +163,8 @@ body {
 
 .schedule .employee-row .employee-schedule .day-table .no-shift:hover {
   background-image: none !important;
-  background-color: gray;
+  background-color: #d6e4f4;
+  cursor: pointer;
 }
 
 .schedule .publish {
@@ -276,36 +277,5 @@ body {
   -ms-grid-column: 4;
   grid-area: employee-remove-button;
   background-color: aqua;
-}
-
-.employeeAdd {
-  display: none;
-  /* Hidden by default */
-  position: fixed;
-  /* Stay in place */
-  z-index: 50;
-  /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%;
-  /* Full width */
-  height: 100%;
-  /* Full height */
-  overflow: auto;
-  /* Enable scroll if needed */
-  background-color: black;
-  /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4);
-  /* Black w/ opacity */
-}
-
-.employeeAdd .employeeAdd-container {
-  background-color: #fefefe;
-  margin: 15% auto;
-  /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 30%;
-  /* Could be more or less, depending on screen size */
 }
 /*# sourceMappingURL=main.css.map */

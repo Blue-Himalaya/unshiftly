@@ -57,6 +57,32 @@ body {
   height: 75px;
 }
 
+.modal-outer {
+  position: fixed;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.468);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+
+  .modal-inner {
+    background-color: white;
+    height: 500px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: calc((100vh - 500px)/2);
+    // transform: translateY(-50%);
+    border: 1px solid color(scheBborder);
+    border-radius: 10px;
+  }
+}
+
 
 .schedule {
 
@@ -74,42 +100,12 @@ body {
 
   min-width: 300px;
 
-  .update-shift-modal-outside {
-    position: fixed;
-    z-index: 1;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.468);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-
-    .update-shift-modal {
-      background-color: white;
-      height: 500px;
-      width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: calc((100vh - 500px)/2);
-      // transform: translateY(-50%);
-      border: 1px solid color(scheBborder);
-      border-radius: 10px;
-    }
-  }
-
   .month {
     font-size: xx-large;
     text-align: center;
     padding: 20px;
     border-bottom: 1px solid color(scheBborder)
   }
-
-  // .table {
-  //   // margin: 0 60px;
-  // }
 
   .table-elem, .table-elem-top, .table-elem-empty {
     align-self: center;
@@ -189,7 +185,8 @@ body {
 
         .no-shift:hover {
           background-image: none !important;
-          background-color: gray;
+          background-color: rgb(214, 228, 244);
+          cursor: pointer;
         }
       }
     }
@@ -325,23 +322,23 @@ body {
 
 }
 
-.employeeAdd {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 50; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+// .employeeAdd {
+//   display: none; /* Hidden by default */
+//   position: fixed; /* Stay in place */
+//   z-index: 50; /* Sit on top */
+//   left: 0;
+//   top: 0;
+//   width: 100%; /* Full width */
+//   height: 100%; /* Full height */
+//   overflow: auto; /* Enable scroll if needed */
+//   background-color: rgb(0,0,0); /* Fallback color */
+//   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 
-  .employeeAdd-container {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 30%; /* Could be more or less, depending on screen size */
-  }
-}
+//   .employeeAdd-container {
+//     background-color: #fefefe;
+//     margin: 15% auto; /* 15% from the top and centered */
+//     padding: 20px;
+//     border: 1px solid #888;
+//     width: 30%; /* Could be more or less, depending on screen size */
+//   }
+// }
