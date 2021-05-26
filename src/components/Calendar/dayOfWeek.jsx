@@ -36,8 +36,8 @@ const DayOfWeek = (props) => {
 
   return (
     <div>
-      {shifts.map((shift) => (
-        <div className="shift-block" onClick={() => toggleModal(shift.phone, shift.id)}>
+      {shifts.map((shift, i) => (
+        <div className="shift-block" key={shift+i} onClick={() => toggleModal(shift.phone, shift.id)}>
           {shift.name}
           <br/>
           {formatTime(shift.datetime)}
