@@ -1,13 +1,27 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import fetchView from '../redux-state/actions/fetchView.js';
+import logOut from '../redux-state/actions/logOut.js';
 
 const Header = (props) => {
-  const admin = useSelector(state => state.adminReducer.admin);
+  const isAuthenticated = useSelector(state => state.viewReducer.isAuthenticated);
+  const admin = useSelector(state => state.viewReducer.admin);
   const dispatch = useDispatch();
+
+  if (!isAuthenticated) {
+    return (
+      <div className='header'>
+        UNSHIFTLY
+      </div>
+    );
+  }
+
   if (!admin) {
     return (
-      <div className='header'>UNSHIFTLY {props.admin}</div>
+      <div className='header'>
+        UNSHIFTLY {props.admin}
+        <button onClick={() => {dispatch(logOut())}}>Log Out</button>
+      </div>
     )
   } else {
     return (
@@ -16,7 +30,7 @@ const Header = (props) => {
         <button onClick={() => {dispatch(fetchView('schedule'))}}>Edit Schedule</button>
         <button onClick={() => {dispatch(fetchView('employees'))}}>Edit Employees</button>
         <button onClick={() => {dispatch(fetchView('calendar'))}}>Go to Calendar</button>
-        {/* <button onClick={() => {dispatch(logOut())}}>Log Out</button> */}
+        <button onClick={() => {dispatch(logOut())}}>Log Out</button>
       </div>
     )
   }

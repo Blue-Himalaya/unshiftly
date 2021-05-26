@@ -9,8 +9,8 @@ export const fetchRoles = () => {
         })
       })
       .catch((error) => {
-        console.log(error)
-      })
+        throw error;
+      });
   }
 }
 

@@ -33,28 +33,31 @@ const getRolesWithColors = (callback) => {
   })
 }
 
-const dropShift = (shift_id, callback) => {
-  const queryString = `INSERT INTO activity (shift, time_of_activity, type_of_activity) VALUES (${shift_id}, (SELECT datetime FROM employee_schedule WHERE id=${shift_id}), 'active')`;
-  connection.query(queryString, (err, results) => {
-    if (err) throw err;
-    callback(results);
-  });
-};
+// const dropShift = (shift_id, callback) => {
+//   const queryString = `INSERT INTO activity (shift, time_of_activity, type_of_activity) VALUES (${shift_id}, (SELECT datetime FROM employee_schedule WHERE id=${shift_id}), 'active')`;
+//   connection.query(queryString, (err, results) => {
+//     if (err) throw err;
+//     callback(results);
+//   });
+// };
 
 const getActivities = (callback) => {
-  const queryString = `select es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es join activity a on a.shift = es.id, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id `;
+  const queryString = `select a.type_of_activity, es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es join activity a on a.shift = es.id, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id `;
   connection.query(queryString, (err, response) => {
     if (err) console.log(err)
     else callback(response);
   });
 }
 
-const updateActivities = (id, type, callback) => {
-  const queryString = `UPDATE activity SET type_of_activity='pending' WHERE id=${id}`;
+const updateActivities = (id, name, type, callback) => {
+  // when someone clicks pick up shift in the activity log, i send type 'scheduled' with the
+  // user's name (user that is logged in) as well as the shift id ~
+  // for my own testing purposes I'm updating the activity table type to 'scheduled';
+  const queryString = `UPDATE activity SET type_of_activity='${type}' WHERE id=${id}`;
    connection.query(queryString), (err, response) => {
      if (err) console.log(err);
    }
-   getActivities(callback);
+  getActivities(callback);
 }
 
 const authenticateUser = (username, callback) => {
@@ -65,7 +68,7 @@ const authenticateUser = (username, callback) => {
 };
 
 const checkIfAdmin = (id, callback) => {
-  const queryString = `SELECT role FROM roles r INNER JOIN employee_roles er ON r.id = er.id_role WHERE id_employee = ${id} `;
+  const queryString = `SELECT role FROM roles r INNER JOIN employee_roles er ON r.id = er.id_role WHERE id_employee = ${id}`;
   connection.query(queryString, (err, results) => {
     callback(null, results[0].role);
   });

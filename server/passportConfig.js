@@ -9,9 +9,7 @@ const passportAuth = (passport) => {
       dbHelpers.authenticateUser(username, (err, user) => {
         if (err) throw err;
         if (!user) return done(null, false);
-        bcrypt.hash(password, bcrypt.genSaltSync(10), (err, res) => {
-          console.log('hash', res);
-        });
+        if (user[0] === undefined) return done(null, false);
         bcrypt.compare(password, user[0].password, (err, result) => {
           if (err) throw err;
           if (result === true) {
@@ -27,13 +25,18 @@ const passportAuth = (passport) => {
   );
 
   passport.serializeUser((user, cb) => {
+    // is it okay that this is using the user id off of the object?
+    // maybe trace it back and determine if and why it's
+    // returning the user from the query.
     cb(null, user[0].id);
   });
   passport.deserializeUser((id, cb) => {
     dbHelpers.authenticateUser(id, (err, user) => {
+      if (err) throw err;
       cb(err, user);
     });
   });
 }
 
 module.exports = passportAuth;
+

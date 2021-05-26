@@ -51,3 +51,53 @@ body, html {
 #activtyLog {
   grid-area: b;
 }
+
+#activityLogContainer {
+  display: grid;
+  grid-template-rows: 0.2fr 0.5fr;
+  margin-top: 5px;
+  justify-items: center;
+}
+
+#activityLog {
+  border: 2px solid black;
+  border-radius: 15px;
+  text-align: center;
+  padding-right: 25px;
+  height: 75vh;
+  min-height: 25vh;
+  overflow-y: scroll;
+}
+
+#activityListItem {
+  list-style: none;
+}
+
+#timeOffTableEntries::-webkit-scrollbar,
+  #activityLog::-webkit-scrollbar {
+  display: none;
+}
+
+#adminNotifs {
+  display: grid;
+  grid-template-rows: 0.2fr 0.5fr;
+  margin-top: 5px;
+  justify-items: center;
+}
+
+
+#timeOffTableEntries
+  thead {
+    font-size: 1.2em;
+ }
+
+#timeOffTableEntries {
+  border: 2px solid black;
+  border-radius: 15px;
+  text-align: center;
+  padding-right: 25px;
+  height: 75vh;
+  min-height: 25vh;
+  overflow-y: scroll;
+}
+
