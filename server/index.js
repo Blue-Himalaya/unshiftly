@@ -163,7 +163,7 @@ app.put('/updateRoleColor', (req, res) => {
   })
 })
 
-app.get('/allRecurringTimeOff', (req, res) => {
+app.get('/recurringTimeOff', (req, res) => {
   dbHelpers.getAllRecurringTimeOff((results) => {
     res.send(results)
   })
