@@ -20,10 +20,11 @@ const Schedule = (props) => {
 
   // MODAL STATES
   const [shiftShow, toggleShiftShow] = useState(false)
+  const [currentDay, updateDay] = useState('')
+  const [currentDate, updateDate] = useState('')
 
   // INFORMATION FROM THE DATABASE
   const [table, updateTable] = useState(null)
-  // const [colors, updateColors] = useState(null)
   const schedule = useSelector(state => state.scheduleReducer.schedule);
   const employees = useSelector(state => state.employeeReducer.employees);
   const timeOff = useSelector(state => state.timeOffReducer.timeOff);

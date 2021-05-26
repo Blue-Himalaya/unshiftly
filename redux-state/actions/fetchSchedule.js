@@ -1,7 +1,12 @@
 const axios = require('axios');
-export const fetchSchedule = () => {
+export const fetchSchedule = (startDate, endDate) => {
   return (dispatch) => {
-    axios.get('/schedule?startDate=2019-10-11&endDate=2019-10-18')
+    axios.get('/schedule', {
+      params: {
+        startDate,
+        endDate
+      }
+    })
       .then((res) => {
         dispatch({
           type: 'GET_SCHEDULE',

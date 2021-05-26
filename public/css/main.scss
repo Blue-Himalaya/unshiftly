@@ -8,7 +8,7 @@ $colors: (
 };
 
 $mobile: 840px;
-$desktop: 1250px;
+$tablet: 1250px;
 
 @mixin mobile {
   @media (max-width: #{$mobile}) {
@@ -16,8 +16,8 @@ $desktop: 1250px;
   }
 };
 
-@mixin desktop {
-  @media (max-width: #{$desktop}) {
+@mixin tablet {
+  @media (max-width: #{$tablet}) {
     @content;
   }
 };
@@ -192,21 +192,21 @@ body {
     .emp-block {
 
       .employee-name {
-        @include desktop {
+        @include tablet {
           padding-top: 35px;
         }
       }
     }
     .employee-schedule {
       .day-table {
-        @include desktop {
+        @include tablet {
           grid-template-columns: auto;
           grid-row-gap: 10px;
           height: 70px;
           background: linear-gradient(to top, $nightBG 50%, white 50%);
         }
         .shift {
-          @include desktop {
+          @include tablet {
             padding: 5px 0;
           }
         }
