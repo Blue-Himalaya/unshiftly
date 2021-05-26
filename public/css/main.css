@@ -15,4 +15,54 @@ body {
   color: white;
   font-size: xx-large;
 }
+
+.employeeList {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 0.2fr 0.7fr 0.2fr 2.9fr 0.1fr;
+      grid-template-columns: 0.2fr 0.7fr 0.2fr 2.9fr 0.1fr;
+  -ms-grid-rows: 0.2fr 2.4fr 0.4fr;
+      grid-template-rows: 0.2fr 2.4fr 0.4fr;
+      grid-template-areas: ". . . . ." ". employee-list-container . employee-edit-container ." ". employee-add-button . employee-remove-button .";
+}
+
+.employeeList .employee-list-container {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: employee-list-container;
+  background-color: grey;
+}
+
+.employeeList .employee-list-title {
+  text-align-last: center;
+}
+
+.employeeList .employee-names {
+  color: orange;
+}
+
+.employeeList .employee-name-entry {
+  padding-bottom: 25px;
+}
+
+.employeeList .employee-edit-container {
+  -ms-grid-row: 2;
+  -ms-grid-column: 4;
+  grid-area: employee-edit-container;
+  background-color: red;
+}
+
+.employeeList .employee-add-button {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: employee-add-button;
+  background-color: yellow;
+}
+
+.employeeList .employee-remove-button {
+  -ms-grid-row: 3;
+  -ms-grid-column: 4;
+  grid-area: employee-remove-button;
+  background-color: aqua;
+}
 /*# sourceMappingURL=main.css.map */

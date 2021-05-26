@@ -54,3 +54,46 @@ body {
   // }
 }
 
+.employeeList {
+  display: grid;
+  grid-template-columns: 0.2fr 0.7fr 0.2fr 2.9fr 0.1fr;
+  grid-template-rows: 0.2fr 2.4fr 0.4fr;
+  grid-template-areas:
+    ". . . . ."
+    ". employee-list-container . employee-edit-container ."
+    ". employee-add-button . employee-remove-button .";
+
+  .employee-list-container {
+    grid-area: employee-list-container;
+    background-color: grey;
+  }
+
+  .employee-list-title {
+    text-align-last: center;
+  }
+
+  .employee-names {
+    color: orange;
+  }
+
+
+  .employee-name-entry {
+    padding-bottom: 25px;
+  }
+
+  .employee-edit-container {
+    grid-area: employee-edit-container;
+    background-color: red;
+  }
+
+  .employee-add-button {
+    grid-area: employee-add-button;
+    background-color: yellow;
+  }
+
+  .employee-remove-button {
+    grid-area: employee-remove-button;
+    background-color:aqua;
+  }
+
+}
