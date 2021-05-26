@@ -199,20 +199,11 @@ const revokeRecurringTimeOff = (dayOff, callback) => {
 */
 
 const getActivities = (callback) => {
-  // const queryString = `select a.type_of_activity, es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es join activity a on a.shift = es.id, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id `;
-  const queryString = `select * from activity`;
+  const queryString = `select * from activity order by id desc limit 20`;
   connection.query(queryString, (err, response) => {
     if (err) console.log(err)
     else callback(response);
   })
-}
-
-const updateActivities = (id, name, type, callback) => {
-  // const queryString = `UPDATE activity SET type_of_activity='${type}' WHERE id=${id}`;
-   connection.query(queryString, (err, response) => {
-     if (err) console.log(err);
-     else getActivities(callback);
-   })
 }
 
 /*
@@ -229,18 +220,13 @@ const getAllActiveEmployees = (callback) => {
 }
 
 const createEmployee = (employeeData, callback) => {
-  const { name, phone, birthday, password, start_date, role } = employeeData;
-  console.log(name, phone, birthday, password, start_date, role)
+  const { name, phone, birthday, password, startDate, role } = employeeData;
   bcrypt.hash(password, bcrypt.genSaltSync(10), (err, hashedPwd) => {
-    console.log(hashedPwd);
-    //*** Don't know if this works yet! ***/
-    // const queryString = `insert into employees (name, phone, birthday, password, start_date, is_active) values ('${name}', ${phone}, '${birthday}', '${hashedPwd}', '${start_date}', 1)`;
-    // insert into employee_roles (id_employee, id_role) values ((select id from employee where name = '${name}'), (select id from roles where name='${role}'))`;
-
-    // connection.query(queryString, (err, results) => {
-    //   if (err) throw err;
-    //   console.log(results);
-    // });
+    const queryString = `insert into employees (name, phone, birthday, password, start_date, is_active) values ('${name}', ${phone}, '${birthday}', '${hashedPwd}', '${startDate}', 1); insert into employee_roles (id_employee, id_role) values ((select id from employees where name = '${name}'), (select id from roles where role='${role}'))`;
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      callback(result);
+    });
   });
 }
 
@@ -293,7 +279,8 @@ module.exports ={
   revokeRecurringTimeOff,
   addNewRecurringTimeOff,
   pickUpShift,
-  releaseShift
+  releaseShift,
+  createEmployee
 }
 
 

@@ -248,6 +248,25 @@ app.put('/employees', (req, res) => {
   });
 })
 
+
+/*
+employee creation requires a body of the following format:
+{
+  name: [employee name],
+  phone: [10 character string of phone number],
+  birthday: [YYYY-MM-DD],
+  password: [initial input password],
+  startDate: [YYYY-MM-DD],
+  role: [single role] <-- currently only a single role, future work for multiple role array
+}
+*/
+
+app.post('/employees', (req, res) => {
+  dbHelpers.createEmployee(req.body, (results) => {
+    res.status(201).send(results).end();
+  })
+})
+
 /*
 ==============================================
       MISC
