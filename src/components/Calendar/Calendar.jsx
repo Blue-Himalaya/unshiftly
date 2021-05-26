@@ -12,8 +12,8 @@ const Calendar = () => {
   const columnDates = useSelector(state => state.scheduleReducer.listOfDays);
   const currentDateInfo = useSelector(state => state.scheduleReducer.currentDate).split('-');
 
-  console.log(columnDates);
-  console.log(currentDateInfo);
+  //console.log(columnDates);
+  //console.log(currentDateInfo);
   let today = `${currentDateInfo[1]} ${currentDateInfo[2]} ${currentDateInfo[0]}`
 
   const [isFormOpen, setToggleForm] = useState(false);

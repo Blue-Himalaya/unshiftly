@@ -4,7 +4,7 @@ import EmployeeInfoModal from './employeeInfoModal.jsx';
 
 const DayOfWeek = (props) => {
 
-  console.log('props: ', props);
+  //console.log('props: ', props);
 
   const [isModalOpen, setToggleModal] = useState(false);
 
@@ -20,10 +20,10 @@ const DayOfWeek = (props) => {
   }
 
   const toggleModal = (pNum, sID) => {
-    console.log(pNum);
-    console.log(sID);
+    //console.log(pNum);
+    //console.log(sID);
     setToggleModal(prevIsModalOpen => !prevIsModalOpen)
-    console.log(isModalOpen)
+    //console.log(isModalOpen)
   }
 
   // MODAL

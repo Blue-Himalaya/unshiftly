@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 const RequestTimeOffForm = (props) => {
   const user = useSelector(state => state.viewReducer.user)
   const { isOpen } = props;
-  console.log(user);
+  //console.log(user);
   return (
     <div>
       {isOpen
