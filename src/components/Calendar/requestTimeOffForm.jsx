@@ -8,8 +8,8 @@ const RequestTimeOffForm = (props) => {
   return (
     <div>
       {isOpen
-      ? <div className="emp-info-modal-bg">
-          <div className="emp-info-modal">
+      ? <div className="emp-info-modal-bg-req modal-outer">
+          <div className="emp-info-modal-req modal-inner">
             Request Time Off
             <br/>
             Date: <input className="date-picker" type="date"></input>
