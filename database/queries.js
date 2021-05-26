@@ -41,28 +41,21 @@ const getRolesWithColors = (callback) => {
   })
 }
 
-const dropShift = (shift_id, callback) => {
-  const queryString = `INSERT INTO activity (shift, time_of_activity, type_of_activity) VALUES (${shift_id}, (SELECT datetime FROM employee_schedule WHERE id=${shift_id}), 'active')`;
-  connection.query(queryString, (err, results) => {
-    if (err) throw err;
-    callback(results);
-  });
-};
-
 const getActivities = (callback) => {
-  const queryString = `select es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es join activity a on a.shift = es.id, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id `;
+  // const queryString = `select a.type_of_activity, es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es join activity a on a.shift = es.id, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id `;
+  const queryString = `select * from activity`;
   connection.query(queryString, (err, response) => {
     if (err) console.log(err)
     else callback(response);
   });
 }
 
-const updateActivities = (id, type, callback) => {
-  const queryString = `UPDATE activity SET type_of_activity='pending' WHERE id=${id}`;
+const updateActivities = (id, name, type, callback) => {
+  // const queryString = `UPDATE activity SET type_of_activity='${type}' WHERE id=${id}`;
    connection.query(queryString), (err, response) => {
      if (err) console.log(err);
    }
-   getActivities(callback);
+  getActivities(callback);
 }
 
 const authenticateUser = (username, callback) => {
@@ -73,7 +66,7 @@ const authenticateUser = (username, callback) => {
 };
 
 const checkIfAdmin = (id, callback) => {
-  const queryString = `SELECT role FROM roles r INNER JOIN employee_roles er ON r.id = er.id_role WHERE id_employee = ${id} `;
+  const queryString = `SELECT role FROM roles r INNER JOIN employee_roles er ON r.id = er.id_role WHERE id_employee = ${id}`;
   connection.query(queryString, (err, results) => {
     callback(null, results[0].role);
   });
@@ -147,21 +140,6 @@ const setSchedule = (arr, callback) => {
   });
 }
 
-const addNewEmployee = (employeeInfo, callback) => {
-  const { name, phone, birthday, password, startDate, role } = employeeInfo;
-  bcrypt.hash(password, bcrypt.genSaltSync(10), (err, res) => {
-    let queryString;
-    // `INSERT INTO employees (name, phone, birthday, password, startDate, role)
-    // // VALUES (${name}, ${phone}, ${birthday}, ${res}, ${startDate}); INSERT INTO employee_roles (id_employee, id_role)
-    // // VALUES ((SELECT id FROM employees WHERE name=${name}), SELECT id FROM roles where role=${role})`
-    console.log('hash', res);
-    connection.query(queryString, (err, result) => {
-      if (err) throw err;
-      console.log(result);
-    });
-  });
-};
-
 const getSchedule = (dateObj, callback) => {
   const queryString = `select es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id and es.datetime between '${dateObj.startDate}' and '${dateObj.endDate}' or employee_role_two = er.id and es.datetime between '${dateObj.startDate}' and '${dateObj.endDate}' order by es.datetime asc`
   connection.query(queryString, (err, results) => {
@@ -186,6 +164,7 @@ const requestSingleDayOff = (requestObj, callback) => {
   })
 }
 
+<<<<<<< HEAD
 const editEmployee = (requestObj, callback) => {
   const {id, name, phone, birthday, startDate, isActive} = requestObj;
   const queryString = `UPDATE employees SET name = '${name}, phone = '${phone}', birthday = '${birthday}', start_date = '${startDate}', is_active = ${isActive} WHERE id = ${id}`;
@@ -193,6 +172,14 @@ const editEmployee = (requestObj, callback) => {
     if(err) console.log(err)
     else callback(results)
   })
+=======
+const createEmployee = (employeeData, callback) => {
+  const { name, phone, birthday, password, start_date, role } = employeeData;
+  bcrypt.hash(password, bcrypt.genSaltSync(10), (err, hashedPwd) => {
+    //*** Don't know if this works yet! ***/
+    const queryStr = `insert into employees (name, phone, birthday, password, start_date, is_active) values ('${name}', ${phone}, '${birthday}', '${hashedPwd}', '${start_date}'); insert into employee_roles (id_employee, id_role) values ((select id from employee where name = '${name}'), (select id from roles where name='${role}'))`
+  });
+>>>>>>> 5ebff84c0f3e901cc0d28d9db956cd35cadfed4f
 }
 
 
@@ -209,8 +196,12 @@ module.exports ={
   getSchedule,
   getAllRecurringTimeOff,
   requestSingleDayOff,
+<<<<<<< HEAD
   editEmployee,
   removeSingleTimeOff
+=======
+  createEmployee,
+>>>>>>> 5ebff84c0f3e901cc0d28d9db956cd35cadfed4f
 }
 
 // INSERT INTO employees (name, phone, birthday, password) VALUES ('example@email.com', 5166660124, '1997-01-06', '$2y$10$niNB9kx6k.lnLgbLn8yfr.oUzIM4xYV90I6nma3qED3nifn6oWdkK')

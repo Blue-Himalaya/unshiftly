@@ -42,14 +42,13 @@ passportAuth(passport);
 */
 
 app.post('/login', (req, res, next) => {
-  console.log(req)
+  //console.log(req)
   passport.authenticate('local', (err, user, info) => {
-    console.log(err, user, info)
     if (err) throw err;
     if (!user) res.send('No User Exists');
     else {
       req.logIn(user, err => {
-        console.log(user)
+        //console.log(user, info)
         if (err) throw err;
         res.send({ auth: 'success!', role: user[0].role, user: user[0].name });
       });
@@ -67,19 +66,34 @@ app.get('/logout')
   //activity log (limit last 20)
 
 //initial employee page load request
-app.get('/employeeSchedule', (req, res) => {
-  const { employeeID, dateStart, dateEnd } = req.params
-  db.getEmployeeSchedule([employeeID, dateStart, dateEnd], (results) => {
-    res.send(results)
-  })
-})
+// app.get('/employeeSchedule', (req, res) => {
+//   const { employeeID, dateStart, dateEnd } = req.params
+//   db.getEmployeeSchedule([employeeID, dateStart, dateEnd], (results) => {
+//     res.send(results)
+//   })
+// })
 
+app.get('/logOut', (req, res) => {
+  req.logout();
+  console.log('after: ', req);
+  res.send('loggedOut');
+});
+
+<<<<<<< HEAD
 app.put('/employeeShiftUpdate', (req, res) => {
   const { employeeID, shiftDate, giveUpPickUp} = req.params
   db.updateEmployeeShiftSwap([employeeID, shiftDate, giveUpPickUp], (results) => {
     res.send(results)
   })
 })
+=======
+// app.put('/employeeShiftUpdate', (req, res) => {
+//   const { employeeID, shiftDate, giveUpPickUp} = req.params
+//   db.updateEmployeeShiftSwap([employeeID, shiftDate, giveUpPickUp], (results) => {
+//     res.send(results)
+//   })
+// })
+>>>>>>> 5ebff84c0f3e901cc0d28d9db956cd35cadfed4f
 
 /*
 ======================================================
@@ -102,9 +116,32 @@ app.get('/schedule', (req, res) => {
     if(err){
       console.log("server err", err)
     } else {
+<<<<<<< HEAD
        var final = helperFunctions.adminScheduleFormatting(results)
        res.send(final)
   }})
+=======
+      var final = helperFunctions.adminScheduleFormatting(results)
+      res.send(final)
+    }
+  })
+})
+
+app.get('/scheduletest', (req, res) => {
+  db.query(`select es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id and es.datetime between '2020-10-11' and '2020-10-17' order by es.datetime asc`,
+  (error, results, fields) => {
+    if (error) {
+      res.send(error);
+      res.status(500);
+      res.end();
+    } else {
+      var final = helperFunctions.adminScheduleFormatting(results)
+      res.send(final);
+      res.status(200);
+      res.end();
+    }
+  })
+>>>>>>> 5ebff84c0f3e901cc0d28d9db956cd35cadfed4f
 })
 
 
@@ -128,6 +165,7 @@ app.get('/allSingleTimeOff', (req, res) => {
     res.send(results)
   })
 })
+<<<<<<< HEAD
 
 app.get('/recurringTimeOff', (req, res) => {
   dbHelpers.getAllRecurringTimeOff((results) => {
@@ -176,6 +214,8 @@ app.get('/allActiveEmployees', (req, res) => {
     res.send(final)
   })
 })
+=======
+>>>>>>> 5ebff84c0f3e901cc0d28d9db956cd35cadfed4f
 
 
 app.get('/allRolesAndColors', (req, res) => {
@@ -186,13 +226,14 @@ app.get('/allRolesAndColors', (req, res) => {
 
 app.get('/getActivities', (req, res) => {
   dbHelpers.getActivities((results) => {
+    console.log(results);
     res.send(results);
   });
 });
 
 app.put('/updateActivities', (req, res) => {
-  const { id, type } = req.body;
-  dbHelpers.updateActivities(1, type, (results) => {
+  const { id, name, type } = req.body;
+  dbHelpers.updateActivities(id, name, type, (results) => {
     res.send(results);
   });
 })
@@ -227,11 +268,28 @@ The only variable which is needed, and cannot be changed is the id.
 i.e. if you want to update the isActive, but nothing else, the endpoint still needs the old information for all other fields
 */
 
+<<<<<<< HEAD
 app.put('/employees', (req, res) => {
   const requestObj = req.body;
   dbHelpers.editEmployee(requestObj, (results) => {
     res.status(201).send('updated').end();
   })
+=======
+app.post('/requestSingleDayOff', (req, res) => {
+  const requestObj = req.query
+  // console.log("reqest obj", requestObj)
+  dbHelpers.requestSingleDayOff(requestObj, (results) => {
+    res.status(200).send('created')
+  });
+});
+
+app.post('/employees', (req, res) => {
+  dbHelpers.createEmployee(req.body, (results) => {
+    // I will probably need these results
+    // to update state ~
+    // res.status(200).send('created');
+  });
+>>>>>>> 5ebff84c0f3e901cc0d28d9db956cd35cadfed4f
 })
 
 

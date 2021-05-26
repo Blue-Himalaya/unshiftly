@@ -1,11 +1,10 @@
 const axios = require('axios');
-
-export const fetchTimeOff = () => {
+export const fetchSingleTimeOff = () => {
   return (dispatch) => {
-    axios.get('/recurringTimeOff')
+    axios.get('/allSingleTimeOff')
       .then((res) => {
         dispatch({
-          type: 'GET_TIMEOFF',
+          type: 'GET_SINGLE_TIMEOFF',
           payload: res.data,
         });
       })
@@ -15,4 +14,4 @@ export const fetchTimeOff = () => {
   }
 };
 
-export default fetchTimeOff;
+export default fetchSingleTimeOff;

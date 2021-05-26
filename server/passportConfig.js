@@ -9,9 +9,7 @@ const passportAuth = (passport) => {
       dbHelpers.authenticateUser(username, (err, user) => {
         if (err) throw err;
         if (!user) return done(null, false);
-        bcrypt.hash(password, bcrypt.genSaltSync(10), (err, res) => {
-          console.log('hash', res);
-        });
+        if (user[0] === undefined) return done(null, false);
         bcrypt.compare(password, user[0].password, (err, result) => {
           if (err) throw err;
           if (result === true) {
@@ -31,9 +29,11 @@ const passportAuth = (passport) => {
   });
   passport.deserializeUser((id, cb) => {
     dbHelpers.authenticateUser(id, (err, user) => {
+      if (err) throw err;
       cb(err, user);
     });
   });
 }
 
 module.exports = passportAuth;
+

@@ -15,6 +15,7 @@ body, html {
 .view-container {
   display: flex;
   flex-direction: row;
+  padding: 20px;
 }
 
 .cal-container {
@@ -22,6 +23,17 @@ body, html {
   flex-direction: column;
   width: 70%;
   height: 100%;
+}
+
+.title-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.cal-title {
+  display: flex;
+  width: fit-content;
 }
 
 .cal-contents-cont {
@@ -42,12 +54,114 @@ body, html {
   margin-left: 50px;
 }
 
-#calendar-dates {
+#daysOfWeek {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 50px repeat(auto-fit);
+  margin-bottom: 20px;
+}
+
+/* .date-container {
+  display: flex;
+  justify-content: center;
+} */
+
+.column-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  width: fit-content;
+  margin-right: 10px;  /* delete this later */
+}
+
+.day {
+  font-size: 0.8rem;
+  width: fit-content;
+}
+
+.date {
+  font-size: 1.2rem;
+  width: fit-content;
 }
 
 #activtyLog {
   grid-area: b;
+}
+
+#activityLogContainer {
+  display: grid;
+  grid-template-rows: 0.2fr 0.5fr;
+  margin-top: 5px;
+  justify-items: center;
+}
+
+#activityLog {
+  border: 2px solid black;
+  border-radius: 15px;
+  text-align: center;
+  padding-right: 25px;
+  height: 75vh;
+  min-height: 25vh;
+  overflow-y: scroll;
+}
+
+#activityListItem {
+  list-style: none;
+}
+
+#timeOffTableEntries::-webkit-scrollbar,
+  #activityLog::-webkit-scrollbar {
+  display: none;
+}
+
+#adminNotifs {
+  display: grid;
+  grid-template-rows: 0.2fr 0.5fr;
+  margin-top: 5px;
+  justify-items: center;
+}
+
+
+#timeOffTableEntries
+  thead {
+    font-size: 1.2em;
+ }
+
+#timeOffTableEntries {
+  border: 2px solid black;
+  border-radius: 15px;
+  text-align: center;
+  padding-right: 25px;
+  height: 75vh;
+  min-height: 25vh;
+  overflow-y: scroll;
+}
+
+.shift-block {
+  width: fit-content;
+  height: fit-content;
+  margin-bottom: 10px;
+}
+
+.emp-info-modal-bg {
+  position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(126, 126, 126, 0.509);
+	z-index: 1000;
+}
+
+.emp-info-modal {
+  position: fixed;
+	width: 200px;
+	height: 200px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #f5f5f5;
+	padding: 50px;
+	z-index: 1000;
 }
