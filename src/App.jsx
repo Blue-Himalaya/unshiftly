@@ -42,7 +42,7 @@ const App = () => {
     dispatch(fetchActivityList());
     dispatch(fetchEmployees());
     dispatch(fetchTimeOff());
-    dispatch(fetchRoles())
+    dispatch(fetchRoles());
     dispatch(fetchView('login'));
     dispatch(fetchAdmin(true));
   }, []);
