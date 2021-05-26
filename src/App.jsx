@@ -5,6 +5,7 @@ import Calendar from './components/Calendar/Calendar.jsx';
 import fetchView from '../redux-state/actions/fetchView.js';
 import fetchSchedule from '../redux-state/actions/fetchSchedule.js';
 import fetchTimeOff from '../redux-state/actions/fetchTimeoff.js';
+import fetchSingleTimeOff from '../redux-state/actions/fetchSingleTimeoff.js';
 import fetchEmployees from '../redux-state/actions/fetchEmployees.js';
 import fetchActivityList from '../redux-state/actions/fetchActivityList.js';
 import fetchRoles from '../redux-state/actions/fetchRoles.js';
@@ -42,6 +43,7 @@ const App = () => {
     dispatch(fetchActivityList());
     dispatch(fetchEmployees());
     dispatch(fetchTimeOff());
+    dispatch(fetchSingleTimeOff());
     dispatch(fetchRoles());
     dispatch(fetchView('login'));
     dispatch(fetchAdmin(true));

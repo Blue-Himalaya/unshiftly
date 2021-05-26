@@ -5,8 +5,9 @@ const userLoggedIn = (username, password) => {
     dispatch({
       type: 'AUTH_REQUESTED',
     });
-    axios.post('/login', { username, password }, { withCredentials: true , url: 'http://localhost:8080' })
+    axios.post('/login', { username, password }, { withCredentials: true , url: 'http://localhost:8080/login' })
       .then((res) => {
+        console.log(res.data);
         if (res.data.auth === 'success!') {
           dispatch({
             type: 'IS_AUTHENTICATED',
