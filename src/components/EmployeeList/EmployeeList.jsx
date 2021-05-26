@@ -6,6 +6,7 @@ import fetchSchedule from '../../../redux-state/actions/fetchEmployees.js';
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
+
   useLayoutEffect(() => {
     function updateSize() {
       setSize([window.innerWidth, window.innerHeight]);
@@ -20,17 +21,25 @@ function useWindowSize() {
 const EmployeeList = () => {
 
   //EMPLOYEE DATA
+  const [employeeNames, updateEmployeeNames] = useState(null)
   const employees = useSelector(state => state.employeeReducer.employees);
   console.log(employees)
         // const dispatch = useDispatch();
 
   useEffect(() => {
+    if (employees) {
+
           // dispatch(fetchSchedule());
           // page load, then immediate schedule view
           //
+      let employeeNames = []
 
+      employees.map((employee) => {
+        employeeNames.push(employee.name)
+      })
 
-
+      updateEmployeeNames(employeeNames)
+  }
   }, []);
 
 
@@ -42,25 +51,18 @@ const EmployeeList = () => {
       <div className="list">
         Employee List
         <div className="employee-names">
-            <div id="calendar-dates">
-              <div>Fri</div>
-              <div>Sat</div>
-              <div>Sun</div>
-              <div>Mon</div>
-              <div>Tue</div>
-              <div>Wed</div>
-              <div>Thu</div>
-            </div>
-            <div>shifts</div>
-          </div>
-      </div>
+          {employeeNames ?
+          employeeNames.map((employee) => {
+            return (
+            <div key={employee}>{employee}</div>
+            )
 
-        <div className="activity-log-container">
-          <div className="activity-grid">
-          </div>
+          })
+          : <div> NOT DONE </div>}
         </div>
-
+      </div>
     </div>
+
   );
 };
 
