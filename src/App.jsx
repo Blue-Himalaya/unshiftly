@@ -35,7 +35,7 @@ const App = () => {
     // console.log('TIMEOFF:', timeOff)
     // console.log('EMPLOYEES:', employees)
     // console.log('ROLES:', roles)
-    // console.log('ADMIN:', admin)
+    // console.log('ADMIN:', admin) // it's a boolean
   }
 
   useEffect(() => {

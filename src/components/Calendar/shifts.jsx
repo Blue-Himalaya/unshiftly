@@ -20,7 +20,7 @@ const Shifts = () => {
   return(
       <div className="column-container">
       {days.map((day) => (
-          <div className="column">
+          <div key={day} className="column">
             <DayOfWeek shifts={schedule[0].[day]} />
           </div>
       ))}
