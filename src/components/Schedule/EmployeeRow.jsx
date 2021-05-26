@@ -40,6 +40,9 @@ const EmployeeRow = (props) => {
             // SETTING 3 DAYS TO TODAY FOR MOBILE
             if( props.width > props.mobileWidth || props.threeDays.indexOf(day) !== -1 ) {
 
+              var iterationDate = new Date(columnDatesFull[dayOfWeek]).getTime()
+              var past = iterationDate < props.today ? 'past' : ''
+
               return <div key={`day-table-${day}`}className={'day-table'}
               style={{
                 // background: `linear-gradient(to left, rgb(245, 245, 245) 50%, rgb(255, 255, 255) 50%)`
@@ -79,7 +82,7 @@ const EmployeeRow = (props) => {
                       updateMeridian={props.updateMeridian} // AM-PM IN MODAL
                       updateEmployee={props.updateEmployee} // EMPLOYEE INFO IN MODAL
 
-                      past={(dayOfWeek < props.indexOfDay) ? 'past' : ''} //DAY OF WEEK IS THE INDEX FROM MAPPING DAYS
+                      past={past} //DAY OF WEEK IS THE INDEX FROM MAPPING DAYS
                       />
                     )
                   })

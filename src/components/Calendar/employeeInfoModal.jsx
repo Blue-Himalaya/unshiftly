@@ -11,8 +11,8 @@ const EmployeeInfoModal = (props) => {
   return (
     <div>
       {isOpen?
-        <div className="emp-info-modal-bg">
-          <div className="emp-info-modal">
+        <div className="emp-info-modal-bg-2 modal-outer">
+          <div className="emp-info-modal-2 modal-inner">
             Employee: {employeeInfo.name}
             <br/>
             Phone: {employeeInfo.phone}

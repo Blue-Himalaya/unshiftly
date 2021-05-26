@@ -9,8 +9,8 @@ const RequestTimeOffForm = (props) => {
   return (
     <div>
       {isOpen
-      ? <div className="emp-info-modal-bg">
-          <div className="emp-info-modal">
+      ? <div className="emp-info-modal-bg-req modal-outer">
+          <div className="emp-info-modal-req modal-inner">
             <div className="x-btn-rto-form" onClick={closeModal}>X</div>
             Request Time Off
             <br/>
