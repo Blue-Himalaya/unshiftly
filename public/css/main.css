@@ -30,6 +30,7 @@ body {
   background-color: #1d2c67;
   color: white;
   font-size: xx-large;
+  position: fixed;
   z-index: 2;
 }
 
