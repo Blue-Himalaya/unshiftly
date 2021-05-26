@@ -13,14 +13,23 @@ const Calendar = () => {
   console.log('employees: ', employees);
 
 
+
+
   return (
     <div>
       <div className="view-container">
         <div className="cal-container">
-          <h1>Calendar</h1>
+          <div className="title-container">
+            <h1 className="cal-title">{'<'} Current Week {'>'}</h1>
+          </div>
           <div className="cal-contents-cont">
-              <div id="columns">
-                <div>Fri</div>
+              <div id="daysOfWeek">
+                <div className="date-container">
+                  <div className="day">
+                    Fri
+                    <div className="date">11</div>
+                  </div>
+                </div>
                 <div>Sat</div>
                 <div>Sun</div>
                 <div>Mon</div>
