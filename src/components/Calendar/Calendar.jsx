@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import ActivityList from './ActivityList.jsx';
 import Shifts from './shifts.jsx';
+import ActivityList from './ActivityList/ActivityList.jsx';
 
 const Calendar = () => {
   const employees = useSelector(state => state.employeeReducer.employees);

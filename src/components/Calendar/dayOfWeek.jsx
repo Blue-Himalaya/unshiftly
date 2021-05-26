@@ -50,5 +50,3 @@ const DayOfWeek = (props) => {
 }
 
 export default DayOfWeek;
-
-{/* <div className="shift-block" onClick={() => getPhoneNum(shift.phone)}> */}
