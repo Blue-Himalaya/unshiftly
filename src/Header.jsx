@@ -11,12 +11,16 @@ const Header = (props) => {
     )
   } else {
     return (
+      <>
       <div className='header'>
         UNSHIFTLY
         <button onClick={() => {dispatch(fetchView('schedule'))}}>Edit Schedule</button>
         <button onClick={() => {dispatch(fetchView('employees'))}}>Edit Employees</button>
         <button onClick={() => {dispatch(fetchView('calendar'))}}>Go to Calendar</button>
+        {/* <button onClick={() => {dispatch(logOut())}}>Log Out</button> */}
       </div>
+      <div className='header-buffer'>&nbsp;</div>
+      </>
     )
   }
 

@@ -9,6 +9,7 @@ import fetchEmployees from '../redux-state/actions/fetchEmployees.js';
 import fetchActivityList from '../redux-state/actions/fetchActivityList.js';
 import fetchRoles from '../redux-state/actions/fetchRoles.js';
 import fetchAdmin from '../redux-state/actions/fetchAdmin.js';
+import Login from './Login/Login.jsx';
 
 import Schedule from './components/Schedule/Schedule.jsx'
 import Header from './Header.jsx'
@@ -25,7 +26,7 @@ const App = () => {
 
   // const admin = true
   const name = 'Steve'
-  const mobileWidth = 500
+  const mobileWidth = 840
 
   if (schedule && employees && timeOff && roles && admin) {
     // console.log('SCHEDULE:', schedule)
@@ -36,11 +37,12 @@ const App = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchSchedule());
+    dispatch(fetchSchedule('2019-10-15'));
+    dispatch(fetchActivityList());
     dispatch(fetchEmployees());
     dispatch(fetchTimeOff());
-    dispatch(fetchRoles())
-    dispatch(fetchView('calendar'));
+    dispatch(fetchRoles());
+    dispatch(fetchView('login'));
     dispatch(fetchAdmin(true));
   }, []);
 
@@ -62,7 +64,7 @@ const App = () => {
     return (
       <>
       <Header/>
-      login
+      <Login />
       </>
     );
   }
