@@ -32,7 +32,7 @@ const AdminNotifications = () => {
   return (
     <div id="adminNotifs">
       <button id="back2Log" onClick={() => setView('activityLog')}>Back to Activity Log</button>
-      <h1>Time Off Requests</h1>
+      <h1>Alerts</h1>
         <div id="timeOffTableEntries">
           <table id="timeOffTable">
           <thead>

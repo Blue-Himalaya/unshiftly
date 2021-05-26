@@ -22,6 +22,8 @@ const Header = (props) => {
       <div className='header'>
         UNSHIFTLY {props.admin}
         <button onClick={() => {dispatch(logOut())}}>Log Out</button>
+        {' '}
+        <span>Welcome {user}</span>
       </div>
     )
   } else {

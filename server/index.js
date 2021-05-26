@@ -42,8 +42,8 @@ app.post('/login', (req, res, next) => {
     if (!user) res.send('No User Exists');
     else {
       req.logIn(user, err => {
-        console.log(user, info)
         if (err) throw err;
+        console.log('USER: ', req.user, 'INFO: ', info)
         res.send({ auth: 'success!', role: user[0].role, user: user[0].name });
       });
     }
@@ -152,13 +152,6 @@ app.get('/getActivities', (req, res) => {
   });
 });
 
-app.put('/updateActivities', (req, res) => {
-  const { id, name, type } = req.body;
-  dbHelpers.updateActivities(id, name, type, (results) => {
-    res.send(results);
-  });
-})
-
 //attach role: role, color: new_color_name to params
 app.put('/updateRoleColor', (req, res) => {
   const roleColorObj = req.query
@@ -204,3 +197,4 @@ app.post('/employees', (req, res) => {
 
 
 module.exports = app;
+

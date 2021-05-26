@@ -42,14 +42,6 @@ const getActivities = (callback) => {
   });
 }
 
-const updateActivities = (id, name, type, callback) => {
-  // const queryString = `UPDATE activity SET type_of_activity='${type}' WHERE id=${id}`;
-   connection.query(queryString), (err, response) => {
-     if (err) console.log(err);
-   }
-  getActivities(callback);
-}
-
 const authenticateUser = (username, callback) => {
   const queryString = `SELECT * FROM employees WHERE name = '${username}'`;
   connection.query(queryString, (err, results) => {
@@ -158,11 +150,21 @@ const requestSingleDayOff = (requestObj, callback) => {
 
 const createEmployee = (employeeData, callback) => {
   const { name, phone, birthday, password, start_date, role } = employeeData;
+  console.log(name, phone, birthday, password, start_date, role)
   bcrypt.hash(password, bcrypt.genSaltSync(10), (err, hashedPwd) => {
+    console.log(hashedPwd);
     //*** Don't know if this works yet! ***/
-    const queryStr = `insert into employees (name, phone, birthday, password, start_date, is_active) values ('${name}', ${phone}, '${birthday}', '${hashedPwd}', '${start_date}'); insert into employee_roles (id_employee, id_role) values ((select id from employee where name = '${name}'), (select id from roles where name='${role}'))`
+    // const queryString = `insert into employees (name, phone, birthday, password, start_date, is_active) values ('${name}', ${phone}, '${birthday}', '${hashedPwd}', '${start_date}', 1)`;
+    // insert into employee_roles (id_employee, id_role) values ((select id from employee where name = '${name}'), (select id from roles where name='${role}'))`;
+
+    // connection.query(queryString, (err, results) => {
+    //   if (err) throw err;
+    //   console.log(results);
+    // });
   });
 }
+
+
 
 
 module.exports ={
@@ -170,7 +172,6 @@ module.exports ={
   getAllSingleTimeOff,
   getRolesWithColors,
   getActivities,
-  updateActivities,
   authenticateUser,
   checkIfAdmin,
   changeRoleColor,
