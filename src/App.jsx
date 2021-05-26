@@ -26,7 +26,7 @@ const App = () => {
 
   // const admin = true
   const name = 'Steve'
-  const mobileWidth = 500
+  const mobileWidth = 840
 
   if (schedule && employees && timeOff && roles && admin) {
     // console.log('SCHEDULE:', schedule)
@@ -37,7 +37,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchSchedule());
+    dispatch(fetchSchedule('2019-10-15'));
     dispatch(fetchActivityList());
     dispatch(fetchEmployees());
     dispatch(fetchTimeOff());

@@ -1,3 +1,18 @@
+.noselect {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
 body, html {
   margin: 0;
   padding: 0;
@@ -11,8 +26,207 @@ body {
 .header {
   padding: 17px 25px;
   height: 41px;
+  width: 100vw;
   background-color: #1d2c67;
   color: white;
   font-size: xx-large;
+  position: fixed;
+  z-index: 2;
+}
+
+.header-buffer {
+  height: 75px;
+}
+
+.schedule {
+  min-width: 300px;
+}
+
+.schedule .update-shift-modal-outside {
+  position: fixed;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.468);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.schedule .update-shift-modal-outside .update-shift-modal {
+  background-color: white;
+  height: 500px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  border: 1px solid #d5d5d5;
+  border-radius: 10px;
+}
+
+.schedule .month {
+  font-size: xx-large;
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid #d5d5d5;
+}
+
+.schedule .table-elem, .schedule .table-elem-top, .schedule .table-elem-empty {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.schedule .table-elem-top {
+  padding: 10px 0;
+  width: 53px;
+}
+
+.schedule .table-elem-top .col-day {
+  margin-top: 5px;
+}
+
+.schedule .table-elem-top .col-date {
+  font-size: x-large;
+  padding-top: 11px;
+  margin-top: 5px;
+  height: 37px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  border-radius: 50%;
+}
+
+.schedule .table-elem-top .highlight-today {
+  border: #1d2c67 solid 2px;
+}
+
+.schedule .highlight-today {
+  color: #1d2c67;
+}
+
+.schedule .past-today {
+  opacity: 40%;
+}
+
+.schedule .table-elem-empty {
+  min-width: 115px;
+}
+
+.schedule .employee-row {
+  border-top: solid 1px #d5d5d5;
+}
+
+.schedule .employee-row .emp-block {
+  height: 100%;
+  padding: 0;
+  background-color: #f4f4f4;
+  width: 100%;
+}
+
+.schedule .employee-row .emp-block .employee-name {
+  text-align: left;
+  padding-left: 25px;
+  padding-top: 25px;
+  min-width: 90px;
+}
+
+.schedule .employee-row .employee-schedule .day-table {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  grid-column-gap: 20px;
+  padding: 10px;
+  border-left: solid 1px #d5d5d5;
+  height: 49px;
+  background: -webkit-gradient(linear, right top, left top, color-stop(50%, #f7f7f7), color-stop(50%, white));
+  background: linear-gradient(to left, #f7f7f7 50%, white 50%);
+}
+
+.schedule .employee-row .employee-schedule .day-table .shift {
+  min-width: 50px;
+  padding: 15px 0;
+}
+
+.schedule .employee-row .employee-schedule .day-table .past {
+  opacity: 30%;
+}
+
+.schedule .employee-row .employee-schedule .day-table .no-shift:hover {
+  background-image: none !important;
+  background-color: gray;
+}
+
+.schedule .publish {
+  height: 100px;
+}
+
+.schedule .publish .button {
+  margin: 20px auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.schedule .publish button {
+  padding: 12px 27px;
+  font-size: larger;
+  background-color: #1d2c67;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.schedule .publish button:hover {
+  background-color: #5271ed;
+}
+
+@media (max-width: 1250px) {
+  .schedule .employee-row .emp-block .employee-name {
+    padding-top: 35px;
+  }
+}
+
+@media (max-width: 1250px) {
+  .schedule .employee-row .employee-schedule .day-table {
+    -ms-grid-columns: auto;
+        grid-template-columns: auto;
+    grid-row-gap: 10px;
+    height: 70px;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(50%, whitesmoke), color-stop(50%, white));
+    background: linear-gradient(to top, whitesmoke 50%, white 50%);
+  }
+}
+
+@media (max-width: 1250px) {
+  .schedule .employee-row .employee-schedule .day-table .shift {
+    padding: 5px 0;
+  }
+}
+
+@media (max-width: 840px) {
+  .schedule .employee-row .emp-block .employee-name {
+    padding: 5px 10px;
+    border-bottom: solid 1px #d5d5d5;
+  }
+}
+
+@media (max-width: 840px) {
+  .schedule .employee-row .employee-schedule .day-table {
+    border-left: none;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(50%, #f7f7f7), color-stop(50%, white));
+    background: linear-gradient(to top, #f7f7f7 50%, white 50%);
+  }
 }
 /*# sourceMappingURL=main.css.map */
