@@ -4,10 +4,11 @@ const UpdateShiftModal = (props) => {
 
   if (props.show) {
     return (
-      <div className='update-shift-modal'
-      onClick={() => {
-        props.toggleShiftShow(!props.show)
-      }}>HELLO</div>
+      <div className='update-shift-modal-outside'>
+        <div className='update-shift-modal'>
+          HELLO
+        </div>
+      </div>
     )
   } else {
     return (null)
