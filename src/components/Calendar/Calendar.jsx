@@ -5,8 +5,6 @@ import ActivityList from './ActivityList/ActivityList.jsx';
 const Calendar = () => {
   const schedule = useSelector(state => state.scheduleReducer.schedule);
 
-  console.log(schedule)
-
   return (
     <div className="view-container">
       <div className="cal-container">

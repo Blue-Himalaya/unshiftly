@@ -61,7 +61,6 @@ const EmployeeList = () => {
   //ALLOWS FOR MODAL TO BE OPENED AND CLOSED
   function setShowModal(e) {
     updateShowModal(!showModal)
-    console.log(showModal)
   }
 
   return (

@@ -12,7 +12,6 @@ const EmployeeAdd = ({showModal, onClose}) => {
 
 
   useEffect(() => {
-    console.log(showModal)
   }, []);
 
   let containerStyle;
