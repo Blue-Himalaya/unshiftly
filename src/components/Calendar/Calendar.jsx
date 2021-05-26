@@ -8,9 +8,9 @@ const Calendar = () => {
   const timeOff = useSelector(state => state.timeOffReducer.timeOff);
   const roles = useSelector(state => state.rolesReducer.roles);
 
-  console.log('roles: ', roles);
-  console.log('timeoff: ', timeOff);
-  console.log('employees: ', employees);
+  // console.log('roles: ', roles);
+  // console.log('timeoff: ', timeOff);
+  // console.log('employees: ', employees);
 
 
 
