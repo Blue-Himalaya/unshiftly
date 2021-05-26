@@ -13,7 +13,8 @@ const scheduleReducer = (state = initialState, action) => {
         currentDate: action.payload[1],
         startDate: action.payload[2],
         endDate: action.payload[3],
-        listOfDays: action.payload[4]
+        listOfDays: action.payload[4],
+        listOfFullDays: action.payload[5]
       }
     }
     case 'GET_ACTIVITIES': {
