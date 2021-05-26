@@ -36,14 +36,13 @@ const passportAuth = require('./passportConfig');
 passportAuth(passport);
 
 app.post('/login', (req, res, next) => {
-  console.log(req)
+  //console.log(req)
   passport.authenticate('local', (err, user, info) => {
-    console.log(err, user, info)
     if (err) throw err;
     if (!user) res.send('No User Exists');
     else {
       req.logIn(user, err => {
-        console.log(user)
+        //console.log(user, info)
         if (err) throw err;
         res.send({ auth: 'success!', role: user[0].role, user: user[0].name });
       });
@@ -59,21 +58,25 @@ app.post('/login', (req, res, next) => {
   //activity log (limit last 20)
 
 //initial employee page load request
-app.get('/employeeSchedule', (req, res) => {
-  const { employeeID, dateStart, dateEnd } = req.params
-  db.getEmployeeSchedule([employeeID, dateStart, dateEnd], (results) => {
-    res.send(results)
-  })
-})
+// app.get('/employeeSchedule', (req, res) => {
+//   const { employeeID, dateStart, dateEnd } = req.params
+//   db.getEmployeeSchedule([employeeID, dateStart, dateEnd], (results) => {
+//     res.send(results)
+//   })
+// })
 
-app.get('/logout')
+app.get('/logOut', (req, res) => {
+  req.logout();
+  console.log('after: ', req);
+  res.send('loggedOut');
+});
 
-app.put('/employeeShiftUpdate', (req, res) => {
-  const { employeeID, shiftDate, giveUpPickUp} = req.params
-  db.updateEmployeeShiftSwap([employeeID, shiftDate, giveUpPickUp], (results) => {
-    res.send(results)
-  })
-})
+// app.put('/employeeShiftUpdate', (req, res) => {
+//   const { employeeID, shiftDate, giveUpPickUp} = req.params
+//   db.updateEmployeeShiftSwap([employeeID, shiftDate, giveUpPickUp], (results) => {
+//     res.send(results)
+//   })
+// })
 
 /*
 this route gets the schedule for the week by dates
@@ -144,13 +147,14 @@ app.get('/allRolesAndColors', (req, res) => {
 
 app.get('/getActivities', (req, res) => {
   dbHelpers.getActivities((results) => {
+    console.log(results);
     res.send(results);
   });
 });
 
 app.put('/updateActivities', (req, res) => {
-  const { id, type } = req.body;
-  dbHelpers.updateActivities(1, type, (results) => {
+  const { id, name, type } = req.body;
+  dbHelpers.updateActivities(id, name, type, (results) => {
     res.send(results);
   });
 })
@@ -187,7 +191,15 @@ app.post('/requestSingleDayOff', (req, res) => {
   // console.log("reqest obj", requestObj)
   dbHelpers.requestSingleDayOff(requestObj, (results) => {
     res.status(200).send('created')
-  })
+  });
+});
+
+app.post('/employees', (req, res) => {
+  dbHelpers.createEmployee(req.body, (results) => {
+    // I will probably need these results
+    // to update state ~
+    // res.status(200).send('created');
+  });
 })
 
 

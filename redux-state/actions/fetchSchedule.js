@@ -37,7 +37,7 @@ export const fetchSchedule = (date) => {
         });
       })
       .catch((err) => {
-        console.log(err);
+        throw err;
       });
   };
 };

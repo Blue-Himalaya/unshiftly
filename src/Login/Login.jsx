@@ -9,7 +9,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(userLoggedIn(e.target.email.value, e.target.password.value));
+    dispatch(userLoggedIn(e.target.username.value, e.target.password.value));
   }
   return (
     <div>
@@ -18,7 +18,7 @@ const Login = () => {
         <div>
           <label>
             Username:
-            <input name="email" type="email" placeholder="ex: user@email.com" />
+            <input name="username" type="username" placeholder="ex: RayRay"/>
           </label>
           <label>
             Password:

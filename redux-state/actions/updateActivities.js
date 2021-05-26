@@ -1,14 +1,15 @@
 const axios = require('axios');
 
-const updateActivities = (id, type) => {
+const updateActivities = (id, name, type) => {
+  console.log(id, name, type)
   return (dispatch) => {
-    axios.put('/updateActivities', { id, type })
+    axios.put('/updateActivities', { id, name, type })
       .then((updated) => {
         console.log(updated)
         dispatch({
           type: 'UPDATE_ACTIVITIES',
           payload: {
-            activities: updated.activities,
+            activities: updated.data,
           }
         })
       })

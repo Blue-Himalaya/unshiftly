@@ -1,8 +1,19 @@
-const timeOffReducer = (state = [], action) => {
+const initialState = {
+  timeOff: [],
+  singleTimeOff: [],
+}
+const timeOffReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'GET_TIMEOFF': {
       return {
+        ...state,
         timeOff: action.payload,
+      }
+    }
+    case 'GET_SINGLE_TIMEOFF': {
+      return {
+        ...state,
+        singleTimeOff: action.payload,
       }
     }
     default:
@@ -10,4 +21,4 @@ const timeOffReducer = (state = [], action) => {
   }
 };
 
-export default timeOffReducer
+export default timeOffReducer;
