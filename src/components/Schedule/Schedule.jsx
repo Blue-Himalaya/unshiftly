@@ -26,11 +26,14 @@ const Schedule = (props) => {
   // INFORMATION FROM THE DATABASE
   const [table, updateTable] = useState(null)
   const schedule = useSelector(state => state.scheduleReducer.schedule);
+  const columnDates = useSelector(state => state.scheduleReducer.listOfDays);
+  const currentDateInfo = useSelector(state => state.scheduleReducer.currentDate).split('-');
   const employees = useSelector(state => state.employeeReducer.employees);
   const timeOff = useSelector(state => state.timeOffReducer.timeOff);
   const roles = useSelector(state => state.rolesReducer.roles);
 
   // LIST OF DAYS
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   const days = ['Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
   const daysOrdered = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const times = ['am', 'pm']
@@ -38,7 +41,7 @@ const Schedule = (props) => {
 
   //LIST OF DAYS FOR COLUMN HEADERS
   const columnDays = ['Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu']
-  var columnDates = ['11', '12', '13', '14', '15', '16', '17']
+  // var columnDates = ['11', '12', '13', '14', '15', '16', '17']
 
   // WINDOW SIZE
   const [width, height] = useWindowSize();
@@ -107,7 +110,7 @@ const Schedule = (props) => {
       show={shiftShow}
       toggleShiftShow={toggleShiftShow}
       />
-      <div className='month'> {'<'} Oct 2019 {'>'}</div>
+      <div className='month'> {'<'} {months[parseInt(currentDateInfo[1])-1]} {currentDateInfo[0]} {'>'}</div>
 
       <div className='table'
       style={{
