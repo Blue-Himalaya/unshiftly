@@ -27,7 +27,8 @@ const ActivityList = () => {
 
   const pickUpShift = (e) => {
     // should consequently update activity log
-    // get user from state!!!! :D
+    // get user from state!!!!
+    // how? ? ? ? ...
     e.target.disabled = true;
     e.target.innerHTML = 'YOU PICKED UP THIS SHIFT';
     dispatch(updateActivities(e.target.id, user, 'scheduled'));
@@ -98,5 +99,8 @@ const ActivityList = () => {
       </div>
     );
 };
+
+// how to handle database route for picking up a shift
+// how to handle approve/deny time off
 
 export default ActivityList;

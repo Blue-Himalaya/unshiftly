@@ -50,10 +50,7 @@ const getActivities = (callback) => {
 }
 
 const updateActivities = (id, name, type, callback) => {
-  // when someone clicks pick up shift in the activity log, i send type 'scheduled' with the
-  // user's name (user that is logged in) as well as the shift id ~
-  // for my own testing purposes I'm updating the activity table type to 'scheduled';
-  const queryString = `UPDATE activity SET type_of_activity='${type}' WHERE id=${id}`;
+  // const queryString = `UPDATE activity SET type_of_activity='${type}' WHERE id=${id}`;
    connection.query(queryString), (err, response) => {
      if (err) console.log(err);
    }
@@ -142,21 +139,6 @@ const setSchedule = (arr, callback) => {
   });
 }
 
-const addNewEmployee = (employeeInfo, callback) => {
-  const { name, phone, birthday, password, startDate, role } = employeeInfo;
-  bcrypt.hash(password, bcrypt.genSaltSync(10), (err, res) => {
-    let queryString;
-    // `INSERT INTO employees (name, phone, birthday, password, startDate, role)
-    // // VALUES (${name}, ${phone}, ${birthday}, ${res}, ${startDate}); INSERT INTO employee_roles (id_employee, id_role)
-    // // VALUES ((SELECT id FROM employees WHERE name=${name}), SELECT id FROM roles where role=${role})`
-    console.log('hash', res);
-    connection.query(queryString, (err, result) => {
-      if (err) throw err;
-      console.log(result);
-    });
-  });
-};
-
 const getSchedule = (dateObj, callback) => {
   const queryString = `select es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id and es.datetime between '${dateObj.startDate}' and '${dateObj.endDate}' or employee_role_two = er.id and es.datetime between '${dateObj.startDate}' and '${dateObj.endDate}' order by es.datetime asc`
   connection.query(queryString, (err, results) => {
@@ -187,7 +169,7 @@ const createEmployee = (employeeData, callback) => {
     //*** Don't know if this works yet! ***/
     const queryStr = `INSERT INTO employees (name, phone, birthday, password, start_date, is_active) VALUES (${name}, ${phone}, ${birthday}, ${hashedPwd}, ${start_date}); INSERT INTO employee_roles (id_employee, id_role) VALUES ((SELECT id FROM employee WHERE name = ${name}), (SELECT id FROM roles where name=${role}))`
   });
-};
+}
 
 
 module.exports ={

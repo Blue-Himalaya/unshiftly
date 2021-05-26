@@ -51,7 +51,6 @@ const AdminNotifications = () => {
                   <td><button id="denyTimeOff" onClick={denyTimeOff} disabled={false}>Deny</button></td>
                 </tr>
             ))}
-            <h6>***END OF LIST***</h6>
             </tbody>
           </table>
         </div>
