@@ -109,7 +109,7 @@ Example Body Info For A Employee To Release A Shift
 
 app.put('/releaseShift', (req, res) => {
   const reqObj = req.body;
-  console.log('reqobj', reqObj);
+  //console.log('reqobj', reqObj);
   dbHelpers.releaseShift(reqObj, (results) => {
     res.status(200).send('Shift has been released to the people.')
   })
