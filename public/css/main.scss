@@ -70,6 +70,8 @@ body {
   // ALL VIEW
   // --------
 
+  min-width: 300px;
+
   .update-shift-modal {
     position: fixed;
     z-index: 1;
@@ -106,11 +108,38 @@ body {
 
   .table-elem-top {
     padding: 10px 0;
+    // background-color: green;
+    width: 53px;
+    // border-radius: 50%;
+    // margin-bottom: 10px;
 
     .col-date {
       font-size: x-large;
+      padding-top: 11px;
+      margin-top: 5px;
+      height: 37px;
+      align-self: center;
+      // background-color: green;
+      border-radius: 50%;
+
     }
+    .highlight-today {
+      // color: rgb(0, 26, 227);
+      // background-color: rgb(145, 157, 247);
+      border:rgb(25, 45, 199) solid 2px;
+    }
+
   }
+  .highlight-today {
+    color: rgb(25, 45, 199);
+    // background-color: rgb(145, 157, 247);
+    // border:rgb(29, 44, 103) solid 2px;
+  }
+
+  .past-today {
+    opacity: 40%;
+  }
+
   .table-elem-empty {
     min-width: 115px;
   }
@@ -151,13 +180,15 @@ body {
           min-width: 50px;
           padding: 15px 0;
         }
-        .shift:hover {
-          opacity: 50%;
+        .past{
+          opacity: 30%;
         }
         .no-shift:hover {
           background-image: none !important;
           background-color: gray;
         }
+
+
       }
     }
   }

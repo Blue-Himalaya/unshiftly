@@ -37,7 +37,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchSchedule('2019-10-13'));
+    dispatch(fetchSchedule('2019-10-15'));
     dispatch(fetchActivityList());
     dispatch(fetchEmployees());
     dispatch(fetchTimeOff());

@@ -32,24 +32,18 @@ const Schedule = (props) => {
   const timeOff = useSelector(state => state.timeOffReducer.timeOff);
   const roles = useSelector(state => state.rolesReducer.roles);
 
-  // LIST OF DAYS
+  // LIST OF CALENDAR INFO
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   const days = ['Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
-  const daysOrdered = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const times = ['am', 'pm']
-  var today = new Date('2019-10-19T11:00:00Z')
-
-  //LIST OF DAYS FOR COLUMN HEADERS
-  const columnDays = ['Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu']
-  // var columnDates = ['11', '12', '13', '14', '15', '16', '17']
 
   // WINDOW SIZE
   const [width, height] = useWindowSize();
 
   // LIST OF THREE DAY VIEW FOR MOBILE
   var threeDays = []
-  if (today.getDay() < 2 || today.getDay() > 4) {
-    var index = days.indexOf(daysOrdered[today.getDay()])
+  var index = columnDates.indexOf(parseInt(currentDateInfo[2]))
+  if (index < 5) {
     threeDays = days.slice(index, index + 3)
   } else {
     threeDays = days.slice(4, 7)
@@ -119,16 +113,17 @@ const Schedule = (props) => {
       }}>
         {width > props.mobileWidth ? <div className='table-elem-empty'></div> : null}
 
-        {columnDays.map((day, i) => {
+        {days.map((day, i) => {
           if ( width > props.mobileWidth || threeDays.indexOf(days[i]) !== -1) {
+            var isToday = columnDates[i] === parseInt(currentDateInfo[2]) ? 'highlight-today' : ''
+            var pastToday = columnDates[i] < parseInt(currentDateInfo[2]) ? 'past-today' : ''
             return(
-              <div key={`table-elem-top-${day}`} className={`table-elem-top column`}>
-                <div className='col-day'>{day}</div>
-                <div className='col-date'>{columnDates[i]}</div>
+              <div key={`table-elem-top-${day}`} className={`table-elem-top column ${isToday} ${pastToday}`}>
+                <div className='col-day'>{day.substring(0, 3)}</div>
+                <div className={`col-date ${isToday}`}>{columnDates[i]}</div>
               </div>
             ) // END OF COLUMN HEADER RETURN
           }
-
         })}
 
       </div> {/* END OF COLUMN HEADERS */}
@@ -141,6 +136,7 @@ const Schedule = (props) => {
         row={table[employee.name]}
         days={days}
         times={times}
+        indexOfDay={index}
         threeDays={threeDays}
         width={width}
         mobileWidth={props.mobileWidth}

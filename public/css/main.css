@@ -38,6 +38,10 @@ body {
   height: 75px;
 }
 
+.schedule {
+  min-width: 300px;
+}
+
 .schedule .update-shift-modal {
   position: fixed;
   z-index: 1;
@@ -75,10 +79,30 @@ body {
 
 .schedule .table-elem-top {
   padding: 10px 0;
+  width: 53px;
 }
 
 .schedule .table-elem-top .col-date {
   font-size: x-large;
+  padding-top: 11px;
+  margin-top: 5px;
+  height: 37px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  border-radius: 50%;
+}
+
+.schedule .table-elem-top .highlight-today {
+  border: #192dc7 solid 2px;
+}
+
+.schedule .highlight-today {
+  color: #192dc7;
+}
+
+.schedule .past-today {
+  opacity: 40%;
 }
 
 .schedule .table-elem-empty {
@@ -120,8 +144,8 @@ body {
   padding: 15px 0;
 }
 
-.schedule .employee-row .employee-schedule .day-table .shift:hover {
-  opacity: 50%;
+.schedule .employee-row .employee-schedule .day-table .past {
+  opacity: 30%;
 }
 
 .schedule .employee-row .employee-schedule .day-table .no-shift:hover {

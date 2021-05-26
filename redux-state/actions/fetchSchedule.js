@@ -5,28 +5,23 @@ export const fetchSchedule = (date) => {
   const daysOrdered = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
   var startDate = new Date(date)
-  var startDate2 = new Date(date)
   var endDate = new Date(date)
+  // DATE TO GET LIST OF DAYS IN THE WEEK
+  var startDate2 = new Date(date)
 
-  console.log(startDate.toUTCString())
-
+  //GET POSITION OF DAY FROM SCHEDULE WEEK FRI-THU
   var index = days.indexOf(daysOrdered[startDate.getUTCDay()])
 
   startDate.setDate(startDate.getUTCDate() - index - 1);
-  startDate2.setDate(startDate2.getUTCDate() - index - 1);
   endDate.setDate(endDate.getUTCDate() + 7 - index - 1)
+  startDate2.setDate(startDate2.getUTCDate() - index - 1);
 
-  console.log(startDate.toUTCString())
-  console.log(endDate.toUTCString())
-
+  //GET LIST OF DAYS IN THE WEEK
   var dates = []
-
   for (var i = 0; i < 7; i++) {
       dates.push(startDate2.getUTCDate())
       startDate2.setDate(startDate2.getUTCDate());
   }
-
-  console.log(dates)
 
   return (dispatch) => {
     axios.get('/schedule', {

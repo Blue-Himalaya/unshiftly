@@ -32,7 +32,7 @@ const EmployeeRow = (props) => {
           gridTemplateColumns: props.gridTemplateColumns
         }}>
 
-          {props.days.map((day) => {
+          {props.days.map((day, dayOfWeek) => {
 
             // SETTING 3 DAYS TO TODAY FOR MOBILE
             if( props.width > props.mobileWidth || props.threeDays.indexOf(day) !== -1 ) {
@@ -64,6 +64,7 @@ const EmployeeRow = (props) => {
                       info={props.row.info}
                       shiftShow={props.shiftShow}
                       toggleShiftShow={props.toggleShiftShow}
+                      past={(dayOfWeek < props.indexOfDay) ? 'past' : ''}
                       />
                     )
                   })
