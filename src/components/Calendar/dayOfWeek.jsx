@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import EmployeeInfoModal from './employeeInfoModal.jsx';
 
 const DayOfWeek = (props) => {
 
-  console.log('props: ', props);
+  // console.log('props: ', props);
 
-  // All of Friday's shifts
+  const [isModalOpen, setToggleModal] = useState(false);
+
+  // All of the day's shifts
   const shifts = props.shifts;
 
   // Format the time
@@ -18,7 +21,18 @@ const DayOfWeek = (props) => {
 
   const getPhoneNum = (num) => {
     console.log(num);
+    setToggleModal(prevIsModalOpen => !prevIsModalOpen)
+    console.log(isModalOpen)
   }
+
+  // MODAL
+  // in State = { modalOpen: false }
+  // onClick toggles the state of modalOpen
+  // with conditional rendering
+    // then it renders the modal
+  // clicking the 'x' button to exit
+    // should toggle the state so it can close
+
 
   return (
     <div>
@@ -27,6 +41,7 @@ const DayOfWeek = (props) => {
           {shift.name}
           <br/>
           {formatTime(shift.datetime)}
+          <EmployeeInfoModal isOpen={isModalOpen} info={[shift.name, shift.phone]}/>
         </div>
       ))}
     </div>

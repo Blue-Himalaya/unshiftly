@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import Shifts from './shifts.jsx';
 import ActivityList from './ActivityList/ActivityList.jsx';
 
-
 const Calendar = () => {
   const employees = useSelector(state => state.employeeReducer.employees);
   const timeOff = useSelector(state => state.timeOffReducer.timeOff);
@@ -47,8 +46,6 @@ const Calendar = () => {
             </div>
           </div>
       </div>
-      <button type="click">Edit Calendar</button>
-      <button type="click">Edit Employees</button>
     </div>
   );
 }
