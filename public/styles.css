@@ -15,6 +15,7 @@ body, html {
 .view-container {
   display: flex;
   flex-direction: row;
+  padding: 20px;
 }
 
 .cal-container {
@@ -22,6 +23,17 @@ body, html {
   flex-direction: column;
   width: 70%;
   height: 100%;
+}
+
+.title-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.cal-title {
+  display: flex;
+  width: fit-content;
 }
 
 .cal-contents-cont {
@@ -42,16 +54,42 @@ body, html {
   margin-left: 50px;
 }
 
-#calendar-dates {
+#daysOfWeek {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 50px repeat(auto-fit);
+  margin-bottom: 20px;
+}
+
+/* .date-container {
+  display: flex;
+  justify-content: center;
+} */
+
+.column-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  width: fit-content;
+  margin-right: 10px;  /* delete this later */
+}
+
+.day {
+  font-size: 0.8rem;
+  width: fit-content;
+}
+
+.date {
+  font-size: 1.2rem;
+  width: fit-content;
 }
 
 #activtyLog {
   grid-area: b;
 }
 
+<<<<<<< HEAD
 #activityLogContainer {
   display: grid;
   grid-template-rows: 0.2fr 0.5fr;
@@ -101,3 +139,10 @@ body, html {
   overflow-y: scroll;
 }
 
+=======
+.shift-block {
+  width: fit-content;
+  height: fit-content;
+  margin-bottom: 10px;
+}
+>>>>>>> 10f2441bde7d34a5b4e625d0cac100542a406fc3
