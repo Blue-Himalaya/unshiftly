@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 app.use(cors({
   origin: 'http://localhost:8080',
-  credentials: true,
+  credentials: true
 }));
 
 app.use(expressSession({
@@ -34,6 +34,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 const passportAuth = require('./passportConfig');
 passportAuth(passport);
+
+/*
+======================================================
+        AUTH
+======================================================
+*/
 
 app.post('/login', (req, res, next) => {
   console.log(req)
@@ -51,6 +57,8 @@ app.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
+app.get('/logout')
+
 
 //page first loads - admin
   //dates of week, in the request params (start, end)
@@ -66,14 +74,18 @@ app.get('/employeeSchedule', (req, res) => {
   })
 })
 
-app.get('/logout')
-
 app.put('/employeeShiftUpdate', (req, res) => {
   const { employeeID, shiftDate, giveUpPickUp} = req.params
   db.updateEmployeeShiftSwap([employeeID, shiftDate, giveUpPickUp], (results) => {
     res.send(results)
   })
 })
+
+/*
+======================================================
+        ALL SCHEDULE ENDPOINTS
+======================================================
+*/
 
 /*
 this route gets the schedule for the week by dates
@@ -93,22 +105,8 @@ app.get('/schedule', (req, res) => {
        var final = helperFunctions.adminScheduleFormatting(results)
        res.send(final)
   }})
-
-app.get('/scheduletest', (req, res) => {
-  db.query(`select es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id or employee_role_two = er.id and es.datetime between '2020-10-11' and '2020-10-17' order by es.datetime asc`,
-  (error, results, fields) => {
-    if (error) {
-      res.send(error);
-      res.status(500);
-      res.end();
-    } else {
-      var final = helperFunctions.adminScheduleFormatting(results)
-      res.send(final);
-      res.status(200);
-      res.end();
-    }
-  })
 })
+
 
 app.post('/schedule', (req, res) => {
   dbHelpers.postSchedule(req.body, (resultsFromSched) => {
@@ -118,7 +116,60 @@ app.post('/schedule', (req, res) => {
   })
 })
 
-// module.exports = app;
+/*
+======================================================
+        TIME OFF
+======================================================
+*/
+
+app.get('/allSingleTimeOff', (req, res) => {
+  const dateObj = req.query;
+  dbHelpers.getAllSingleTimeOff(dateObj,(results) => {
+    res.send(results)
+  })
+})
+
+app.get('/recurringTimeOff', (req, res) => {
+  dbHelpers.getAllRecurringTimeOff((results) => {
+    res.send(results)
+  })
+})
+
+/*
+
+example body for requestSingleDayOff:
+
+ {
+   date: 2019-10-22,
+   morning: 1,
+   empId: 4,
+   empName: "Danielle"
+ }
+
+ */
+
+ app.post('/requestSingleDayOff', (req, res) => {
+  const requestObj = req.body
+  // console.log("reqest obj", requestObj)
+  dbHelpers.requestSingleDayOff(requestObj, (results) => {
+    res.status(200).send('created')
+  })
+})
+
+app.put('/singleTimeOff', (req, res) => {
+  const reqId = req.body.id;
+  dbHelpers.removeSingleTimeOff(reqId, (results) => {
+    res.status(201).send('removed').end();
+  })
+})
+
+/*
+======================================================
+      EMPLOYEE INFORMATION
+======================================================
+
+*/
+
 app.get('/allActiveEmployees', (req, res) => {
   dbHelpers.getAllActiveEmployees((results) => {
     var final = helperFunctions.employeeRolesFormatting(results)
@@ -126,14 +177,6 @@ app.get('/allActiveEmployees', (req, res) => {
   })
 })
 
-
-app.get('/allSingleTimeOff', (req, res) => {
-  const dateObj = req.query
-  dbHelpers.getAllSingleTimeOff(dateObj,(results) => {
-    res.send(results)
-  })
-})
-})
 
 app.get('/allRolesAndColors', (req, res) => {
   dbHelpers.getRolesWithColors((results) => {
@@ -162,30 +205,32 @@ app.put('/updateRoleColor', (req, res) => {
   })
 })
 
-app.get('/recurringTimeOff', (req, res) => {
-  dbHelpers.getAllRecurringTimeOff((results) => {
-    res.send(results)
-  })
-})
 
 /*
+======================================================
+        EMPLOYEE INFORMATION
+======================================================
 
-example params for requestSingleDayOff:
+/*
+Change information about employees
+Endpoint needs the following in the form of a body from the
+axios put request:
+{id: [employee id],
+name: [employee name],
+phone: [employee phone],
+birthday: [employee birthday],
+startDate: [employee start date],
+isActive: 0 if employee is inactive, 1 if they are active}
 
- {
-   date: 2019-10-22,
-   morning: 1,
-   empId: 4,
-   empName: "Danielle"
- }
+All of these values should be what the employee information should reflect AFTER put request.
+The only variable which is needed, and cannot be changed is the id.
+i.e. if you want to update the isActive, but nothing else, the endpoint still needs the old information for all other fields
+*/
 
- */
-
-app.post('/requestSingleDayOff', (req, res) => {
-  const requestObj = req.query
-  // console.log("reqest obj", requestObj)
-  dbHelpers.requestSingleDayOff(requestObj, (results) => {
-    res.status(200).send('created')
+app.put('/employees', (req, res) => {
+  const requestObj = req.body;
+  dbHelpers.editEmployee(requestObj, (results) => {
+    res.status(201).send('updated').end();
   })
 })
 

@@ -10,10 +10,18 @@ const getAllActiveEmployees = (callback) => {
 }
 
 const getAllSingleTimeOff = (dateObj, callback) => {
-  const queryString = `select t.date, t.morning, e.name, e.id from time_off t  join employees e where t.id_employee = e.id and t.date between '${dateObj.startDate}' and '${dateObj.endDate}' order by t.date asc`;
+  const queryString = `select t.id, t.date, t.morning, e.name, e.id from time_off t  join employees e where t.id_employee = e.id and t.date between '${dateObj.startDate}' and '${dateObj.endDate}' order by t.date asc`;
   connection.query(queryString, (err, response) => {
     if(err) console.log(err)
     else callback(response)
+  })
+}
+
+const removeSingleTimeOff = (timeOffId, callback) => {
+  const queryString = `DELETE FROM time_off WHERE id = ${timeOffId}`;
+  connection.query(queryString, (err, results) => {
+    if(err) console.log(err)
+    else callback(results)
   })
 }
 
@@ -178,6 +186,15 @@ const requestSingleDayOff = (requestObj, callback) => {
   })
 }
 
+const editEmployee = (requestObj, callback) => {
+  const {id, name, phone, birthday, startDate, isActive} = requestObj;
+  const queryString = `UPDATE employees SET name = '${name}, phone = '${phone}', birthday = '${birthday}', start_date = '${startDate}', is_active = ${isActive} WHERE id = ${id}`;
+  connection.query(queryString, (err, results) => {
+    if(err) console.log(err)
+    else callback(results)
+  })
+}
+
 
 module.exports ={
   getAllActiveEmployees,
@@ -191,7 +208,9 @@ module.exports ={
   postSchedule,
   getSchedule,
   getAllRecurringTimeOff,
-  requestSingleDayOff
+  requestSingleDayOff,
+  editEmployee,
+  removeSingleTimeOff
 }
 
 // INSERT INTO employees (name, phone, birthday, password) VALUES ('example@email.com', 5166660124, '1997-01-06', '$2y$10$niNB9kx6k.lnLgbLn8yfr.oUzIM4xYV90I6nma3qED3nifn6oWdkK')
