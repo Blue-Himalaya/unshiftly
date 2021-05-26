@@ -18,14 +18,14 @@ function useWindowSize() {
   return size;
 }
 
+
 const EmployeeList = () => {
 
   //EMPLOYEE DATA
   const [employeeNames, updateEmployeeNames] = useState(null)
   const employees = useSelector(state => state.employeeReducer.employees);
   const [currentEmployee, updateCurrentEmployee] = useState(employees[0])
-  console.log(employees)
-  console.log(currentEmployee)
+
         // const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,6 +48,15 @@ const EmployeeList = () => {
   // WINDOW SIZE
   const [width, height] = useWindowSize();
 
+  function changeCurrent(e) {
+    for (let i = 0; i < employees.length; i++) {
+      if (employees[i].name === e.target.innerHTML) {
+        updateCurrentEmployee(employees[i])
+      }
+    }
+  };
+
+
   return (
     <div className="employeeList">
       <div className="employee-list-container">
@@ -56,7 +65,11 @@ const EmployeeList = () => {
           {employeeNames ?
           employeeNames.map((employee) => {
             return (
-            <div key={employee} className='employee-name-entry'>
+            <div
+            key={employee}
+            className='employee-name-entry'
+            onClick={changeCurrent}
+            >
               {employee}
               </div>
             )
@@ -69,12 +82,13 @@ const EmployeeList = () => {
         {currentEmployee ?
           <div className="employee-edit-entries">
             <div className="employee-edit-name">{currentEmployee.name}</div>
-            <div className="employee-edit-password">{currentEmployee.password}</div>
-            <div className="employee-edit-phone">{currentEmployee.phone}</div>            <div className="employee-edit-birthday">{currentEmployee.birthday}</div>
-            {/* <div className="employee-edit-roles">{currentEmployee.roles.map((role) => {
-              return (<div>{role}<div>)
-            })}</div> */}
-            <div className="employee-edit-startDate">{currentEmployee.start_date}</div>
+            <div className="employee-edit-password">Password: {currentEmployee.password}</div>
+            <div className="employee-edit-phone">Phone Number: {currentEmployee.phone}</div>
+            <div className="employee-edit-birthday">Birthday: {currentEmployee.birthday}</div>
+            <div className="employee-edit-roles">Roles:{currentEmployee.roles.map((role) => {
+              return (<div>{role.role}</div>)
+            })}</div>
+            <div className="employee-edit-startDate">Start Date: {currentEmployee.start_date}</div>
           </div>
         : <div> NOT DONE</div>}
       </div>
