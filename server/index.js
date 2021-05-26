@@ -75,7 +75,7 @@ app.put('/updateRoleColor', (req, res) => {
   })
 })
 
-app.get('/recurringTimeOff', (req, res) => {
+app.get('/allRecurringTimeOff', (req, res) => {
   dbHelpers.getAllRecurringTimeOff((results) => {
     res.send(results)
   })
