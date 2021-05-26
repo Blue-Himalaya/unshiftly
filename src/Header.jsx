@@ -11,18 +11,24 @@ const Header = (props) => {
 
   if (!isAuthenticated) {
     return (
+      <>
       <div className='header'>
         UNSHIFTLY
       </div>
+      <div className='header-buffer'>&nbsp;</div>
+      </>
     );
   }
 
   if (!admin) {
     return (
+      <>
       <div className='header'>
         UNSHIFTLY {props.admin}
         <button onClick={() => {dispatch(logOut())}}>Log Out</button>
       </div>
+      <div className='header-buffer'>&nbsp;</div>
+      </>
     )
   } else {
     return (
