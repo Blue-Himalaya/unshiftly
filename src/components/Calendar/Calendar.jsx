@@ -47,8 +47,6 @@ const Calendar = () => {
             </div>
           </div>
       </div>
-      <button type="click">Edit Calendar</button>
-      <button type="click">Edit Employees</button>
     </div>
   );
 }
