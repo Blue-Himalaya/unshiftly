@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useLayoutEffect} from 'react'
 import EmployeeRow from './EmployeeRow.jsx'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
+import UpdateShiftModal from './UpdateShiftModal.jsx'
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -16,6 +17,9 @@ function useWindowSize() {
 }
 
 const Schedule = (props) => {
+
+  // MODAL STATES
+  const [shiftShow, toggleShiftShow] = useState(false)
 
   // INFORMATION FROM THE DATABASE
   const [table, updateTable] = useState(null)
@@ -58,6 +62,7 @@ const Schedule = (props) => {
       employees.map((employee) => {
         table[employee.name] =
         {
+          info: employee,
           Friday: { am: ['', '', ''], pm: ['', '', ''] },
           Saturday: { am: ['', '', ''], pm: ['', '', ''] },
           Sunday: { am: ['', '', ''], pm: ['', '', ''] },
@@ -108,6 +113,10 @@ const Schedule = (props) => {
     <>
     {table !== null ?
     <div className='schedule'>
+      {/* <UpdateShiftModal
+      show={shiftShow}
+      toggleShiftShow={toggleShiftShow}
+      /> */}
       <div className='month'> {'<'} Oct 2019 {'>'}</div>
 
       <div className='table'
@@ -144,6 +153,8 @@ const Schedule = (props) => {
         mobileWidth={props.mobileWidth}
         gridTemplateColumns={gridTemplateColumns}
         gridTemplateColumnsTable={gridTemplateColumnsTable}
+        shiftShow={shiftShow}
+        toggleShiftShow={toggleShiftShow}
         />
       })}
 

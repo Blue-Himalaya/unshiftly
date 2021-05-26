@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Shift from './Shift.jsx'
 
 
 const EmployeeRow = (props) => {
@@ -42,26 +42,29 @@ const EmployeeRow = (props) => {
                 // background: `linear-gradient(to left, rgb(245, 245, 245) 50%, rgb(255, 255, 255) 50%)`
               }}>
                 {
-                  props.times.map((time) => {
-                    var shiftTime = props.row[day][time][0]
+                  props.times.map((meridian) => {
+                    var shiftTime = props.row[day][meridian][0]
                     shiftTime = shiftTime.substring(0, shiftTime.length-3)
-                    var role1 = props.row[day][time][1]
+                    var role1 = props.row[day][meridian][1]
                     if (!role1) {
                       role1 = 'none'
                     }
-                    var role2 = props.row[day][time][2]
+                    var role2 = props.row[day][meridian][2]
                     if (!role2) {
                       role2 = role1
                     }
                     return (
-                      <div key={`table-elem-${day}-${time}`} className={'table-elem shift noselect'}
-                        style={{
-                          background: `linear-gradient(0.375turn, ${props.colors[role1]} 50%, ${props.colors[role2]} 50%)`,
-                          color: 'white',
-                          borderRadius: '5px'
-                        }}>
-                        &nbsp;{shiftTime}&nbsp;
-                      </div>
+                      <Shift
+                      key={`table-elem-${day}-${meridian}`}
+                      day={day}
+                      meridian={meridian}
+                      color1={props.colors[role1]}
+                      color2={props.colors[role2]}
+                      shiftTime={shiftTime}
+                      info={props.row.info}
+                      shiftShow={props.shiftShow}
+                      toggleShiftShow={props.toggleShiftShow}
+                      />
                     )
                   })
                 }
