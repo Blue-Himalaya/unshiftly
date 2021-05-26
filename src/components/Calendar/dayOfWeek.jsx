@@ -4,7 +4,7 @@ import EmployeeInfoModal from './employeeInfoModal.jsx';
 
 const DayOfWeek = (props) => {
 
-  // console.log('props: ', props);
+  console.log('props: ', props);
 
   const [isModalOpen, setToggleModal] = useState(false);
 
@@ -19,8 +19,9 @@ const DayOfWeek = (props) => {
     return (hour + ' ' + dayEve);
   }
 
-  const getPhoneNum = (num) => {
-    console.log(num);
+  const toggleModal = (pNum, sID) => {
+    console.log(pNum);
+    console.log(sID);
     setToggleModal(prevIsModalOpen => !prevIsModalOpen)
     console.log(isModalOpen)
   }
@@ -33,11 +34,10 @@ const DayOfWeek = (props) => {
   // clicking the 'x' button to exit
     // should toggle the state so it can close
 
-
   return (
     <div>
       {shifts.map((shift) => (
-        <div className="shift-block" onClick={() => getPhoneNum(shift.phone)}>
+        <div className="shift-block" onClick={() => toggleModal(shift.phone, shift.id)}>
           {shift.name}
           <br/>
           {formatTime(shift.datetime)}
