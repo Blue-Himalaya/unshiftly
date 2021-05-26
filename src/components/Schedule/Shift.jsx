@@ -10,7 +10,14 @@ const Shift = (props) => {
       color: 'white',
       borderRadius: '5px'
     }}
-    onClick={() => {if (noShift && !props.past) props.toggleShiftShow(!props.shiftShow)}}>
+    onClick={() => {
+        if (noShift && !props.past) {
+          props.toggleShiftShow(!props.shiftShow)
+          props.updateDay(props.dayFull)
+          props.updateMeridian(props.meridian)
+          props.updateEmployee(props.employeeInfo)
+        }
+      }}>
     &nbsp;{props.shiftTime}&nbsp;
   </div>
   )

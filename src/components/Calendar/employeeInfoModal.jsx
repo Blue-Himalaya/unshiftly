@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 const EmployeeInfoModal = (props) => {
   let employeeInfo = props.info;
-  console.log(employeeInfo)
+  //console.log(employeeInfo)
 
   // if the modal is not open return null
   // else the code below (modal) will render

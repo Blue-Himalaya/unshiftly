@@ -5,7 +5,7 @@ const initialState = {
   admin: '',
 }
 const viewReducer = (state = initialState, action) => {
-  console.log(action.type)
+  // console.log(action.type)
   switch (action.type) {
     case 'GET_VIEW': {
       return {

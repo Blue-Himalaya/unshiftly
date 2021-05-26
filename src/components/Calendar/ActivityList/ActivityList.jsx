@@ -23,7 +23,7 @@ const ActivityList = () => {
 
   const dispatch = useDispatch();
 
-  console.log('activities', activities, activities[0])
+  // console.log('activities', activities, activities[0])
 
   const pickUpShift = (e) => {
     // should consequently update activity log

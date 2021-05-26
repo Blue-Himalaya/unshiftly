@@ -36,7 +36,7 @@ const passportAuth = require('./passportConfig');
 passportAuth(passport);
 
 app.post('/login', (req, res, next) => {
-  console.log(req)
+  //console.log(req)
   passport.authenticate('local', (err, user, info) => {
     if (err) throw err;
     if (!user) res.send('No User Exists');
@@ -44,7 +44,7 @@ app.post('/login', (req, res, next) => {
       req.logIn(user, err => {
         if (err) throw err;
         console.log('USER: ', req.user, 'INFO: ', info)
-        res.send({ auth: 'success!', role: user[0].role, user: user[0].name });
+        res.send({ auth: 'success!', role: user[0].role, user: [user[0].id, user[0].name] });
       });
     }
   })(req, res, next);
