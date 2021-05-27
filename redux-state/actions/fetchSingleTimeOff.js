@@ -1,7 +1,25 @@
 const axios = require('axios');
-export const fetchSingleTimeOff = () => {
+export const fetchSingleTimeOff = (date) => {
+
+  const days = ['Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
+  const daysOrdered = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+  var startDate = new Date(date)
+  var endDate = new Date(date)
+
+  //GET POSITION OF DAY FROM SCHEDULE WEEK FRI-THU
+  var index = days.indexOf(daysOrdered[startDate.getUTCDay()])
+
+  startDate.setDate(startDate.getUTCDate() - index - 1);
+  endDate.setDate(endDate.getUTCDate() + 7 - index - 1)
+
   return (dispatch) => {
-    axios.get('/allSingleTimeOff')
+    axios.get('/allSingleTimeOff', {
+      params: {
+        startDate,
+        endDate
+      }
+    })
       .then((res) => {
         dispatch({
           type: 'GET_SINGLE_TIMEOFF',
