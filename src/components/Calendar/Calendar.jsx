@@ -46,12 +46,7 @@ const Calendar = () => {
   // console.log('timeoff: ', timeOff);
   // console.log('employees: ', employees);
 
-  const sendTimeOffReq  = (date, morning, empId, empName) => {
-    // submit req func
-  }
-
   const timeOffReqForm = () => {
-    // onClick
     setToggleForm(prevIsFormOpen => !prevIsFormOpen)
   }
 
