@@ -4,3 +4,7 @@ package-lock.json
 .env
 node_modules
 public/css/main.css.map
+.terraform.lock.hcl
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup

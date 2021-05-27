@@ -309,13 +309,6 @@ app.get('/getActivities', (req, res) => {
   });
 });
 
-app.put('/updateActivities', (req, res) => {
-  const { id, name, type } = req.body;
-  dbHelpers.updateActivities(id, name, type, (results) => {
-    res.send(results);
-  });
-})
-
 /*
 example role color params object:
 {
