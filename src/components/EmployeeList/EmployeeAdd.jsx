@@ -29,8 +29,8 @@ const EmployeeAdd = ({showModal, onClose}) => {
   }
 
   return (
-    <div className='employeeAdd' style = {containerStyle}>
-      <div className='employeeAdd-container'>
+    <div className='employeeAdd modal-outer' style = {containerStyle}>
+      <div className='employeeAdd-container modal-inner'>
         ADD AN EMPLOYEE
         <div className='footer'>
         <button onClick={close}> Exit </button>

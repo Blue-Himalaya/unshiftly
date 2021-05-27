@@ -23,14 +23,16 @@ const App = () => {
   const admin = useSelector(state => state.adminReducer.admin);
   const employees = useSelector(state => state.employeeReducer.employees);
   const timeOff = useSelector(state => state.timeOffReducer.timeOff);
+  const singleTimeOff = useSelector(state => state.timeOffReducer.singleTimeOff);
   const roles = useSelector(state => state.rolesReducer.roles);
   const dispatch = useDispatch();
 
   // const admin = true
   const name = 'Steve'
-  const mobileWidth = 840
+  const mobileWidth = 730
+  const tabletWidth = 1250
 
-  if (schedule && employees && timeOff && roles && admin) {
+  if (schedule && employees && timeOff && roles && admin && singleTimeOff) {
     // console.log('SCHEDULE:', schedule)
     // console.log('TIMEOFF:', timeOff)
     // console.log('EMPLOYEES:', employees)
@@ -39,20 +41,20 @@ const App = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchSchedule('2019-10-11'));
+    dispatch(fetchSchedule('2019-10-15'));
+    dispatch(fetchSingleTimeOff('2019-10-15'));
     dispatch(fetchActivityList());
     dispatch(fetchEmployees());
     dispatch(fetchTimeOff());
-    dispatch(fetchSingleTimeOff());
     dispatch(fetchRoles());
     dispatch(fetchView('login'));
     dispatch(fetchAdmin(true));
   }, []);
 
-  if (!view || !schedule || !employees || !timeOff || !roles) {
+  if (!view || !schedule || !employees || !timeOff || !roles || !singleTimeOff) {
     return (
       <>
-      <Header/>
+      <Header mobileWidth={mobileWidth}/>
       Loading...
       </>
     );
@@ -66,7 +68,7 @@ const App = () => {
   if (view === 'login') {
     return (
       <>
-      <Header/>
+      <Header mobileWidth={mobileWidth}/>
       <Login />
       </>
     );
@@ -81,15 +83,15 @@ const App = () => {
     if (admin) {
       return (
         <>
-          <Header/>
-          <Schedule mobileWidth={mobileWidth}/>
+          <Header mobileWidth={mobileWidth}/>
+          <Schedule mobileWidth={mobileWidth} tabletWidth={tabletWidth}/>
         </>
       );
 
     } else {
       return (
         <>
-        <Header/>
+        <Header mobileWidth={mobileWidth}/>
         YOU CAN'T SEE ME
         </>
       )
@@ -105,14 +107,14 @@ const App = () => {
     if (admin) {
       return (
         <>
-        <Header />
+        <Header mobileWidth={mobileWidth}/>
         <EmployeeList/>
         </>
       );
     } else {
       return  (
         <>
-        <Header />
+        <Header mobileWidth={mobileWidth}/>
         NOT ADMIN
         </>
       )
@@ -127,14 +129,14 @@ const App = () => {
   if (view === 'calendar') { //Tomas's & Amber's
     return (
       <>
-      <Header />
+      <Header mobileWidth={mobileWidth}/>
       <Calendar />
       </>
     );
   }
   return (
     <div>
-      <Header />
+      <Header mobileWidth={mobileWidth}/>
       Loading...
     </div>
   );

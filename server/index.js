@@ -50,7 +50,7 @@ app.post('/login', (req, res, next) => {
       req.logIn(user, err => {
         if (err) throw err;
         console.log('USER: ', req.user, 'INFO: ', info)
-        res.send({ auth: 'success!', role: user[0].role, user: [user[0].id, user[0].name] });
+        res.send({ auth: 'success!', role: user[0].role, user: [user[0].id, user[0].name, user[0].role] });
       });
     }
   })(req, res, next);
@@ -88,6 +88,36 @@ app.get('/schedule', (req, res) => {
   }})
 })
 
+/**
+ * {
+    "schedule": [
+        {
+            "dateTime": "2020-09-11 16:00:00",
+            "name": "jum",
+            "role_one": "bartender",
+            "role_two": null
+        },
+        {
+            "dateTime": "2020-09-11 16:00:00",
+            "name": "Danielle",
+            "role_one": "bartender",
+            "role_two": "server"
+        },
+        {
+            "dateTime": "2020-09-11 16:00:00",
+            "name": "Steve",
+            "role_one": "manager",
+            "role_two": null
+        },
+        {
+            "dateTime": "2020-09-11 16:00:00",
+            "name": "Katie",
+            "role_one": "expo",
+            "role_two": null
+        }
+    ]
+}
+ */
 app.post('/schedule', (req, res) => {
   dbHelpers.postSchedule(req.body, (resultsFromSched) => {
     res.send(resultsFromSched);

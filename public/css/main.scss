@@ -1,9 +1,10 @@
 $colors: (
   dark: rgb(29, 44, 103),
-  scheBborder: rgb(213, 213, 213)
+  mid: rgb(90, 111, 196),
+  schedBorder: rgb(206, 206, 206)
 );
 
-$mobile: 840px;
+$mobile: 730px;
 $tablet: 1250px;
 
 @function color($color-name) {
@@ -51,10 +52,92 @@ body {
   font-size: xx-large;
   position: fixed;
   z-index: 2;
+
+  .header-name-large,
+  .header-dropdown-name {
+    font-size: medium;
+  }
+
+  .header-dropdown {
+    position: fixed;
+    z-index: 5;
+    width: 170px;
+    left: calc(100vw - 210px);
+    top: 20px;
+
+    @include mobile {
+      left: calc(100vw - 200px);
+    }
+
+    .header-dropdown-name {
+      padding: 11px 0;
+      margin-bottom: 15px;
+      text-align: end;
+    }
+
+    #header-dropdown-list {
+      background-color: white;
+      border-radius: 5px;
+      border: 1px solid color(schedBorder);
+      display: none;
+
+      .header-dropdown-button {
+        padding: 3px 10px;
+        border-top: 1px solid color(schedBorder);
+
+        button {
+          background: none;
+          border: none;
+          font-size: medium;
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
 }
 
 .header-buffer {
   height: 75px;
+}
+
+.modal-outer {
+  position: fixed;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.468);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  @include mobile {
+    -webkit-backdrop-filter: blur(0px);
+    backdrop-filter: blur(0px);
+  }
+
+  .modal-inner {
+    background-color: white;
+    height: 500px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: calc((100vh - 500px)/2);
+    // transform: translateY(-50%);
+    border: 1px solid color(schedBorder);
+    border-radius: 10px;
+    @include mobile {
+      margin-top: calc((100vh - 500px));
+      width: 100vw;
+      background-color: color(mid);
+      color: white;
+      border: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
 }
 
 
@@ -64,95 +147,79 @@ body {
   // VARIABLES
   // ---------
 
-  $nightBG: rgb(245, 245, 245);
-  $nightBGmobile: rgb(247, 247, 247);
   $empBG: rgb(244, 244, 244);
 
   // --------
   // ALL VIEW
   // --------
 
-  min-width: 300px;
+  min-width: 280px;
 
-  .update-shift-modal-outside {
-    position: fixed;
-    z-index: 1;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.468);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
+  .table-header{
 
-    .update-shift-modal {
-      background-color: white;
-      height: 500px;
-      width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: calc((100vh - 500px)/2);
-      // transform: translateY(-50%);
-      border: 1px solid color(scheBborder);
-      border-radius: 10px;
-    }
-  }
-
-  .month {
-    font-size: xx-large;
-    text-align: center;
-    padding: 20px;
-    border-bottom: 1px solid color(scheBborder)
-  }
-
-  // .table {
-  //   // margin: 0 60px;
-  // }
-
-  .table-elem, .table-elem-top, .table-elem-empty {
-    align-self: center;
-    justify-self: center;
-    text-align: center;
-    vertical-align: middle;
-    width: 100%;
-  }
-
-  .table-elem-top {
-    padding: 10px 0;
-    width: 53px;
-
-    .col-day {
-      margin-top: 5px;
-    }
-    .col-date {
+    .month {
       font-size: x-large;
-      padding-top: 11px;
-      margin-top: 5px;
-      height: 37px;
+      text-align: center;
       align-self: center;
-      border-radius: 50%;
+      padding: 20px 10px;
+      min-width: 95px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      grid-column-gap: 10px;
 
+      .click-left {
+        justify-self: end;
+      }
+      .click-right {
+        justify-self: start;
+      }
     }
-    .highlight-today {
-      border:color(dark) solid 2px;
+
+    .column-names {
+
+      border-left: 1px solid color(schedBorder);
+
+      .table-elem, .table-elem-top, .table-elem-empty {
+        align-self: center;
+        justify-self: center;
+        text-align: center;
+        vertical-align: middle;
+        width: 100%;
+      }
+
+      .table-elem-top {
+        padding: 10px 0;
+        width: 53px;
+
+        .col-day {
+          margin-top: 5px;
+        }
+        .col-date {
+          font-size: x-large;
+          padding-top: 11px;
+          margin-top: 5px;
+          height: 37px;
+          align-self: center;
+          border-radius: 50%;
+
+        }
+        .highlight-today {
+          border:color(dark) solid 2px;
+        }
+      }
+      .highlight-today {
+        color: color(dark);
+      }
+
+      .past-today {
+        opacity: 40%;
+      }
     }
   }
-  .highlight-today {
-    color: color(dark);
-  }
 
-  .past-today {
-    opacity: 40%;
-  }
-
-  .table-elem-empty {
-    min-width: 115px;
-  }
 
   .employee-row {
-    border-top: solid 1px color(scheBborder);
+    border-top: solid 1px color(schedBorder);
 
     .emp-block {
       height: 100%;
@@ -174,13 +241,13 @@ body {
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 20px;
         padding: 10px;
-        border-left: solid 1px color(scheBborder);
+        border-left: solid 1px color(schedBorder);
         height: 49px;
-        background: linear-gradient(to left, $nightBGmobile 50%, white 50%);
 
         .shift {
           min-width: 50px;
           padding: 15px 0;
+          text-align: center;
         }
 
         .past{
@@ -189,7 +256,8 @@ body {
 
         .no-shift:hover {
           background-image: none !important;
-          background-color: gray;
+          background-color: rgb(214, 228, 244);
+          cursor: pointer;
         }
       }
     }
@@ -221,24 +289,20 @@ body {
   // TABLET VIEW
   // -----------
 
-  .employee-row {
-    .emp-block {
-      .employee-name {
-        @include tablet {
+  @include tablet {
+    .employee-row {
+      .emp-block {
+        .employee-name {
           padding-top: 35px;
         }
       }
-    }
-    .employee-schedule {
-      .day-table {
-        @include tablet {
+
+      .employee-schedule {
+        .day-table {
           grid-template-columns: auto;
           grid-row-gap: 10px;
           height: 70px;
-          background: linear-gradient(to top, $nightBG 50%, white 50%);
-        }
-        .shift {
-          @include tablet {
+          .shift {
             padding: 5px 0;
           }
         }
@@ -250,31 +314,30 @@ body {
   // MOBILE VIEW
   // -----------
 
-  .table {
-    @include mobile {
-      // margin: 0 10px;
+
+  @include mobile {
+    .table-header {
+      .month {
+        border-bottom: 1px solid color(schedBorder);
+      }
+
+      .column-names {
+        border-left: none;
+      }
+
     }
-  }
-
-  .employee-row {
-
-    .emp-block {
-      .employee-name {
-        @include mobile {
-          padding: 5px 10px;
-          border-bottom: solid 1px color(scheBborder);
-          // border-left: solid 1px color(scheBborder);
-          // border-right: solid 1px color(scheBborder);
+    .employee-row {
+      .emp-block {
+        .employee-name {
+            padding: 5px 10px;
+            border-bottom: solid 1px color(schedBorder);
         }
       }
-    }
 
-    .employee-schedule {
-      .day-table {
-        @include mobile {
-          border-left: none;
-          background: linear-gradient(to top, $nightBGmobile 50%, white 50%);
-          // grid-template-columns: 1fr 1fr;
+      .employee-schedule {
+        .day-table {
+            border-left: none;
+            // background: linear-gradient(to top, $nightBGmobile 50%, white 50%);
         }
       }
     }
@@ -325,23 +388,23 @@ body {
 
 }
 
-.employeeAdd {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 50; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+// .employeeAdd {
+//   display: none; /* Hidden by default */
+//   position: fixed; /* Stay in place */
+//   z-index: 50; /* Sit on top */
+//   left: 0;
+//   top: 0;
+//   width: 100%; /* Full width */
+//   height: 100%; /* Full height */
+//   overflow: auto; /* Enable scroll if needed */
+//   background-color: rgb(0,0,0); /* Fallback color */
+//   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 
-  .employeeAdd-container {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 30%; /* Could be more or less, depending on screen size */
-  }
-}
+//   .employeeAdd-container {
+//     background-color: #fefefe;
+//     margin: 15% auto; /* 15% from the top and centered */
+//     padding: 20px;
+//     border: 1px solid #888;
+//     width: 30%; /* Could be more or less, depending on screen size */
+//   }
+// }

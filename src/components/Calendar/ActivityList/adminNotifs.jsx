@@ -50,8 +50,6 @@ const AdminNotifications = () => {
                   <td>{tOff.name}</td>
                   <td>{tOff.day}</td>
                   {tOff.morning > 0 ? <td>Morning</td> : <td>Night</td>}
-                  <td><button id="approveTimeOff" onClick={approveTimeOff} disabled={false}>Approve</button></td>
-                  <td><button id="denyTimeOff" onClick={denyTimeOff} disabled={false}>Deny</button></td>
                 </tr>
             ))}
             </tbody>
