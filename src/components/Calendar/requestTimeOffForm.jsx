@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import fetchSingleTimeOff from '../../../redux-state/actions/singleTimeOff.js'
-
+import fetchSingleTimeOffGet from '../../../redux-state/actions/fetchSingleTimeOff.js'
+// fetch the other timeoff thing!
 
 const RequestTimeOffForm = (props) => {
+  const dispatch = useDispatch();
   const user = useSelector(state => state.viewReducer.user)
+  const currentDate = useSelector(state => state.scheduleReducer.currentDate)
 
   const { isOpen } = props;
   const { closeModal } = props;
@@ -15,19 +17,17 @@ const RequestTimeOffForm = (props) => {
   const [isMorning, setIsMorning] = useState(null);
 
   const sendTimeOffReq  = (date, morning, empId, empName) => {
-    // submit req func
-    // fetchSingleTimeOff(date, morning, empId, empName);
-
+    console.log(morning);
     axios.post('/requestSingleDayOff', {
       date: date,
       morning: morning,
       empId: empId,
       empName: empName
     })
-    .then(() =>
-      fetchSingleTimeOff();
+    .then((body) =>
+      dispatch(fetchSingleTimeOffGet(currentDate))
     )
-    .catch(() => console.log('Som when rong'))
+    .catch((err) => console.log('err ', err))
   }
 
   return (
