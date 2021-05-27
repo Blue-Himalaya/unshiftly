@@ -2,6 +2,7 @@ import React, {useState, useEffect, useLayoutEffect} from 'react'
 import EmployeeRow from './EmployeeRow.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import UpdateShiftModal from './UpdateShiftModal.jsx'
+import moment from 'moment'
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -29,8 +30,10 @@ const Schedule = (props) => {
   const [table, updateTable] = useState(null)
   const schedule = useSelector(state => state.scheduleReducer.schedule);
   const columnDates = useSelector(state => state.scheduleReducer.listOfDays); // 11-17
+  const singleTimeOff = useSelector(state => state.timeOffReducer.singleTimeOff);
   const columnDatesFull = useSelector(state => state.scheduleReducer.listOfFullDays); // 2019-10-11 - 2019-10-17
   const currentDateInfo = useSelector(state => state.scheduleReducer.currentDate).split('-'); // ['2019', '10', '15']
+  const startDateInfo = useSelector(state => state.scheduleReducer.startDate); // ['2019', '10', '15']
   const employees = useSelector(state => state.employeeReducer.employees);
   const timeOff = useSelector(state => state.timeOffReducer.timeOff);
   const roles = useSelector(state => state.rolesReducer.roles);
@@ -109,6 +112,14 @@ const Schedule = (props) => {
         })
       }
 
+      singleTimeOff.map(timeoff => {
+        var day = moment.utc(timeoff.date).format('dddd')
+        var time = moment.utc(timeoff.date).format('hh:mm a').split(' ')[1]
+        // console.log(timeoff, day, time)
+        table[timeoff.name][day][time][1] = 'off'
+        table[timeoff.name][day][time][0] = 'RTO:00'
+      })
+
       updateTable(table)
     }
   }, [])
@@ -158,7 +169,9 @@ const Schedule = (props) => {
         {/* MONTH */}
         <div className='month'>
           <div className='click-left'>{'<'}</div>
-          <div className='month-text'>{months[parseInt(currentDateInfo[1])-1]} {currentDateInfo[0]} </div>
+          <div className='month-text'>
+            {months[startDateInfo.getUTCMonth()]} {startDateInfo.getUTCFullYear()}
+          </div>
           <div className='click-right'>{'>'}</div>
         </div>
 
@@ -181,8 +194,8 @@ const Schedule = (props) => {
             var isToday = iterationDate === today ? 'highlight-today' : ''
             var pastToday = iterationDate < today ? 'past-today' : ''
 
-            console.log('TODAY:', today)
-            console.log('ITERA:', iterationDate)
+            // console.log('TODAY:', today)
+            // console.log('ITERA:', iterationDate)
 
             //RENDER COLUMN NAMES
             return(

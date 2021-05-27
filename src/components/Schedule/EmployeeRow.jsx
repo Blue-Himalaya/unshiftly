@@ -53,6 +53,7 @@ const EmployeeRow = (props) => {
                     var shiftTime = props.row[day][meridian][0] // 11:00:00
                     shiftTime = shiftTime.substring(0, shiftTime.length-3) //11:00
 
+                    // console.log(props.row[day][meridian])
                     // GET OR SET TwO ROLES
                     var role1 = props.row[day][meridian][1]
                     if (!role1) {

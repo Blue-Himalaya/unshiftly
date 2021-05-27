@@ -2,12 +2,21 @@ import React from 'react'
 
 const Shift = (props) => {
 
-  var noShift = (props.color1 === 'rgba(255, 255, 255, 0)' && !props.past) ? 'no-shift' : ''
+  var color = 'white'
+  if (!props.color1.includes('a')) {
+    var colorVal = props.color1.split(', ')[2]
+    colorVal = colorVal.replace('%)', '')
+    if (parseInt(colorVal) > 55) {
+      color = 'black'
+    }
+  }
+
+  var noShift = (props.color1 === 'hsla(30, 0%, 100%, 0)' && !props.past) ? 'no-shift' : ''
   return (
     <div className={`table-elem shift noselect ${noShift} ${props.past}`}
     style={{
       backgroundImage: `linear-gradient(0.375turn, ${props.color1} 50%, ${props.color2} 50%)`,
-      color: 'white',
+      color: color,
       borderRadius: '5px'
     }}
     onClick={() => {
