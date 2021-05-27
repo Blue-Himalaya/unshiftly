@@ -92,6 +92,36 @@ app.get('/schedule', (req, res) => {
   }})
 })
 
+/**
+ * {
+    "schedule": [
+        {
+            "dateTime": "2020-09-11 16:00:00",
+            "name": "jum",
+            "role_one": "bartender",
+            "role_two": null
+        },
+        {
+            "dateTime": "2020-09-11 16:00:00",
+            "name": "Danielle",
+            "role_one": "bartender",
+            "role_two": "server"
+        },
+        {
+            "dateTime": "2020-09-11 16:00:00",
+            "name": "Steve",
+            "role_one": "manager",
+            "role_two": null
+        },
+        {
+            "dateTime": "2020-09-11 16:00:00",
+            "name": "Katie",
+            "role_one": "expo",
+            "role_two": null
+        }
+    ]
+}
+ */
 app.post('/schedule', (req, res) => {
   dbHelpers.postSchedule(req.body, (resultsFromSched) => {
     res.send(resultsFromSched);
@@ -282,13 +312,6 @@ app.get('/getActivities', (req, res) => {
     res.send(results);
   });
 });
-
-app.put('/updateActivities', (req, res) => {
-  const { id, name, type } = req.body;
-  dbHelpers.updateActivities(id, name, type, (results) => {
-    res.send(results);
-  });
-})
 
 /*
 example role color params object:

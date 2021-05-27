@@ -2,6 +2,7 @@ import React, {useState, useEffect, useLayoutEffect} from 'react'
 import EmployeeRow from './EmployeeRow.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import UpdateShiftModal from './UpdateShiftModal.jsx'
+import moment from 'moment'
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -20,19 +21,24 @@ const Schedule = (props) => {
 
   // MODAL STATES
   const [shiftShow, toggleShiftShow] = useState(false)
-  const [currentDay, updateDay] = useState('') // fri-thu
-  const [currentMeridian, updateMeridian] = useState('') // whole date 2019-10-15
+  const [currentDate, updateDate] = useState('') // fri-thu
+  const [currentDay, updateDay] = useState('') // whole date 2019-10-15
+  const [currentMeridian, updateMeridian] = useState('') //am pm
   const [currentEmployee, updateEmployee] = useState('')
 
   // INFORMATION FROM THE DATABASE
   const [table, updateTable] = useState(null)
-  const schedule = useSelector(state => state.scheduleReducer.schedule);
-  const columnDates = useSelector(state => state.scheduleReducer.listOfDays); // 11-17
+  const [unavailability, updateUnavailability] = useState(null)
+
   const columnDatesFull = useSelector(state => state.scheduleReducer.listOfFullDays); // 2019-10-11 - 2019-10-17
   const currentDateInfo = useSelector(state => state.scheduleReducer.currentDate).split('-'); // ['2019', '10', '15']
+  const startDateInfo = useSelector(state => state.scheduleReducer.startDate); // ['2019', '10', '15']
+  const singleTimeOff = useSelector(state => state.timeOffReducer.singleTimeOff);
+  const columnDates = useSelector(state => state.scheduleReducer.listOfDays); // 11-17
   const employees = useSelector(state => state.employeeReducer.employees);
+  const schedule = useSelector(state => state.scheduleReducer.schedule);
   const timeOff = useSelector(state => state.timeOffReducer.timeOff);
-  const roles = useSelector(state => state.rolesReducer.roles);
+  const colors = useSelector(state => state.rolesReducer.roles);
   const today = new Date(currentDateInfo.join('-')).getTime() // date version of current day
 
   // LIST OF CALENDAR INFO
@@ -71,7 +77,7 @@ const Schedule = (props) => {
 
   // CREATE DATA STRUCTURE FOR THE CALENDAR ONLY WHEN ALL DATA EXISTS
   useEffect(() => {
-    if (schedule && employees && timeOff && roles) {
+    if (schedule && employees && timeOff && colors) {
 
       // LIST OF ALL DATA TO GO IN THE SCHEDULE BY EMPLOYEE NAME
       var table = {};
@@ -108,7 +114,40 @@ const Schedule = (props) => {
         })
       }
 
+      singleTimeOff.map(timeoff => {
+        var day = moment.utc(timeoff.date).format('dddd')
+        var time = moment.utc(timeoff.date).format('hh:mm a').split(' ')[1]
+        // console.log(timeoff, day, time)
+        table[timeoff.name][day][time][1] = 'off'
+        table[timeoff.name][day][time][0] = 'RTO:00'
+      })
+
+      var unavailability = {}
+
+      employees.map((employee) => {
+        unavailability[employee.name] =
+        {
+          info: employee,
+          Friday: { am: 0, pm: 0 },
+          Saturday: { am: 0, pm: 0 },
+          Sunday: { am: 0, pm: 0 },
+          Monday: { am: 0, pm: 0 },
+          Tuesday: { am: 0, pm: 0 },
+          Wednesday: { am: 0, pm: 0 },
+          Thursday: { am: 0, pm: 0 }
+        }
+      })
+
+      timeOff.map(off => {
+        if (off.morning === 1) {
+          unavailability[off.name][off.day]['am'] = 1
+        } else if (off.morning === 0) {
+          unavailability[off.name][off.day]['pm'] = 1
+        }
+      })
+
       updateTable(table)
+      updateUnavailability(unavailability)
     }
   }, [])
 
@@ -125,37 +164,50 @@ const Schedule = (props) => {
       =========== MODAL ===========
       ========================== */}
       <UpdateShiftModal
+      days={days}
+      months={months}
+      publish={publish}
+
       show={shiftShow}
       toggleShiftShow={toggleShiftShow}
+
       updateMeridian={updateMeridian}
       updateDay={updateDay}
       updateEmployee={updateEmployee}
+      updateDate={updateDate}
+
       currentMeridian={currentMeridian}
       currentDay={currentDay}
       currentEmployee={currentEmployee}
-      publish={publish}
+      currentDate={currentDate}
       />
-
-
-      {/* =========================
-      =========== MONTH ===========
-      ========================== */}
-      <div className='month'> {'<'} {months[parseInt(currentDateInfo[1])-1]} {currentDateInfo[0]} {'>'}</div>
-
 
 
       {/* =========================
       =========== DATES ===========
       ========================== */}
 
-      <div className='table'
+      <div className='table table-header'
       style={{
         display: 'grid',
-        gridTemplateColumns: (width > props.mobileWidth ? '1fr ' : '') + gridTemplateColumns
+        gridTemplateColumns: gridTemplateColumnsTable
       }}>
 
-        {/* ADD DIV IF NOT MOBILE TO FILLE EMPTY GRID SPACE AT THE BEGINNING */}
-        {width > props.mobileWidth ? <div className='table-elem-empty'></div> : null}
+        {/* MONTH */}
+        <div className='month'>
+          <div className='click-left'>{'<'}</div>
+          <div className='month-text'>
+            {months[startDateInfo.getUTCMonth()]} {startDateInfo.getUTCFullYear()}
+          </div>
+          <div className='click-right'>{'>'}</div>
+        </div>
+
+        {/* DAYS OF THE WEEK   s */}
+        <div className='column-names'
+        style={{
+          display: 'grid',
+          gridTemplateColumns: gridTemplateColumns
+        }}>
 
         {/* MAP THROUGH FRIDAY-THURSDAY */}
         {/* i WILL BE THE SAME FOR DAYS, COLUMNDATES, COLUMNDATESFULL */}
@@ -169,6 +221,9 @@ const Schedule = (props) => {
             var isToday = iterationDate === today ? 'highlight-today' : ''
             var pastToday = iterationDate < today ? 'past-today' : ''
 
+            // console.log('TODAY:', today)
+            // console.log('ITERA:', iterationDate)
+
             //RENDER COLUMN NAMES
             return(
               <div key={`table-elem-top-${day}`} className={`table-elem-top column ${isToday} ${pastToday}`}>
@@ -178,6 +233,7 @@ const Schedule = (props) => {
             )
           } // END FOR RENDER CONDITION
         })} {/* END FOR DAYS MAP */}
+        </div>
 
       </div> {/* END OF COLUMN HEADERS */}
 
@@ -190,9 +246,10 @@ const Schedule = (props) => {
       {employees.map((employee) => {
         return <EmployeeRow
         key={employee.name}
-        colors={roles}
+        colors={colors}
         name={employee.name}
         row={table[employee.name]} // Includes information
+        timeoff={unavailability[employee.name]}
 
         days={days} // Friday-Thursday
         times={times} // AM-PM
@@ -202,6 +259,7 @@ const Schedule = (props) => {
 
         width={width} // Width of the window
         mobileWidth={props.mobileWidth} // Width of mobile
+        tabletWidth={props.tabletWidth}  // Width of tablet
         gridTemplateColumns={gridTemplateColumns} // How many days to render
         gridTemplateColumnsTable={gridTemplateColumnsTable} // Where to render employee in respect to schedule
 
@@ -210,6 +268,7 @@ const Schedule = (props) => {
         updateDay={updateDay}
         updateMeridian={updateMeridian}
         updateEmployee={updateEmployee}
+        updateDate={updateDate}
         />
       })}
 
