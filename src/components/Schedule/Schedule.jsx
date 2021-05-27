@@ -47,7 +47,7 @@ const Schedule = (props) => {
   const times = ['am', 'pm']
 
   // PUBLISH BUTTON
-  const [publish, togglePublish] = useState(true)
+  const [publish, togglePublish] = useState(false)
 
   // WINDOW SIZE
   const [width, height] = useWindowSize();
@@ -116,8 +116,7 @@ const Schedule = (props) => {
 
       singleTimeOff.map(timeoff => {
         var day = moment.utc(timeoff.date).format('dddd')
-        var time = moment.utc(timeoff.date).format('hh:mm a').split(' ')[1]
-        // console.log(timeoff, day, time)
+        var time = timeoff.morning ? 'am' : 'pm'
         table[timeoff.name][day][time][1] = 'off'
         table[timeoff.name][day][time][0] = 'RTO:00'
       })
