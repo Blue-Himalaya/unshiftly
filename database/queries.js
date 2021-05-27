@@ -101,7 +101,7 @@ const releaseShift = (reqObj, callback) => {
   console.log(reqObj);
   const { shiftId, empName, empId, date, morning, role } = reqObj;
   const shift = morning ? 'morning' : 'evening';
-  const activityString = `${empName} has given up their ${role} - ${morning} shift on ${date}.`
+  const activityString = `${empName} has given up their ${role} - ${shift} shift on ${date}.`
   const queryString = `update employee_schedule set is_released = 1 where id = '${shiftId}'; insert into activity (time_of_activity, type_of_activity) values (now(), '${activityString}')`
   connection.query(queryString, (err, results) => {
     if(err) console.log(err);
