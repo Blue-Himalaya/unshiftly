@@ -45,7 +45,7 @@ const ActivityList = () => {
   if (admin === true) {
     return (
       <div id="activityLogContainer">
-        <h1>Activity Log</h1>
+        <h1 style={{margin: 0}}>Activity Log</h1>
       <div className="activityLog">
         <ul>
         {activities.map((activity) => (
@@ -66,7 +66,7 @@ const ActivityList = () => {
 
     return (
       <div id="activityLogContainer">
-        <h1>Activity Log</h1>
+        <h1 style={{margin: 0}}>Activity Log</h1>
         <div className="activityLog">
           <ul>
           {activities.map((activity) => (

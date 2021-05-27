@@ -2,6 +2,11 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
+  overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .header {
@@ -15,13 +20,12 @@ body, html {
 .view-container {
   display: flex;
   flex-direction: row;
-  padding: 20px;
 }
 
 .cal-container {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 80%;
   height: 100%;
 }
 
@@ -40,18 +44,19 @@ body, html {
   display: block;
 }
 
-.activity-grid {
+/* .activity-grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:
   "a a a a a a a b"
   "c c c c c c c b";
-}
+} */
 
 .activity-log-container {
   display: flex;
-  width: 30%;
+  width: 20%;
   margin-left: 50px;
+  text-align: center;
 }
 
 #daysOfWeek {
@@ -82,55 +87,28 @@ body, html {
 
 /** ACTIVITY LOG **/
 
-/* #activityLogContainer {
-  display: grid;
-  grid-template-rows: 0.2fr 0.5fr;
-  margin-top: 5px;
-  justify-items: center;
-} */
+#activityLogContainer {
+  height: calc(100vh - 75px);
+  background-color: rgba(112,128,144);
+}
 
 .activityLog {
   grid-area: b;
-  border: 2px solid black;
-  border-radius: 15px;
-  text-align: center;
   padding-right: 25px;
-  height: 75vh;
+  height: calc(100vh - 113px);
   min-height: 25vh;
   overflow-y: scroll;
-  width: 20vw;
+  padding-top: 10px;
 }
 
-#activityListItem {
+.activityListItem {
   list-style: none;
-}
-
-#timeOffTableEntries::-webkit-scrollbar,
-  #activityLog::-webkit-scrollbar {
-  display: none;
-}
-
-#adminNotifs {
   display: grid;
-  grid-template-rows: 0.2fr 0.5fr;
-  margin-top: 5px;
-  justify-items: center;
+  grid-template-rows: 1fr 1fr;
 }
 
-
-#timeOffTableEntries
-  thead {
-    font-size: 1.2em;
- }
-
-#timeOffTableEntries {
-  border: 2px solid black;
-  border-radius: 15px;
-  text-align: center;
-  padding-right: 25px;
-  height: 75vh;
-  min-height: 25vh;
-  overflow-y: scroll;
+.activityLog::-webkit-scrollbar {
+  display: none;
 }
 
 /** END OF ACTIVITY LOG **/
