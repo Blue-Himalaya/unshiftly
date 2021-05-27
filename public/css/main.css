@@ -262,7 +262,87 @@ body {
   -ms-grid-row: 2;
   -ms-grid-column: 4;
   grid-area: employee-edit-container;
-  background-color: red;
+}
+
+.employeeList .employee-edit-name-input {
+  text-align: center;
+  font-size: xxx-large;
+  letter-spacing: 2.5px;
+}
+
+.employeeList .employee-edit-credentials {
+  display: -ms-grid;
+  display: grid;
+  font-size: 30px;
+  padding-left: 15px;
+  -ms-grid-columns: 0.5fr 1.5fr;
+      grid-template-columns: 0.5fr 1.5fr;
+  -ms-grid-rows: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+      grid-template-areas: "employee-edit-title-password employee-edit-password-input" "employee-edit-title-phone employee-edit-phone-input" "employee-edit-title-birthday employee-edit-birthday-input" "employee-edit-title-startDate employee-edit-startDate-input";
+}
+
+.employeeList .employee-edit-credentials .credential {
+  padding-bottom: 10px;
+  padding-top: 30px;
+  height: 100px;
+}
+
+.employeeList .employee-edit-credentials .entry {
+  padding-left: 35px;
+  padding-bottom: 10px;
+  height: 100px;
+  padding-top: 30px;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-title-password {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: employee-edit-title-password;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-title-phone {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: employee-edit-title-phone;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-title-birthday {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: employee-edit-title-birthday;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-title-startDate {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: employee-edit-title-startDate;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-password-input {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: employee-edit-password-input;
+  -webkit-text-security: disc;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-phone-input {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: employee-edit-phone-input;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-birthday-input {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: employee-edit-birthday-input;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-startDate-input {
+  -ms-grid-row: 4;
+  -ms-grid-column: 2;
+  grid-area: employee-edit-startDate-input;
 }
 
 .employeeList .employee-add-button {

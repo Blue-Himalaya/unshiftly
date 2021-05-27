@@ -2,6 +2,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import EmployeeAdd from '../EmployeeList/EmployeeAdd.jsx'
+import moment from 'moment';
 
 
 function useWindowSize() {
@@ -100,6 +101,18 @@ const EmployeeList = () => {
     updateName(e);
   }
 
+  function transferDateBack(str) {
+    moment(str).toISOString()
+  }
+
+  function transferDate(str) {
+    var date = moment(str);
+    var dateComponent = date.utc().format('YYYY-MM-DD');
+    transferDateBack(dateComponent)
+    return dateComponent
+  }
+
+
 /*
   Change information about employees
   Endpoint needs the following in the form of a body from the
@@ -120,7 +133,7 @@ function submitChanges() {
   console.log(currentEmployeeName)
   console.log(currentEmployeePhone)
   console.log(currentEmployeeBirthday)
-  console.log(currentEmployeeStartDate)
+  console.dir(currentEmployeeStartDate)
   console.log(currentEmployee.is_active)
 }
 
@@ -161,22 +174,24 @@ function submitChanges() {
       <div className="employee-edit-container">
         {currentEmployee ?
           <div className="employee-edit-entries">
-              <div className="employee-edit-name-input" contentEditable="true" suppressContentEditableWarning={true} onInput={e => checkOnChange(e)}>{currentEmployeeName}</div>
-            <div className="employee-edit-password-title"> Password:
-              <div className="employee-edit-password-input">{currentEmployee.password}</div>
+            <div className="employee-edit-name-input" contentEditable="true" suppressContentEditableWarning={true} onInput={e => checkOnChange(e)}>{currentEmployeeName}</div>
+            <div className="employee-edit-credentials">
+            <div className="credential  employee-edit-title-password">Password:
             </div>
-            <div className="employee-edit-phone-title">Phone Number:
-              <div className="employee-edit-phone-input" contentEditable="true" suppressContentEditableWarning={true} onFocus={(e) => {e.target.selectionStart = window.cursor}} onInput={e => checkOnChange(e)}>{currentEmployeePhone}</div>
+              <div className="entry employee-edit-password-input">{currentEmployee.password}</div>
+            <div className="credential  employee-edit-title">Phone Number:
             </div>
-            <div className="employee-edit-birthday-title">Birthday:
-              <div className="employee-edit-birthday-input">{currentEmployeeBirthday}</div>
+              <div className="entry employee-edit-phone-input" contentEditable="true" suppressContentEditableWarning={true} onFocus={(e) => {e.target.selectionStart = window.cursor}} onInput={e => checkOnChange(e)}>{currentEmployeePhone}</div>
+            <div className="credential employee-edit-title">Birthday:
             </div>
-            <div className="employee-edit-roles-title">Roles:{currentEmployee.roles.map((role) => {
+              <div className="entry employee-edit-birthday-input">{transferDate(currentEmployeeBirthday)}</div>
+              <div className="credential employee-edit-title">Start Date:
+              </div>
+                <div className="entry employee-edit-startDate-input">{transferDate(currentEmployee.start_date)}</div>
+              </div>
+            <div className="credential  employee-edit-title">Roles:{currentEmployee.roles.map((role) => {
               return (<div className="employee-edit-roles-input" key={role.role}>{role.role}</div>)
               })}</div>
-            <div className="employee-edit-startDate-title">Start Date:
-              <div className="employee-edit-startDate-input">{currentEmployee.start_date}</div>
-            </div>
             <button onClick={()=> submitChanges()}>SUBMIT CHANGES</button>
           </div>
         : <div> NOT DONE</div>}
