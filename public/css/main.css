@@ -74,8 +74,12 @@ body {
 .header .header-dropdown #header-dropdown-list .header-dropdown-button button {
   background: none;
   border: none;
+  border-radius: 0px;
   font-size: medium;
   margin-bottom: 12px;
+  color: black;
+  text-align: start;
+  padding: 1px 6px;
 }
 
 .header-buffer {
@@ -118,9 +122,6 @@ body {
   .modal-outer .modal-inner {
     margin-top: calc((100vh - 500px));
     width: 100vw;
-    background-color: #5a6fc4;
-    color: white;
-    border: none;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
@@ -306,8 +307,8 @@ body {
   display: grid;
   -ms-grid-columns: 0.2fr 0.7fr 0.2fr 2.9fr 0.1fr;
       grid-template-columns: 0.2fr 0.7fr 0.2fr 2.9fr 0.1fr;
-  -ms-grid-rows: 0.2fr 2.4fr 0.4fr;
-      grid-template-rows: 0.2fr 2.4fr 0.4fr;
+  -ms-grid-rows: 5% 80% 15%;
+      grid-template-rows: 5% 80% 15%;
       grid-template-areas: ". . . . ." ". employee-list-container . employee-edit-container ." ". employee-add-button . employee-remove-button .";
 }
 
@@ -315,15 +316,36 @@ body {
   -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: employee-list-container;
-  background-color: grey;
+  background-color: #c4c4c4;
+  border: inset;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  padding: 10px;
+  height: 95%;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .employeeList .employee-list-title {
   text-align-last: center;
+  text-align: center;
+  font-size: large;
+  letter-spacing: 1px;
+  color: #FFF;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  padding-bottom: 20px;
+  text-decoration: underline;
 }
 
 .employeeList .employee-names {
-  color: orange;
+  font-size: medium;
+  letter-spacing: 1px;
+  color: #FFF;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-transform: uppercase;
+  padding-bottom: 25px;
 }
 
 .employeeList .employee-name-entry {
@@ -334,20 +356,109 @@ body {
   -ms-grid-row: 2;
   -ms-grid-column: 4;
   grid-area: employee-edit-container;
-  background-color: red;
+  background-color: #c4c4c4;
+  border: inset;
+  border-radius: 100px;
+  padding: 20px;
+}
+
+.employeeList .employee-edit-name-input {
+  text-align: center;
+  font-size: xxx-large;
+  letter-spacing: 2.5px;
+  color: #FFF;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.75);
+  text-transform: uppercase;
+}
+
+.employeeList .employee-edit-credentials {
+  display: -ms-grid;
+  display: grid;
+  font-size: 30px;
+  padding-left: 15px;
+  color: #FFF;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  -ms-grid-columns: 0.5fr 1.5fr;
+      grid-template-columns: 0.5fr 1.5fr;
+  -ms-grid-rows: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+      grid-template-areas: "employee-edit-title-password employee-edit-password-input" "employee-edit-title-phone employee-edit-phone-input" "employee-edit-title-birthday employee-edit-birthday-input" "employee-edit-title-startDate employee-edit-startDate-input";
+}
+
+.employeeList .employee-edit-credentials .credential {
+  padding-bottom: 10px;
+  padding-top: 30px;
+  height: 100px;
+}
+
+.employeeList .employee-edit-credentials .entry {
+  padding-left: 35px;
+  padding-bottom: 10px;
+  height: 100px;
+  padding-top: 30px;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-title-password {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: employee-edit-title-password;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-title-phone {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: employee-edit-title-phone;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-title-birthday {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: employee-edit-title-birthday;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-title-startDate {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: employee-edit-title-startDate;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-password-input {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: employee-edit-password-input;
+  -webkit-text-security: disc;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-phone-input {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: employee-edit-phone-input;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-birthday-input {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: employee-edit-birthday-input;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-startDate-input {
+  -ms-grid-row: 4;
+  -ms-grid-column: 2;
+  grid-area: employee-edit-startDate-input;
 }
 
 .employeeList .employee-add-button {
   -ms-grid-row: 3;
   -ms-grid-column: 2;
   grid-area: employee-add-button;
-  background-color: yellow;
 }
 
 .employeeList .employee-remove-button {
   -ms-grid-row: 3;
   -ms-grid-column: 4;
   grid-area: employee-remove-button;
-  background-color: aqua;
+  -ms-grid-column-align: end;
+      justify-self: end;
 }
 /*# sourceMappingURL=main.css.map */

@@ -11,13 +11,13 @@ const RequestTimeOffForm = (props) => {
 
   const { isOpen } = props;
   const { closeModal } = props;
-  console.log(user);
+  // console.log(user);
 
   const [pickDate, setPickDate] = useState(null);
   const [isMorning, setIsMorning] = useState(null);
 
   const sendTimeOffReq  = (date, morning, empId, empName) => {
-    console.log(morning);
+    // console.log(morning);
     axios.post('/requestSingleDayOff', {
       date: date,
       morning: morning,

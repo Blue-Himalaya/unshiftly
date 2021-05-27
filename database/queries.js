@@ -32,64 +32,36 @@ const getSchedule = (dateObj, callback) => {
     else callback(null, Object.values(JSON.parse(JSON.stringify(results))))
   })
 }
-const postSchedule = (request, cb) => {
-  let len = request.schedule.length;
-  let role_one_values = [];
-  let role_two_values = [];
-  let retArr = [];
-  for (let i = 0; i < len; i ++) {
-    (function (i) {
-      connection.query(`SELECT '${request.schedule[i].dateTime}' AS date, er.id FROM employee_roles er JOIN employees e ON er.id_employee = e.id JOIN roles r ON er.id_role = r.id WHERE e.name = '${request.schedule[i].name}' AND r.role = '${request.schedule[i].role_one}'`,
-      (error, results, fields) => {
-        if (error) {
-          console.error('error: ', error);
-        } else {
-          role_one_values.push(results);
-          if (role_one_values.length === len) {
-            role_one_values = Object.values(JSON.parse(JSON.stringify(role_one_values)));
-            for (let i = 0; i < role_one_values.length; i ++) {
-              retArr.push([role_one_values[i][0]['date'], role_one_values[i][0]['id']]);
-            }
-            for (let j = 0; j < retArr.length; j ++) {
-              (function (j) {
-                connection.query(`SELECT '${request.schedule[j].dateTime}' AS date, er.id FROM employee_roles er JOIN employees e ON er.id_employee = e.id JOIN roles r ON er.id_role = r.id WHERE e.name = '${request.schedule[j].name}' AND r.role = '${request.schedule[j].role_two}'`,
-                (err, rslts) => {
-                  if (err) {
-                    console.error('err: ', err);
-                  } else {
-                    if (!rslts.length) {
-                      retArr[j].push(null);
-                      role_two_values.push(null);
-                      if (role_two_values.length === len) {
-                        setSchedule(retArr, cb);
-                      }
-                    } else {
-                      retArr[j].push(Object.values(JSON.parse(JSON.stringify(rslts)))[0]['id']);
-                      role_two_values.push(rslts);
-                      if (role_two_values.length === len) {
-                        setSchedule(retArr, cb);
-                      }
-                    }
-                  }
-                })
-              })(j);
-            }
-          }
-        }
-      })
-    })(i);
+
+const postSchedule = (schedule, successCb, errorCb) => {
+  let queryString = '';
+  for (let i = 0; i < schedule.length; i ++) {
+    queryString += `INSERT INTO employee_schedule (datetime, employee_role_one) VALUES ('${schedule[i].dateTime}', (SELECT er.id FROM employee_roles er JOIN employees e ON er.id_employee = e.id JOIN roles r ON er.id_role = r.id WHERE e.name = '${schedule[i].name}' AND r.role = '${schedule[i].role_one}')); `;
   }
+  connection.query(queryString,
+    (error, results, fields) => {
+      if (error) {
+        errorCb(error);
+      } else {
+        successCb(results);
+      }
+    })
 }
 
-const setSchedule = (arr, callback) => {
-  connection.query(`INSERT INTO employee_schedule (datetime, employee_role_one, employee_role_two) VALUES ?`, [arr],
+const deleteShift = (ids, successCb, errorCb) => {
+  let queryString = '';
+  for (let i = 0; i < ids.length; i ++) {
+    queryString += `DELETE FROM employee_schedule WHERE id = ${ids[i]}; `
+  }
+  console.log('q string: ', queryString);
+  connection.query(queryString,
   (error, results, fields) => {
     if (error) {
-      console.error(error);
+      errorCb(error);
     } else {
-      callback(results);
+      successCb(results);
     }
-  });
+  })
 }
 
 /*
@@ -270,7 +242,6 @@ module.exports ={
   authenticateUser,
   checkIfAdmin,
   changeRoleColor,
-  postSchedule,
   getSchedule,
   getAllRecurringTimeOff,
   requestSingleDayOff,
@@ -280,7 +251,9 @@ module.exports ={
   addNewRecurringTimeOff,
   pickUpShift,
   releaseShift,
-  createEmployee
+  createEmployee,
+  deleteShift,
+  postSchedule
 }
 
 
