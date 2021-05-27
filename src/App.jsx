@@ -7,7 +7,6 @@ import fetchSchedule from '../redux-state/actions/fetchSchedule.js';
 import fetchTimeOff from '../redux-state/actions/fetchTimeOff.js';
 import fetchSingleTimeOff from '../redux-state/actions/fetchSingleTimeOff.js';
 import fetchEmployees from '../redux-state/actions/fetchEmployees.js';
-import fetchActivityList from '../redux-state/actions/fetchActivityList.js';
 import fetchRoles from '../redux-state/actions/fetchRoles.js';
 import fetchAdmin from '../redux-state/actions/fetchAdmin.js';
 import Login from './Login/Login.jsx';
@@ -18,7 +17,6 @@ import EmployeeList from './components/EmployeeList/EmployeeList.jsx'
 
 const App = () => {
   const schedule = useSelector(state => state.scheduleReducer.schedule);
-  // const activityList = useSelector(state => state.activityListReducer.activityList);
   const view = useSelector(state => state.viewReducer.view);
   const admin = useSelector(state => state.adminReducer.admin);
   const employees = useSelector(state => state.employeeReducer.employees);
