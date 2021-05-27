@@ -50,7 +50,7 @@ app.post('/login', (req, res, next) => {
       req.logIn(user, err => {
         if (err) throw err;
         console.log('USER: ', req.user, 'INFO: ', info)
-        res.send({ auth: 'success!', role: user[0].role, user: [user[0].id, user[0].name] });
+        res.send({ auth: 'success!', role: user[0].role, user: [user[0].id, user[0].name, user[0].role] });
       });
     }
   })(req, res, next);
