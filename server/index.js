@@ -118,16 +118,9 @@ app.get('/schedule', (req, res) => {
     ]
 }
  */
-// app.post('/schedule', (req, res) => {
-//   dbHelpers.postSchedule(req.body, (resultsFromSched) => {
-//     res.send(resultsFromSched);
-//     res.status(200);
-//     res.end();
-//   })
-// })
 
 app.post('/schedule', (req, res) => {
-  dbHelpers.newSchedule(req.body.schedule,
+  dbHelpers.postSchedule(req.body.schedule,
     (schedSuccess) => {
       res.send(schedSuccess);
       res.status(201);
