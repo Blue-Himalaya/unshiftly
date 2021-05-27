@@ -46,12 +46,7 @@ const Calendar = () => {
   // console.log('timeoff: ', timeOff);
   // console.log('employees: ', employees);
 
-  const sendTimeOffReq  = (date, morning, empId, empName) => {
-    // submit req func
-  }
-
   const timeOffReqForm = () => {
-    // onClick
     setToggleForm(prevIsFormOpen => !prevIsFormOpen)
   }
 
@@ -88,7 +83,7 @@ const Calendar = () => {
           </div>
       </div>
       <button type="click" onClick={timeOffReqForm}>Request Time Off</button>
-      <RequestTimeOffForm isOpen={isFormOpen} />
+      <RequestTimeOffForm isOpen={isFormOpen} closeModal={timeOffReqForm}/>
       <button type="click">Release Shift</button>
     </div>
   );

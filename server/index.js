@@ -125,6 +125,20 @@ app.post('/schedule', (req, res) => {
     res.end();
   })
 })
+
+app.post('/scheduletest', (req, res) => {
+  dbHelpers.newSchedule(req.body.schedule,
+    (schedSuccess) => {
+      res.send(schedSuccess);
+      res.status(201);
+      res.end();
+    },
+    (schedError) => {
+      res.send(schedError);
+      res.status(500);
+      res.end();
+    });
+})
 /*
 Example Body Info For A Employee To Release A Shift
 {
@@ -162,6 +176,29 @@ app.put('/pickUpShift', (req, res) => {
   dbHelpers.pickUpShift(reqObj, (results) => {
     res.status(200).send('Shift successfully picked up').end();
   })
+})
+
+/*
+To delete a shift, all that is needed is the shift id
+{
+  ids: [id] <-- array of ids
+}
+don't forget the axios delete syntax:
+axios.delete('url', { data: payload }).then(
+  // Observe the data keyword this time. Very important
+  // payload is the request body
+)
+*/
+
+app.delete('/schedule', (req, res) => {
+  console.log('req body ids: ', req.body.ids)
+  dbHelpers.deleteShift(req.body.ids,
+    (results) => {
+      res.send(results).status(204).end();
+    },
+    (err) => {
+      res.send(err).status(500).end();
+    })
 })
 
 /*
@@ -308,13 +345,6 @@ app.get('/getActivities', (req, res) => {
     res.send(results);
   });
 });
-
-app.put('/updateActivities', (req, res) => {
-  const { id, name, type } = req.body;
-  dbHelpers.updateActivities(id, name, type, (results) => {
-    res.send(results);
-  });
-})
 
 /*
 example role color params object:

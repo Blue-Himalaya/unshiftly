@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import Calendar from './components/Calendar/Calendar.jsx';
 import fetchView from '../redux-state/actions/fetchView.js';
 import fetchSchedule from '../redux-state/actions/fetchSchedule.js';
-import fetchTimeOff from '../redux-state/actions/fetchTimeoff.js';
-import fetchSingleTimeOff from '../redux-state/actions/fetchSingleTimeoff.js';
+import fetchTimeOff from '../redux-state/actions/fetchTimeOff.js';
+import fetchSingleTimeOff from '../redux-state/actions/fetchSingleTimeOff.js';
 import fetchEmployees from '../redux-state/actions/fetchEmployees.js';
 import fetchActivityList from '../redux-state/actions/fetchActivityList.js';
 import fetchRoles from '../redux-state/actions/fetchRoles.js';
@@ -40,9 +40,11 @@ const App = () => {
     // console.log('ADMIN:', admin) // it's a boolean
   }
 
+
   useEffect(() => {
-    dispatch(fetchSchedule('2019-10-15'));
-    dispatch(fetchSingleTimeOff('2019-10-15'));
+    const date = '2016-10-27';
+    dispatch(fetchSchedule(date));
+    dispatch(fetchSingleTimeOff(date));
     dispatch(fetchActivityList());
     dispatch(fetchEmployees());
     dispatch(fetchTimeOff());
