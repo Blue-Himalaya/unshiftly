@@ -116,12 +116,12 @@ const Schedule = (props) => {
         })
       }
 
-      // singleTimeOff.map(timeoff => {
-      //   var day = moment.utc(timeoff.date).format('dddd')
-      //   var time = timeoff.morning ? 'am' : 'pm'
-      //   table[timeoff.name][day][time][1] = 'off'
-      //   table[timeoff.name][day][time][0] = 'RTO:00'
-      // })
+      singleTimeOff.map(timeoff => {
+        var day = moment.utc(timeoff.date).format('dddd')
+        var time = timeoff.morning ? 'am' : 'pm'
+        table[timeoff.name][day][time][1] = 'off'
+        table[timeoff.name][day][time][0] = 'RTO:00'
+      })
 
       var unavailability = {}
 
@@ -139,13 +139,13 @@ const Schedule = (props) => {
         }
       })
 
-      // timeOff.map(off => {
-      //   if (off.morning === 1) {
-      //     unavailability[off.name][off.day]['am'] = 1
-      //   } else if (off.morning === 0) {
-      //     unavailability[off.name][off.day]['pm'] = 1
-      //   }
-      // })
+      timeOff.map(off => {
+        if (off.morning === 1) {
+          unavailability[off.name][off.day]['am'] = 1
+        } else if (off.morning === 0) {
+          unavailability[off.name][off.day]['pm'] = 1
+        }
+      })
 
       updateTable(table)
       updateUnavailability(unavailability)
