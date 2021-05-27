@@ -96,7 +96,7 @@ body::-webkit-scrollbar {
 .activityLog {
   grid-area: b;
   padding-right: 25px;
-  height: calc(100vh - 113px);
+  height: calc(100vh - 165px);
   min-height: 25vh;
   overflow-y: scroll;
   padding-top: 10px;
