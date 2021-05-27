@@ -109,8 +109,10 @@ const Schedule = (props) => {
           var time = shift.datetime.split(' ')
 
           //EMPLOYEE-NAME > DAY > AM/PM = TIME
-          table[shift.name][day][time[time.length - 1]] =
-            [time[time.length - 2], shift.role[0], shift.role[1]]
+          if (table[shift.name]) {
+            table[shift.name][day][time[time.length - 1]] =
+              [time[time.length - 2], shift.role[0], shift.role[1]]
+          }
         })
       }
 
