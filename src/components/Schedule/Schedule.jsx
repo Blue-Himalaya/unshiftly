@@ -109,17 +109,19 @@ const Schedule = (props) => {
           var time = shift.datetime.split(' ')
 
           //EMPLOYEE-NAME > DAY > AM/PM = TIME
-          table[shift.name][day][time[time.length - 1]] =
-            [time[time.length - 2], shift.role[0], shift.role[1]]
+          if (table[shift.name]) {
+            table[shift.name][day][time[time.length - 1]] =
+              [time[time.length - 2], shift.role[0], shift.role[1]]
+          }
         })
       }
 
-      singleTimeOff.map(timeoff => {
-        var day = moment.utc(timeoff.date).format('dddd')
-        var time = timeoff.morning ? 'am' : 'pm'
-        table[timeoff.name][day][time][1] = 'off'
-        table[timeoff.name][day][time][0] = 'RTO:00'
-      })
+      // singleTimeOff.map(timeoff => {
+      //   var day = moment.utc(timeoff.date).format('dddd')
+      //   var time = timeoff.morning ? 'am' : 'pm'
+      //   table[timeoff.name][day][time][1] = 'off'
+      //   table[timeoff.name][day][time][0] = 'RTO:00'
+      // })
 
       var unavailability = {}
 
@@ -137,13 +139,13 @@ const Schedule = (props) => {
         }
       })
 
-      timeOff.map(off => {
-        if (off.morning === 1) {
-          unavailability[off.name][off.day]['am'] = 1
-        } else if (off.morning === 0) {
-          unavailability[off.name][off.day]['pm'] = 1
-        }
-      })
+      // timeOff.map(off => {
+      //   if (off.morning === 1) {
+      //     unavailability[off.name][off.day]['am'] = 1
+      //   } else if (off.morning === 0) {
+      //     unavailability[off.name][off.day]['pm'] = 1
+      //   }
+      // })
 
       updateTable(table)
       updateUnavailability(unavailability)
