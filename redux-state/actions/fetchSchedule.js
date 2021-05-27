@@ -33,7 +33,7 @@ export const fetchSchedule = (date) => {
         day = '0' + day
     }
     datesFull.push([year, month, day].join('-'))
-    startDate2.setDate(startDate2.getUTCDate());
+    startDate2.setDate(startDate2.getDate() + 1);
   }
 
   return (dispatch) => {

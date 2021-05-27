@@ -9,6 +9,10 @@ const EmployeeRow = (props) => {
   } else {
 
     const columnDatesFull = useSelector(state => state.scheduleReducer.listOfFullDays); // 2019-10-11 - 2019-10-17
+    const naDay = 'rgb(225, 225, 225)'
+    const naNight = 'rgb(215, 215, 215)'
+    const aDay = 'white'
+    const aNight = 'rgb(245, 245, 245)'
 
     return (
 
@@ -42,10 +46,25 @@ const EmployeeRow = (props) => {
 
               var iterationDate = new Date(columnDatesFull[dayOfWeek]).getTime()
               var past = iterationDate < props.today ? 'past' : ''
+              var timeoff = props.timeoff[day]
+
+              var dayColor = aDay
+              var nightColor = aNight
+
+              if (timeoff.am === 1) {
+                dayColor = naDay
+              }
+
+              if (timeoff.pm === 1) {
+                nightColor = naNight
+              }
+
+              var gradDirection = (props.width > props.tabletWidth ? 'left' : 'top')
 
               return <div key={`day-table-${day}`}className={'day-table'}
               style={{
                 // background: `linear-gradient(to left, rgb(245, 245, 245) 50%, rgb(255, 255, 255) 50%)`
+                background: `linear-gradient(to ${gradDirection}, ${nightColor} 50%, ${dayColor} 50%)`
                 // THIS GRADIENT DEPENDS ON AVAILABLE DAYS
               }}>
                 { //LOOP THORUGH AM AND PM FOR THE CURRENT DAY
@@ -53,6 +72,7 @@ const EmployeeRow = (props) => {
                     var shiftTime = props.row[day][meridian][0] // 11:00:00
                     shiftTime = shiftTime.substring(0, shiftTime.length-3) //11:00
 
+                    // console.log(props.row[day][meridian])
                     // GET OR SET TwO ROLES
                     var role1 = props.row[day][meridian][1]
                     if (!role1) {
@@ -74,6 +94,7 @@ const EmployeeRow = (props) => {
                       color1={props.colors[role1]}
                       color2={props.colors[role2]}
                       shiftTime={shiftTime} // 11:00
+                      timeoff={timeoff}
                       employeeInfo={props.row.info} // EMPLOYEE INFO
 
                       shiftShow={props.shiftShow} // STATE OF MODAL
@@ -81,6 +102,7 @@ const EmployeeRow = (props) => {
                       updateDay={props.updateDay} // DAY IN MODAL
                       updateMeridian={props.updateMeridian} // AM-PM IN MODAL
                       updateEmployee={props.updateEmployee} // EMPLOYEE INFO IN MODAL
+                      updateDate={props.updateDate} // DATE IN MODAL
 
                       past={past} //DAY OF WEEK IS THE INDEX FROM MAPPING DAYS
                       />

@@ -9,8 +9,8 @@ const rolesReducer = (state = [], action) => {
       })
 
       //SET MORE COLORS
-      colors.none = 'rgba(255, 255, 255, 0)'
-      colors.off = 'gray'
+      colors.none = 'hsla(30, 0%, 100%, 0)'
+      colors.off = 'hsl(26, 3%, 84%)'
       return {
         roles: colors
       }
