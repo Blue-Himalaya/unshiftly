@@ -52,15 +52,12 @@ const EmployeeList = () => {
     //WATCHES ATTRIBUTES TO CONTINUE TO CHANGE ONCE A DIFFERENT EMPLOYEE IS SELECTED
     if(currentEmployee.name !== currentEmployeeName) {
       updateCurrentEmployeeName(currentEmployee.name)
-      console.log('TRIGGERED')
     }
     if(currentEmployee.phone !== currentEmployeePhone) {
       updateCurrentEmployeePhone(currentEmployee.phone)
-      console.log('TRIGGERED P')
     }
     if(currentEmployee.roles !== currentEmployeeRoles) {
       updateCurrentEmployeeRoles(currentEmployee.roles)
-      console.log('TRIGGERED R')
     }
   }, [currentEmployee.name, currentEmployee.phone, currentEmployee.birthday]);
 
@@ -80,7 +77,6 @@ const EmployeeList = () => {
   //ALLOWS FOR MODAL TO BE OPENED AND CLOSED
   function setShowModal(e) {
     updateShowModal(!showModal)
-    console.log(currentEmployeeName)
   }
 
   //CHECKS CURRENT VALUE OF CHANGED TEXT AND CHANGES STATE
@@ -128,12 +124,12 @@ const EmployeeList = () => {
   i.e. if you want to update the isActive, but nothing else, the endpoint still needs the old information for all other fields
 */
 function submitChanges() {
-  console.log(currentEmployee.id)
-  console.log(currentEmployeeName)
-  console.log(currentEmployeePhone)
-  console.log(currentEmployeeBirthday)
-  console.dir(currentEmployeeStartDate)
-  console.log(currentEmployee.is_active)
+  // console.log(currentEmployee.id)
+  // console.log(currentEmployeeName)
+  // console.log(currentEmployeePhone)
+  // console.log(currentEmployeeBirthday)
+  // console.dir(currentEmployeeStartDate)
+  // console.log(currentEmployee.is_active)
 }
 
 
