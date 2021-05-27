@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import Calendar from './components/Calendar/Calendar.jsx';
 import fetchView from '../redux-state/actions/fetchView.js';
 import fetchSchedule from '../redux-state/actions/fetchSchedule.js';
-import fetchTimeOff from '../redux-state/actions/fetchTimeOff.js';
-import fetchSingleTimeOff from '../redux-state/actions/fetchSingleTimeOff.js';
+import fetchTimeOff from '../redux-state/actions/fetchTimeoff.js';
+import fetchSingleTimeOff from '../redux-state/actions/fetchSingleTimeoff.js';
 import fetchEmployees from '../redux-state/actions/fetchEmployees.js';
 import fetchActivityList from '../redux-state/actions/fetchActivityList.js';
 import fetchRoles from '../redux-state/actions/fetchRoles.js';
@@ -23,40 +23,36 @@ const App = () => {
   const admin = useSelector(state => state.adminReducer.admin);
   const employees = useSelector(state => state.employeeReducer.employees);
   const timeOff = useSelector(state => state.timeOffReducer.timeOff);
-  const singleTimeOff = useSelector(state => state.timeOffReducer.singleTimeOff);
   const roles = useSelector(state => state.rolesReducer.roles);
   const dispatch = useDispatch();
 
   // const admin = true
   const name = 'Steve'
-  const mobileWidth = 730
-  const tabletWidth = 1250
+  const mobileWidth = 840
 
-  if (schedule && employees && timeOff && roles && admin && singleTimeOff) {
+  if (schedule && employees && timeOff && roles && admin) {
     // console.log('SCHEDULE:', schedule)
     // console.log('TIMEOFF:', timeOff)
     // console.log('EMPLOYEES:', employees)
     // console.log('ROLES:', roles)
-    // console.log('ADMIN:', admin) // it's a boolean
+    // console.log('ADMIN:', admin)
   }
 
-
   useEffect(() => {
-    const date = '2016-10-27';
-    dispatch(fetchSchedule(date));
-    dispatch(fetchSingleTimeOff(date));
+    dispatch(fetchSchedule('2019-10-11'));
     dispatch(fetchActivityList());
     dispatch(fetchEmployees());
     dispatch(fetchTimeOff());
+    dispatch(fetchSingleTimeOff());
     dispatch(fetchRoles());
-    dispatch(fetchView('employees'));
+    dispatch(fetchView('login'));
     dispatch(fetchAdmin(true));
   }, []);
 
-  if (!view || !schedule || !employees || !timeOff || !roles || !singleTimeOff) {
+  if (!view || !schedule || !employees || !timeOff || !roles) {
     return (
       <>
-      <Header mobileWidth={mobileWidth}/>
+      <Header/>
       Loading...
       </>
     );
@@ -70,7 +66,7 @@ const App = () => {
   if (view === 'login') {
     return (
       <>
-      <Header mobileWidth={mobileWidth}/>
+      <Header/>
       <Login />
       </>
     );
@@ -85,15 +81,15 @@ const App = () => {
     if (admin) {
       return (
         <>
-          <Header mobileWidth={mobileWidth}/>
-          <Schedule mobileWidth={mobileWidth} tabletWidth={tabletWidth}/>
+          <Header/>
+          <Schedule mobileWidth={mobileWidth}/>
         </>
       );
 
     } else {
       return (
         <>
-        <Header mobileWidth={mobileWidth}/>
+        <Header/>
         YOU CAN'T SEE ME
         </>
       )
@@ -109,14 +105,14 @@ const App = () => {
     if (admin) {
       return (
         <>
-        <Header mobileWidth={mobileWidth}/>
+        <Header />
         <EmployeeList/>
         </>
       );
     } else {
       return  (
         <>
-        <Header mobileWidth={mobileWidth}/>
+        <Header />
         NOT ADMIN
         </>
       )
@@ -131,14 +127,14 @@ const App = () => {
   if (view === 'calendar') { //Tomas's & Amber's
     return (
       <>
-      <Header mobileWidth={mobileWidth}/>
+      <Header />
       <Calendar />
       </>
     );
   }
   return (
     <div>
-      <Header mobileWidth={mobileWidth}/>
+      <Header />
       Loading...
     </div>
   );
