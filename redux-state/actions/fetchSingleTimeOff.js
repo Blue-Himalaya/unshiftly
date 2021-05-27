@@ -10,8 +10,8 @@ export const fetchSingleTimeOff = (date) => {
   //GET POSITION OF DAY FROM SCHEDULE WEEK FRI-THU
   var index = days.indexOf(daysOrdered[startDate.getUTCDay()])
 
-  startDate.setDate(startDate.getUTCDate() - index - 1);
-  endDate.setDate(endDate.getUTCDate() + 7 - index - 1)
+  startDate.setDate(startDate.getDate() - index);
+  endDate.setDate(endDate.getDate() + 7 - index - 1)
 
   return (dispatch) => {
     axios.get('/allSingleTimeOff', {
