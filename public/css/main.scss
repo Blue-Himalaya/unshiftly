@@ -134,9 +134,9 @@ body {
     @include mobile {
       margin-top: calc((100vh - 500px));
       width: 100vw;
-      background-color: color(mid);
-      color: white;
-      border: none;
+      // background-color: color(mid);
+      // color: white;
+      // border: none;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }

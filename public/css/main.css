@@ -122,9 +122,6 @@ body {
   .modal-outer .modal-inner {
     margin-top: calc((100vh - 500px));
     width: 100vw;
-    background-color: #5a6fc4;
-    color: white;
-    border: none;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
