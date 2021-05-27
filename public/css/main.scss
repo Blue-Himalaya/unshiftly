@@ -88,8 +88,12 @@ body {
         button {
           background: none;
           border: none;
+          border-radius: 0px;
           font-size: medium;
           margin-bottom: 12px;
+          color: black;
+          text-align: start;
+          padding: 1px 6px;
         }
       }
     }

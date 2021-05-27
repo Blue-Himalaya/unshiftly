@@ -17,6 +17,9 @@ const UpdateShiftModal = (props) => {
               Add to Schedule:
             </div>
             <div>
+              {props.currentEmployee.name}
+            </div>
+            <div>
               <br/>
               {props.currentDay},&nbsp;
               {props.months[parseInt(dateInfo[1])]}&nbsp;
@@ -24,7 +27,7 @@ const UpdateShiftModal = (props) => {
             </div>
             <form>
               <label htmlFor="shift-time">Shift Time: </label>
-              <select id="shift-time" type="time" name="shift-time">
+              <select id="shift-time" name="shift-time">
                 {props.currentMeridian === 'am' ?
                 <>
                 <option value='6:00'>6:00</option>
@@ -50,8 +53,29 @@ const UpdateShiftModal = (props) => {
                 </>
                 }
               </select> {props.currentMeridian.toUpperCase()}
-              {/* HELLO  {JSON.stringify(props.currentEmployee)} <br/> */}
+               {/* {JSON.stringify(props.currentEmployee)} <br/> */}
+
               <br/>
+
+              <label htmlFor="shift-role-1">Role 1: </label>
+              <select id="shift-role-1" name="shift-role-1">
+                {props.currentEmployee.roles.map((role) => {
+                  return <option key={role.role} value={role.role}>{role.role}</option>
+                })}
+              </select>
+
+              <br/>
+
+              <label htmlFor="shift-role-2">Role 2: </label>
+              <select id="shift-role-2" name="shift-role-2">
+                <option value={null}>--</option>
+                {props.currentEmployee.roles.map((role) => {
+                  return <option key={role.role} value={role.role}>{role.role}</option>
+                })}
+              </select>
+
+              <br/>
+
               {props.publish ?
               <input type='submit' value='Save Progress'/> :
               <input type='submit' value='Publish'/>}
