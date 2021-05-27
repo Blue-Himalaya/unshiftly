@@ -10,6 +10,7 @@ body, html {
   background-color:rgb(29, 44, 103);
   color: white;
   font-size: xx-large;
+
 }
 
 .view-container {
@@ -169,4 +170,69 @@ body, html {
 	background-color: #f5f5f5;
 	padding: 50px;
 	z-index: 1000;
+}
+
+/* Login Page CSS*/
+.loginHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: lighter;
+}
+
+.loginForm{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+.formLabelsInputs{
+  margin-top: 10px;
+}
+.loginButton{
+	text-transform: uppercase;
+	text-decoration: none;
+	background: rgb(29, 44, 103);
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+  transition: all 0.4s ease 0s;
+  width: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:10px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+}
+.loginButton:hover {
+	background: black;
+	letter-spacing: 1px;
+	-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+	-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+	box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+	transition: all 0.4s ease 0s;
+}
+.buttonText{
+  color:white;
+}
+.longInputs{
+  padding:2px;
+  border-radius:5px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(29, 44, 103);
+  width: 250px;
+}
+.labelText{
+  font-weight: lighter;
+}
+.entireLogIn{
+  margin-top: 250px;
 }
