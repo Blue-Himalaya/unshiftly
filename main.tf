@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "app_server" {
-  ami = "ami-0d5eff06f840b45e9"
+  ami = "ami-09e67e426f25ce0d7"
   instance_type = "t2.micro"
   key_name = "knowledge_key"
   security_groups = ["unshiftly-web"]
