@@ -9,25 +9,49 @@ const Login = () => {
   const dispatch = useDispatch();
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log("this is e", e.target)
     dispatch(userLoggedIn(e.target.username.value, e.target.password.value));
   }
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={onSubmit}>
+    <div className="entireLogIn">
+      <h1 className="loginHeader">scheduling made easy.</h1>
+      <form className="loginForm" onSubmit={onSubmit}>
         <div>
-          <label>
-            Username:
-            <input name="username" type="username" placeholder="ex: RayRay"/>
+          <div className="formLabelsInputs">
+          <label
+            className="labelText">
+            user id:
           </label>
-          <label>
-            Password:
-            <input name="password" type="password" placeholder="Password" />
-          </label>
-          {authenticated === false ? 'INVALID COMBO' : <></>}
+        <br></br>
+          <input
+
+          className="longInputs"
+          name="username"
+          type="username"
+          placeholder="ex: RayRay"/>
         </div>
-        <button type="submit">Log in</button>
+        <div className="formLabelsInputs">
+          <label
+          className="labelText">
+          password:
+          </label>
+        <br></br>
+          <input
+
+          className="longInputs"
+          name="password"
+          type="password"
+          placeholder="Password" />
+        </div>
+        {authenticated === false ? 'INVALID COMBO' : <></>}
+       </div>
+       <button
+      type="submit"
+      className="loginButton">
+      <span className="buttonText" >Log in</span>
+      </button >
       </form>
+
     </div>
   )
 }
