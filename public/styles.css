@@ -143,6 +143,12 @@ body, html {
   height: fit-content;
   margin-bottom: 10px;
 }
+.shift-block:hover {
+  cursor: pointer;
+}
+.shift-block-cont {
+  background-color: lightgray;
+}
 
 .emp-info-modal-bg {
   position: fixed;
@@ -150,7 +156,6 @@ body, html {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(126, 126, 126, 0.509);
 	z-index: 1000;
 }
 
