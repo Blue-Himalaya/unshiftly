@@ -7,6 +7,7 @@ import fetchSchedule from '../redux-state/actions/fetchSchedule.js';
 import fetchTimeOff from '../redux-state/actions/fetchTimeOff.js';
 import fetchSingleTimeOff from '../redux-state/actions/fetchSingleTimeOff.js';
 import fetchEmployees from '../redux-state/actions/fetchEmployees.js';
+import fetchActivityList from '../redux-state/actions/fetchActivityList.js';
 import fetchRoles from '../redux-state/actions/fetchRoles.js';
 import fetchAdmin from '../redux-state/actions/fetchAdmin.js';
 import Login from './Login/Login.jsx';
@@ -17,6 +18,7 @@ import EmployeeList from './components/EmployeeList/EmployeeList.jsx'
 
 const App = () => {
   const schedule = useSelector(state => state.scheduleReducer.schedule);
+  // const activityList = useSelector(state => state.activityListReducer.activityList);
   const view = useSelector(state => state.viewReducer.view);
   const admin = useSelector(state => state.adminReducer.admin);
   const employees = useSelector(state => state.employeeReducer.employees);
@@ -40,20 +42,7 @@ const App = () => {
 
 
   useEffect(() => {
-
-    // CURRENT DATE
-    // const dateObj = new Date();
-    // const date =
-    //   [dateObj.getUTCFullYear(),
-    //   (dateObj.getUTCMonth() + 1).toString().length === 1
-    //     ? '0' + (dateObj.getUTCMonth() + 1)
-    //     : (dateObj.getUTCMonth() + 1),
-    //   dateObj.getUTCDate()]
-    //   .join('-')
-
-    // HARDCODED DATE
-    const date = '2019-10-15'
-
+    const date = '2016-10-27';
     dispatch(fetchSchedule(date));
     dispatch(fetchSingleTimeOff(date));
     dispatch(fetchActivityList());
