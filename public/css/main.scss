@@ -347,7 +347,7 @@ body {
 .employeeList {
   display: grid;
   grid-template-columns: 0.2fr 0.7fr 0.2fr 2.9fr 0.1fr;
-  grid-template-rows: 0.2fr 2.4fr 0.4fr;
+  grid-template-rows: 5% 80% 15%;
   grid-template-areas:
     ". . . . ."
     ". employee-list-container . employee-edit-container ."
@@ -355,15 +355,36 @@ body {
 
   .employee-list-container {
     grid-area: employee-list-container;
-    background-color: grey;
+    background-color: #c4c4c4;
+    border: inset;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    padding: 10px;
+    height: 95%;
+    overflow: hidden;
+    overflow-y: scroll;
+
   }
 
   .employee-list-title {
     text-align-last: center;
+    text-align: center;
+    font-size: large;
+    letter-spacing: 1px;
+    color: #FFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
+    text-transform: uppercase;
+    padding-bottom: 20px;
+    text-decoration: underline;
   }
 
   .employee-names {
-    color: orange;
+    font-size: medium;
+    letter-spacing: 1px;
+    color: #FFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-transform: uppercase;
+    padding-bottom: 25px;
   }
 
 
@@ -373,17 +394,94 @@ body {
 
   .employee-edit-container {
     grid-area: employee-edit-container;
-    background-color: red;
+    background-color: #c4c4c4;
+    border: inset;
+    border-radius: 100px;
+    padding: 20px;
+
+  }
+
+  .employee-edit-name-input {
+    text-align: center;
+    font-size: xxx-large;
+    letter-spacing: 2.5px;
+    color: #FFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.75);
+    text-transform: uppercase;
+  }
+
+  .employee-edit-credentials {
+    display: grid;
+    font-size: 30px;
+    padding-left: 15px;
+    color: #FFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    grid-template-columns: 0.5fr 1.5fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "employee-edit-title-password employee-edit-password-input"
+      "employee-edit-title-phone employee-edit-phone-input"
+      "employee-edit-title-birthday employee-edit-birthday-input"
+      "employee-edit-title-startDate employee-edit-startDate-input";
+
+    .credential {
+      padding-bottom: 10px;
+      padding-top: 30px;
+      height: 100px;
+    }
+
+    .entry {
+      padding-left: 35px;
+      padding-bottom: 10px;
+      height: 100px;
+      padding-top: 30px;
+    }
+
+
+    .employee-edit-title-password {
+      grid-area: employee-edit-title-password;
+    }
+
+    .employee-edit-title-phone {
+      grid-area: employee-edit-title-phone;
+    }
+
+    .employee-edit-title-birthday {
+      grid-area: employee-edit-title-birthday;
+    }
+
+    .employee-edit-title-startDate {
+      grid-area: employee-edit-title-startDate;
+    }
+
+    .employee-edit-password-input {
+      grid-area: employee-edit-password-input;
+      -webkit-text-security: disc;
+
+    }
+
+    .employee-edit-phone-input {
+      grid-area: employee-edit-phone-input;
+    }
+
+    .employee-edit-birthday-input {
+      grid-area: employee-edit-birthday-input;
+    }
+
+
+    .employee-edit-startDate-input {
+      grid-area: employee-edit-startDate-input;
+    }
   }
 
   .employee-add-button {
     grid-area: employee-add-button;
-    background-color: yellow;
   }
 
   .employee-remove-button {
     grid-area: employee-remove-button;
-    background-color:aqua;
+    justify-self: end;
   }
 
 }
