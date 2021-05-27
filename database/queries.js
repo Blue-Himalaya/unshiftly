@@ -92,6 +92,27 @@ const setSchedule = (arr, callback) => {
   });
 }
 
+const newSchedule = (schedule, successCb, errorCb) => {
+  let queryString = '';
+
+}
+
+const deleteShift = (ids, successCb, errorCb) => {
+  let queryString = '';
+  for (let i = 0; i < ids.length; i ++) {
+    queryString += `DELETE FROM employee_schedule WHERE id = ${ids[i]}; `
+  }
+  console.log('q string: ', queryString);
+  connection.query(queryString,
+  (error, results, fields) => {
+    if (error) {
+      errorCb(error);
+    } else {
+      successCb(results);
+    }
+  })
+}
+
 /*
 ======================================================
         Scheduling Realse-Pick Up
@@ -282,7 +303,9 @@ module.exports ={
   addNewRecurringTimeOff,
   pickUpShift,
   releaseShift,
-  createEmployee
+  createEmployee,
+  deleteShift,
+  newSchedule
 }
 
 
