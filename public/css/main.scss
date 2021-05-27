@@ -1,9 +1,10 @@
 $colors: (
   dark: rgb(29, 44, 103),
-  scheBborder: rgb(213, 213, 213)
+  mid: rgb(90, 111, 196),
+  schedBorder: rgb(206, 206, 206)
 );
 
-$mobile: 840px;
+$mobile: 730px;
 $tablet: 1250px;
 
 @function color($color-name) {
@@ -51,6 +52,52 @@ body {
   font-size: xx-large;
   position: fixed;
   z-index: 2;
+
+  .header-name-large,
+  .header-dropdown-name {
+    font-size: medium;
+  }
+
+  .header-dropdown {
+    position: fixed;
+    z-index: 5;
+    width: 170px;
+    left: calc(100vw - 210px);
+    top: 20px;
+
+    @include mobile {
+      left: calc(100vw - 200px);
+    }
+
+    .header-dropdown-name {
+      padding: 11px 0;
+      margin-bottom: 15px;
+      text-align: end;
+    }
+
+    #header-dropdown-list {
+      background-color: white;
+      border-radius: 5px;
+      border: 1px solid color(schedBorder);
+      display: none;
+
+      .header-dropdown-button {
+        padding: 3px 10px;
+        border-top: 1px solid color(schedBorder);
+
+        button {
+          background: none;
+          border: none;
+          border-radius: 0px;
+          font-size: medium;
+          margin-bottom: 12px;
+          color: black;
+          text-align: start;
+          padding: 1px 6px;
+        }
+      }
+    }
+  }
 }
 
 .header-buffer {
@@ -69,6 +116,10 @@ body {
   background-color: rgba(255, 255, 255, 0.468);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
+  @include mobile {
+    -webkit-backdrop-filter: blur(0px);
+    backdrop-filter: blur(0px);
+  }
 
   .modal-inner {
     background-color: white;
@@ -78,9 +129,19 @@ body {
     margin-right: auto;
     margin-top: calc((100vh - 500px)/2);
     // transform: translateY(-50%);
-    border: 1px solid color(scheBborder);
+    border: 1px solid color(schedBorder);
     border-radius: 10px;
+    @include mobile {
+      margin-top: calc((100vh - 500px));
+      width: 100vw;
+      // background-color: color(mid);
+      // color: white;
+      // border: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
   }
+
 }
 
 
@@ -90,65 +151,79 @@ body {
   // VARIABLES
   // ---------
 
-  $nightBG: rgb(245, 245, 245);
-  $nightBGmobile: rgb(247, 247, 247);
   $empBG: rgb(244, 244, 244);
 
   // --------
   // ALL VIEW
   // --------
 
-  min-width: 300px;
+  min-width: 280px;
 
-  .month {
-    font-size: xx-large;
-    text-align: center;
-    padding: 20px;
-    border-bottom: 1px solid color(scheBborder)
-  }
+  .table-header{
 
-  .table-elem, .table-elem-top, .table-elem-empty {
-    align-self: center;
-    justify-self: center;
-    text-align: center;
-    vertical-align: middle;
-    width: 100%;
-  }
-
-  .table-elem-top {
-    padding: 10px 0;
-    width: 53px;
-
-    .col-day {
-      margin-top: 5px;
-    }
-    .col-date {
+    .month {
       font-size: x-large;
-      padding-top: 11px;
-      margin-top: 5px;
-      height: 37px;
+      text-align: center;
       align-self: center;
-      border-radius: 50%;
+      padding: 20px 10px;
+      min-width: 95px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      grid-column-gap: 10px;
 
+      .click-left {
+        justify-self: end;
+      }
+      .click-right {
+        justify-self: start;
+      }
     }
-    .highlight-today {
-      border:color(dark) solid 2px;
+
+    .column-names {
+
+      border-left: 1px solid color(schedBorder);
+
+      .table-elem, .table-elem-top, .table-elem-empty {
+        align-self: center;
+        justify-self: center;
+        text-align: center;
+        vertical-align: middle;
+        width: 100%;
+      }
+
+      .table-elem-top {
+        padding: 10px 0;
+        width: 53px;
+
+        .col-day {
+          margin-top: 5px;
+        }
+        .col-date {
+          font-size: x-large;
+          padding-top: 11px;
+          margin-top: 5px;
+          height: 37px;
+          align-self: center;
+          border-radius: 50%;
+
+        }
+        .highlight-today {
+          border:color(dark) solid 2px;
+        }
+      }
+      .highlight-today {
+        color: color(dark);
+      }
+
+      .past-today {
+        opacity: 40%;
+      }
     }
   }
-  .highlight-today {
-    color: color(dark);
-  }
 
-  .past-today {
-    opacity: 40%;
-  }
-
-  .table-elem-empty {
-    min-width: 115px;
-  }
 
   .employee-row {
-    border-top: solid 1px color(scheBborder);
+    border-top: solid 1px color(schedBorder);
 
     .emp-block {
       height: 100%;
@@ -170,13 +245,13 @@ body {
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 20px;
         padding: 10px;
-        border-left: solid 1px color(scheBborder);
+        border-left: solid 1px color(schedBorder);
         height: 49px;
-        background: linear-gradient(to left, $nightBGmobile 50%, white 50%);
 
         .shift {
           min-width: 50px;
           padding: 15px 0;
+          text-align: center;
         }
 
         .past{
@@ -218,24 +293,20 @@ body {
   // TABLET VIEW
   // -----------
 
-  .employee-row {
-    .emp-block {
-      .employee-name {
-        @include tablet {
+  @include tablet {
+    .employee-row {
+      .emp-block {
+        .employee-name {
           padding-top: 35px;
         }
       }
-    }
-    .employee-schedule {
-      .day-table {
-        @include tablet {
+
+      .employee-schedule {
+        .day-table {
           grid-template-columns: auto;
           grid-row-gap: 10px;
           height: 70px;
-          background: linear-gradient(to top, $nightBG 50%, white 50%);
-        }
-        .shift {
-          @include tablet {
+          .shift {
             padding: 5px 0;
           }
         }
@@ -247,31 +318,30 @@ body {
   // MOBILE VIEW
   // -----------
 
-  .table {
-    @include mobile {
-      // margin: 0 10px;
+
+  @include mobile {
+    .table-header {
+      .month {
+        border-bottom: 1px solid color(schedBorder);
+      }
+
+      .column-names {
+        border-left: none;
+      }
+
     }
-  }
-
-  .employee-row {
-
-    .emp-block {
-      .employee-name {
-        @include mobile {
-          padding: 5px 10px;
-          border-bottom: solid 1px color(scheBborder);
-          // border-left: solid 1px color(scheBborder);
-          // border-right: solid 1px color(scheBborder);
+    .employee-row {
+      .emp-block {
+        .employee-name {
+            padding: 5px 10px;
+            border-bottom: solid 1px color(schedBorder);
         }
       }
-    }
 
-    .employee-schedule {
-      .day-table {
-        @include mobile {
-          border-left: none;
-          background: linear-gradient(to top, $nightBGmobile 50%, white 50%);
-          // grid-template-columns: 1fr 1fr;
+      .employee-schedule {
+        .day-table {
+            border-left: none;
+            // background: linear-gradient(to top, $nightBGmobile 50%, white 50%);
         }
       }
     }
@@ -281,7 +351,7 @@ body {
 .employeeList {
   display: grid;
   grid-template-columns: 0.2fr 0.7fr 0.2fr 2.9fr 0.1fr;
-  grid-template-rows: 0.2fr 2.4fr 0.4fr;
+  grid-template-rows: 5% 80% 15%;
   grid-template-areas:
     ". . . . ."
     ". employee-list-container . employee-edit-container ."
@@ -289,15 +359,36 @@ body {
 
   .employee-list-container {
     grid-area: employee-list-container;
-    background-color: grey;
+    background-color: #c4c4c4;
+    border: inset;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    padding: 10px;
+    height: 95%;
+    overflow: hidden;
+    overflow-y: scroll;
+
   }
 
   .employee-list-title {
     text-align-last: center;
+    text-align: center;
+    font-size: large;
+    letter-spacing: 1px;
+    color: #FFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
+    text-transform: uppercase;
+    padding-bottom: 20px;
+    text-decoration: underline;
   }
 
   .employee-names {
-    color: orange;
+    font-size: medium;
+    letter-spacing: 1px;
+    color: #FFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-transform: uppercase;
+    padding-bottom: 25px;
   }
 
 
@@ -307,17 +398,94 @@ body {
 
   .employee-edit-container {
     grid-area: employee-edit-container;
-    background-color: red;
+    background-color: #c4c4c4;
+    border: inset;
+    border-radius: 100px;
+    padding: 20px;
+
+  }
+
+  .employee-edit-name-input {
+    text-align: center;
+    font-size: xxx-large;
+    letter-spacing: 2.5px;
+    color: #FFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.75);
+    text-transform: uppercase;
+  }
+
+  .employee-edit-credentials {
+    display: grid;
+    font-size: 30px;
+    padding-left: 15px;
+    color: #FFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    grid-template-columns: 0.5fr 1.5fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "employee-edit-title-password employee-edit-password-input"
+      "employee-edit-title-phone employee-edit-phone-input"
+      "employee-edit-title-birthday employee-edit-birthday-input"
+      "employee-edit-title-startDate employee-edit-startDate-input";
+
+    .credential {
+      padding-bottom: 10px;
+      padding-top: 30px;
+      height: 100px;
+    }
+
+    .entry {
+      padding-left: 35px;
+      padding-bottom: 10px;
+      height: 100px;
+      padding-top: 30px;
+    }
+
+
+    .employee-edit-title-password {
+      grid-area: employee-edit-title-password;
+    }
+
+    .employee-edit-title-phone {
+      grid-area: employee-edit-title-phone;
+    }
+
+    .employee-edit-title-birthday {
+      grid-area: employee-edit-title-birthday;
+    }
+
+    .employee-edit-title-startDate {
+      grid-area: employee-edit-title-startDate;
+    }
+
+    .employee-edit-password-input {
+      grid-area: employee-edit-password-input;
+      -webkit-text-security: disc;
+
+    }
+
+    .employee-edit-phone-input {
+      grid-area: employee-edit-phone-input;
+    }
+
+    .employee-edit-birthday-input {
+      grid-area: employee-edit-birthday-input;
+    }
+
+
+    .employee-edit-startDate-input {
+      grid-area: employee-edit-startDate-input;
+    }
   }
 
   .employee-add-button {
     grid-area: employee-add-button;
-    background-color: yellow;
   }
 
   .employee-remove-button {
     grid-area: employee-remove-button;
-    background-color:aqua;
+    justify-self: end;
   }
 
 }

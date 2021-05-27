@@ -50,7 +50,7 @@ app.post('/login', (req, res, next) => {
       req.logIn(user, err => {
         if (err) throw err;
         console.log('USER: ', req.user, 'INFO: ', info)
-        res.send({ auth: 'success!', role: user[0].role, user: [user[0].id, user[0].name] });
+        res.send({ auth: 'success!', role: user[0].role, user: [user[0].id, user[0].name, user[0].role] });
       });
     }
   })(req, res, next);
@@ -88,12 +88,56 @@ app.get('/schedule', (req, res) => {
   }})
 })
 
+/**
+ * {
+    "schedule": [
+        {
+            "dateTime": "2020-09-11 16:00:00",
+            "name": "jum",
+            "role_one": "bartender",
+            "role_two": null
+        },
+        {
+            "dateTime": "2020-09-11 16:00:00",
+            "name": "Danielle",
+            "role_one": "bartender",
+            "role_two": "server"
+        },
+        {
+            "dateTime": "2020-09-11 16:00:00",
+            "name": "Steve",
+            "role_one": "manager",
+            "role_two": null
+        },
+        {
+            "dateTime": "2020-09-11 16:00:00",
+            "name": "Katie",
+            "role_one": "expo",
+            "role_two": null
+        }
+    ]
+}
+ */
 app.post('/schedule', (req, res) => {
   dbHelpers.postSchedule(req.body, (resultsFromSched) => {
     res.send(resultsFromSched);
     res.status(200);
     res.end();
   })
+})
+
+app.post('/scheduletest', (req, res) => {
+  dbHelpers.newSchedule(req.body.schedule,
+    (schedSuccess) => {
+      res.send(schedSuccess);
+      res.status(201);
+      res.end();
+    },
+    (schedError) => {
+      res.send(schedError);
+      res.status(500);
+      res.end();
+    });
 })
 /*
 Example Body Info For A Employee To Release A Shift
@@ -132,6 +176,29 @@ app.put('/pickUpShift', (req, res) => {
   dbHelpers.pickUpShift(reqObj, (results) => {
     res.status(200).send('Shift successfully picked up').end();
   })
+})
+
+/*
+To delete a shift, all that is needed is the shift id
+{
+  ids: [id] <-- array of ids
+}
+don't forget the axios delete syntax:
+axios.delete('url', { data: payload }).then(
+  // Observe the data keyword this time. Very important
+  // payload is the request body
+)
+*/
+
+app.delete('/schedule', (req, res) => {
+  console.log('req body ids: ', req.body.ids)
+  dbHelpers.deleteShift(req.body.ids,
+    (results) => {
+      res.send(results).status(204).end();
+    },
+    (err) => {
+      res.send(err).status(500).end();
+    })
 })
 
 /*
@@ -278,13 +345,6 @@ app.get('/getActivities', (req, res) => {
     res.send(results);
   });
 });
-
-app.put('/updateActivities', (req, res) => {
-  const { id, name, type } = req.body;
-  dbHelpers.updateActivities(id, name, type, (results) => {
-    res.send(results);
-  });
-})
 
 /*
 example role color params object:

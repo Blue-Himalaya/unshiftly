@@ -61,11 +61,6 @@ body, html {
   margin-bottom: 20px;
 }
 
-/* .date-container {
-  display: flex;
-  justify-content: center;
-} */
-
 .column-container {
   display: flex;
   flex-direction: row;

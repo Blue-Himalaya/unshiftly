@@ -12,9 +12,9 @@ export const fetchSchedule = (date) => {
   //GET POSITION OF DAY FROM SCHEDULE WEEK FRI-THU
   var index = days.indexOf(daysOrdered[startDate.getUTCDay()])
 
-  startDate.setDate(startDate.getUTCDate() - index - 1);
-  endDate.setDate(endDate.getUTCDate() + 7 - index - 1)
-  startDate2.setDate(startDate2.getUTCDate() - index - 1);
+  startDate.setDate(startDate.getDate() - index);
+  endDate.setDate(endDate.getDate() + 7 - index)
+  startDate2.setDate(startDate2.getDate() - index);
 
   //GET LIST OF DAYS IN THE WEEK
   var dates = []
@@ -33,7 +33,7 @@ export const fetchSchedule = (date) => {
         day = '0' + day
     }
     datesFull.push([year, month, day].join('-'))
-    startDate2.setDate(startDate2.getUTCDate());
+    startDate2.setDate(startDate2.getDate() + 1);
   }
 
   return (dispatch) => {

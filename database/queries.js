@@ -92,6 +92,27 @@ const setSchedule = (arr, callback) => {
   });
 }
 
+const newSchedule = (schedule, successCb, errorCb) => {
+  let queryString = '';
+
+}
+
+const deleteShift = (ids, successCb, errorCb) => {
+  let queryString = '';
+  for (let i = 0; i < ids.length; i ++) {
+    queryString += `DELETE FROM employee_schedule WHERE id = ${ids[i]}; `
+  }
+  console.log('q string: ', queryString);
+  connection.query(queryString,
+  (error, results, fields) => {
+    if (error) {
+      errorCb(error);
+    } else {
+      successCb(results);
+    }
+  })
+}
+
 /*
 ======================================================
         Scheduling Realse-Pick Up
@@ -140,8 +161,10 @@ const requestSingleDayOff = (requestObj, callback) => {
   empName
   */
   const {date, morning, empId, empName} = requestObj;
-  const shift = morning ? 'morning' : 'evening';
-  const queryString = `insert into time_off (id_employee, date, morning) values ('${empId}', '${date}', '${morning}'); insert into activity (time_of_activity, type_of_activity) values (now(), '${empName} has requested the ${shift} off on the date of ${date}')`;
+  const shift = morning === '1' ? 'morning' : 'evening';
+  console.log(typeof morning);
+  const queryString = `insert into time_off (id_employee, date, morning) values (${empId}, '${date}', ${morning}); insert into activity (time_of_activity, type_of_activity) values (now(), '${empName} has requested the ${shift} off on the date of ${date}')`;
+  console.log('qryStr: ', queryString);
   connection.query(queryString, (err, results) => {
     if(err) console.log(err)
     else callback(results)
@@ -280,7 +303,9 @@ module.exports ={
   addNewRecurringTimeOff,
   pickUpShift,
   releaseShift,
-  createEmployee
+  createEmployee,
+  deleteShift,
+  newSchedule
 }
 
 
