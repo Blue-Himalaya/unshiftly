@@ -484,6 +484,7 @@ body {
 
   .employee-remove-button {
     grid-area: employee-remove-button;
+    justify-self: end;
   }
 
 }

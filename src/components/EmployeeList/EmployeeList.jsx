@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import EmployeeAdd from '../EmployeeList/EmployeeAdd.jsx'
 import moment from 'moment';
+import axios from 'axios';
 
 
 function useWindowSize() {
@@ -35,8 +36,6 @@ const EmployeeList = () => {
 
   //MODAL
   const [showModal, updateShowModal] = useState(false);
-
-
 
   useEffect(() => {
     // UPDATES ACTUAL LIST WITH EMPLOYEE'S NAMES
@@ -136,6 +135,21 @@ function submitChanges() {
   console.dir(currentEmployeeStartDate)
   console.log(currentEmployee.is_active)
 }
+
+
+const addNewEmployee = (name, phone, birthday, password, startDate, role) => {
+  axios.post('/employees', {
+    name: name,
+    phone: phone,
+    birthday: birthday,
+    password: password,
+    startDate: startDate,
+    role: role
+  }).catch((err) => console.log('Error', err))
+}
+
+//LAYOUT OF ADD EMPLOYEE FUNCTION CALL
+// addNewEmployee('Tester','0000000001','4000-02-02','a','1942-05-20','expo')
 
 /*
   employee creation requires a body of the following format:

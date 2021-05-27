@@ -457,5 +457,7 @@ body {
   -ms-grid-row: 3;
   -ms-grid-column: 4;
   grid-area: employee-remove-button;
+  -ms-grid-column-align: end;
+      justify-self: end;
 }
 /*# sourceMappingURL=main.css.map */
