@@ -1,9 +1,10 @@
 $colors: (
   dark: rgb(29, 44, 103),
-  scheBborder: rgb(213, 213, 213)
+  mid: rgb(90, 111, 196),
+  schedBorder: rgb(206, 206, 206)
 );
 
-$mobile: 840px;
+$mobile: 730px;
 $tablet: 1250px;
 
 @function color($color-name) {
@@ -51,6 +52,48 @@ body {
   font-size: xx-large;
   position: fixed;
   z-index: 2;
+
+  .header-name-large,
+  .header-dropdown-name {
+    font-size: medium;
+  }
+
+  .header-dropdown {
+    position: fixed;
+    z-index: 5;
+    width: 170px;
+    left: calc(100vw - 210px);
+    top: 20px;
+
+    @include mobile {
+      left: calc(100vw - 200px);
+    }
+
+    .header-dropdown-name {
+      padding: 11px 0;
+      margin-bottom: 15px;
+      text-align: end;
+    }
+
+    #header-dropdown-list {
+      background-color: white;
+      border-radius: 5px;
+      border: 1px solid color(schedBorder);
+      display: none;
+
+      .header-dropdown-button {
+        padding: 3px 10px;
+        border-top: 1px solid color(schedBorder);
+
+        button {
+          background: none;
+          border: none;
+          font-size: medium;
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
 }
 
 .header-buffer {
@@ -69,6 +112,10 @@ body {
   background-color: rgba(255, 255, 255, 0.468);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
+  @include mobile {
+    -webkit-backdrop-filter: blur(0px);
+    backdrop-filter: blur(0px);
+  }
 
   .modal-inner {
     background-color: white;
@@ -78,9 +125,19 @@ body {
     margin-right: auto;
     margin-top: calc((100vh - 500px)/2);
     // transform: translateY(-50%);
-    border: 1px solid color(scheBborder);
+    border: 1px solid color(schedBorder);
     border-radius: 10px;
+    @include mobile {
+      margin-top: calc((100vh - 500px));
+      width: 100vw;
+      background-color: color(mid);
+      color: white;
+      border: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
   }
+
 }
 
 
@@ -90,15 +147,13 @@ body {
   // VARIABLES
   // ---------
 
-  $nightBG: rgb(245, 245, 245);
-  $nightBGmobile: rgb(247, 247, 247);
   $empBG: rgb(244, 244, 244);
 
   // --------
   // ALL VIEW
   // --------
 
-  min-width: 300px;
+  min-width: 280px;
 
   .table-header{
 
@@ -122,7 +177,7 @@ body {
 
     .column-names {
 
-      border-left: 1px solid color(scheBborder);
+      border-left: 1px solid color(schedBorder);
 
       .table-elem, .table-elem-top, .table-elem-empty {
         align-self: center;
@@ -164,7 +219,7 @@ body {
 
 
   .employee-row {
-    border-top: solid 1px color(scheBborder);
+    border-top: solid 1px color(schedBorder);
 
     .emp-block {
       height: 100%;
@@ -186,9 +241,8 @@ body {
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 20px;
         padding: 10px;
-        border-left: solid 1px color(scheBborder);
+        border-left: solid 1px color(schedBorder);
         height: 49px;
-        background: linear-gradient(to left, $nightBGmobile 50%, white 50%);
 
         .shift {
           min-width: 50px;
@@ -235,24 +289,20 @@ body {
   // TABLET VIEW
   // -----------
 
-  .employee-row {
-    .emp-block {
-      .employee-name {
-        @include tablet {
+  @include tablet {
+    .employee-row {
+      .emp-block {
+        .employee-name {
           padding-top: 35px;
         }
       }
-    }
-    .employee-schedule {
-      .day-table {
-        @include tablet {
+
+      .employee-schedule {
+        .day-table {
           grid-template-columns: auto;
           grid-row-gap: 10px;
           height: 70px;
-          background: linear-gradient(to top, $nightBG 50%, white 50%);
-        }
-        .shift {
-          @include tablet {
+          .shift {
             padding: 5px 0;
           }
         }
@@ -268,7 +318,7 @@ body {
   @include mobile {
     .table-header {
       .month {
-        border-bottom: 1px solid color(scheBborder);
+        border-bottom: 1px solid color(schedBorder);
       }
 
       .column-names {
@@ -277,25 +327,17 @@ body {
 
     }
     .employee-row {
-
       .emp-block {
         .employee-name {
-
             padding: 5px 10px;
-            border-bottom: solid 1px color(scheBborder);
-            // border-left: solid 1px color(scheBborder);
-            // border-right: solid 1px color(scheBborder);
-
+            border-bottom: solid 1px color(schedBorder);
         }
       }
 
       .employee-schedule {
         .day-table {
-
             border-left: none;
-            background: linear-gradient(to top, $nightBGmobile 50%, white 50%);
-            // grid-template-columns: 1fr 1fr;
-
+            // background: linear-gradient(to top, $nightBGmobile 50%, white 50%);
         }
       }
     }

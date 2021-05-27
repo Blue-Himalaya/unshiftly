@@ -11,7 +11,7 @@ const Shift = (props) => {
     }
   }
 
-  var noShift = (props.color1 === 'hsla(30, 0%, 100%, 0)' && !props.past) ? 'no-shift' : ''
+  var noShift = (props.color1 === 'hsla(30, 0%, 100%, 0)' && !props.past && !props.timeoff[props.meridian]) ? 'no-shift' : ''
   return (
     <div className={`table-elem shift noselect ${noShift} ${props.past}`}
     style={{

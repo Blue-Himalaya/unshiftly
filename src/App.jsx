@@ -29,7 +29,8 @@ const App = () => {
 
   // const admin = true
   const name = 'Steve'
-  const mobileWidth = 840
+  const mobileWidth = 730
+  const tabletWidth = 1250
 
   if (schedule && employees && timeOff && roles && admin && singleTimeOff) {
     // console.log('SCHEDULE:', schedule)
@@ -53,7 +54,7 @@ const App = () => {
   if (!view || !schedule || !employees || !timeOff || !roles || !singleTimeOff) {
     return (
       <>
-      <Header/>
+      <Header mobileWidth={mobileWidth}/>
       Loading...
       </>
     );
@@ -67,7 +68,7 @@ const App = () => {
   if (view === 'login') {
     return (
       <>
-      <Header/>
+      <Header mobileWidth={mobileWidth}/>
       <Login />
       </>
     );
@@ -82,15 +83,15 @@ const App = () => {
     if (admin) {
       return (
         <>
-          <Header/>
-          <Schedule mobileWidth={mobileWidth}/>
+          <Header mobileWidth={mobileWidth}/>
+          <Schedule mobileWidth={mobileWidth} tabletWidth={tabletWidth}/>
         </>
       );
 
     } else {
       return (
         <>
-        <Header/>
+        <Header mobileWidth={mobileWidth}/>
         YOU CAN'T SEE ME
         </>
       )
@@ -106,14 +107,14 @@ const App = () => {
     if (admin) {
       return (
         <>
-        <Header />
+        <Header mobileWidth={mobileWidth}/>
         <EmployeeList/>
         </>
       );
     } else {
       return  (
         <>
-        <Header />
+        <Header mobileWidth={mobileWidth}/>
         NOT ADMIN
         </>
       )
@@ -128,14 +129,14 @@ const App = () => {
   if (view === 'calendar') { //Tomas's & Amber's
     return (
       <>
-      <Header />
+      <Header mobileWidth={mobileWidth}/>
       <Calendar />
       </>
     );
   }
   return (
     <div>
-      <Header />
+      <Header mobileWidth={mobileWidth}/>
       Loading...
     </div>
   );
