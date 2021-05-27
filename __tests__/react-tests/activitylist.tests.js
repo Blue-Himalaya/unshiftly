@@ -9,28 +9,30 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { spy } from 'sinon';
 import { expect } from 'chai';
+import { findByTestAtrr } from '../../utils.js';
 import App from '../../src/App.jsx';
 import store from '../../redux-state/store.js';
 
 // spy(Header.prototype, 'useEffect');
 
-describe('Activity List', () => {
-  it('should render without crashing', () => {
-    const wrapper = shallow(
+const setUp = () => {
+  const component = shallow(
     <Provider store={store}>
       <ActivityList />
     </Provider>
-    );
-  expect(wrapper.find(ActivityList)).to.have.lengthOf(1);
-  });
+  );
+  return component;
+};
 
-  it('should contain activityLogContainer', () => {
-    const wrapper = shallow(
-    <Provider store={store}>
-      <ActivityList />
-    </Provider>
-    );
-    expect(wrapper.html()).to.contain('div');
-  })
+describe('Activity List', () => {
+  let component;
+    beforeEach(() => {
+        component = setUp();
+    });
+
+  it('should render without crashing', () => {
+    const wrapper = component;
+    expect(wrapper).to.have.lengthOf(1);
+  });
 
 });

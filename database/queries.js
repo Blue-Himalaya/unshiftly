@@ -113,9 +113,7 @@ const requestSingleDayOff = (requestObj, callback) => {
   */
   const {date, morning, empId, empName} = requestObj;
   const shift = morning === '1' ? 'morning' : 'evening';
-  console.log(typeof morning);
   const queryString = `insert into time_off (id_employee, date, morning) values (${empId}, '${date}', ${morning}); insert into activity (time_of_activity, type_of_activity) values (now(), '${empName} has requested the ${shift} off on the date of ${date}')`;
-  console.log('qryStr: ', queryString);
   connection.query(queryString, (err, results) => {
     if(err) console.log(err)
     else callback(results)

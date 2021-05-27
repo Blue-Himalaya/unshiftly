@@ -74,6 +74,9 @@ const Calendar = () => {
               </div>
               <Shifts />
             </div>
+      <button type="click" onClick={timeOffReqForm}>Request Time Off</button>
+      <RequestTimeOffForm isOpen={isFormOpen} closeModal={timeOffReqForm}/>
+      <button type="click">Release Shift</button>
         </div>
 
           <div className="activity-log-container">
@@ -82,9 +85,6 @@ const Calendar = () => {
             </div>
           </div>
       </div>
-      <button type="click" onClick={timeOffReqForm}>Request Time Off</button>
-      <RequestTimeOffForm isOpen={isFormOpen} closeModal={timeOffReqForm}/>
-      <button type="click">Release Shift</button>
     </div>
   );
 }
