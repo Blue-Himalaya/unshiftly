@@ -26,7 +26,7 @@ const checkIfAdmin = (id, callback) => {
 ======================================================
 */
 const getSchedule = (dateObj, callback) => {
-  const queryString = `select es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id and es.datetime between '${dateObj.startDate}' and '${dateObj.endDate}' or employee_role_two = er.id and es.datetime between '${dateObj.startDate}' and '${dateObj.endDate}' order by es.datetime asc`
+  const queryString = `select es.id, es.datetime, e.name, r.role, e.phone from employee_schedule es, employees e join employee_roles er on er.id_employee = e.id join roles r on r.id = er.id_role where es.employee_role_one = er.id and es.datetime between '${dateObj.startDate}' and '${dateObj.endDate}' and e.is_active = 1 order by es.datetime asc`
   connection.query(queryString, (err, results) => {
     if(err) console.log("db err", err)
     else callback(null, Object.values(JSON.parse(JSON.stringify(results))))
