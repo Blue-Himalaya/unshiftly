@@ -24,7 +24,7 @@ const RequestTimeOffForm = (props) => {
       empId: empId,
       empName: empName
     })
-    .then((body) =>
+    .then(() =>
       dispatch(fetchSingleTimeOffGet(currentDate))
     )
     .catch((err) => console.log('err ', err))
