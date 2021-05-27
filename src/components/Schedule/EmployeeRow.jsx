@@ -81,6 +81,7 @@ const EmployeeRow = (props) => {
                       updateDay={props.updateDay} // DAY IN MODAL
                       updateMeridian={props.updateMeridian} // AM-PM IN MODAL
                       updateEmployee={props.updateEmployee} // EMPLOYEE INFO IN MODAL
+                      updateDate={props.updateDate} // DATE IN MODAL
 
                       past={past} //DAY OF WEEK IS THE INDEX FROM MAPPING DAYS
                       />

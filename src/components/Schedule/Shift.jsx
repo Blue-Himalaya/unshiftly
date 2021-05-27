@@ -13,7 +13,8 @@ const Shift = (props) => {
     onClick={() => {
         if (noShift && !props.past) {
           props.toggleShiftShow(!props.shiftShow)
-          props.updateDay(props.dayFull)
+          props.updateDate(props.dayFull)
+          props.updateDay(props.day)
           props.updateMeridian(props.meridian)
           props.updateEmployee(props.employeeInfo)
         }

@@ -20,8 +20,9 @@ const Schedule = (props) => {
 
   // MODAL STATES
   const [shiftShow, toggleShiftShow] = useState(false)
-  const [currentDay, updateDay] = useState('') // fri-thu
-  const [currentMeridian, updateMeridian] = useState('') // whole date 2019-10-15
+  const [currentDate, updateDate] = useState('') // fri-thu
+  const [currentDay, updateDay] = useState('') // whole date 2019-10-15
+  const [currentMeridian, updateMeridian] = useState('') //am pm
   const [currentEmployee, updateEmployee] = useState('')
 
   // INFORMATION FROM THE DATABASE
@@ -125,37 +126,48 @@ const Schedule = (props) => {
       =========== MODAL ===========
       ========================== */}
       <UpdateShiftModal
+      days={days}
+      months={months}
+      publish={publish}
+
       show={shiftShow}
       toggleShiftShow={toggleShiftShow}
+
       updateMeridian={updateMeridian}
       updateDay={updateDay}
       updateEmployee={updateEmployee}
+      updateDate={updateDate}
+
       currentMeridian={currentMeridian}
       currentDay={currentDay}
       currentEmployee={currentEmployee}
-      publish={publish}
+      currentDate={currentDate}
       />
-
-
-      {/* =========================
-      =========== MONTH ===========
-      ========================== */}
-      <div className='month'> {'<'} {months[parseInt(currentDateInfo[1])-1]} {currentDateInfo[0]} {'>'}</div>
-
 
 
       {/* =========================
       =========== DATES ===========
       ========================== */}
 
-      <div className='table'
+      <div className='table table-header'
       style={{
         display: 'grid',
-        gridTemplateColumns: (width > props.mobileWidth ? '1fr ' : '') + gridTemplateColumns
+        gridTemplateColumns: gridTemplateColumnsTable
       }}>
 
-        {/* ADD DIV IF NOT MOBILE TO FILLE EMPTY GRID SPACE AT THE BEGINNING */}
-        {width > props.mobileWidth ? <div className='table-elem-empty'></div> : null}
+        {/* MONTH */}
+        <div className='month'>
+          <div className='click-left'>{'<'}</div>
+          <div className='month-text'>{months[parseInt(currentDateInfo[1])-1]} {currentDateInfo[0]} </div>
+          <div className='click-right'>{'>'}</div>
+        </div>
+
+        {/* DAYS OF THE WEEK   s */}
+        <div className='column-names'
+        style={{
+          display: 'grid',
+          gridTemplateColumns: gridTemplateColumns
+        }}>
 
         {/* MAP THROUGH FRIDAY-THURSDAY */}
         {/* i WILL BE THE SAME FOR DAYS, COLUMNDATES, COLUMNDATESFULL */}
@@ -169,6 +181,9 @@ const Schedule = (props) => {
             var isToday = iterationDate === today ? 'highlight-today' : ''
             var pastToday = iterationDate < today ? 'past-today' : ''
 
+            console.log('TODAY:', today)
+            console.log('ITERA:', iterationDate)
+
             //RENDER COLUMN NAMES
             return(
               <div key={`table-elem-top-${day}`} className={`table-elem-top column ${isToday} ${pastToday}`}>
@@ -178,6 +193,7 @@ const Schedule = (props) => {
             )
           } // END FOR RENDER CONDITION
         })} {/* END FOR DAYS MAP */}
+        </div>
 
       </div> {/* END OF COLUMN HEADERS */}
 
@@ -210,6 +226,7 @@ const Schedule = (props) => {
         updateDay={updateDay}
         updateMeridian={updateMeridian}
         updateEmployee={updateEmployee}
+        updateDate={updateDate}
         />
       })}
 

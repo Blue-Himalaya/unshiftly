@@ -67,14 +67,35 @@ body {
   min-width: 300px;
 }
 
-.schedule .month {
-  font-size: xx-large;
+.schedule .table-header .month {
+  font-size: x-large;
   text-align: center;
-  padding: 20px;
-  border-bottom: 1px solid #d5d5d5;
+  -ms-grid-row-align: center;
+      align-self: center;
+  padding: 20px 10px;
+  min-width: 95px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr auto 1fr;
+      grid-template-columns: 1fr auto 1fr;
+  grid-column-gap: 10px;
 }
 
-.schedule .table-elem, .schedule .table-elem-top, .schedule .table-elem-empty {
+.schedule .table-header .month .click-left {
+  -ms-grid-column-align: end;
+      justify-self: end;
+}
+
+.schedule .table-header .month .click-right {
+  -ms-grid-column-align: start;
+      justify-self: start;
+}
+
+.schedule .table-header .column-names {
+  border-left: 1px solid #d5d5d5;
+}
+
+.schedule .table-header .column-names .table-elem, .schedule .table-header .column-names .table-elem-top, .schedule .table-header .column-names .table-elem-empty {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
@@ -85,16 +106,16 @@ body {
   width: 100%;
 }
 
-.schedule .table-elem-top {
+.schedule .table-header .column-names .table-elem-top {
   padding: 10px 0;
   width: 53px;
 }
 
-.schedule .table-elem-top .col-day {
+.schedule .table-header .column-names .table-elem-top .col-day {
   margin-top: 5px;
 }
 
-.schedule .table-elem-top .col-date {
+.schedule .table-header .column-names .table-elem-top .col-date {
   font-size: x-large;
   padding-top: 11px;
   margin-top: 5px;
@@ -105,20 +126,16 @@ body {
   border-radius: 50%;
 }
 
-.schedule .table-elem-top .highlight-today {
+.schedule .table-header .column-names .table-elem-top .highlight-today {
   border: #1d2c67 solid 2px;
 }
 
-.schedule .highlight-today {
+.schedule .table-header .column-names .highlight-today {
   color: #1d2c67;
 }
 
-.schedule .past-today {
+.schedule .table-header .column-names .past-today {
   opacity: 40%;
-}
-
-.schedule .table-elem-empty {
-  min-width: 115px;
 }
 
 .schedule .employee-row {
@@ -155,6 +172,7 @@ body {
 .schedule .employee-row .employee-schedule .day-table .shift {
   min-width: 50px;
   padding: 15px 0;
+  text-align: center;
 }
 
 .schedule .employee-row .employee-schedule .day-table .past {
@@ -215,13 +233,16 @@ body {
 }
 
 @media (max-width: 840px) {
+  .schedule .table-header .month {
+    border-bottom: 1px solid #d5d5d5;
+  }
+  .schedule .table-header .column-names {
+    border-left: none;
+  }
   .schedule .employee-row .emp-block .employee-name {
     padding: 5px 10px;
     border-bottom: solid 1px #d5d5d5;
   }
-}
-
-@media (max-width: 840px) {
   .schedule .employee-row .employee-schedule .day-table {
     border-left: none;
     background: -webkit-gradient(linear, left bottom, left top, color-stop(50%, #f7f7f7), color-stop(50%, white));
