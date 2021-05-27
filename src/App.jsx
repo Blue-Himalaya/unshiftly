@@ -45,7 +45,7 @@ const App = () => {
     dispatch(fetchTimeOff());
     dispatch(fetchSingleTimeOff());
     dispatch(fetchRoles());
-    dispatch(fetchView('login'));
+    dispatch(fetchView('employees'));
     dispatch(fetchAdmin(true));
   }, []);
 
