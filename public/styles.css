@@ -87,18 +87,15 @@ body, html {
 
 /** ACTIVITY LOG **/
 
-#activtyLog {
-  grid-area: b;
-}
-
-#activityLogContainer {
+/* #activityLogContainer {
   display: grid;
   grid-template-rows: 0.2fr 0.5fr;
   margin-top: 5px;
   justify-items: center;
-}
+} */
 
-#activityLog {
+.activityLog {
+  grid-area: b;
   border: 2px solid black;
   border-radius: 15px;
   text-align: center;

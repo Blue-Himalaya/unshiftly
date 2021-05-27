@@ -24,13 +24,13 @@ describe('Activity List', () => {
   expect(wrapper.find(ActivityList)).to.have.lengthOf(1);
   });
 
-  it('should contain activityLogContainer', () => {
-    const wrapper = shallow(
-    <Provider store={store}>
-      <ActivityList />
-    </Provider>
-    );
-    expect(wrapper.html()).to.contain('div');
-  })
+  // it('should contain activityLogContainer', () => {
+  //   const wrapper = shallow(
+  //   <Provider store={store}>
+  //     <ActivityList />
+  //   </Provider>
+  //   );
+  //   expect(wrapper.html()).to.contain('div');
+  // })
 
 });

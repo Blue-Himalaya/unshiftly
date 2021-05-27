@@ -29,6 +29,8 @@ app.use(expressSession({
   saveUninitialized: true,
 }));
 
+
+
 app.use(cookieParser(process.env.secretOrKey));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -42,7 +44,9 @@ passportAuth(passport);
 */
 
 app.post('/login', (req, res, next) => {
-  //console.log(req)
+  var hour = 3600000
+  req.session.cookie.expires = new Date(Date.now() + hour)
+  req.session.cookie.maxAge = hour
   passport.authenticate('local', (err, user, info) => {
     if (err) throw err;
     if (!user) res.send('No User Exists');
