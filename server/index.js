@@ -109,7 +109,7 @@ Example Body Info For A Employee To Release A Shift
 
 app.put('/releaseShift', (req, res) => {
   const reqObj = req.body;
-  console.log('reqobj', reqObj);
+  //console.log('reqobj', reqObj);
   dbHelpers.releaseShift(reqObj, (results) => {
     res.status(200).send('Shift has been released to the people.')
   })
@@ -246,6 +246,25 @@ app.put('/employees', (req, res) => {
   dbHelpers.editEmployee(req.body, (results) => {
     res.status(204).end();
   });
+})
+
+
+/*
+employee creation requires a body of the following format:
+{
+  name: [employee name],
+  phone: [10 character string of phone number],
+  birthday: [YYYY-MM-DD],
+  password: [initial input password],
+  startDate: [YYYY-MM-DD],
+  role: [single role] <-- currently only a single role, future work for multiple role array
+}
+*/
+
+app.post('/employees', (req, res) => {
+  dbHelpers.createEmployee(req.body, (results) => {
+    res.status(201).send(results).end();
+  })
 })
 
 /*

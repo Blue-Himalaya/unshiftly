@@ -52,7 +52,7 @@ const ActivityList = () => {
       <div id="activityLog">
         <ul>
         {activities.map((activity) => (
-        <div id="activityListItem">
+        <div id="activityListItem" key={activity.id}>
           <li key={activity.id}> Activity on: {moment(activity.datetime).format('MMMM Do YYYY, h:mm:ss a')}
             <br />
           {activity.type_of_activity}
