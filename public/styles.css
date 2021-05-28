@@ -21,6 +21,7 @@ body::-webkit-scrollbar {
 .view-container {
   display: flex;
   flex-direction: row;
+  padding-left: 10px;
 }
 
 .cal-container {
@@ -44,9 +45,10 @@ body::-webkit-scrollbar {
 .cal-contents-cont {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 60px auto;
+  grid-template-rows: 50px auto;
   height: 700px;
   overflow: scroll;
+  margin: 12px 0px;
 }
 
 .activity-log-container {
@@ -58,8 +60,11 @@ body::-webkit-scrollbar {
 
 
 .column {
-  width: fit-content;
-  margin-right: 10px;  /* delete this later */
+  display: flex;
+  justify-content: center;
+  background-color: rgb(233, 233, 233);
+  margin: 0px 5px;
+  border-radius: 5px;
 }
 
 .day {
@@ -67,9 +72,35 @@ body::-webkit-scrollbar {
   width: fit-content;
 }
 
+.date-container {
+  display: flex;
+  justify-content: center;
+}
+
 .date {
   font-size: 1.2rem;
   width: fit-content;
+}
+
+.btn {
+  background: rgb(29, 44, 103);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  margin: 0px 7px;
+  font-size: 0.95rem;
+}
+.btn:hover{
+  cursor: pointer;
+  background-color: rgb(90, 111, 196);
+}
+
+.toggle-wk-btn {
+  margin: 0px 5px;
+}
+.toggle-wk-btn:hover {
+  cursor: pointer;
+  color: rgb(90, 111, 196);
 }
 
 /** ACTIVITY LOG **/
@@ -103,7 +134,7 @@ body::-webkit-scrollbar {
 .shift-block {
   width: fit-content;
   height: fit-content;
-  margin-bottom: 10px;
+  margin: 10px 0px;
 }
 .shift-block:hover {
   cursor: pointer;
