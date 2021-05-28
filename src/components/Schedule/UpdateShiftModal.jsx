@@ -65,7 +65,7 @@ const UpdateShiftModal = (props) => {
             <form onSubmit={(e) => {
                 addShift(e, props.currentEmployee, props.currentDate,
                 () => { //cbSuccess
-                  dispatch(fetchSchedule(props.today))
+                  dispatch(fetchSchedule(props.weekDate))
                   // const schedule = useSelector(state => state.scheduleReducer.schedule);
                   // props.updateSchedule()
                 },
