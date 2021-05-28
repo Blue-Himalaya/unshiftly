@@ -262,7 +262,7 @@ const Schedule = (props) => {
 
             //RENDER COLUMN NAMES
             return(
-              <div key={`table-elem-top-${day}`} className={`table-elem-top column ${isToday} ${pastToday}`}>
+              <div key={`table-elem-top-${day}`} className={`table-elem-top column-rc ${isToday} ${pastToday}`}>
                 <div className='col-day'>{day.substring(0, 3)}</div>
                 <div className={`col-date ${isToday}`}>{columnDates[i]}</div>
               </div>
