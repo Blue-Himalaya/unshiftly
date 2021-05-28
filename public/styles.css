@@ -43,15 +43,9 @@ body::-webkit-scrollbar {
 
 .cal-contents-cont {
   display: block;
+  height: 700px;
+  overflow: scroll;
 }
-
-/* .activity-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-areas:
-  "a a a a a a a b"
-  "c c c c c c c b";
-} */
 
 .activity-log-container {
   display: flex;
