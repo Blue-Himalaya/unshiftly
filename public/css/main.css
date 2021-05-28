@@ -211,6 +211,9 @@ body {
   padding: 0;
   background-color: #f4f4f4;
   width: 100%;
+  background-color: #c9daeb;
+  border-bottom: #9eaab6 1px solid;
+  border-right: #9eaab6 1px solid;
 }
 
 .schedule .employee-row .emp-block .employee-name {
