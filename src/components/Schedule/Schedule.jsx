@@ -223,7 +223,11 @@ const Schedule = (props) => {
             dispatch(fetchWeek(weekDate, -7))
           }}>{'<'}</div>
 
-          <div className='month-text'>
+          <div className='month-text'
+          onClick={() => {
+            dispatch(fetchSingleTimeOff(currentDateInfo.join('-'), 0))
+            dispatch(fetchWeek(currentDateInfo.join('-'), 0))
+          }}>
             {months[startDateInfo.getUTCMonth()]} {startDateInfo.getUTCFullYear()}
           </div>
 
