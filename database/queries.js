@@ -66,7 +66,7 @@ const deleteShift = (ids, successCb, errorCb) => {
 
 /*
 ======================================================
-        Scheduling Realse-Pick Up
+        Scheduling Release-Pick Up
 ======================================================
 */
 const releaseShift = (reqObj, callback) => {
@@ -97,7 +97,7 @@ const pickUpShift = (reqObj, callback) => {
 ======================================================
 */
 const getAllSingleTimeOff = (dateObj, callback) => {
-  const queryString = `select t.id, t.date, t.morning, e.name, e.id from time_off t  join employees e where t.id_employee = e.id and t.date between '${dateObj.startDate}' and '${dateObj.endDate}' order by t.date asc`;
+  const queryString = `select t.id as timeOffId, t.date, t.morning, e.name, e.id from time_off t  join employees e where t.id_employee = e.id and t.date between '${dateObj.startDate}' and '${dateObj.endDate}' order by t.date asc`;
   connection.query(queryString, (err, response) => {
     if(err) console.log(err)
     else callback(response)
