@@ -5,7 +5,7 @@ const EmployeeInfoModal = (props) => {
   let employeeInfo = props.info;
   let isOpen = props.isOpen;
 
-  console.log(employeeInfo);
+  //console.log(employeeInfo);
 
   const user = useSelector(state => state.viewReducer.user)
 

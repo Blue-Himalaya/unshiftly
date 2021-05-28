@@ -11,11 +11,11 @@ const Shift = (props) => {
     }
   }
 
-  var noShift = (props.color1 === 'hsla(30, 0%, 100%, 0)' && !props.past && !props.timeoff[props.meridian]) ? 'no-shift' : ''
+  var noShift = (/*props.color1 === 'hsla(30, 0%, 100%, 0)' && !props.past && */!props.timeoff[props.meridian]) ? 'no-shift' : ''
   return (
     <div className={`table-elem shift noselect ${noShift} ${props.past}`}
     style={{
-      backgroundImage: `linear-gradient(0.375turn, ${props.color1} 50%, ${props.color2} 50%)`,
+      backgroundColor: props.color1,
       color: color,
       borderRadius: '5px'
     }}
@@ -26,6 +26,9 @@ const Shift = (props) => {
           props.updateDay(props.day)
           props.updateMeridian(props.meridian)
           props.updateEmployee(props.employeeInfo)
+          props.updateExists(props.color1)
+          props.updateShift(props.shiftTime)
+          props.updateShiftID(props.shiftID)
         }
       }}>
     &nbsp;{props.shiftTime}&nbsp;
