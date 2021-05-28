@@ -134,7 +134,10 @@ body::-webkit-scrollbar {
 .shift-block {
   width: fit-content;
   height: fit-content;
+  border-radius: 3px;
+  padding: 6px;
   margin: 10px 0px;
+  font-size: 0.85em;
 }
 .shift-block:hover {
   cursor: pointer;

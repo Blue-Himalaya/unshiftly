@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const Shifts = () => {
   const schedule = useSelector(state => state.scheduleReducer.schedule);
-  //console.log('schedule: ', schedule)
+  const roles = useSelector(state => state.rolesReducer.roles)
 
   var days = ['Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
 
