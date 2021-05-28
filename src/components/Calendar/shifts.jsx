@@ -7,6 +7,10 @@ const Shifts = () => {
   const schedule = useSelector(state => state.scheduleReducer.schedule);
   console.log('schedule: ', schedule)
 
+  // useEffect(() => {
+
+  // }, [schedule])
+
   var days = ['Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
 
   return(
