@@ -56,10 +56,16 @@ const EmployeeList = () => {
     if(currentEmployee.phone !== currentEmployeePhone) {
       updateCurrentEmployeePhone(currentEmployee.phone)
     }
+    if(currentEmployee.birthday !== currentEmployeeBirthday) {
+      updateCurrentEmployeeBirthday(currentEmployee.birthday)
+    }
+    if(currentEmployee.start_date !== currentEmployeeStartDate) {
+      updateCurrentEmployeeStartDate(currentEmployee.start_date)
+    }
     if(currentEmployee.roles !== currentEmployeeRoles) {
       updateCurrentEmployeeRoles(currentEmployee.roles)
     }
-  }, [currentEmployee.name, currentEmployee.phone, currentEmployee.birthday]);
+  }, [currentEmployee.name, currentEmployee.phone, currentEmployee.birthday, currentEmployee.start_date, currentEmployee.roles]);
 
 
   // WINDOW SIZE
@@ -90,7 +96,7 @@ const EmployeeList = () => {
       return capitalizeFirstLetter(split[2])
     }
     function updateName(e) {
-      return eval('updateAddEmployee' + extractClassName(e.target.className))(e.target.value)
+      return eval('updateCurrentEmployee' + extractClassName(e.target.className))(e.target.value)
     }
 
     updateName(e);
