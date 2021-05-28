@@ -208,6 +208,14 @@ body {
   }
 
   .table-header{
+    position: fixed;
+    width: 100vw;
+    background-color: white;
+    border-bottom: 1px solid color(schedBorder);
+
+    @include mobile {
+      position: initial
+    }
 
     .month {
       font-size: x-large;

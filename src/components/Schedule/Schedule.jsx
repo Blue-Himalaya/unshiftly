@@ -63,7 +63,7 @@ const Schedule = (props) => {
   // LIST OF THREE DAY VIEW FOR MOBILE
   var threeDays = []
   var index = columnDates.indexOf(parseInt(currentDateInfo[2]))
-  if (index < 5) {
+  if (index < 5 && index > -1) {
     threeDays = days.slice(index, index + 3)
   } else if (index >= 5 && index < 7) {
     threeDays = days.slice(4, 7)
@@ -129,7 +129,7 @@ const Schedule = (props) => {
         var time = timeoff.morning ? 'am' : 'pm'
         table[timeoff.name][day][time][1] = 'off'
         table[timeoff.name][day][time][0] = 'RTO:00'
-        table[timeoff.name][day][time][3] = timeoff.id
+        table[timeoff.name][day][time][3] = timeoff.timeOffId
       })
 
       var unavailability = {}
@@ -159,7 +159,7 @@ const Schedule = (props) => {
       updateTable(table)
       updateUnavailability(unavailability)
     }
-  }, [schedule])
+  }, [schedule, singleTimeOff])
 
 
   /* ===========================================================
@@ -223,7 +223,11 @@ const Schedule = (props) => {
             dispatch(fetchWeek(weekDate, -7))
           }}>{'<'}</div>
 
-          <div className='month-text'>
+          <div className='month-text'
+          onClick={() => {
+            dispatch(fetchSingleTimeOff(currentDateInfo.join('-'), 0))
+            dispatch(fetchWeek(currentDateInfo.join('-'), 0))
+          }}>
             {months[startDateInfo.getUTCMonth()]} {startDateInfo.getUTCFullYear()}
           </div>
 
@@ -269,6 +273,7 @@ const Schedule = (props) => {
 
       </div> {/* END OF COLUMN HEADERS */}
 
+      {width > props.mobileWidth ? <div style={{height:'101px'}}></div> : null}
 
 
       {/* =========================
