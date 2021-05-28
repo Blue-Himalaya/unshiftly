@@ -20,7 +20,6 @@ const DayOfWeek = (props) => {
   }
 
   const toggleModal = (id, name, phone, role, day, e) => {
-    // e.stopPropagation();
     setShiftInfo({
       name: name,
       phone: phone,
@@ -35,7 +34,6 @@ const DayOfWeek = (props) => {
     <div>
       {shifts.map((shift, i) => (
         <div className="shift-block" key={shift+i}>
-        {/* onClick={(e) => toggleModal(shift.id, shift.name, shift.phone, shift.role[0], day, e)} > */}
           <span onClick={(e) => toggleModal(shift.id, shift.name, shift.phone, shift.role[0], day, e)}>{shift.name}</span>
           <br/>
           {formatTime(shift.datetime)}
