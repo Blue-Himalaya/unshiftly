@@ -134,13 +134,18 @@ body::-webkit-scrollbar {
 .shift-block {
   width: fit-content;
   height: fit-content;
+  border-radius: 3px;
+  padding: 6px;
   margin: 10px 0px;
+  font-size: 0.95em;
+  color: black;
 }
 .shift-block:hover {
   cursor: pointer;
 }
 .shift-block-cont {
   background-color: lightgray;
+  color: black;
 }
 
 .emp-info-modal-bg {
