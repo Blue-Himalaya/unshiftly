@@ -7,13 +7,6 @@ const ReleaseShiftForm = (props) => {
   const { closeModal } = props;
   const [pickDate, setPickDate] = useState(null);
 
-  /*
-
-  ====RELEASE SHIFT FORM====
-  Get functionality from employee info modal up into the
-  top level compoenent (Calendar)
-  */
-
   return (
     <div>
       {isOpen

@@ -62,13 +62,10 @@ const Calendar = () => {
             </div>
           </div>
       </div>
-<<<<<<< HEAD
       <button type="click" onClick={timeOffReqForm}>Request Time Off</button>
       <RequestTimeOffForm isOpen={isFormOpen} closeModal={timeOffReqForm} />
       {/* <button type="click"  onClick={toggleReleaseShiftForm}>Release Shift</button>
       <ReleaseShiftForm isOpen={isReleaseFormOpen} closeModal={toggleReleaseShiftForm} /> */}
-=======
->>>>>>> 74d036360d312380d614fb329d66a23d2ac0ade5
     </div>
   );
 }

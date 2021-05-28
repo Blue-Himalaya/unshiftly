@@ -131,7 +131,6 @@ body {
     // transform: translateY(-50%);
     border: 1px solid color(schedBorder);
     border-radius: 10px;
-<<<<<<< HEAD
     // @include mobile {
     //   margin-top: calc((100vh - 500px));
     //   width: 100vw;
@@ -141,17 +140,6 @@ body {
     //   border-bottom-left-radius: 0;
     //   border-bottom-right-radius: 0;
     // }
-=======
-    @include mobile {
-      margin-top: calc((100vh - 500px));
-      width: 100vw;
-      // background-color: color(mid);
-      // color: white;
-      // border: none;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
->>>>>>> 74d036360d312380d614fb329d66a23d2ac0ade5
   }
 
 }

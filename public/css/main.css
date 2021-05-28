@@ -110,8 +110,6 @@ body {
   border-radius: 10px;
 }
 
-<<<<<<< HEAD
-=======
 @media (max-width: 730px) {
   .modal-outer .modal-inner {
     margin-top: calc((100vh - 500px));
@@ -121,7 +119,6 @@ body {
   }
 }
 
->>>>>>> 74d036360d312380d614fb329d66a23d2ac0ade5
 .schedule {
   min-width: 280px;
 }
