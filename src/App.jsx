@@ -54,7 +54,7 @@ const App = () => {
       .join('-')
 
     // HARDCODED DATE
-    date = '2019-05-11';
+    // date = '2019-05-11';
 
     dispatch(fetchSchedule(date));
     dispatch(fetchSingleTimeOff(date));
