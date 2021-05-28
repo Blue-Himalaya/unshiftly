@@ -42,16 +42,12 @@ body::-webkit-scrollbar {
 }
 
 .cal-contents-cont {
-  display: block;
-}
-
-/* .activity-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-areas:
-  "a a a a a a a b"
-  "c c c c c c c b";
-} */
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 60px auto;
+  height: 700px;
+  overflow: scroll;
+}
 
 .activity-log-container {
   display: flex;
@@ -60,7 +56,7 @@ body::-webkit-scrollbar {
   text-align: center;
 }
 
-#daysOfWeek {
+/* #daysOfWeek {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin-bottom: 20px;
@@ -69,7 +65,7 @@ body::-webkit-scrollbar {
 .column-container {
   display: flex;
   flex-direction: row;
-}
+} */
 
 .column {
   width: fit-content;
@@ -119,6 +115,12 @@ body::-webkit-scrollbar {
   height: fit-content;
   margin-bottom: 10px;
 }
+.shift-block:hover {
+  cursor: pointer;
+}
+.shift-block-cont {
+  background-color: lightgray;
+}
 
 .emp-info-modal-bg {
   position: fixed;
@@ -126,7 +128,6 @@ body::-webkit-scrollbar {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(126, 126, 126, 0.509);
 	z-index: 1000;
 }
 

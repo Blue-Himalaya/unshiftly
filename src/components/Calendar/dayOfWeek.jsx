@@ -3,10 +3,9 @@ import { useSelector } from 'react-redux';
 import EmployeeInfoModal from './employeeInfoModal.jsx';
 
 const DayOfWeek = (props) => {
-
-  //console.log('props: ', props);
-
   const [isModalOpen, setToggleModal] = useState(false);
+  const [shiftInfo, setShiftInfo] = useState({});
+
 
   // All of the day's shifts
   const shifts = props.shifts;
@@ -19,34 +18,27 @@ const DayOfWeek = (props) => {
     return (hour + ' ' + dayEve);
   }
 
-  const toggleModal = (pNum, sID) => {
-    //console.log(pNum);
-    //console.log(sID);
+  const toggleModal = (id, name, phone) => {
+    setShiftInfo({
+      name: name,
+      phone: phone,
+      id: id
+    });
     setToggleModal(prevIsModalOpen => !prevIsModalOpen)
-    //console.log(isModalOpen)
   }
-
-  // MODAL
-  // in State = { modalOpen: false }
-  // onClick toggles the state of modalOpen
-  // with conditional rendering
-    // then it renders the modal
-  // clicking the 'x' button to exit
-    // should toggle the state so it can close
 
   return (
     <div>
       {shifts.map((shift, i) => (
-        <div className="shift-block" key={shift+i} onClick={() => toggleModal(shift.phone, shift.id)}>
+        <div className="shift-block" key={shift+i} onClick={() => toggleModal(shift.id, shift.name, shift.phone)} >
           {shift.name}
           <br/>
           {formatTime(shift.datetime)}
-          <EmployeeInfoModal isOpen={isModalOpen} info={[shift.name, shift.phone]}/>
+          <EmployeeInfoModal isOpen={isModalOpen} info={shiftInfo} openModal={toggleModal}/>
         </div>
       ))}
     </div>
   )
-  //
 }
 
 export default DayOfWeek;

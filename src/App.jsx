@@ -40,9 +40,9 @@ const App = () => {
     // console.log('ADMIN:', admin) // it's a boolean
   }
 
-
+  // date with full schedule - 2019-10-11
   useEffect(() => {
-
+    
     // CURRENT DATE
     // const dateObj = new Date();
     // const date =
@@ -54,8 +54,8 @@ const App = () => {
     //   .join('-')
 
     // HARDCODED DATE
-    const date = '1990-09-30'
-
+    const date = '2019-10-11';
+    
     dispatch(fetchSchedule(date));
     dispatch(fetchSingleTimeOff(date));
     dispatch(fetchActivityList());
