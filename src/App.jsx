@@ -42,7 +42,20 @@ const App = () => {
 
   // date with full schedule - 2019-10-11
   useEffect(() => {
+    
+    // CURRENT DATE
+    // const dateObj = new Date();
+    // const date =
+    //   [dateObj.getUTCFullYear(),
+    //   (dateObj.getUTCMonth() + 1).toString().length === 1
+    //     ? '0' + (dateObj.getUTCMonth() + 1)
+    //     : (dateObj.getUTCMonth() + 1),
+    //   dateObj.getUTCDate()]
+    //   .join('-')
+
+    // HARDCODED DATE
     const date = '2019-10-11';
+    
     dispatch(fetchSchedule(date));
     dispatch(fetchSingleTimeOff(date));
     dispatch(fetchActivityList());
