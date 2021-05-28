@@ -25,12 +25,14 @@ const Calendar = () => {
     setToggleReleaseForm(prevIsReleaseFormOpen => !prevIsReleaseFormOpen)
   }
 
+  useEffect(() => {}, [])
+
   return (
     <div>
       <div className="view-container">
         <div className="cal-container">
           <div className="title-container">
-            <h1 className="cal-title">{'<'} {today} {'>'}</h1>
+            <h1 className="cal-title"> <span>{'<'}</span> {today} <span>{'>'}</span></h1>
           </div>
           <div className="cal-contents-cont">
               <div id="daysOfWeek">
@@ -49,6 +51,9 @@ const Calendar = () => {
               </div>
               <Shifts />
             </div>
+            <button type="click" onClick={timeOffReqForm}>Request Time Off</button>
+            <RequestTimeOffForm isOpen={isFormOpen} closeModal={timeOffReqForm}/>
+            <button type="click">Release Shift</button>
         </div>
 
           <div className="activity-log-container">
@@ -57,10 +62,13 @@ const Calendar = () => {
             </div>
           </div>
       </div>
+<<<<<<< HEAD
       <button type="click" onClick={timeOffReqForm}>Request Time Off</button>
       <RequestTimeOffForm isOpen={isFormOpen} closeModal={timeOffReqForm} />
       {/* <button type="click"  onClick={toggleReleaseShiftForm}>Release Shift</button>
       <ReleaseShiftForm isOpen={isReleaseFormOpen} closeModal={toggleReleaseShiftForm} /> */}
+=======
+>>>>>>> 74d036360d312380d614fb329d66a23d2ac0ade5
     </div>
   );
 }

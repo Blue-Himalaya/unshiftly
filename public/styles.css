@@ -2,6 +2,11 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
+  /* overflow: hidden; */
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .header {
@@ -10,18 +15,18 @@ body, html {
   background-color:rgb(29, 44, 103);
   color: white;
   font-size: xx-large;
+
 }
 
 .view-container {
   display: flex;
   flex-direction: row;
-  padding: 20px;
 }
 
 .cal-container {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 80%;
   height: 100%;
 }
 
@@ -40,18 +45,19 @@ body, html {
   display: block;
 }
 
-.activity-grid {
+/* .activity-grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:
   "a a a a a a a b"
   "c c c c c c c b";
-}
+} */
 
 .activity-log-container {
   display: flex;
-  width: 30%;
+  width: 20%;
   margin-left: 50px;
+  text-align: center;
 }
 
 #daysOfWeek {
@@ -82,58 +88,28 @@ body, html {
 
 /** ACTIVITY LOG **/
 
-#activtyLog {
-  grid-area: b;
-}
-
 #activityLogContainer {
-  display: grid;
-  grid-template-rows: 0.2fr 0.5fr;
-  margin-top: 5px;
-  justify-items: center;
+  height: calc(100vh - 75px);
+  background-color: rgb(201 218 235);
 }
 
-#activityLog {
-  border: 2px solid black;
-  border-radius: 15px;
-  text-align: center;
+.activityLog {
+  grid-area: b;
   padding-right: 25px;
-  height: 75vh;
+  height: calc(100vh - 165px);
   min-height: 25vh;
   overflow-y: scroll;
-  width: 20vw;
+  padding-top: 10px;
 }
 
-#activityListItem {
+.activityListItem {
   list-style: none;
-}
-
-#timeOffTableEntries::-webkit-scrollbar,
-  #activityLog::-webkit-scrollbar {
-  display: none;
-}
-
-#adminNotifs {
   display: grid;
-  grid-template-rows: 0.2fr 0.5fr;
-  margin-top: 5px;
-  justify-items: center;
+  grid-template-rows: 1fr 1fr;
 }
 
-
-#timeOffTableEntries
-  thead {
-    font-size: 1.2em;
- }
-
-#timeOffTableEntries {
-  border: 2px solid black;
-  border-radius: 15px;
-  text-align: center;
-  padding-right: 25px;
-  height: 75vh;
-  min-height: 25vh;
-  overflow-y: scroll;
+.activityLog::-webkit-scrollbar {
+  display: none;
 }
 
 /** END OF ACTIVITY LOG **/
@@ -171,11 +147,67 @@ body, html {
 	z-index: 1000;
 }
 
-.x-btn-rto-form {
-  width: fit-content;
-  margin-left: auto;
+/* Login Page CSS*/
+.loginHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: lighter;
 }
 
-.x-btn-rto-form:hover {
+.loginForm{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+.formLabelsInputs{
+  margin-top: 10px;
+}
+.loginButton{
+	text-transform: uppercase;
+	text-decoration: none;
+	background: rgb(29, 44, 103);
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+  transition: all 0.4s ease 0s;
+  width: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:10px;
   cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+}
+.loginButton:hover {
+	background: black;
+	letter-spacing: 1px;
+	-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+	-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+	box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+	transition: all 0.4s ease 0s;
+}
+.buttonText{
+  color:white;
+}
+.longInputs{
+  padding:2px;
+  border-radius:5px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(29, 44, 103);
+  width: 250px;
+}
+.labelText{
+  font-weight: lighter;
+}
+.entireLogIn{
+  margin-top: 250px;
 }

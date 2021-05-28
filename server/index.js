@@ -29,6 +29,8 @@ app.use(expressSession({
   saveUninitialized: true,
 }));
 
+
+
 app.use(cookieParser(process.env.secretOrKey));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -42,7 +44,9 @@ passportAuth(passport);
 */
 
 app.post('/login', (req, res, next) => {
-  //console.log(req)
+  var hour = 3600000
+  req.session.cookie.expires = new Date(Date.now() + hour)
+  req.session.cookie.maxAge = hour
   passport.authenticate('local', (err, user, info) => {
     if (err) throw err;
     if (!user) res.send('No User Exists');
@@ -118,12 +122,19 @@ app.get('/schedule', (req, res) => {
     ]
 }
  */
+
 app.post('/schedule', (req, res) => {
-  dbHelpers.postSchedule(req.body, (resultsFromSched) => {
-    res.send(resultsFromSched);
-    res.status(200);
-    res.end();
-  })
+  dbHelpers.postSchedule(req.body.schedule,
+    (schedSuccess) => {
+      res.send(schedSuccess);
+      res.status(201);
+      res.end();
+    },
+    (schedError) => {
+      res.send(schedError);
+      res.status(500);
+      res.end();
+    });
 })
 /*
 Example Body Info For A Employee To Release A Shift
@@ -162,6 +173,29 @@ app.put('/pickUpShift', (req, res) => {
   dbHelpers.pickUpShift(reqObj, (results) => {
     res.status(200).send('Shift successfully picked up').end();
   })
+})
+
+/*
+To delete a shift, all that is needed is the shift id
+{
+  ids: [id] <-- array of ids
+}
+don't forget the axios delete syntax:
+axios.delete('url', { data: payload }).then(
+  // Observe the data keyword this time. Very important
+  // payload is the request body
+)
+*/
+
+app.delete('/schedule', (req, res) => {
+  console.log('req body ids: ', req.body.ids)
+  dbHelpers.deleteShift(req.body.ids,
+    (results) => {
+      res.send(results).status(204).end();
+    },
+    (err) => {
+      res.send(err).status(500).end();
+    })
 })
 
 /*

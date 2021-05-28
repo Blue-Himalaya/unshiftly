@@ -11,7 +11,6 @@ const ActivityList = () => {
   const admin = useSelector(state => state.viewReducer.admin);
   const user = useSelector(state => state.viewReducer.user);
   const activities = useSelector(state => state.scheduleReducer.activities);
-  const [view, setView] = useState('activityLog');
   const dispatch = useDispatch();
 
   // if (pickedUp) {
@@ -25,7 +24,6 @@ const ActivityList = () => {
   // }
 
   if (!activities) return ( <div id="activityLogContainer">Loading...</div> );
-  if (view === 'adminNotifs') return ( <div> <AdminNotifications /> </div> );
 
   const pickUpShift = (e) => {
     e.target.disabled = true;
@@ -47,17 +45,16 @@ const ActivityList = () => {
   if (admin === true) {
     return (
       <div id="activityLogContainer">
-        <button onClick={() => setView('adminNotifs')} id="timeOffRequestsBtn">Alerts</button>
-        <h1>Activity Log</h1>
-      <div id="activityLog">
+        <h1 style={{margin: 0, padding: '20px', borderBottom: '#8eb4d9 1px solid'}}>Activity Log</h1>
+      <div className="activityLog">
         <ul>
         {activities.map((activity) => (
-        <div id="activityListItem" key={activity.id}>
-          <li key={activity.id}> Activity on: {moment(activity.datetime).format('MMMM Do YYYY, h:mm:ss a')}
-            <br />
-          {activity.type_of_activity}
-            <br />
+        <div className="activityListItem" key={activity.id}>
+          <li key={activity.id}>
+            {activity.type_of_activity.split(' ').slice(1, 3).join(' ') === 'has picked' ? <strong className="update">Update: </strong> : <strong className="alert">Alert: </strong>}
+            {activity.type_of_activity}
             </li>
+
             <br />
           </div>
         ))}
@@ -69,15 +66,16 @@ const ActivityList = () => {
 
     return (
       <div id="activityLogContainer">
-        <h1>Activity Log</h1>
-        <div id="activityLog">
+        <h1 style={{margin: 0, padding: '20px', borderBottom: '#8eb4d9 1px solid'}}>Activity Log</h1>
+        <div className="activityLog">
           <ul>
           {activities.map((activity) => (
             activity.type_of_activity.split(' ').slice(1, 3).join(' ') === 'has changed' || activity.type_of_activity.split(' ').slice(1, 3).join(' ') === 'has requested' ? <></> :
-            <div key={activity.shift} id="activityListItem">
-              <li key={activity.id}> Activity on: {moment(activity.datetime).format('MMMM Do YYYY, h:mm:ss a')}
+            <div key={activity.shift} className="activityListItem">
+              <li key={activity.id}>
+              {/* Activity on: {moment(activity.datetime).format('MMMM Do YYYY, h:mm:ss a')} */}
               <br />
-              {activity.type_of_activity}
+              <strong>Alert:</strong>{' '}{activity.type_of_activity}
               <br />
               {activity.type_of_activity.split(' ').slice(1, 3).join(' ') === 'has given' ? <div id="pickup-shift-btn">
                 <button disabled={false} id={activity.id} onClick={(e) => pickUpShift(e)}>Pick Up Shift</button>
