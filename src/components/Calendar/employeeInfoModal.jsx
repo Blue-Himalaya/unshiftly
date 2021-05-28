@@ -5,24 +5,35 @@ const EmployeeInfoModal = (props) => {
   let employeeInfo = props.info;
   let isOpen = props.isOpen;
 
+  console.log(employeeInfo);
+
   const user = useSelector(state => state.viewReducer.user)
 
   const { openModal } = props;
-  // if the modal is not open return null
-  // else the code below (modal) will render
+  const { closeModal } = props;
 
-  // put a check for user matching the name of the person in shift block
+  const sendReleaseShiftForm = () => {
+    console.log('WIP');
+    //axios.put
+    // .then({
+  //     dispatch(fetchActivityList)
+  //   })
+  //   .catch((err) => console.log(err))
+  }
 
   return (
     <div className="shift-block-cont">
       {isOpen?
         <div className="emp-info-modal-bg-2 modal-outer">
           <div className="emp-info-modal-2 modal-inner">
-            Employee: {employeeInfo[0]}
+            <div className="x-btn-rto-form" onClick={closeModal}>X</div>
+            Employee: {employeeInfo.name}
             <br/>
-            Phone: {employeeInfo[1]}
-            {user === employeeInfo[0]
-            ? <button type="click" onClick={() => console.log('release shift sent')}>Submit</button>
+            Phone: {employeeInfo.phone}
+            <br/>
+            ID: {employeeInfo.id}
+            {user[1] === employeeInfo.name
+            ? <button type="click" onClick={() => console.log('release shift')}>Submit</button>
             : null}
           </div>
         </div>

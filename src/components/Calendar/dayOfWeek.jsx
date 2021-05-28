@@ -4,6 +4,8 @@ import EmployeeInfoModal from './employeeInfoModal.jsx';
 
 const DayOfWeek = (props) => {
   const [isModalOpen, setToggleModal] = useState(false);
+  const [shiftInfo, setShiftInfo] = useState({});
+
 
   // All of the day's shifts
   const shifts = props.shifts;
@@ -17,18 +19,22 @@ const DayOfWeek = (props) => {
   }
 
   const toggleModal = (id, name, phone) => {
+    setShiftInfo({
+      name: name,
+      phone: phone,
+      id: id
+    });
     setToggleModal(prevIsModalOpen => !prevIsModalOpen)
-    console.log(id, name, phone)
   }
 
   return (
     <div>
       {shifts.map((shift, i) => (
-        <div className="shift-block" key={shift+i} onClick={() => toggleModal(shift.id, shift.name, shift.phone)}>
+        <div className="shift-block" key={shift+i} onClick={() => toggleModal(shift.id, shift.name, shift.phone)} >
           {shift.name}
           <br/>
           {formatTime(shift.datetime)}
-          <EmployeeInfoModal isOpen={isModalOpen} info={[shift.name, shift.phone, shift.id]} openModal={toggleModal}/>
+          <EmployeeInfoModal isOpen={isModalOpen} info={shiftInfo} openModal={toggleModal}/>
         </div>
       ))}
     </div>
