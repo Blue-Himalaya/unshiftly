@@ -458,7 +458,10 @@ body {
     letter-spacing: 8px;
     color: #000;
     text-transform: uppercase;
+    border: none;
     border-bottom: 0.5px solid;
+    background: none;
+    width: 100%
   }
 
   .employee-edit-credentials {
@@ -479,14 +482,20 @@ body {
     .credential {
       padding-bottom: 10px;
       padding-top: 30px;
-      height: 100px;
-    }
 
+    }
     .entry {
-      padding-left: 35px;
+      padding-left: 15px;
       padding-bottom: 10px;
-      height: 100px;
-      padding-top: 30px;
+      height: 100%;
+      color: #000;
+      font-size: large;
+      padding-top: 10px;
+
+      input {
+        width: 100%;
+        height: 100%;
+      }
     }
 
 
@@ -509,20 +518,33 @@ body {
     .employee-edit-password-input {
       grid-area: employee-edit-password-input;
       -webkit-text-security: disc;
+      padding-top:30px;
 
     }
 
     .employee-edit-phone-input {
       grid-area: employee-edit-phone-input;
+      border: none;
+      background: none;
+      height: 100%;
+      width: 100%;
     }
 
     .employee-edit-birthday-input {
       grid-area: employee-edit-birthday-input;
+      border: none;
+      background: none;
+      height: 100%;
+      width: 100%;
     }
 
 
     .employee-edit-startDate-input {
       grid-area: employee-edit-startDate-input;
+      border:none;
+      background: none;
+      height: 100%;
+      width: 100%;
     }
   }
 

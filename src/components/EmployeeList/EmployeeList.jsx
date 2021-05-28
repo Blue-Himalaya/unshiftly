@@ -90,7 +90,7 @@ const EmployeeList = () => {
       return capitalizeFirstLetter(split[2])
     }
     function updateName(e) {
-      return eval('updateCurrentEmployee' + extractClassName(e.target.className))(e.target.innerHTML)
+      return eval('updateCurrentEmployee' + extractClassName(e.target.className))(e.target.value)
     }
 
     updateName(e);
@@ -190,20 +190,20 @@ const addNewEmployee = (name, phone, birthday, password, startDate, role) => {
       <div className="employee-edit-container">
         {currentEmployee ?
           <div className="employee-edit-entries">
-            <div className="employee-edit-name-input" contentEditable="true" suppressContentEditableWarning={true} onInput={e => checkOnChange(e)}>{currentEmployeeName}</div>
+            <input className="employee-edit-name-input" input="text" defaultValue={currentEmployeeName} onChange={e => checkOnChange(e)}></input>
             <div className="employee-edit-credentials">
             <div className="credential  employee-edit-title-password">Password:
             </div>
               <div className="entry employee-edit-password-input">{currentEmployee.password}</div>
             <div className="credential  employee-edit-title">Phone Number:
             </div>
-              <div className="entry employee-edit-phone-input" contentEditable="true" suppressContentEditableWarning={true} onFocus={(e) => {e.target.selectionStart = window.cursor}} onInput={e => checkOnChange(e)}>{currentEmployeePhone}</div>
+              <input className="entry employee-edit-phone-input" input="text" defaultValue={currentEmployeePhone} onChange={e => checkOnChange(e)}/>
             <div className="credential employee-edit-title">Birthday:
             </div>
-              <div className="entry employee-edit-birthday-input">{transferDate(currentEmployeeBirthday)}</div>
+              <input className="entry employee-edit-birthday-input" input="text" defaultValue={transferDate(currentEmployeeBirthday)} onChange={e => checkOnChange(e)}/>
               <div className="credential employee-edit-title">Start Date:
               </div>
-                <div className="entry employee-edit-startDate-input">{transferDate(currentEmployee.start_date)}</div>
+                <input className="entry employee-edit-startDate-input" input="text" defaultValue={transferDate(currentEmployee.start_date)} onChange={e => checkOnChange(e)}/>
               </div>
             <div className="credential  employee-edit-title">Roles:{currentEmployee.roles.map((role) => {
               return (<div className="employee-edit-roles-input" key={role.role}>{role.role}</div>)

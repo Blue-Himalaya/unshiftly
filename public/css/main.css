@@ -397,7 +397,10 @@ body {
   letter-spacing: 8px;
   color: #000;
   text-transform: uppercase;
+  border: none;
   border-bottom: 0.5px solid;
+  background: none;
+  width: 100%;
 }
 
 .employeeList .employee-edit-credentials {
@@ -418,14 +421,20 @@ body {
 .employeeList .employee-edit-credentials .credential {
   padding-bottom: 10px;
   padding-top: 30px;
-  height: 100px;
 }
 
 .employeeList .employee-edit-credentials .entry {
-  padding-left: 35px;
+  padding-left: 15px;
   padding-bottom: 10px;
-  height: 100px;
-  padding-top: 30px;
+  height: 100%;
+  color: #000;
+  font-size: large;
+  padding-top: 10px;
+}
+
+.employeeList .employee-edit-credentials .entry input {
+  width: 100%;
+  height: 100%;
 }
 
 .employeeList .employee-edit-credentials .employee-edit-title-password {
@@ -457,24 +466,37 @@ body {
   -ms-grid-column: 2;
   grid-area: employee-edit-password-input;
   -webkit-text-security: disc;
+  padding-top: 30px;
 }
 
 .employeeList .employee-edit-credentials .employee-edit-phone-input {
   -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: employee-edit-phone-input;
+  border: none;
+  background: none;
+  height: 100%;
+  width: 100%;
 }
 
 .employeeList .employee-edit-credentials .employee-edit-birthday-input {
   -ms-grid-row: 3;
   -ms-grid-column: 2;
   grid-area: employee-edit-birthday-input;
+  border: none;
+  background: none;
+  height: 100%;
+  width: 100%;
 }
 
 .employeeList .employee-edit-credentials .employee-edit-startDate-input {
   -ms-grid-row: 4;
   -ms-grid-column: 2;
   grid-area: employee-edit-startDate-input;
+  border: none;
+  background: none;
+  height: 100%;
+  width: 100%;
 }
 
 .employeeList .employee-buttons {
