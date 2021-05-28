@@ -63,7 +63,7 @@ const Schedule = (props) => {
   // LIST OF THREE DAY VIEW FOR MOBILE
   var threeDays = []
   var index = columnDates.indexOf(parseInt(currentDateInfo[2]))
-  if (index < 5) {
+  if (index < 5 && index > -1) {
     threeDays = days.slice(index, index + 3)
   } else if (index >= 5 && index < 7) {
     threeDays = days.slice(4, 7)
