@@ -3,6 +3,7 @@ import EmployeeRow from './EmployeeRow.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import UpdateShiftModal from './UpdateShiftModal.jsx'
 import fetchWeek from '../../../redux-state/actions/fetchWeek.js';
+import fetchSingleTimeOff from '../../../redux-state/actions/fetchSingleTimeOff.js';
 import moment from 'moment'
 
 function useWindowSize() {
@@ -195,6 +196,7 @@ const Schedule = (props) => {
       currentDate={currentDate}
 
       today={currentDateInfo.join('-')}
+      weekDate={weekDate}
 
       // updateSchedule={updateReturnSched}
       // schedule={schedule}
@@ -213,11 +215,21 @@ const Schedule = (props) => {
 
         {/* MONTH */}
         <div className='month'>
-          <div className='click-left' onClick={() => {dispatch(fetchWeek(weekDate, -7))}}>{'<'}</div>
+          <div className='click-left'
+          onClick={() => {
+            dispatch(fetchSingleTimeOff(weekDate, -7))
+            dispatch(fetchWeek(weekDate, -7))
+          }}>{'<'}</div>
+
           <div className='month-text'>
             {months[startDateInfo.getUTCMonth()]} {startDateInfo.getUTCFullYear()}
           </div>
-          <div className='click-right' onClick={() => {dispatch(fetchWeek(weekDate, 7))}}>{'>'}</div>
+
+          <div className='click-right'
+          onClick={() => {
+            dispatch(fetchSingleTimeOff(weekDate, 7))
+            dispatch(fetchWeek(weekDate, 7))
+            }}>{'>'}</div>
         </div>
 
         {/* DAYS OF THE WEEK   s */}
