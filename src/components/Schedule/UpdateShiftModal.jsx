@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
 import fetchWeek from '../../../redux-state/actions/fetchWeek.js';
+import fetchSingleTimeOff from '../../../redux-state/actions/fetchSingleTimeOff.js';
 
 // ADDING SHIFT FUNCTION ========================
 const addShift = (e, emp, date, cbSuccess, cbEnd) => {
@@ -65,14 +66,14 @@ const openShift = (id, cbSuccess, cbEnd) => {
     "id": id
   }
 
-  console.log(body)
-  // axios.put('singleTimeOff', body)
-  //   .then((res) => {
-  //     cbSuccess()
-  //   })
-  //   .catch((err) => {
-  //     console.error(err)
-  //   })
+  // console.log(body)
+  axios.put('singleTimeOff', body)
+    .then((res) => {
+      cbSuccess()
+    })
+    .catch((err) => {
+      console.error(err)
+    })
 
   cbEnd()
 }
@@ -215,19 +216,19 @@ const UpdateShiftModal = (props) => {
                     }}>Delete</button>
                   </div>
                 :
-                  // <div className='btn'>
-                  //   <button onClick={() => {
-                  //     openShift(props.currentShiftID,
-                  //       () => { //cbSuccess
-                  //         dispatch(fetchWeek(props.weekDate, 0))
-                  //       },
-                  //       () => { //cbEnd
-                  //       props.toggleShiftShow(!props.show)
-                  //     })
-                  //   }}>Re-Open</button>
-                  // </div>
+                  <div className='btn'>
+                    <button onClick={() => {
+                      openShift(props.currentShiftID,
+                        () => { //cbSuccess
+                          dispatch(fetchSingleTimeOff(props.weekDate, 0))
+                        },
+                        () => { //cbEnd
+                        props.toggleShiftShow(!props.show)
+                      })
+                    }}>Re-Open</button>
+                  </div>
 
-                  null
+                  // null
                 }
 
               </div>
