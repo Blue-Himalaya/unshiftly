@@ -42,7 +42,7 @@ const App = () => {
 
 
   useEffect(() => {
-    const date = '2016-10-27';
+    const date = '2019-10-11';
     dispatch(fetchSchedule(date));
     dispatch(fetchSingleTimeOff(date));
     dispatch(fetchActivityList());

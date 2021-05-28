@@ -7,9 +7,11 @@ const DayOfWeek = (props) => {
   //console.log('props: ', props);
 
   const [isModalOpen, setToggleModal] = useState(false);
+  const [shiftInfo, setShiftInfo] = useState({});
 
   // All of the day's shifts
   const shifts = props.shifts;
+  console.log(shifts)
 
   // Format the time
   const formatTime = (time) => {
@@ -19,13 +21,20 @@ const DayOfWeek = (props) => {
     return (hour + ' ' + dayEve);
   }
 
-  const toggleModal = (pNum, sID) => {
-    //console.log(pNum);
-    //console.log(sID);
+  const toggleModal = (name, phone, id) => {
+    setShiftInfo({
+      name,
+      phone,
+      id
+    });
     setToggleModal(prevIsModalOpen => !prevIsModalOpen)
     //console.log(isModalOpen)
   }
-
+  if (isModalOpen)  {
+    return (
+      <EmployeeInfoModal isOpen={isModalOpen} info={shiftInfo}/>
+    )
+  }
   // MODAL
   // in State = { modalOpen: false }
   // onClick toggles the state of modalOpen
@@ -37,11 +46,10 @@ const DayOfWeek = (props) => {
   return (
     <div>
       {shifts.map((shift, i) => (
-        <div className="shift-block" key={shift+i} onClick={() => toggleModal(shift.phone, shift.id)}>
+        <div className="shift-block" key={shift+i} onClick={() => toggleModal(shift.name, shift.phone, shift.id)}>
           {shift.name}
           <br/>
           {formatTime(shift.datetime)}
-          <EmployeeInfoModal isOpen={isModalOpen} info={[shift.name, shift.phone]}/>
         </div>
       ))}
     </div>
