@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import fetchSingleTimeOffGet from '../../../redux-state/actions/fetchSingleTimeOff.js'
-// fetch the other timeoff thing!
 
 const RequestTimeOffForm = (props) => {
   const dispatch = useDispatch();
