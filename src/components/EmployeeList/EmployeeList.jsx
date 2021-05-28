@@ -212,12 +212,14 @@ const addNewEmployee = (name, phone, birthday, password, startDate, role) => {
           </div>
         : <div> NOT DONE</div>}
       </div>
-      <div className="employee-add-button">
-      <button onClick={e => {setShowModal(e)}}>ADD NEW EMPLOYEE</button>
-      <EmployeeAdd onClose = {setShowModal} showModal={showModal}/>
-      </div>
-      <div className="employee-remove-button">
-          <button>REMOVE EMPLOYEE FROM ACTIVE</button>
+      <div className='employee-buttons'>
+        <div className="employee-add-button">
+        <button onClick={e => {setShowModal(e)}}>ADD NEW EMPLOYEE</button>
+        <EmployeeAdd onClose = {setShowModal} showModal={showModal}/>
+        </div>
+        <div className="employee-remove-button">
+            <button>REMOVE EMPLOYEE FROM ACTIVE</button>
+        </div>
       </div>
     </div>
 
