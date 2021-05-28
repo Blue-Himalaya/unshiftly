@@ -198,7 +198,7 @@ const EmployeeList = () => {
               })}</div>
               </div>
             <div className="submit-changes-button">
-            <button onClick={()=> submitChanges()}>SUBMIT CHANGES</button>
+            <button onClick={()=> {submitChanges(); dispatch(fetchEmployees())}}>SUBMIT CHANGES</button>
             </div>
           </div>
         : <div> NOT DONE</div>}
