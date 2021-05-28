@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
-import EmployeeAdd from '../EmployeeList/EmployeeAdd.jsx'
+import EmployeeAdd from '../EmployeeList/EmployeeAdd.jsx';
 import moment from 'moment';
 import axios from 'axios';
+import fetchEmployees from '../../../redux-state/actions/fetchEmployees.js';
+
 
 
 function useWindowSize() {
@@ -24,6 +26,7 @@ function useWindowSize() {
 const EmployeeList = () => {
 
   //EMPLOYEE DATA
+  const dispatch = useDispatch();
   const employees = useSelector(state => state.employeeReducer.employees);
   const [employeeNames, updateEmployeeNames] = useState(null)
   const [currentEmployee, updateCurrentEmployee] = useState(employees[0])
@@ -65,7 +68,7 @@ const EmployeeList = () => {
     if(currentEmployee.roles !== currentEmployeeRoles) {
       updateCurrentEmployeeRoles(currentEmployee.roles)
     }
-  }, [currentEmployee.name, currentEmployee.phone, currentEmployee.birthday, currentEmployee.start_date, currentEmployee.roles]);
+  }, [currentEmployee.name, currentEmployee.phone, currentEmployee.birthday, currentEmployee.start_date, currentEmployee.roles, employees]);
 
 
   // WINDOW SIZE
@@ -206,7 +209,7 @@ const EmployeeList = () => {
         <EmployeeAdd onClose = {setShowModal} showModal={showModal}/>
         </div>
         <div className="employee-remove-button">
-            <button onClick={() => removeFromActive()}>REMOVE EMPLOYEE FROM ACTIVE</button>
+            <button onClick={() => {removeFromActive(); dispatch(fetchEmployees())}}>REMOVE EMPLOYEE FROM ACTIVE</button>
         </div>
       </div>
     </div>
