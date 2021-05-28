@@ -90,7 +90,7 @@ const EmployeeList = () => {
       return capitalizeFirstLetter(split[2])
     }
     function updateName(e) {
-      return eval('updateCurrentEmployee' + extractClassName(e.target.className))(e.target.value)
+      return eval('updateAddEmployee' + extractClassName(e.target.className))(e.target.value)
     }
 
     updateName(e);
@@ -121,6 +121,10 @@ const EmployeeList = () => {
 
   function submitChanges(cb) {
     updateEmployee(currentEmployee.id, currentEmployeeName, currentEmployeePhone, transferDate(currentEmployeeBirthday), transferDate(currentEmployeeStartDate), currentEmployee.is_active)
+  }
+
+  function removeFromActive(cb) {
+    updateEmployee(currentEmployee.id, currentEmployeeName, currentEmployeePhone, transferDate(currentEmployeeBirthday), transferDate(currentEmployeeStartDate), '0')
   }
 /*
   Change information about employees
@@ -196,7 +200,7 @@ const EmployeeList = () => {
         <EmployeeAdd onClose = {setShowModal} showModal={showModal}/>
         </div>
         <div className="employee-remove-button">
-            <button>REMOVE EMPLOYEE FROM ACTIVE</button>
+            <button onClick={() => removeFromActive()}>REMOVE EMPLOYEE FROM ACTIVE</button>
         </div>
       </div>
     </div>

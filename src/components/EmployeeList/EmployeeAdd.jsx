@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 
 
 const EmployeeAdd = ({showModal, onClose}) => {
@@ -9,12 +10,12 @@ const EmployeeAdd = ({showModal, onClose}) => {
      onClose(e);
   }
 
-  const [addEmployeeName, updateAddEmployeeName] = useState(addEmployee.name)
-  const [addEmployeePhone, updateAddEmployeePhone] = useState(addEmployee.phone)
-  const [addEmployeeBirthday, updateAddEmployeeBirthday] = useState(addEmployee.birthday)
-  const [addEmployeePassword, updateAddEmployeePassword] = useState(addEmployee.password)
-  const [addEmployeeStartDate, updateAddEmployeeStartDate] = useState(addEmployee.start_date)
-  const [addEmployeeRoles, updateAddEmployeeRoles] = useState(addEmployee.roles)
+  const [addEmployeeName, updateAddEmployeeName] = useState(null)
+  const [addEmployeePhone, updateAddEmployeePhone] = useState(null)
+  const [addEmployeeBirthday, updateAddEmployeeBirthday] = useState(null)
+  const [addEmployeePassword, updateAddEmployeePassword] = useState(null)
+  const [addEmployeeStartDate, updateAddEmployeeStartDate] = useState(null)
+  const [addEmployeeRoles, updateAddEmployeeRoles] = useState(null)
 
 
 
@@ -35,6 +36,23 @@ const EmployeeAdd = ({showModal, onClose}) => {
     }
   }
 
+  //CHECKS CURRENT VALUE OF CHANGED TEXT AND CHANGES STATE
+  function checkOnChange(e) {
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+    function extractClassName(e) {
+      let split = e.split('-')
+      return capitalizeFirstLetter(split[2])
+    }
+    function updateName(e) {
+      return eval('updateAddEmployee' + extractClassName(e.target.className))(e.target.value)
+    }
+
+    updateName(e);
+  }
+
   //ADD NEW EMPLOYEE
 const addNewEmployee = (name, phone, birthday, password, startDate, role) => {
   axios.post('/employees', {
@@ -47,7 +65,10 @@ const addNewEmployee = (name, phone, birthday, password, startDate, role) => {
   }).catch((err) => console.log('Error', err))
 }
 
-
+function submitChanges() {
+  addNewEmployee(addEmployeeName, addEmployeePhone, addEmployeeBirthday, addEmployeePassword, addEmployeeStartDate, addEmployeeRoles);
+  close();
+}
 //LAYOUT OF ADD EMPLOYEE FUNCTION CALL
 // addNewEmployee('Tester','0000000001','4000-02-02','a','1942-05-20','expo')
 
@@ -86,7 +107,7 @@ const addNewEmployee = (name, phone, birthday, password, startDate, role) => {
           </div>
         <div className='footer'>
           <div className='submit-new'>
-            <button onClick={close}>Submit</button>
+            <button onClick={submitChanges}>Submit</button>
           </div>
           <div className='exit-new'>
             <button onClick={close}> Exit </button>
