@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Shifts from './shifts.jsx';
 import RequestTimeOffForm from './requestTimeOffForm.jsx';
-import ReleaseShiftForm from './releaseShiftForm.jsx';
 import ActivityList from './ActivityList/ActivityList.jsx';
 import fetchWeek from '../../../redux-state/actions/fetchWeek.js';
 
@@ -37,7 +36,7 @@ const Calendar = () => {
       <div className="view-container">
         <div className="cal-container">
           <div className="title-container">
-            <h1 className="cal-title"> <span className="btn" onClick={() => dispatch(fetchWeek(weekDate, -7))}>{'<'}</span> {months[startDateInfo.getUTCMonth()]} {currentDateInfo[0]} <span className="btn" onClick={() => dispatch(fetchWeek(weekDate, 7))}>{'>'}</span></h1>
+            <h1 className="cal-title"> <span className="toggle-wk-btn" onClick={() => dispatch(fetchWeek(weekDate, -7))}>{'<'}</span> {months[startDateInfo.getUTCMonth()]} {currentDateInfo[0]} <span className="toggle-wk-btn" onClick={() => dispatch(fetchWeek(weekDate, 7))}>{'>'}</span></h1>
           </div>
           <div className="cal-contents-cont">
                 <div className="date-container">
@@ -77,7 +76,7 @@ const Calendar = () => {
                 </div>
               <Shifts />
             </div>
-            <button type="click" onClick={timeOffReqForm}>Request Time Off</button>
+            <button className="btn" type="click" onClick={timeOffReqForm}>Request Time Off</button>
             <RequestTimeOffForm isOpen={isFormOpen} closeModal={timeOffReqForm}/>
         </div>
           <div className="activity-log-container">
