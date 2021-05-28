@@ -226,10 +226,14 @@ body {
     border-top: solid 1px color(schedBorder);
 
     .emp-block {
+
       height: 100%;
       padding: 0;
       background-color: $empBG;
       width: 100%;
+      background-color: rgb(201, 218, 235);
+      border-bottom: rgb(158, 170, 182) 1px solid;
+      border-right: rgb(158, 170, 182) 1px solid;
 
       .employee-name {
         text-align: left;

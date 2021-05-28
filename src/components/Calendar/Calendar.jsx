@@ -50,12 +50,14 @@ const Calendar = () => {
     setToggleForm(prevIsFormOpen => !prevIsFormOpen)
   }
 
+  useEffect(() => {}, [])
+
   return (
     <div>
       <div className="view-container">
         <div className="cal-container">
           <div className="title-container">
-            <h1 className="cal-title">{'<'} {today} {'>'}</h1>
+            <h1 className="cal-title"> <span>{'<'}</span> {today} <span>{'>'}</span></h1>
           </div>
           <div className="cal-contents-cont">
               <div id="daysOfWeek">
@@ -74,9 +76,9 @@ const Calendar = () => {
               </div>
               <Shifts />
             </div>
-      <button type="click" onClick={timeOffReqForm}>Request Time Off</button>
-      <RequestTimeOffForm isOpen={isFormOpen} closeModal={timeOffReqForm}/>
-      <button type="click">Release Shift</button>
+            <button type="click" onClick={timeOffReqForm}>Request Time Off</button>
+            <RequestTimeOffForm isOpen={isFormOpen} closeModal={timeOffReqForm}/>
+            <button type="click">Release Shift</button>
         </div>
 
           <div className="activity-log-container">
