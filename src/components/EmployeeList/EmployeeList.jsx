@@ -56,10 +56,16 @@ const EmployeeList = () => {
     if(currentEmployee.phone !== currentEmployeePhone) {
       updateCurrentEmployeePhone(currentEmployee.phone)
     }
+    if(currentEmployee.birthday !== currentEmployeeBirthday) {
+      updateCurrentEmployeeBirthday(currentEmployee.birthday)
+    }
+    if(currentEmployee.start_date !== currentEmployeeStartDate) {
+      updateCurrentEmployeeStartDate(currentEmployee.start_date)
+    }
     if(currentEmployee.roles !== currentEmployeeRoles) {
       updateCurrentEmployeeRoles(currentEmployee.roles)
     }
-  }, [currentEmployee.name, currentEmployee.phone, currentEmployee.birthday]);
+  }, [currentEmployee.name, currentEmployee.phone, currentEmployee.birthday, currentEmployee.start_date, currentEmployee.roles]);
 
 
   // WINDOW SIZE
@@ -90,7 +96,7 @@ const EmployeeList = () => {
       return capitalizeFirstLetter(split[2])
     }
     function updateName(e) {
-      return eval('updateCurrentEmployee' + extractClassName(e.target.className))(e.target.innerHTML)
+      return eval('updateCurrentEmployee' + extractClassName(e.target.className))(e.target.value)
     }
 
     updateName(e);
@@ -106,22 +112,26 @@ const EmployeeList = () => {
     // transferDateBack(dateComponent)
     return dateComponent
   }
-function submitChanges() {
-  // console.log(currentEmployee.id)
-  // console.log(currentEmployeeName)
-  // console.log(currentEmployeePhone)
-  // console.log(currentEmployeeBirthday)
-  // console.dir(currentEmployeeStartDate)
-  // console.log(currentEmployee.is_active)
-}
 
-//UPDATE EMPLOYEE
-const updateEmployee = (id, name, phone, birthday, startDate, isActive) => {
-  axios.put('/employees', {
+  //UPDATE EMPLOYEE
+  const updateEmployee = (id, name, phone, birthday, startDate, isActive) => {
+    axios.put('/employees', {
+      id: id,
+      name: name,
+      phone: phone,
+      birthday: birthday,
+      startDate: startDate,
+      isActive: isActive
+    }).catch((err) => console.log('Error while updating', err))
+  }
 
-  })
-}
+  function submitChanges(cb) {
+    updateEmployee(currentEmployee.id, currentEmployeeName, currentEmployeePhone, transferDate(currentEmployeeBirthday), transferDate(currentEmployeeStartDate), currentEmployee.is_active)
+  }
 
+  function removeFromActive(cb) {
+    updateEmployee(currentEmployee.id, currentEmployeeName, currentEmployeePhone, transferDate(currentEmployeeBirthday), transferDate(currentEmployeeStartDate), '0')
+  }
 /*
   Change information about employees
   Endpoint needs the following in the form of a body from the
@@ -138,32 +148,6 @@ const updateEmployee = (id, name, phone, birthday, startDate, isActive) => {
   i.e. if you want to update the isActive, but nothing else, the endpoint still needs the old information for all other fields
 */
 
-//ADD NEW EMPLOYEE
-const addNewEmployee = (name, phone, birthday, password, startDate, role) => {
-  axios.post('/employees', {
-    name: name,
-    phone: phone,
-    birthday: birthday,
-    password: password,
-    startDate: startDate,
-    role: role
-  }).catch((err) => console.log('Error', err))
-}
-
-//LAYOUT OF ADD EMPLOYEE FUNCTION CALL
-// addNewEmployee('Tester','0000000001','4000-02-02','a','1942-05-20','expo')
-
-/*
-  employee creation requires a body of the following format:
-  {
-    name: [employee name],
-    phone: [10 character string of phone number],
-    birthday: [YYYY-MM-DD],
-    password: [initial input password],
-    startDate: [YYYY-MM-DD],
-    role: [single role] <-- currently only a single role, future work for multiple role array
-  }
-*/
 
 
   return (
@@ -190,25 +174,29 @@ const addNewEmployee = (name, phone, birthday, password, startDate, role) => {
       <div className="employee-edit-container">
         {currentEmployee ?
           <div className="employee-edit-entries">
-            <div className="employee-edit-name-input" contentEditable="true" suppressContentEditableWarning={true} onInput={e => checkOnChange(e)}>{currentEmployeeName}</div>
+            <input className="employee-edit-name-input" input="text" value={currentEmployeeName} onChange={e => checkOnChange(e)}></input>
             <div className="employee-edit-credentials">
             <div className="credential  employee-edit-title-password">Password:
             </div>
               <div className="entry employee-edit-password-input">{currentEmployee.password}</div>
             <div className="credential  employee-edit-title">Phone Number:
             </div>
-              <div className="entry employee-edit-phone-input" contentEditable="true" suppressContentEditableWarning={true} onFocus={(e) => {e.target.selectionStart = window.cursor}} onInput={e => checkOnChange(e)}>{currentEmployeePhone}</div>
+              <input className="entry employee-edit-phone-input" input="text" value={currentEmployeePhone} onChange={e => checkOnChange(e)}/>
             <div className="credential employee-edit-title">Birthday:
             </div>
-              <div className="entry employee-edit-birthday-input">{transferDate(currentEmployeeBirthday)}</div>
+              <input className="entry employee-edit-birthday-input" input="text" value={transferDate(currentEmployeeBirthday)} onChange={e => checkOnChange(e)}/>
               <div className="credential employee-edit-title">Start Date:
               </div>
-                <div className="entry employee-edit-startDate-input">{transferDate(currentEmployee.start_date)}</div>
-              </div>
-            <div className="credential  employee-edit-title">Roles:{currentEmployee.roles.map((role) => {
-              return (<div className="employee-edit-roles-input" key={role.role}>{role.role}</div>)
+                <input className="entry employee-edit-startDate-input" input="text" value={transferDate(currentEmployee.start_date)} onChange={e => checkOnChange(e)}/>
+            <div className="credential  employee-edit-title">Roles:
+            </div>
+            <div className="entry employee-edit-roles-input">{currentEmployee.roles.map((role) => {
+              return (<div key={role.role}>{role.role}</div>)
               })}</div>
+              </div>
+            <div className="submit-changes-button">
             <button onClick={()=> submitChanges()}>SUBMIT CHANGES</button>
+            </div>
           </div>
         : <div> NOT DONE</div>}
       </div>
@@ -218,7 +206,7 @@ const addNewEmployee = (name, phone, birthday, password, startDate, role) => {
         <EmployeeAdd onClose = {setShowModal} showModal={showModal}/>
         </div>
         <div className="employee-remove-button">
-            <button>REMOVE EMPLOYEE FROM ACTIVE</button>
+            <button onClick={() => removeFromActive()}>REMOVE EMPLOYEE FROM ACTIVE</button>
         </div>
       </div>
     </div>

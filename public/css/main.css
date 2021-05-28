@@ -370,6 +370,7 @@ body {
   padding: 20px;
   height: 95%;
   overflow: hidden;
+  height: 900px;
   overflow-y: scroll;
 }
 
@@ -410,7 +411,10 @@ body {
   letter-spacing: 8px;
   color: #000;
   text-transform: uppercase;
+  border: none;
   border-bottom: 0.5px solid;
+  background: none;
+  width: 100%;
 }
 
 .employeeList .employee-edit-credentials {
@@ -422,23 +426,28 @@ body {
   color: #000;
   -ms-grid-columns: 0.5fr 1.5fr;
       grid-template-columns: 0.5fr 1.5fr;
-  -ms-grid-rows: 1fr 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr 1fr;
+  -ms-grid-rows: 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   gap: 0px 0px;
-      grid-template-areas: "employee-edit-title-password employee-edit-password-input" "employee-edit-title-phone employee-edit-phone-input" "employee-edit-title-birthday employee-edit-birthday-input" "employee-edit-title-startDate employee-edit-startDate-input";
+      grid-template-areas: "employee-edit-title-password employee-edit-password-input" "employee-edit-title-phone employee-edit-phone-input" "employee-edit-title-birthday employee-edit-birthday-input" "employee-edit-title-startDate employee-edit-startDate-input" "employee-edit-title-roles employee-edit-roles-input";
 }
 
 .employeeList .employee-edit-credentials .credential {
   padding-bottom: 10px;
   padding-top: 30px;
-  height: 100px;
 }
 
 .employeeList .employee-edit-credentials .entry {
-  padding-left: 35px;
+  padding-left: 15px;
   padding-bottom: 10px;
-  height: 100px;
-  padding-top: 30px;
+  height: 100%;
+  color: #000;
+  font-size: large;
+}
+
+.employeeList .employee-edit-credentials .entry input {
+  width: 100%;
+  height: 100%;
 }
 
 .employeeList .employee-edit-credentials .employee-edit-title-password {
@@ -465,35 +474,76 @@ body {
   grid-area: employee-edit-title-startDate;
 }
 
+.employeeList .employee-edit-credentials .employee-edit-title-roles {
+  -ms-grid-row: 5;
+  -ms-grid-column: 1;
+  grid-area: employee-edit-title-roles;
+}
+
 .employeeList .employee-edit-credentials .employee-edit-password-input {
   -ms-grid-row: 1;
   -ms-grid-column: 2;
   grid-area: employee-edit-password-input;
   -webkit-text-security: disc;
+  padding-top: 30px;
 }
 
 .employeeList .employee-edit-credentials .employee-edit-phone-input {
   -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: employee-edit-phone-input;
+  border: none;
+  background: none;
+  height: 100%;
+  width: 100%;
 }
 
 .employeeList .employee-edit-credentials .employee-edit-birthday-input {
   -ms-grid-row: 3;
   -ms-grid-column: 2;
   grid-area: employee-edit-birthday-input;
+  border: none;
+  background: none;
+  height: 100%;
+  width: 100%;
 }
 
 .employeeList .employee-edit-credentials .employee-edit-startDate-input {
   -ms-grid-row: 4;
   -ms-grid-column: 2;
   grid-area: employee-edit-startDate-input;
+  border: none;
+  background: none;
+  height: 100%;
+  width: 100%;
+}
+
+.employeeList .employee-edit-credentials .employee-edit-roles-input {
+  -ms-grid-row: 5;
+  -ms-grid-column: 2;
+  grid-area: employee-edit-roles-input;
+  border: none;
+  background: none;
+  height: 100%;
+  width: 100%;
+  padding-top: 25px;
 }
 
 .employeeList .employee-buttons {
+  grid-area: employee-buttons;
   -ms-grid-row: 2;
   -ms-grid-column: 3;
   grid-area: employee-buttons;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .employeeList .employee-add-button {
@@ -506,5 +556,174 @@ body {
   grid-area: employee-remove-button;
   -ms-grid-column-align: end;
       justify-self: end;
+}
+
+.employeeList .submit-changes-button {
+  padding-top: 20%;
+  text-align: end;
+}
+
+.employee-edit-container {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: employee-edit-container;
+  padding: 20px;
+  height: 95%;
+}
+
+.employee-add-name-input {
+  text-align: center;
+  font-size: x-large;
+  letter-spacing: 2px;
+  color: #000;
+  text-transform: uppercase;
+  border: none;
+  background: none;
+  width: 100%;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+
+.employee-add-credentials {
+  display: -ms-grid;
+  display: grid;
+  font-size: medium;
+  padding-left: 15px;
+  text-transform: uppercase;
+  color: #000;
+  -ms-grid-columns: 0.5fr 1.5fr;
+      grid-template-columns: 0.5fr 1.5fr;
+  -ms-grid-rows: 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+      grid-template-areas: "employee-add-title-password employee-add-password-input" "employee-add-title-phone employee-add-phone-input" "employee-add-title-birthday employee-add-birthday-input" "employee-add-title-startDate employee-add-startDate-input" "employee-add-title-roles employee-add-roles-input";
+}
+
+.employee-add-credentials .credential {
+  padding-bottom: 10px;
+  padding-top: 30px;
+}
+
+.employee-add-credentials .entry {
+  padding-left: 15px;
+  padding-bottom: 10px;
+  height: 100%;
+  color: #000;
+  font-size: medium;
+  width: 100%;
+}
+
+.employee-add-credentials .entry input {
+  width: 50%;
+  height: 50%;
+}
+
+.employee-add-credentials .employee-add-title-password {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: employee-add-title-password;
+}
+
+.employee-add-credentials .employee-add-title-phone {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: employee-add-title-phone;
+}
+
+.employee-add-credentials .employee-add-title-birthday {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: employee-add-title-birthday;
+}
+
+.employee-add-credentials .employee-add-title-startDate {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: employee-add-title-startDate;
+}
+
+.employee-add-credentials .employee-add-title-roles {
+  -ms-grid-row: 5;
+  -ms-grid-column: 1;
+  grid-area: employee-add-title-roles;
+}
+
+.employee-add-credentials .employee-add-password-input {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: employee-add-password-input;
+  -webkit-text-security: disc;
+  border: none;
+  background: none;
+  height: 100%;
+  width: 100%;
+}
+
+.employee-add-credentials .employee-add-phone-input {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: employee-add-phone-input;
+  border: none;
+  background: none;
+  height: 100%;
+  width: 100%;
+}
+
+.employee-add-credentials .employee-add-birthday-input {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: employee-add-birthday-input;
+  border: none;
+  background: none;
+  height: 100%;
+  width: 100%;
+}
+
+.employee-add-credentials .employee-add-startDate-input {
+  -ms-grid-row: 4;
+  -ms-grid-column: 2;
+  grid-area: employee-add-startDate-input;
+  border: none;
+  background: none;
+  height: 100%;
+  width: 100%;
+}
+
+.employee-add-credentials .employee-add-roles-input {
+  -ms-grid-row: 5;
+  -ms-grid-column: 2;
+  grid-area: employee-add-roles-input;
+  border: none;
+  background: none;
+  height: 100%;
+  width: 100%;
+}
+
+.footer {
+  grid-area: employee-buttons;
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: employee-buttons;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.employee-add-button {
+  grid-area: employee-add-button;
+  -ms-grid-column-align: end;
+      justify-self: end;
+}
+
+.employee-remove-button {
+  grid-area: employee-remove-button;
+  -ms-grid-column-align: start;
+      justify-self: start;
 }
 /*# sourceMappingURL=main.css.map */
