@@ -9,6 +9,7 @@ const DayOfWeek = (props) => {
 
   // All of the day's shifts
   const shifts = props.shifts;
+  const day = props.day
 
   // Format the time
   const formatTime = (time) => {
@@ -18,11 +19,13 @@ const DayOfWeek = (props) => {
     return (hour + ' ' + dayEve);
   }
 
-  const toggleModal = (id, name, phone) => {
+  const toggleModal = (id, name, phone, role, day, e) => {
     setShiftInfo({
       name: name,
       phone: phone,
-      id: id
+      id: id,
+      role: role,
+      day: day
     });
     setToggleModal(prevIsModalOpen => !prevIsModalOpen)
   }
@@ -30,11 +33,11 @@ const DayOfWeek = (props) => {
   return (
     <div>
       {shifts.map((shift, i) => (
-        <div className="shift-block" key={shift+i} onClick={() => toggleModal(shift.id, shift.name, shift.phone)} >
-          {shift.name}
+        <div className="shift-block" key={shift+i}>
+          <span onClick={(e) => toggleModal(shift.id, shift.name, shift.phone, shift.role[0], day, e)}>{shift.name}</span>
           <br/>
           {formatTime(shift.datetime)}
-          <EmployeeInfoModal isOpen={isModalOpen} info={shiftInfo} openModal={toggleModal}/>
+          <EmployeeInfoModal isOpen={isModalOpen} info={shiftInfo} toggleOpen={toggleModal}/>
         </div>
       ))}
     </div>

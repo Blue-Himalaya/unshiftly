@@ -56,16 +56,6 @@ body::-webkit-scrollbar {
   text-align: center;
 }
 
-/* #daysOfWeek {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  margin-bottom: 20px;
-}
-
-.column-container {
-  display: flex;
-  flex-direction: row;
-} */
 
 .column {
   width: fit-content;
