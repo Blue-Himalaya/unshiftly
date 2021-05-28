@@ -40,7 +40,6 @@ const Calendar = () => {
             <h1 className="cal-title"> <span className="btn" onClick={() => dispatch(fetchWeek(weekDate, -7))}>{'<'}</span> {months[startDateInfo.getUTCMonth()]} {currentDateInfo[0]} <span className="btn" onClick={() => dispatch(fetchWeek(weekDate, 7))}>{'>'}</span></h1>
           </div>
           <div className="cal-contents-cont">
-              <div id="daysOfWeek">
                 <div className="date-container">
                   <div className="day">Fri
                     <div className="date">{columnDates[0]}</div>
@@ -76,7 +75,6 @@ const Calendar = () => {
                     <div className="date">{columnDates[6]}</div>
                   </div>
                 </div>
-              </div>
               <Shifts />
             </div>
             <button type="click" onClick={timeOffReqForm}>Request Time Off</button>

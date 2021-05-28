@@ -42,7 +42,9 @@ body::-webkit-scrollbar {
 }
 
 .cal-contents-cont {
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 60px auto;
   height: 700px;
   overflow: scroll;
 }
@@ -54,7 +56,7 @@ body::-webkit-scrollbar {
   text-align: center;
 }
 
-#daysOfWeek {
+/* #daysOfWeek {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin-bottom: 20px;
@@ -63,7 +65,7 @@ body::-webkit-scrollbar {
 .column-container {
   display: flex;
   flex-direction: row;
-}
+} */
 
 .column {
   width: fit-content;
