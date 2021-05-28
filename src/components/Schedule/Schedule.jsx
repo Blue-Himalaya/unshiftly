@@ -2,6 +2,8 @@ import React, {useState, useEffect, useLayoutEffect} from 'react'
 import EmployeeRow from './EmployeeRow.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import UpdateShiftModal from './UpdateShiftModal.jsx'
+import fetchWeek from '../../../redux-state/actions/fetchWeek.js';
+import fetchSingleTimeOff from '../../../redux-state/actions/fetchSingleTimeOff.js';
 import moment from 'moment'
 
 function useWindowSize() {
@@ -19,12 +21,17 @@ function useWindowSize() {
 
 const Schedule = (props) => {
 
+  const dispatch = useDispatch()
+
   // MODAL STATES
   const [shiftShow, toggleShiftShow] = useState(false)
   const [currentDate, updateDate] = useState('') // fri-thu
   const [currentDay, updateDay] = useState('') // whole date 2019-10-15
   const [currentMeridian, updateMeridian] = useState('') //am pm
+  const [currentShift, updateShift] = useState('') //11:00
   const [currentEmployee, updateEmployee] = useState('')
+  const [currentExists, updateExists] = useState('')
+  const [currentShiftID, updateShiftID] = useState('')
 
   // INFORMATION FROM THE DATABASE
   const [table, updateTable] = useState(null)
@@ -36,6 +43,7 @@ const Schedule = (props) => {
   const singleTimeOff = useSelector(state => state.timeOffReducer.singleTimeOff);
   const columnDates = useSelector(state => state.scheduleReducer.listOfDays); // 11-17
   const employees = useSelector(state => state.employeeReducer.employees);
+  const weekDate = useSelector(state => state.scheduleReducer.weekDate)
   const schedule = useSelector(state => state.scheduleReducer.schedule);
   const timeOff = useSelector(state => state.timeOffReducer.timeOff);
   const colors = useSelector(state => state.rolesReducer.roles);
@@ -87,13 +95,13 @@ const Schedule = (props) => {
         table[employee.name] =
         {
           info: employee,
-          Friday: { am: ['', '', ''], pm: ['', '', ''] },
-          Saturday: { am: ['', '', ''], pm: ['', '', ''] },
-          Sunday: { am: ['', '', ''], pm: ['', '', ''] },
-          Monday: { am: ['', '', ''], pm: ['', '', ''] },
-          Tuesday: { am: ['', '', ''], pm: ['', '', ''] },
-          Wednesday: { am: ['', '', ''], pm: ['', '', ''] },
-          Thursday: { am: ['', '', ''], pm: ['', '', ''] }
+          Friday: { am: ['', '', '', ''], pm: ['', '', '', ''] },
+          Saturday: { am: ['', '', '', ''], pm: ['', '', '', ''] },
+          Sunday: { am: ['', '', '', ''], pm: ['', '', '', ''] },
+          Monday: { am: ['', '', '', ''], pm: ['', '', '', ''] },
+          Tuesday: { am: ['', '', '', ''], pm: ['', '', '', ''] },
+          Wednesday: { am: ['', '', '', ''], pm: ['', '', '', ''] },
+          Thursday: { am: ['', '', '', ''], pm: ['', '', '', ''] }
         }
       })
 
@@ -109,8 +117,10 @@ const Schedule = (props) => {
           var time = shift.datetime.split(' ')
 
           //EMPLOYEE-NAME > DAY > AM/PM = TIME
-          table[shift.name][day][time[time.length - 1]] =
-            [time[time.length - 2], shift.role[0], shift.role[1]]
+          if (table[shift.name]) {
+            table[shift.name][day][time[time.length - 1]] =
+              [time[time.length - 2], shift.role[0], shift.role[1], shift.id]
+          }
         })
       }
 
@@ -119,6 +129,7 @@ const Schedule = (props) => {
         var time = timeoff.morning ? 'am' : 'pm'
         table[timeoff.name][day][time][1] = 'off'
         table[timeoff.name][day][time][0] = 'RTO:00'
+        table[timeoff.name][day][time][3] = timeoff.id
       })
 
       var unavailability = {}
@@ -148,7 +159,7 @@ const Schedule = (props) => {
       updateTable(table)
       updateUnavailability(unavailability)
     }
-  }, [])
+  }, [schedule])
 
 
   /* ===========================================================
@@ -174,11 +185,23 @@ const Schedule = (props) => {
       updateDay={updateDay}
       updateEmployee={updateEmployee}
       updateDate={updateDate}
+      updateExists={updateExists}
+      updateShift={updateShift}
+      updateShiftID={updateShiftID}
 
       currentMeridian={currentMeridian}
       currentDay={currentDay}
       currentEmployee={currentEmployee}
       currentDate={currentDate}
+      currentExists={currentExists}
+      currentShift={currentShift}
+      currentShiftID={currentShiftID}
+
+      today={currentDateInfo.join('-')}
+      weekDate={weekDate}
+
+      // updateSchedule={updateReturnSched}
+      // schedule={schedule}
       />
 
 
@@ -194,11 +217,21 @@ const Schedule = (props) => {
 
         {/* MONTH */}
         <div className='month'>
-          <div className='click-left'>{'<'}</div>
+          <div className='click-left'
+          onClick={() => {
+            dispatch(fetchSingleTimeOff(weekDate, -7))
+            dispatch(fetchWeek(weekDate, -7))
+          }}>{'<'}</div>
+
           <div className='month-text'>
             {months[startDateInfo.getUTCMonth()]} {startDateInfo.getUTCFullYear()}
           </div>
-          <div className='click-right'>{'>'}</div>
+
+          <div className='click-right'
+          onClick={() => {
+            dispatch(fetchSingleTimeOff(weekDate, 7))
+            dispatch(fetchWeek(weekDate, 7))
+            }}>{'>'}</div>
         </div>
 
         {/* DAYS OF THE WEEK   s */}
@@ -268,6 +301,9 @@ const Schedule = (props) => {
         updateMeridian={updateMeridian}
         updateEmployee={updateEmployee}
         updateDate={updateDate}
+        updateExists={updateExists}
+        updateShift={updateShift}
+        updateShiftID={updateShiftID}
         />
       })}
 

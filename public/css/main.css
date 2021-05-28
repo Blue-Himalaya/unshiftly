@@ -95,16 +95,8 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(255, 255, 255, 0.468);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-}
-
-@media (max-width: 730px) {
-  .modal-outer {
-    -webkit-backdrop-filter: blur(0px);
-    backdrop-filter: blur(0px);
-  }
 }
 
 .modal-outer .modal-inner {
@@ -118,17 +110,57 @@ body {
   border-radius: 10px;
 }
 
-@media (max-width: 730px) {
-  .modal-outer .modal-inner {
-    margin-top: calc((100vh - 500px));
-    width: 100vw;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-}
-
 .schedule {
   min-width: 280px;
+}
+
+.schedule .update-shift-modal-content .modal-header {
+  padding: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #1d2c67;
+  color: white;
+}
+
+.schedule .update-shift-modal-content .modal-info {
+  padding: 25px 35px;
+  font-size: larger;
+}
+
+.schedule .update-shift-modal-content .modal-info .modal-employee-name {
+  font-size: xxx-large;
+  color: #3a3a89;
+  font-weight: 900;
+  margin-top: 10px;
+  border-bottom: 1px solid gray;
+  padding-bottom: 16px;
+}
+
+.schedule .update-shift-modal-content .modal-info select {
+  padding: 5px 10px;
+  margin: 15px 15px;
+  font-size: large;
+}
+
+.schedule .update-shift-modal-content .modal-info .btn {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.schedule .update-shift-modal-content .modal-info .btn input, .schedule .update-shift-modal-content .modal-info .btn button {
+  padding: 12px 27px;
+  font-size: larger;
+  background-color: #1d2c67;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.schedule .update-shift-modal-content .modal-info .btn input:hover {
+  background-color: #5271ed;
 }
 
 .schedule .table-header .month {
@@ -211,6 +243,9 @@ body {
   padding: 0;
   background-color: #f4f4f4;
   width: 100%;
+  background-color: #c9daeb;
+  border-bottom: #9eaab6 1px solid;
+  border-right: #9eaab6 1px solid;
 }
 
 .schedule .employee-row .emp-block .employee-name {
@@ -242,8 +277,8 @@ body {
 }
 
 .schedule .employee-row .employee-schedule .day-table .no-shift:hover {
-  background-image: none !important;
-  background-color: #d6e4f4;
+  background-color: #d6e4f4 !important;
+  color: black !important;
   cursor: pointer;
 }
 
@@ -305,23 +340,21 @@ body {
 .employeeList {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 0.2fr 0.7fr 0.2fr 2.9fr 0.1fr;
-      grid-template-columns: 0.2fr 0.7fr 0.2fr 2.9fr 0.1fr;
-  -ms-grid-rows: 5% 80% 15%;
-      grid-template-rows: 5% 80% 15%;
-      grid-template-areas: ". . . . ." ". employee-list-container . employee-edit-container ." ". employee-add-button . employee-remove-button .";
+  -ms-grid-columns: 0.7fr 0.2fr 2.9fr 0.1fr;
+      grid-template-columns: 0.7fr 0.2fr 2.9fr 0.1fr;
+  -ms-grid-rows: 84% 16%;
+      grid-template-rows: 84% 16%;
+      grid-template-areas: "employee-list-container . employee-edit-container ." "employee-list-container . employee-buttons .";
+  background-color: #FFF;
 }
 
 .employeeList .employee-list-container {
-  -ms-grid-row: 2;
-  -ms-grid-column: 2;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
   grid-area: employee-list-container;
-  background-color: #c4c4c4;
-  border: inset;
-  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 30px;
-  padding: 10px;
+  background-color: #c9daeb;
+  padding: 20px;
   height: 95%;
   overflow: hidden;
   overflow-y: scroll;
@@ -332,18 +365,16 @@ body {
   text-align: center;
   font-size: large;
   letter-spacing: 1px;
-  color: #FFF;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  color: #000;
   text-transform: uppercase;
   padding-bottom: 20px;
-  text-decoration: underline;
 }
 
 .employeeList .employee-names {
   font-size: medium;
   letter-spacing: 1px;
-  color: #FFF;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: #000;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   text-transform: uppercase;
   padding-bottom: 25px;
 }
@@ -353,31 +384,29 @@ body {
 }
 
 .employeeList .employee-edit-container {
-  -ms-grid-row: 2;
-  -ms-grid-column: 4;
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
   grid-area: employee-edit-container;
-  background-color: #c4c4c4;
-  border: inset;
-  border-radius: 100px;
   padding: 20px;
+  height: 95%;
 }
 
 .employeeList .employee-edit-name-input {
   text-align: center;
   font-size: xxx-large;
-  letter-spacing: 2.5px;
-  color: #FFF;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.75);
+  letter-spacing: 8px;
+  color: #000;
   text-transform: uppercase;
+  border-bottom: 0.5px solid;
 }
 
 .employeeList .employee-edit-credentials {
   display: -ms-grid;
   display: grid;
-  font-size: 30px;
+  font-size: large;
   padding-left: 15px;
-  color: #FFF;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  color: #000;
   -ms-grid-columns: 0.5fr 1.5fr;
       grid-template-columns: 0.5fr 1.5fr;
   -ms-grid-rows: 1fr 1fr 1fr 1fr;
@@ -448,15 +477,19 @@ body {
   grid-area: employee-edit-startDate-input;
 }
 
+.employeeList .employee-buttons {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: employee-buttons;
+}
+
 .employeeList .employee-add-button {
-  -ms-grid-row: 3;
-  -ms-grid-column: 2;
   grid-area: employee-add-button;
+  -ms-grid-column-align: start;
+      justify-self: start;
 }
 
 .employeeList .employee-remove-button {
-  -ms-grid-row: 3;
-  -ms-grid-column: 4;
   grid-area: employee-remove-button;
   -ms-grid-column-align: end;
       justify-self: end;

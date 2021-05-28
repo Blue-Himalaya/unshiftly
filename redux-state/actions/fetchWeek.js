@@ -1,20 +1,23 @@
 const axios = require('axios');
-export const fetchSchedule = (date) => {
+export const fetchWeek = (weekDate, offset) => { //offset is +7 or -7
 
   const days = ['Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
   const daysOrdered = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-  var startDate = new Date(date)
-  var endDate = new Date(date)
+  var newWeekdate = new Date(weekDate)
+  newWeekdate.setDate(newWeekdate.getDate() + offset);
+
+  var startDate = new Date(weekDate)
+  var endDate = new Date(weekDate)
   // DATE TO GET LIST OF DAYS IN THE WEEK
-  var startDate2 = new Date(date)
+  var startDate2 = new Date(weekDate)
 
   //GET POSITION OF DAY FROM SCHEDULE WEEK FRI-THU
   var index = days.indexOf(daysOrdered[startDate.getUTCDay()])
 
-  startDate.setDate(startDate.getDate() - index);
-  endDate.setDate(endDate.getDate() + 7 - index)
-  startDate2.setDate(startDate2.getDate() - index);
+  startDate.setDate(startDate.getDate() - index + offset);
+  endDate.setDate(endDate.getDate() + 7 - index + offset)
+  startDate2.setDate(startDate2.getDate() - index + offset);
 
   //GET LIST OF DAYS IN THE WEEK
   var dates = []
@@ -45,8 +48,8 @@ export const fetchSchedule = (date) => {
     })
       .then((res) => {
         dispatch({
-          type: 'GET_SCHEDULE',
-          payload: [res.data, date, date, startDate, endDate, dates, datesFull],
+          type: 'GET_WEEK',
+          payload: [res.data, newWeekdate.toISOString(), startDate, endDate, dates, datesFull],
         });
       })
       .catch((err) => {
@@ -55,4 +58,4 @@ export const fetchSchedule = (date) => {
   };
 };
 
-export default fetchSchedule;
+export default fetchWeek;

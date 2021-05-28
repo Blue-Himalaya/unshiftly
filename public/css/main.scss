@@ -113,13 +113,13 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(255, 255, 255, 0.468);
+  // background-color: rgba(255, 255, 255, 0.468);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-  @include mobile {
-    -webkit-backdrop-filter: blur(0px);
-    backdrop-filter: blur(0px);
-  }
+  // @include mobile {
+  //   -webkit-backdrop-filter: blur(0px);
+  //   backdrop-filter: blur(0px);
+  // }
 
   .modal-inner {
     background-color: white;
@@ -131,15 +131,15 @@ body {
     // transform: translateY(-50%);
     border: 1px solid color(schedBorder);
     border-radius: 10px;
-    @include mobile {
-      margin-top: calc((100vh - 500px));
-      width: 100vw;
-      // background-color: color(mid);
-      // color: white;
-      // border: none;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
+    // @include mobile {
+    //   margin-top: calc((100vh - 500px));
+    //   width: 100vw;
+    //   background-color: color(mid);
+    //   color: white;
+    //   border: none;
+    //   border-bottom-left-radius: 0;
+    //   border-bottom-right-radius: 0;
+    // }
   }
 
 }
@@ -158,6 +158,54 @@ body {
   // --------
 
   min-width: 280px;
+
+  .update-shift-modal-content {
+    .modal-header {
+      padding: 10px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      background-color: rgb(29, 44, 103);
+      color: white;
+    }
+
+    .modal-info {
+      padding: 25px 35px;
+      font-size: larger;
+
+      .modal-employee-name {
+        font-size: xxx-large;
+        color: #3a3a89;
+        font-weight: 900;
+        margin-top: 10px;
+        border-bottom: 1px solid gray;
+        padding-bottom: 16px;
+      }
+
+      select {
+        padding: 5px 10px;
+        margin: 15px 15px;
+        font-size: large;
+      }
+
+      .btn {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        input, button {
+          padding: 12px 27px;
+          font-size: larger;
+          background-color: rgb(29, 44, 103);
+          color: white;
+          border: none;
+          border-radius: 5px;
+        }
+
+        input:hover {
+          background-color: rgb(82, 113, 237);
+        }
+      }
+    }
+  }
 
   .table-header{
 
@@ -226,10 +274,14 @@ body {
     border-top: solid 1px color(schedBorder);
 
     .emp-block {
+
       height: 100%;
       padding: 0;
       background-color: $empBG;
       width: 100%;
+      background-color: rgb(201, 218, 235);
+      border-bottom: rgb(158, 170, 182) 1px solid;
+      border-right: rgb(158, 170, 182) 1px solid;
 
       .employee-name {
         text-align: left;
@@ -259,8 +311,9 @@ body {
         }
 
         .no-shift:hover {
-          background-image: none !important;
-          background-color: rgb(214, 228, 244);
+          // background-image: none !important;
+          background-color: rgb(214, 228, 244) !important;
+          color: black !important;
           cursor: pointer;
         }
       }
@@ -350,43 +403,39 @@ body {
 
 .employeeList {
   display: grid;
-  grid-template-columns: 0.2fr 0.7fr 0.2fr 2.9fr 0.1fr;
-  grid-template-rows: 5% 80% 15%;
+  grid-template-columns: 0.7fr 0.2fr 2.9fr 0.1fr;
+  grid-template-rows: 84% 16%;
   grid-template-areas:
-    ". . . . ."
-    ". employee-list-container . employee-edit-container ."
-    ". employee-add-button . employee-remove-button .";
+    "employee-list-container . employee-edit-container ."
+    "employee-list-container . employee-buttons .";
+  background-color: #FFF;
 
   .employee-list-container {
     grid-area: employee-list-container;
-    background-color: #c4c4c4;
-    border: inset;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 30px;
-    padding: 10px;
+    background-color: rgb(201, 218, 235);
+    padding: 20px;
     height: 95%;
     overflow: hidden;
     overflow-y: scroll;
 
   }
-
+//adding a comment to be able to commit
   .employee-list-title {
     text-align-last: center;
     text-align: center;
     font-size: large;
     letter-spacing: 1px;
-    color: #FFF;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
+    color: #000;
     text-transform: uppercase;
     padding-bottom: 20px;
-    text-decoration: underline;
+
   }
 
   .employee-names {
     font-size: medium;
     letter-spacing: 1px;
-    color: #FFF;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #000;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.10);
     text-transform: uppercase;
     padding-bottom: 25px;
   }
@@ -398,28 +447,26 @@ body {
 
   .employee-edit-container {
     grid-area: employee-edit-container;
-    background-color: #c4c4c4;
-    border: inset;
-    border-radius: 100px;
     padding: 20px;
+    height: 95%;
 
   }
 
   .employee-edit-name-input {
     text-align: center;
     font-size: xxx-large;
-    letter-spacing: 2.5px;
-    color: #FFF;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.75);
+    letter-spacing: 8px;
+    color: #000;
     text-transform: uppercase;
+    border-bottom: 0.5px solid;
   }
 
   .employee-edit-credentials {
     display: grid;
-    font-size: 30px;
+    font-size: large;
     padding-left: 15px;
-    color: #FFF;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    color: #000;
     grid-template-columns: 0.5fr 1.5fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     gap: 0px 0px;
@@ -479,8 +526,13 @@ body {
     }
   }
 
+  .employee-buttons {
+    grid-area: employee-buttons;
+  }
+
   .employee-add-button {
     grid-area: employee-add-button;
+    justify-self: start;
   }
 
   .employee-remove-button {

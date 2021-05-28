@@ -9,7 +9,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("this is e", e.target)
     dispatch(userLoggedIn(e.target.username.value, e.target.password.value));
   }
   return (

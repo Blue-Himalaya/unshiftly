@@ -83,6 +83,8 @@ const EmployeeRow = (props) => {
                       role2 = role1
                     }
 
+                    var id = props.row[day][meridian][3]
+
                     //RENDER SHIFT
                     return (
                       <Shift
@@ -94,6 +96,7 @@ const EmployeeRow = (props) => {
                       color1={props.colors[role1]}
                       color2={props.colors[role2]}
                       shiftTime={shiftTime} // 11:00
+                      shiftID={id}
                       timeoff={timeoff}
                       employeeInfo={props.row.info} // EMPLOYEE INFO
 
@@ -103,6 +106,9 @@ const EmployeeRow = (props) => {
                       updateMeridian={props.updateMeridian} // AM-PM IN MODAL
                       updateEmployee={props.updateEmployee} // EMPLOYEE INFO IN MODAL
                       updateDate={props.updateDate} // DATE IN MODAL
+                      updateExists={props.updateExists}
+                      updateShift={props.updateShift}
+                      updateShiftID={props.updateShiftID}
 
                       past={past} //DAY OF WEEK IS THE INDEX FROM MAPPING DAYS
                       />

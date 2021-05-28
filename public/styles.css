@@ -2,7 +2,7 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 body::-webkit-scrollbar {
@@ -42,16 +42,12 @@ body::-webkit-scrollbar {
 }
 
 .cal-contents-cont {
-  display: block;
-}
-
-/* .activity-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-areas:
-  "a a a a a a a b"
-  "c c c c c c c b";
-} */
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 60px auto;
+  height: 700px;
+  overflow: scroll;
+}
 
 .activity-log-container {
   display: flex;
@@ -60,16 +56,6 @@ body::-webkit-scrollbar {
   text-align: center;
 }
 
-#daysOfWeek {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  margin-bottom: 20px;
-}
-
-.column-container {
-  display: flex;
-  flex-direction: row;
-}
 
 .column {
   width: fit-content;
@@ -90,13 +76,13 @@ body::-webkit-scrollbar {
 
 #activityLogContainer {
   height: calc(100vh - 75px);
-  background-color: rgba(112,128,144);
+  background-color: rgb(201 218 235);
 }
 
 .activityLog {
   grid-area: b;
   padding-right: 25px;
-  height: calc(100vh - 113px);
+  height: calc(100vh - 165px);
   min-height: 25vh;
   overflow-y: scroll;
   padding-top: 10px;
@@ -119,6 +105,12 @@ body::-webkit-scrollbar {
   height: fit-content;
   margin-bottom: 10px;
 }
+.shift-block:hover {
+  cursor: pointer;
+}
+.shift-block-cont {
+  background-color: lightgray;
+}
 
 .emp-info-modal-bg {
   position: fixed;
@@ -126,7 +118,6 @@ body::-webkit-scrollbar {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(126, 126, 126, 0.509);
 	z-index: 1000;
 }
 
