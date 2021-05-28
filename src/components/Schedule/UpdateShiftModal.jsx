@@ -37,22 +37,25 @@ const UpdateShiftModal = (props) => {
       <div className='update-shift-modal-outside modal-outer'>
         <div className='update-shift-modal modal-inner'>
 
-          <div onClick={() => {
-            props.toggleShiftShow(!props.show)
-            props.updateEmployee('')
-            props.updateDay('')
-            props.updateMeridian('')
-            }}>x</div>
+          <div className='update-shift-modal-content'>
 
-            <div>
+            <div className='modal-header'onClick={() => {
+              props.toggleShiftShow(!props.show)
+              props.updateEmployee('')
+              props.updateDay('')
+              props.updateMeridian('')
+              }}>x
+            </div>
+
+            <div className='modal-title'>
               Add to Schedule:
             </div>
 
-            <div>
+            <div className='modal-employee-name'>
               {props.currentEmployee.name}
             </div>
 
-            <div>
+            <div className='modal-shift-info'>
               <br/>
               {props.currentDay},&nbsp;
               {props.months[parseInt(dateInfo[1])]}&nbsp;
@@ -110,20 +113,13 @@ const UpdateShiftModal = (props) => {
 
               <br/>
 
-              {/* <label htmlFor="shift-role-2">Role 2: </label>
-              <select id="shift-role-2" name="shift-role-2">
-                <option value={'flamingo'}>--</option>
-                {props.currentEmployee.roles.map((role) => {
-                  return <option key={role.role} value={role.role}>{role.role}</option>
-                })}
-              </select> */}
-
               <br/>
 
               {props.publish ?
               <input type='submit' value='Save Progress'/> :
               <input type='submit' value='Publish'/>}
             </form>
+          </div>
         </div>
       </div>
     )

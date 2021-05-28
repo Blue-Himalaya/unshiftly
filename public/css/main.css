@@ -131,6 +131,14 @@ body {
   min-width: 280px;
 }
 
+.schedule .update-shift-modal-content .modal-header {
+  padding: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #1d2c67;
+  color: white;
+}
+
 .schedule .table-header .month {
   font-size: x-large;
   text-align: center;

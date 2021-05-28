@@ -159,6 +159,16 @@ body {
 
   min-width: 280px;
 
+  .update-shift-modal-content {
+    .modal-header {
+      padding: 10px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      background-color: rgb(29, 44, 103);
+      color: white;
+    }
+  }
+
   .table-header{
 
     .month {
