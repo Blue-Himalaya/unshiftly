@@ -354,43 +354,39 @@ body {
 
 .employeeList {
   display: grid;
-  grid-template-columns: 0.2fr 0.7fr 0.2fr 2.9fr 0.1fr;
-  grid-template-rows: 5% 80% 15%;
+  grid-template-columns: 0.7fr 0.2fr 2.9fr 0.1fr;
+  grid-template-rows: 84% 16%;
   grid-template-areas:
-    ". . . . ."
-    ". employee-list-container . employee-edit-container ."
-    ". employee-add-button . employee-remove-button .";
+    "employee-list-container . employee-edit-container ."
+    "employee-list-container . employee-buttons .";
+  background-color: #FFF;
 
   .employee-list-container {
     grid-area: employee-list-container;
-    background-color: #c4c4c4;
-    border: inset;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 30px;
-    padding: 10px;
+    background-color: rgb(201, 218, 235);
+    padding: 20px;
     height: 95%;
     overflow: hidden;
     overflow-y: scroll;
 
   }
-
+//adding a comment to be able to commit
   .employee-list-title {
     text-align-last: center;
     text-align: center;
     font-size: large;
     letter-spacing: 1px;
-    color: #FFF;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
+    color: #000;
     text-transform: uppercase;
     padding-bottom: 20px;
-    text-decoration: underline;
+
   }
 
   .employee-names {
     font-size: medium;
     letter-spacing: 1px;
-    color: #FFF;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #000;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.10);
     text-transform: uppercase;
     padding-bottom: 25px;
   }
@@ -402,28 +398,26 @@ body {
 
   .employee-edit-container {
     grid-area: employee-edit-container;
-    background-color: #c4c4c4;
-    border: inset;
-    border-radius: 100px;
     padding: 20px;
+    height: 95%;
 
   }
 
   .employee-edit-name-input {
     text-align: center;
     font-size: xxx-large;
-    letter-spacing: 2.5px;
-    color: #FFF;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.75);
+    letter-spacing: 8px;
+    color: #000;
     text-transform: uppercase;
+    border-bottom: 0.5px solid;
   }
 
   .employee-edit-credentials {
     display: grid;
-    font-size: 30px;
+    font-size: large;
     padding-left: 15px;
-    color: #FFF;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    color: #000;
     grid-template-columns: 0.5fr 1.5fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     gap: 0px 0px;
@@ -483,8 +477,13 @@ body {
     }
   }
 
+  .employee-buttons {
+    grid-area: employee-buttons;
+  }
+
   .employee-add-button {
     grid-area: employee-add-button;
+    justify-self: start;
   }
 
   .employee-remove-button {
