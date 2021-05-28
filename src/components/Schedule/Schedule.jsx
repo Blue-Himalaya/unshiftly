@@ -28,12 +28,14 @@ const Schedule = (props) => {
   const [currentDate, updateDate] = useState('') // fri-thu
   const [currentDay, updateDay] = useState('') // whole date 2019-10-15
   const [currentMeridian, updateMeridian] = useState('') //am pm
+  const [currentShift, updateShift] = useState('') //11:00
   const [currentEmployee, updateEmployee] = useState('')
+  const [currentExists, updateExists] = useState('')
+  const [currentShiftID, updateShiftID] = useState('')
 
   // INFORMATION FROM THE DATABASE
   const [table, updateTable] = useState(null)
   const [unavailability, updateUnavailability] = useState(null)
-  // const [returnSched, updateReturnSched] = useState({})
 
   const columnDatesFull = useSelector(state => state.scheduleReducer.listOfFullDays); // 2019-10-11 - 2019-10-17
   const currentDateInfo = useSelector(state => state.scheduleReducer.currentDate).split('-'); // ['2019', '10', '15']
@@ -46,13 +48,6 @@ const Schedule = (props) => {
   const timeOff = useSelector(state => state.timeOffReducer.timeOff);
   const colors = useSelector(state => state.rolesReducer.roles);
   const today = new Date(currentDateInfo.join('-')).getTime() // date version of current day
-
-  // const [returnSched, updateReturnSched] = useState(schedule)
-
-  // const updateSchedule = () => {
-  //   schedule = useSelector(state => state.scheduleReducer.schedule);
-  //   updateReturnSched(schedule)
-  // }
 
   // LIST OF CALENDAR INFO
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -100,13 +95,13 @@ const Schedule = (props) => {
         table[employee.name] =
         {
           info: employee,
-          Friday: { am: ['', '', ''], pm: ['', '', ''] },
-          Saturday: { am: ['', '', ''], pm: ['', '', ''] },
-          Sunday: { am: ['', '', ''], pm: ['', '', ''] },
-          Monday: { am: ['', '', ''], pm: ['', '', ''] },
-          Tuesday: { am: ['', '', ''], pm: ['', '', ''] },
-          Wednesday: { am: ['', '', ''], pm: ['', '', ''] },
-          Thursday: { am: ['', '', ''], pm: ['', '', ''] }
+          Friday: { am: ['', '', '', ''], pm: ['', '', '', ''] },
+          Saturday: { am: ['', '', '', ''], pm: ['', '', '', ''] },
+          Sunday: { am: ['', '', '', ''], pm: ['', '', '', ''] },
+          Monday: { am: ['', '', '', ''], pm: ['', '', '', ''] },
+          Tuesday: { am: ['', '', '', ''], pm: ['', '', '', ''] },
+          Wednesday: { am: ['', '', '', ''], pm: ['', '', '', ''] },
+          Thursday: { am: ['', '', '', ''], pm: ['', '', '', ''] }
         }
       })
 
@@ -124,7 +119,7 @@ const Schedule = (props) => {
           //EMPLOYEE-NAME > DAY > AM/PM = TIME
           if (table[shift.name]) {
             table[shift.name][day][time[time.length - 1]] =
-              [time[time.length - 2], shift.role[0], shift.role[1]]
+              [time[time.length - 2], shift.role[0], shift.role[1], shift.id]
           }
         })
       }
@@ -134,6 +129,7 @@ const Schedule = (props) => {
         var time = timeoff.morning ? 'am' : 'pm'
         table[timeoff.name][day][time][1] = 'off'
         table[timeoff.name][day][time][0] = 'RTO:00'
+        table[timeoff.name][day][time][3] = timeoff.id
       })
 
       var unavailability = {}
@@ -189,11 +185,17 @@ const Schedule = (props) => {
       updateDay={updateDay}
       updateEmployee={updateEmployee}
       updateDate={updateDate}
+      updateExists={updateExists}
+      updateShift={updateShift}
+      updateShiftID={updateShiftID}
 
       currentMeridian={currentMeridian}
       currentDay={currentDay}
       currentEmployee={currentEmployee}
       currentDate={currentDate}
+      currentExists={currentExists}
+      currentShift={currentShift}
+      currentShiftID={currentShiftID}
 
       today={currentDateInfo.join('-')}
       weekDate={weekDate}
@@ -299,6 +301,9 @@ const Schedule = (props) => {
         updateMeridian={updateMeridian}
         updateEmployee={updateEmployee}
         updateDate={updateDate}
+        updateExists={updateExists}
+        updateShift={updateShift}
+        updateShiftID={updateShiftID}
         />
       })}
 

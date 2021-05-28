@@ -96,17 +96,31 @@ const EmployeeList = () => {
     updateName(e);
   }
 
-  function transferDateBack(str) {
-    moment(str).toISOString()
-  }
+  // function transferDateBack(str) {
+  //   moment(str).toISOString()
+  // }
 
   function transferDate(str) {
     var date = moment(str);
     var dateComponent = date.utc().format('YYYY-MM-DD');
-    transferDateBack(dateComponent)
+    // transferDateBack(dateComponent)
     return dateComponent
   }
+function submitChanges() {
+  // console.log(currentEmployee.id)
+  // console.log(currentEmployeeName)
+  // console.log(currentEmployeePhone)
+  // console.log(currentEmployeeBirthday)
+  // console.dir(currentEmployeeStartDate)
+  // console.log(currentEmployee.is_active)
+}
 
+//UPDATE EMPLOYEE
+const updateEmployee = (id, name, phone, birthday, startDate, isActive) => {
+  axios.put('/employees', {
+
+  })
+}
 
 /*
   Change information about employees
@@ -123,16 +137,8 @@ const EmployeeList = () => {
   The only variable which is needed, and cannot be changed is the id.
   i.e. if you want to update the isActive, but nothing else, the endpoint still needs the old information for all other fields
 */
-function submitChanges() {
-  // console.log(currentEmployee.id)
-  // console.log(currentEmployeeName)
-  // console.log(currentEmployeePhone)
-  // console.log(currentEmployeeBirthday)
-  // console.dir(currentEmployeeStartDate)
-  // console.log(currentEmployee.is_active)
-}
 
-
+//ADD NEW EMPLOYEE
 const addNewEmployee = (name, phone, birthday, password, startDate, role) => {
   axios.post('/employees', {
     name: name,
@@ -206,12 +212,14 @@ const addNewEmployee = (name, phone, birthday, password, startDate, role) => {
           </div>
         : <div> NOT DONE</div>}
       </div>
-      <div className="employee-add-button">
-      <button onClick={e => {setShowModal(e)}}>ADD NEW EMPLOYEE</button>
-      <EmployeeAdd onClose = {setShowModal} showModal={showModal}/>
-      </div>
-      <div className="employee-remove-button">
-          <button>REMOVE EMPLOYEE FROM ACTIVE</button>
+      <div className='employee-buttons'>
+        <div className="employee-add-button">
+        <button onClick={e => {setShowModal(e)}}>ADD NEW EMPLOYEE</button>
+        <EmployeeAdd onClose = {setShowModal} showModal={showModal}/>
+        </div>
+        <div className="employee-remove-button">
+            <button>REMOVE EMPLOYEE FROM ACTIVE</button>
+        </div>
       </div>
     </div>
 
