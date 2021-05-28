@@ -1,7 +1,7 @@
 const axios = require('axios');
 export const fetchSingleTimeOff = (date, offset = 0) => {
 
-  console.log(date)
+  //console.log(date)
 
   const days = ['Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
   const daysOrdered = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']

@@ -110,17 +110,57 @@ body {
   border-radius: 10px;
 }
 
-@media (max-width: 730px) {
-  .modal-outer .modal-inner {
-    margin-top: calc((100vh - 500px));
-    width: 100vw;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-}
-
 .schedule {
   min-width: 280px;
+}
+
+.schedule .update-shift-modal-content .modal-header {
+  padding: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #1d2c67;
+  color: white;
+}
+
+.schedule .update-shift-modal-content .modal-info {
+  padding: 25px 35px;
+  font-size: larger;
+}
+
+.schedule .update-shift-modal-content .modal-info .modal-employee-name {
+  font-size: xxx-large;
+  color: #3a3a89;
+  font-weight: 900;
+  margin-top: 10px;
+  border-bottom: 1px solid gray;
+  padding-bottom: 16px;
+}
+
+.schedule .update-shift-modal-content .modal-info select {
+  padding: 5px 10px;
+  margin: 15px 15px;
+  font-size: large;
+}
+
+.schedule .update-shift-modal-content .modal-info .btn {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.schedule .update-shift-modal-content .modal-info .btn input, .schedule .update-shift-modal-content .modal-info .btn button {
+  padding: 12px 27px;
+  font-size: larger;
+  background-color: #1d2c67;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.schedule .update-shift-modal-content .modal-info .btn input:hover {
+  background-color: #5271ed;
 }
 
 .schedule .table-header .month {
@@ -237,8 +277,8 @@ body {
 }
 
 .schedule .employee-row .employee-schedule .day-table .no-shift:hover {
-  background-image: none !important;
-  background-color: #d6e4f4;
+  background-color: #d6e4f4 !important;
+  color: black !important;
   cursor: pointer;
 }
 
