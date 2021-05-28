@@ -11,7 +11,6 @@ const RequestTimeOffForm = (props) => {
 
   const { isOpen } = props;
   const { closeModal } = props;
-  // console.log(user);
 
   const [pickDate, setPickDate] = useState(null);
   const [isMorning, setIsMorning] = useState(null);
