@@ -45,7 +45,7 @@ const App = () => {
 
     // CURRENT DATE
     const dateObj = new Date();
-    const date =
+    var date =
       [dateObj.getUTCFullYear(),
       (dateObj.getUTCMonth() + 1).toString().length === 1
         ? '0' + (dateObj.getUTCMonth() + 1)
@@ -54,7 +54,7 @@ const App = () => {
       .join('-')
 
     // HARDCODED DATE
-    // const date = '2019-10-11';
+    date = '2019-05-11';
 
     dispatch(fetchSchedule(date));
     dispatch(fetchSingleTimeOff(date));

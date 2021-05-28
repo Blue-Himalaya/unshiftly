@@ -129,7 +129,7 @@ const Schedule = (props) => {
         var time = timeoff.morning ? 'am' : 'pm'
         table[timeoff.name][day][time][1] = 'off'
         table[timeoff.name][day][time][0] = 'RTO:00'
-        table[timeoff.name][day][time][3] = timeoff.id
+        table[timeoff.name][day][time][3] = timeoff.timeOffId
       })
 
       var unavailability = {}
@@ -159,7 +159,7 @@ const Schedule = (props) => {
       updateTable(table)
       updateUnavailability(unavailability)
     }
-  }, [schedule])
+  }, [schedule, singleTimeOff])
 
 
   /* ===========================================================
