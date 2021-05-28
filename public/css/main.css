@@ -163,6 +163,19 @@ body {
   background-color: #5271ed;
 }
 
+.schedule .table-header {
+  position: fixed;
+  width: 100vw;
+  background-color: white;
+  border-bottom: 1px solid #cecece;
+}
+
+@media (max-width: 730px) {
+  .schedule .table-header {
+    position: initial;
+  }
+}
+
 .schedule .table-header .month {
   font-size: x-large;
   text-align: center;
