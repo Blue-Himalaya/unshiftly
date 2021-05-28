@@ -273,6 +273,7 @@ const Schedule = (props) => {
 
       </div> {/* END OF COLUMN HEADERS */}
 
+      {width > props.mobileWidth ? <div style={{height:'101px'}}></div> : null}
 
 
       {/* =========================
