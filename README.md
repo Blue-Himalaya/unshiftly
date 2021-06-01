@@ -12,7 +12,7 @@
 > Tyler Moniz - [GitHub](https://github.com/ZinomT) | [LinkedIn](https://www.linkedin.com/in/tylermoniz/) | [tmgnbvt@gmail.com](mailto:tmgnbvt@gmail.com?subject=[GitHub]%20Unshiftly)<br>
 > Amber Morris - [GitHub](https://github.com/amberMorris97) | [LinkedIn](https://www.linkedin.com/in/amber-morris-8a5883101/) | [ambermorris1997@gmail.com](mailto:ambermorris1997@gmail.com?subject=[GitHub]%20Unshiftly)<br>
 > Ryan Pannone - [GitHub](https://github.com/Rpannone88) | [LinkedIn](https://www.linkedin.com/in/ryan-pannone/) | [rpannone88@gmail.com](mailto:rpannone88@gmail.com?subject=[GitHub]%20Unshiftly)<br>
-> Tomas Rodriguez - [GitHub](https://github.com/tomrod10) | [LinkedIn](https://www.linkedin.com/in/tomas-rodriguez-al/) | [tomrod243.com](mailto:tomrod243@gmail.com?subject=[GitHub]%20Unshiftly)
+> Tomas Rodriguez - [GitHub](https://github.com/tomrod10) | [LinkedIn](https://www.linkedin.com/in/tomas-rodriguez-al/) | [tomrod243@gmail.com](mailto:tomrod243@gmail.com?subject=[GitHub]%20Unshiftly)
 
 <br>
 
