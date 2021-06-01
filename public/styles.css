@@ -80,6 +80,12 @@ body::-webkit-scrollbar {
 .date {
   font-size: 1.2rem;
   width: fit-content;
+  justify-content: center;
+}
+
+.date-today {
+  border: solid 1px rgb(29, 44, 103);
+  border-radius: 5px;
 }
 
 .btn {

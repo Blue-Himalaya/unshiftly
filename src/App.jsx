@@ -50,7 +50,9 @@ const App = () => {
       (dateObj.getUTCMonth() + 1).toString().length === 1
         ? '0' + (dateObj.getUTCMonth() + 1)
         : (dateObj.getUTCMonth() + 1),
-      dateObj.getUTCDate()]
+      (dateObj.getUTCDate()).toString().length === 1
+        ? '0' + (dateObj.getUTCDate())
+        : (dateObj.getUTCDate())]
       .join('-')
 
     // HARDCODED DATE

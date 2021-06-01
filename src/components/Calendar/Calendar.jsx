@@ -30,6 +30,13 @@ const Calendar = () => {
   }
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  const days = ['Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
+
+  const todayNum = new Date().getDate(); // 31
+
+  // {let highlight = columnDates[0] === today
+  // ? 'date-today'
+  // : ''}
 
   return (
     <div>
