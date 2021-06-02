@@ -35,11 +35,6 @@ const Calendar = () => {
 
   const todayNum = new Date().getDate(); // 31
 
-  // {let highlight = columnDates[0] === today
-  // ? 'date-today'
-  // : ''}
-
-
   return (
     <div>
       <div className="view-container">
@@ -49,8 +44,8 @@ const Calendar = () => {
           </div>
           <div className="cal-contents-cont">
             {days.map((day, i) => (
-              <div className="date-container">
-                <div className={day === normalWeekDays[new Date().getDay()] ? "day today" : "day"}>{day}
+              <div className={day === normalWeekDays[new Date().getDay()] ? "date-container today" : "date-container"}>
+                <div className="day">{day}
                   <div className="date">{columnDates[i]}</div>
                 </div>
               </div>
