@@ -125,7 +125,7 @@ const Schedule = (props) => {
       }
 
       singleTimeOff.map(timeoff => {
-        var day = moment.utc(timeoff.date).format('dddd')
+        var day = moment/*.utc*/(timeoff.date).format('dddd')
         var time = timeoff.morning ? 'am' : 'pm'
         table[timeoff.name][day][time][1] = 'off'
         table[timeoff.name][day][time][0] = 'RTO:00'
@@ -228,7 +228,7 @@ const Schedule = (props) => {
             dispatch(fetchSingleTimeOff(currentDateInfo.join('-'), 0))
             dispatch(fetchWeek(currentDateInfo.join('-'), 0))
           }}>
-            {months[startDateInfo.getUTCMonth()]} {startDateInfo.getUTCFullYear()}
+            {months[startDateInfo.getMonth()]} {startDateInfo.getFullYear()}
           </div>
 
           <div className='click-right'

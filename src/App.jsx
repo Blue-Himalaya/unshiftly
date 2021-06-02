@@ -46,13 +46,13 @@ const App = () => {
     // CURRENT DATE
     const dateObj = new Date();
     var date =
-      [dateObj.getUTCFullYear(),
-      (dateObj.getUTCMonth() + 1).toString().length === 1
-        ? '0' + (dateObj.getUTCMonth() + 1)
-        : (dateObj.getUTCMonth() + 1),
-      (dateObj.getUTCDate()).toString().length === 1
-        ? '0' + (dateObj.getUTCDate())
-        : (dateObj.getUTCDate())]
+      [dateObj.getFullYear(),
+      (dateObj.getMonth() + 1).toString().length === 1
+        ? '0' + (dateObj.getMonth() + 1)
+        : (dateObj.getMonth() + 1),
+      (dateObj.getDate()).toString().length === 1
+        ? '0' + (dateObj.getDate())
+        : (dateObj.getDate())]
       .join('-')
 
     // HARDCODED DATE
