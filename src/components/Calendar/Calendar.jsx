@@ -30,6 +30,7 @@ const Calendar = () => {
   }
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
   const normalWeekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
   const days = ['Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu']
 
@@ -40,7 +41,7 @@ const Calendar = () => {
       <div className="view-container">
         <div className="cal-container">
           <div className="title-container">
-            <h1 className="cal-title"> <span className="toggle-wk-btn" onClick={() => dispatch(fetchWeek(weekDate, -7))}>{'<'}</span> {months[startDateInfo.getUTCMonth()]} {currentDateInfo[0]} <span className="toggle-wk-btn" onClick={() => dispatch(fetchWeek(weekDate, 7))}>{'>'}</span></h1>
+            <h1 className="cal-title"> <span className="toggle-wk-btn" onClick={() => dispatch(fetchWeek(weekDate, -7))}>{'<'}</span> {months[startDateInfo.getMonth()]} {currentDateInfo[0]} <span className="toggle-wk-btn" onClick={() => dispatch(fetchWeek(weekDate, 7))}>{'>'}</span></h1>
           </div>
           <div className="cal-contents-cont">
             {days.map((day, i) => (
