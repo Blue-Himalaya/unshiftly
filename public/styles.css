@@ -19,6 +19,7 @@ body::-webkit-scrollbar {
 }
 
 .view-container {
+  height: calc(100vh - 75px);
   display: flex;
   flex-direction: row;
   padding-left: 10px;
@@ -28,7 +29,7 @@ body::-webkit-scrollbar {
   display: flex;
   flex-direction: column;
   width: 80%;
-  height: 100%;
+  padding-bottom: 40px;
 }
 
 .title-container {
@@ -46,7 +47,6 @@ body::-webkit-scrollbar {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 50px auto;
-  height: 700px;
   overflow: scroll;
   margin: 12px 0px;
 }
@@ -60,16 +60,30 @@ body::-webkit-scrollbar {
 
 
 .column {
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
   background-color: rgb(233, 233, 233);
   margin: 0px 5px;
+  padding: 10px;
   border-radius: 5px;
+}
+.inner-column-spacing {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.prev-day {
+  background-color: rgba(206, 206, 206, 0.509);
 }
 
 .day {
+  display: flex;
   font-size: 0.8rem;
-  width: fit-content;
+  flex-direction: column;
+  margin: 2px;
+  align-items: center;
 }
 
 .date-container {
@@ -80,15 +94,14 @@ body::-webkit-scrollbar {
 .date {
   font-size: 1.2rem;
   width: fit-content;
-  justify-content: center;
 }
 
 .today {
-  border: solid 1px rgb(29, 44, 103);
+  border: solid 2px rgb(29, 44, 103);
   height: 40px;
   width: 40px;
   border-radius: 20px;
-  /* width: fit-content; */
+  /* padding: 2px; */
   justify-self: center;
 }
 
@@ -142,11 +155,11 @@ body::-webkit-scrollbar {
 /** END OF ACTIVITY LOG **/
 
 .shift-block {
-  width: fit-content;
+  width: 80%;
   height: fit-content;
   border-radius: 3px;
   padding: 6px;
-  margin: 10px 0px;
+  margin: 5px 0px;
   font-size: 0.95em;
   color: black;
 }
