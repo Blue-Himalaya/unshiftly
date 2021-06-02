@@ -30,13 +30,15 @@ const Calendar = () => {
   }
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-  const days = ['Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
+  const normalWeekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+  const days = ['Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu']
 
   const todayNum = new Date().getDate(); // 31
 
   // {let highlight = columnDates[0] === today
   // ? 'date-today'
   // : ''}
+
 
   return (
     <div>
@@ -46,41 +48,13 @@ const Calendar = () => {
             <h1 className="cal-title"> <span className="toggle-wk-btn" onClick={() => dispatch(fetchWeek(weekDate, -7))}>{'<'}</span> {months[startDateInfo.getUTCMonth()]} {currentDateInfo[0]} <span className="toggle-wk-btn" onClick={() => dispatch(fetchWeek(weekDate, 7))}>{'>'}</span></h1>
           </div>
           <div className="cal-contents-cont">
-                <div className="date-container">
-                  <div className="day">Fri
-                    <div className="date">{columnDates[0]}</div>
-                  </div>
+            {days.map((day, i) => (
+              <div className="date-container">
+                <div className={day === normalWeekDays[new Date().getDay()] ? "day today" : "day"}>{day}
+                  <div className="date">{columnDates[i]}</div>
                 </div>
-                <div className="date-container">
-                  <div className="day">Sat
-                    <div className="date">{columnDates[1]}</div>
-                  </div>
-                </div>
-                <div className="date-container">
-                  <div className="day">Sun
-                    <div className="date">{columnDates[2]}</div>
-                  </div>
-                </div>
-                <div className="date-container">
-                  <div className="day">Mon
-                    <div className="date">{columnDates[3]}</div>
-                  </div>
-                </div>
-                <div className="date-container">
-                  <div className="day">Tue
-                    <div className="date">{columnDates[4]}</div>
-                  </div>
-                </div>
-                <div className="date-container">
-                  <div className="day">Wed
-                    <div className="date">{columnDates[5]}</div>
-                  </div>
-                </div>
-                <div className="date-container">
-                  <div className="day">Thu
-                    <div className="date">{columnDates[6]}</div>
-                  </div>
-                </div>
+              </div>
+            ))}
               <Shifts />
             </div>
             <button className="btn" type="click" onClick={timeOffReqForm}>Request Time Off</button>
