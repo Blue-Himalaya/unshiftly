@@ -33,18 +33,18 @@ const DayOfWeek = (props) => {
   }
 
   return (
-    <div>
+    <div className="inner-column-spacing">
       {shifts.map((shift, i) => (
-        <div className="shift-block" key={shift+i} style={{
+        <div className="shift-block" key={shift+i} onClick={(e) => toggleModal(shift.id, shift.name, shift.phone, shift.role[0], day, e)} style={{
           backgroundColor: roles[shift.role[0]],
           color: 'white'
         }}>
-          <span onClick={(e) => toggleModal(shift.id, shift.name, shift.phone, shift.role[0], day, e)}>{shift.name}</span>
+          <span>{shift.name}</span>
           <br/>
           {formatTime(shift.datetime)}
-          <EmployeeInfoModal isOpen={isModalOpen} info={shiftInfo} toggleOpen={toggleModal}/>
         </div>
       ))}
+      <EmployeeInfoModal isOpen={isModalOpen} info={shiftInfo} toggleOpen={toggleModal}/>
     </div>
   )
 }
