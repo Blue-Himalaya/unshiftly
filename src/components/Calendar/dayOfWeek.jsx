@@ -11,7 +11,8 @@ const DayOfWeek = (props) => {
 
   // All of the day's shifts
   const shifts = props.shifts;
-  const day = props.day
+  const day = props.day;
+  const { previous } = props;
 
   // Format the time
   const formatTime = (time) => {
@@ -37,6 +38,7 @@ const DayOfWeek = (props) => {
       {shifts.map((shift, i) => (
         <div className="shift-block" key={shift+i} onClick={(e) => toggleModal(shift.id, shift.name, shift.phone, shift.role[0], day, e)} style={{
           backgroundColor: roles[shift.role[0]],
+          opacity: previous ? "30%" : "100%",
           color: 'white'
         }}>
           <span>{shift.name}</span>

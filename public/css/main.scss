@@ -116,6 +116,8 @@ body {
   // background-color: rgba(255, 255, 255, 0.468);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
+  opacity: 100%;
+
   // @include mobile {
   //   -webkit-backdrop-filter: blur(0px);
   //   backdrop-filter: blur(0px);
@@ -131,6 +133,7 @@ body {
     // transform: translateY(-50%);
     border: 1px solid color(schedBorder);
     border-radius: 10px;
+    opacity: 100%;
     // @include mobile {
     //   margin-top: calc((100vh - 500px));
     //   width: 100vw;

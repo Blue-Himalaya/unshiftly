@@ -20,10 +20,8 @@ const Shifts = () => {
       {days.map((day, i) => {
         let dayOfWeek = new Date(columnDates[i]);
         let today = new Date(currentDate)
-        console.log('dayOfWeek ', dayOfWeek);
-        console.log('today ', today)
-          return <div key={day} className={dayOfWeek < today ? "column prev-day" : "column"}>
-            <DayOfWeek day={day} shifts={schedule[0].[day]} />
+          return <div key={day} className="column">
+            <DayOfWeek day={day} previous={dayOfWeek < today ? true : false} shifts={schedule[0].[day]} />
           </div>
       })}
       </>

@@ -171,25 +171,68 @@ body::-webkit-scrollbar {
   color: black;
 }
 
-.emp-info-modal-bg {
-  position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 1000;
+.emp-info-modal {
+  padding: 15px;
 }
 
-.emp-info-modal {
-  position: fixed;
-	width: 200px;
-	height: 200px;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: #f5f5f5;
-	padding: 50px;
-	z-index: 1000;
+.x-btn-rto-form {
+  width: fit-content;
+  font-size: 2rem;
+  margin-left: auto;
+  margin-bottom: 20px;
+}
+.x-btn-rto-form:hover {
+  cursor: pointer;
+}
+
+.btn-modal-cont {
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn-release-shift {
+  display: block;
+  margin: 10px 0px;
+}
+
+.info-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.modal-label {
+  width: fit-content;
+  font-size: 2rem;
+  margin-top: 15px;
+}
+
+
+.employee-name-cal {
+  color: #3a3a89;
+  justify-items: center;
+  width: 80%;
+  display: flex;
+  font-size: 3.5rem;
+  margin-bottom: 30px;
+  border-bottom: 1px solid gray;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.employee-phone {
+  color: #3a3a89;
+  justify-items: center;
+  width: 80%;
+  display: flex;
+  font-size: 3.5rem;
+  margin-bottom: 30px;
+  border-bottom: 1px solid gray;
+  flex-wrap: nowrap;
+  justify-content: center;
 }
 
 /* Login Page CSS*/
