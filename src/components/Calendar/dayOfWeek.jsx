@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import EmployeeInfoModal from './employeeInfoModal.jsx';
 
+
 const DayOfWeek = (props) => {
+  const roles = useSelector(state => state.rolesReducer.roles);
   const [isModalOpen, setToggleModal] = useState(false);
   const [shiftInfo, setShiftInfo] = useState({});
 
@@ -33,7 +35,10 @@ const DayOfWeek = (props) => {
   return (
     <div>
       {shifts.map((shift, i) => (
-        <div className="shift-block" key={shift+i}>
+        <div className="shift-block" key={shift+i} style={{
+          backgroundColor: roles[shift.role[0]],
+          color: 'white'
+        }}>
           <span onClick={(e) => toggleModal(shift.id, shift.name, shift.phone, shift.role[0], day, e)}>{shift.name}</span>
           <br/>
           {formatTime(shift.datetime)}
