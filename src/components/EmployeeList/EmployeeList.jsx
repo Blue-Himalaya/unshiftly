@@ -111,7 +111,7 @@ const EmployeeList = () => {
 
   function transferDate(str) {
     var date = moment(str);
-    var dateComponent = date.utc().format('YYYY-MM-DD');
+    var dateComponent = date/*.utc()*/.format('YYYY-MM-DD');
     // transferDateBack(dateComponent)
     return dateComponent
   }

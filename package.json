@@ -6,8 +6,10 @@
   "scripts": {
     "test": "npx jest",
     "test:watch": "npx jest --watch --detectOpenHandles",
-    "build": "npx webpack --watch",
-    "server": "npx nodemon server/start.js"
+    "build-watch": "npx webpack --watch",
+    "server": "npx nodemon server/start.js",
+    "start": "node server/start.js",
+    "build": "npx webpack"
   },
   "repository": {
     "type": "git",

@@ -13,7 +13,7 @@ export const fetchWeek = (weekDate, offset) => { //offset is +7 or -7
   var startDate2 = new Date(weekDate)
 
   //GET POSITION OF DAY FROM SCHEDULE WEEK FRI-THU
-  var index = days.indexOf(daysOrdered[startDate.getUTCDay()])
+  var index = days.indexOf(daysOrdered[startDate.getDay()])
 
   startDate.setDate(startDate.getDate() - index + offset);
   endDate.setDate(endDate.getDate() + 7 - index + offset)
@@ -23,10 +23,10 @@ export const fetchWeek = (weekDate, offset) => { //offset is +7 or -7
   var dates = []
   var datesFull =[]
   for (var i = 0; i < 7; i++) {
-    dates.push(startDate2.getUTCDate())
-    var year = startDate2.getUTCFullYear().toString()
-    var month = (startDate2.getUTCMonth() + 1).toString()
-    var day = startDate2.getUTCDate().toString()
+    dates.push(startDate2.getDate())
+    var year = startDate2.getFullYear().toString()
+    var month = (startDate2.getMonth() + 1).toString()
+    var day = startDate2.getDate().toString()
 
     if (month.length === 1) {
         month = '0' + month
