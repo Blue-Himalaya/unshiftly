@@ -10,7 +10,7 @@ export const fetchSingleTimeOff = (date, offset = 0) => {
   var endDate = new Date(date)
 
   //GET POSITION OF DAY FROM SCHEDULE WEEK FRI-THU
-  var index = days.indexOf(daysOrdered[startDate.getUTCDay()])
+  var index = days.indexOf(daysOrdered[startDate.getDay()])
 
   startDate.setDate(startDate.getDate() - index + offset);
   endDate.setDate(endDate.getDate() + 7 - index - 1 + offset)
