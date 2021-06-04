@@ -21,7 +21,7 @@ const Shifts = () => {
         let dayOfWeek = new Date(columnDates[i]);
         let today = new Date(currentDate)
           return <div key={day} className="column">
-            <DayOfWeek day={day} previous={dayOfWeek < today ? true : false} shifts={schedule[0].[day]} />
+            <DayOfWeek dayprop={columnDates[i]} day={day} previous={dayOfWeek < today ? true : false} shifts={schedule[0].[day]} />
           </div>
       })}
       </>

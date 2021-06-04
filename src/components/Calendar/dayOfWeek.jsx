@@ -12,6 +12,7 @@ const DayOfWeek = (props) => {
   // All of the day's shifts
   const shifts = props.shifts;
   const day = props.day;
+  const { dayprop } = props;
   const { previous } = props;
 
   // Format the time
@@ -22,13 +23,20 @@ const DayOfWeek = (props) => {
     return (hour + ' ' + dayEve);
   }
 
-  const toggleModal = (id, name, phone, role, day, e) => {
+  const toggleModal = (e, id, name, phone, role, day, date, time) => {
+    var getTime = ''
+    if (time) {
+      getTime = time.split(' ')[4];
+    }
+    const morning = getTime === 'am' ? 1 : 0;
     setShiftInfo({
       name: name,
       phone: phone,
       id: id,
       role: role,
-      day: day
+      day: day,
+      date: date,
+      morning: morning,
     });
     setToggleModal(prevIsModalOpen => !prevIsModalOpen)
   }
@@ -36,7 +44,7 @@ const DayOfWeek = (props) => {
   return (
     <div className="inner-column-spacing">
       {shifts.map((shift, i) => (
-        <div className="shift-block" key={shift+i} onClick={(e) => toggleModal(shift.id, shift.name, shift.phone, shift.role[0], day, e)} style={{
+        <div className="shift-block" key={shift+i} onClick={(e) => toggleModal(e, shift.id, shift.name, shift.phone, shift.role[0], day, dayprop, shift.datetime)} style={{
           backgroundColor: roles[shift.role[0]],
           opacity: previous ? "30%" : "100%",
           color: 'white'

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import fetchActivityList from '../../../redux-state/actions/fetchActivityList.js'
 import axios from 'axios';
+import moment from 'moment';
 
 const EmployeeInfoModal = (props) => {
   let shiftInfo = props.info; // phone, empName, empId
@@ -15,19 +16,20 @@ const EmployeeInfoModal = (props) => {
   const [dayOfWeek, setDayOfWeek] = useState('');
   const [daySplit, setDaySplit] = useState('');
 
-  const sendReleaseShiftForm = (shiftId, empName, role, empId, date, morning) => {
-    axios.put('/releaseShift', {
-      shiftId: shiftId,
-      empName: empName,
-      role: role,
-      empId: empId,
-      date: date,
-      morning: morning
+  const sendReleaseShiftForm = (e, shiftId, empId, empName, role, date, morning) => {
+    const releaseShift = {
+      shiftId,
+      empId,
+      empName,
+      role,
+      date,
+      morning,
+    }
+    axios.put('/releaseShift', { releaseShift })
+    .then(() => {
+      dispatch(fetchActivityList());
     })
-    .then(() => (
-      dispatch(fetchActivityList())
-    ))
-    .catch((err) => console.log(err))
+    .catch(err => {if (err) throw err});
   }
 
   return (
@@ -49,7 +51,8 @@ const EmployeeInfoModal = (props) => {
               <div className="employee-phone">
                 {shiftInfo.phone}
               </div>
-              {user[1] === shiftInfo.name
+              {user[1] === shiftInfo.name ? <button className="btn btn-release-shift" onClick={(e) => sendReleaseShiftForm(e, shiftInfo.id, user[0], shiftInfo.name, shiftInfo.role, shiftInfo.date, shiftInfo.morning)}>Drop this shift</button> : null}
+              {/* {user[1] === shiftInfo.name
               ? <div className="btn-modal-cont"><select className="btn-release-shift" onChange={(e) => setDayOfWeek(e.target.value)}>
                   <option value="">Day</option>
                   <option value="Friday">Friday</option>
@@ -64,9 +67,9 @@ const EmployeeInfoModal = (props) => {
                   <option value="">AM/PM</option>
                   <option value={1}>AM</option>
                   <option value={0}>PM</option>
-                </select>
-                <button className="btn btn-release-shift" type="click" onClick={() => sendReleaseShiftForm(shiftInfo.id, shiftInfo.name, shiftInfo.role, user[0], dayOfWeek, )}>Submit</button></div>
-              : null}
+                </select> */}
+                {/* <button className="btn btn-release-shift" type="click" onClick={() => sendReleaseShiftForm(shiftInfo.id, shiftInfo.name, shiftInfo.role, user[0], dayOfWeek, shiftInfo.date)}>Submit</button></div>
+              : null} */}
             </div>
           </div>
         </div>

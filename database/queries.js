@@ -16,7 +16,8 @@ const authenticateUser = (username, callback) => {
 const checkIfAdmin = (id, callback) => {
   const queryString = `SELECT role FROM roles r INNER JOIN employee_roles er ON r.id = er.id_role WHERE id_employee = ${id}`;
   connection.query(queryString, (err, results) => {
-    callback(null, results[0].role);
+    const roles = results.map(res => res.role);
+    callback(null, roles);
   });
 };
 
@@ -70,11 +71,10 @@ const deleteShift = (ids, successCb, errorCb) => {
 ======================================================
 */
 const releaseShift = (reqObj, callback) => {
-  console.log(reqObj);
-  const { shiftId, empName, empId, date, morning, role } = reqObj;
+  const { shiftId, empName, empId, date, morning, role } = reqObj.releaseShift;
   const shift = morning ? 'morning' : 'evening';
   const activityString = `${empName} has given up their ${role} - ${shift} shift on ${date}.`
-  const queryString = `update employee_schedule set is_released = 1 where id = '${shiftId}'; insert into activity (time_of_activity, type_of_activity) values (now(), '${activityString}')`
+  const queryString = `update employee_schedule set is_released = 1 where id = '${shiftId}'; insert into activity (shift, time_of_activity, type_of_activity) values (${shiftId}, now(), '${activityString}')`
   connection.query(queryString, (err, results) => {
     if(err) console.log(err);
     else callback(results);
@@ -85,7 +85,21 @@ const pickUpShift = (reqObj, callback) => {
   const {date, morning, shiftId, role, empName, empId} = reqObj;
   const shift = morning ? 'morning' : 'evening';
   const activityString = `${empName} has picked up a ${role} shift on ${date} in the ${shift}`
-  const queryString = `UPDATE employee_schedule SET employee_role_one = (SELECT er.id FROM employee_roles er JOIN employees e ON er.id_employee = e.id JOIN roles r ON er.id_role = r.id WHERE e.name = '${empName}' AND r.role = '${role}'), is_released = 0 WHERE id = ${shiftId}; INSERT INTO activity (time_of_activity, type_of_activity) VALUES (now(), '${activityString}')`;
+  const queryString = `
+  UPDATE employee_schedule
+  SET employee_role_one =
+  (SELECT er.id FROM employee_roles er
+  JOIN employees e ON er.id_employee = e.id
+  JOIN roles r ON er.id_role = r.id
+  WHERE e.name = '${empName}'
+  AND r.role = '${role}'),
+  is_released = 0
+  WHERE id = ${shiftId};
+  INSERT INTO activity (shift, time_of_activity, type_of_activity)
+  VALUES (${shiftId}, now(), '${activityString}')`;
+
+  console.log(queryString)
+
   connection.query(queryString, (err, results) => {
     if(err) console.log(err);
     else callback(results);
@@ -193,7 +207,7 @@ const getAllActiveEmployees = (callback) => {
 
 const createEmployee = (employeeData, callback) => {
   const { name, phone, birthday, password, startDate, role } = employeeData;
-  bcrypt.hash(password, bcrypt.genSaltSync(10), (err, hashedPwd) => {
+  bcrypt.hash(password, bcrypt. genSaltSync(10), (err, hashedPwd) => {
     const queryString = `insert into employees (name, phone, birthday, password, start_date, is_active) values ('${name}', ${phone}, '${birthday}', '${hashedPwd}', '${startDate}', 1); insert into employee_roles (id_employee, id_role) values ((select id from employees where name = '${name}'), (select id from roles where role='${role}'))`;
     connection.query(queryString, (err, result) => {
       if (err) throw err;
@@ -231,8 +245,6 @@ const changeRoleColor = (roleColorObj, callback) => {
     else callback(response)
   })
 }
-
-
 
 module.exports ={
   getAllActiveEmployees,

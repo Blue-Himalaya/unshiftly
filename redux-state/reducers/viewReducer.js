@@ -14,6 +14,7 @@ const viewReducer = (state = initialState, action) => {
       }
     }
     case 'IS_AUTHENTICATED': {
+      console.log(action.payload)
       return {
         view: 'calendar',
         isAuthenticated: true,

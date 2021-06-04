@@ -10,7 +10,6 @@ const passportAuth = (passport) => {
         if (err) throw err;
         if (!user) return done(null, false);
         if (user[0] === undefined) return done(null, false);
-        if (password === 'password') return done(null, user);
         bcrypt.compare(password, user[0].password, (err, result) => {
           if (err) throw err;
           if (result === true) {
