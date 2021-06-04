@@ -14,10 +14,9 @@ const Calendar = () => {
   const weekDate = useSelector(state => state.scheduleReducer.weekDate);
   const employees = useSelector(state => state.employeeReducer.employees);
   const columnDates = useSelector(state => state.scheduleReducer.listOfDays);
-  const currentDateInfo = useSelector(state => state.scheduleReducer.currentDate).split('-');
   const startDateInfo = useSelector(state => state.scheduleReducer.startDate); // ['2019', '10', '15']
-
-  let today = `${currentDateInfo[1]} ${currentDateInfo[0]}`
+  const columnDatesFull = useSelector(state => state.scheduleReducer.listOfFullDays); // 2019-10-11 - 2019-10-17
+  const currentDateInfo = useSelector(state => state.scheduleReducer.currentDate).split('-'); // ['2019', '10', '15']
 
   const [isFormOpen, setToggleForm] = useState(false);
   const [isReleaseFormOpen, setToggleReleaseForm] = useState(false);
@@ -34,7 +33,11 @@ const Calendar = () => {
   const normalWeekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
   const days = ['Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu']
 
-  const todayNum = new Date().getDate(); // 31
+  const today = new Date(currentDateInfo.join('-'));
+  const iterationDay = new Date(columnDatesFull[6]);
+
+  console.log('today: ', today);
+  console.log('iterationDay: ', iterationDay);
 
   return (
     <div>
@@ -45,7 +48,7 @@ const Calendar = () => {
           </div>
           <div className="cal-contents-cont">
             {days.map((day, i) => (
-              <div className={columnDates[i] === new Date().getDate() ? "date-container today" : "date-container"}>
+              <div className={new Date(columnDatesFull[i]).getTime() === today.getTime() ? "date-container today" : "date-container"}>
                 <div className="day">{day}
                   <div className="date">{columnDates[i]}</div>
                 </div>
