@@ -116,6 +116,8 @@ body {
   // background-color: rgba(255, 255, 255, 0.468);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
+  opacity: 100%;
+
   // @include mobile {
   //   -webkit-backdrop-filter: blur(0px);
   //   backdrop-filter: blur(0px);
@@ -131,6 +133,7 @@ body {
     // transform: translateY(-50%);
     border: 1px solid color(schedBorder);
     border-radius: 10px;
+    opacity: 100%;
     // @include mobile {
     //   margin-top: calc((100vh - 500px));
     //   width: 100vw;
@@ -409,6 +412,12 @@ body {
   }
 }
 
+//=================================
+//
+// EMPLOYEE LIST
+//
+//=================================
+
 .employeeList {
   display: grid;
   grid-template-columns: 0.7fr 0.2fr 2.9fr 0.1fr;
@@ -424,10 +433,10 @@ body {
     padding: 20px;
     height: 95%;
     overflow: hidden;
+    height: 900px;
     overflow-y: scroll;
 
   }
-//adding a comment to be able to commit
   .employee-list-title {
     text-align-last: center;
     text-align: center;
@@ -453,6 +462,12 @@ body {
     padding-bottom: 25px;
   }
 
+//=================================
+//
+// EMPLOYEE EDIT
+//
+//=================================
+
   .employee-edit-container {
     grid-area: employee-edit-container;
     padding: 20px;
@@ -466,7 +481,10 @@ body {
     letter-spacing: 8px;
     color: #000;
     text-transform: uppercase;
+    border: none;
     border-bottom: 0.5px solid;
+    background: none;
+    width: 100%
   }
 
   .employee-edit-credentials {
@@ -476,25 +494,31 @@ body {
     text-transform: uppercase;
     color: #000;
     grid-template-columns: 0.5fr 1.5fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     gap: 0px 0px;
     grid-template-areas:
       "employee-edit-title-password employee-edit-password-input"
       "employee-edit-title-phone employee-edit-phone-input"
       "employee-edit-title-birthday employee-edit-birthday-input"
-      "employee-edit-title-startDate employee-edit-startDate-input";
+      "employee-edit-title-startDate employee-edit-startDate-input"
+      "employee-edit-title-roles employee-edit-roles-input";
 
     .credential {
       padding-bottom: 10px;
       padding-top: 30px;
-      height: 100px;
-    }
 
+    }
     .entry {
-      padding-left: 35px;
+      padding-left: 15px;
       padding-bottom: 10px;
-      height: 100px;
-      padding-top: 30px;
+      height: 100%;
+      color: #000;
+      font-size: large;
+
+      input {
+        width: 100%;
+        height: 100%;
+      }
     }
 
 
@@ -514,28 +538,62 @@ body {
       grid-area: employee-edit-title-startDate;
     }
 
+    .employee-edit-title-roles {
+      grid-area: employee-edit-title-roles;
+    }
+
     .employee-edit-password-input {
       grid-area: employee-edit-password-input;
       -webkit-text-security: disc;
+      padding-top:30px;
 
     }
 
     .employee-edit-phone-input {
       grid-area: employee-edit-phone-input;
+      border: none;
+      background: none;
+      height: 100%;
+      width: 100%;
     }
 
     .employee-edit-birthday-input {
       grid-area: employee-edit-birthday-input;
+      border: none;
+      background: none;
+      height: 100%;
+      width: 100%;
+
     }
 
 
     .employee-edit-startDate-input {
       grid-area: employee-edit-startDate-input;
+      border:none;
+      background: none;
+      height: 100%;
+      width: 100%;
+
+    }
+
+    .employee-edit-roles-input {
+      grid-area: employee-edit-roles-input;
+      border:none;
+      background: none;
+      height: 100%;
+      width: 100%;
+      padding-top: 25px;
+
     }
   }
 
   .employee-buttons {
     grid-area: employee-buttons;
+    grid-area: employee-buttons;
+    display: -webkit-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   .employee-add-button {
@@ -548,25 +606,160 @@ body {
     justify-self: end;
   }
 
+  .submit-changes-button {
+    padding-top: 20%;
+    text-align: end;
+  }
+
 }
 
-// .employeeAdd {
-//   display: none; /* Hidden by default */
-//   position: fixed; /* Stay in place */
-//   z-index: 50; /* Sit on top */
-//   left: 0;
-//   top: 0;
-//   width: 100%; /* Full width */
-//   height: 100%; /* Full height */
-//   overflow: auto; /* Enable scroll if needed */
-//   background-color: rgb(0,0,0); /* Fallback color */
-//   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 
-//   .employeeAdd-container {
-//     background-color: #fefefe;
-//     margin: 15% auto; /* 15% from the top and centered */
-//     padding: 20px;
-//     border: 1px solid #888;
-//     width: 30%; /* Could be more or less, depending on screen size */
-//   }
-// }
+
+//=================================
+//
+// EMPLOYEE ADD MODAL
+//
+//=================================
+
+
+.employee-edit-container {
+  grid-area: employee-edit-container;
+  padding: 20px;
+  height: 95%;
+
+}
+
+.employee-add-name-input {
+  text-align: center;
+  font-size: x-large;
+  letter-spacing: 2px;
+  color: #000;
+  text-transform: uppercase;
+  border: none;
+  background: none;
+  width: 100%;
+  padding-bottom: 20px;
+  padding-top: 10px;
+
+}
+
+.employee-add-credentials {
+  display: grid;
+  font-size: medium;
+  padding-left: 15px;
+  text-transform: uppercase;
+  color: #000;
+  grid-template-columns: 0.5fr 1.5fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "employee-add-title-password employee-add-password-input"
+    "employee-add-title-phone employee-add-phone-input"
+    "employee-add-title-birthday employee-add-birthday-input"
+    "employee-add-title-startDate employee-add-startDate-input"
+    "employee-add-title-roles employee-add-roles-input";
+
+
+  .credential {
+    padding-bottom: 10px;
+    padding-top: 30px;
+
+  }
+  .entry {
+    padding-left: 15px;
+    padding-bottom: 10px;
+    height: 100%;
+    color: #000;
+    font-size: medium;
+    width: 100%;
+
+
+    input {
+      width: 50%;
+      height: 50%;
+    }
+  }
+
+
+  .employee-add-title-password {
+    grid-area: employee-add-title-password;
+  }
+
+  .employee-add-title-phone {
+    grid-area: employee-add-title-phone;
+  }
+
+  .employee-add-title-birthday {
+    grid-area: employee-add-title-birthday;
+  }
+
+  .employee-add-title-startDate {
+    grid-area: employee-add-title-startDate;
+  }
+
+  .employee-add-title-roles {
+    grid-area: employee-add-title-roles;
+  }
+
+  .employee-add-password-input {
+    grid-area: employee-add-password-input;
+    -webkit-text-security: disc;
+    border: none;
+    background: none;
+    height: 100%;
+    width: 100%;
+
+  }
+
+  .employee-add-phone-input {
+    grid-area: employee-add-phone-input;
+    border: none;
+    background: none;
+    height: 100%;
+    width: 100%;
+  }
+
+  .employee-add-birthday-input {
+    grid-area: employee-add-birthday-input;
+    border: none;
+    background: none;
+    height: 100%;
+    width: 100%;
+  }
+
+
+  .employee-add-startDate-input {
+    grid-area: employee-add-startDate-input;
+    border:none;
+    background: none;
+    height: 100%;
+    width: 100%;
+  }
+
+  .employee-add-roles-input {
+    grid-area: employee-add-roles-input;
+    border:none;
+    background: none;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.footer {
+  grid-area: employee-buttons;
+  grid-area: employee-buttons;
+  display: -webkit-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.employee-add-button {
+  grid-area: employee-add-button;
+  justify-self: end;
+}
+
+.employee-remove-button {
+  grid-area: employee-remove-button;
+  justify-self: start;
+}

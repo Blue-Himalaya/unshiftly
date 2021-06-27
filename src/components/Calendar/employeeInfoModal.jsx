@@ -33,17 +33,24 @@ const EmployeeInfoModal = (props) => {
   return (
     <div className="shift-block-cont">
       {isOpen?
-        <div className="emp-info-modal-bg-2 modal-outer">
-          <div className="emp-info-modal-2 modal-inner">
+        <div className="modal-outer">
+          <div className="modal-inner emp-info-modal">
             <div className="x-btn-rto-form" onClick={toggleOpen}>X</div>
-            <div>
-              Employee: {shiftInfo.name}
-              <br/>
-              Phone: {shiftInfo.phone}
-              <br/>
-              shift ID: {shiftInfo.id}
+            <div className="info-cont">
+              <div className="modal-label">
+                Employee:
+              </div>
+              <div className="employee-name-cal">
+                {shiftInfo.name}
+              </div>
+              <div className="modal-label">
+                Phone:
+              </div>
+              <div className="employee-phone">
+                {shiftInfo.phone}
+              </div>
               {user[1] === shiftInfo.name
-              ? <div><select onChange={(e) => setDayOfWeek(e.target.value)}>
+              ? <div className="btn-modal-cont"><select className="btn-release-shift" onChange={(e) => setDayOfWeek(e.target.value)}>
                   <option value="">Day</option>
                   <option value="Friday">Friday</option>
                   <option value="Saturday">Saturday</option>
@@ -53,12 +60,12 @@ const EmployeeInfoModal = (props) => {
                   <option value="Wednesday">Wednesday</option>
                   <option value="Thursday">Thursday</option>
                 </select>
-                <select onChange={(e) => setDaySplit(e.target.value)}>
+                <select className="btn-release-shift" onChange={(e) => setDaySplit(e.target.value)}>
                   <option value="">AM/PM</option>
                   <option value={1}>AM</option>
                   <option value={0}>PM</option>
                 </select>
-                <button type="click" onClick={() => sendReleaseShiftForm(shiftInfo.id, shiftInfo.name, shiftInfo.role, user[0], dayOfWeek, )}>Submit</button></div>
+                <button className="btn btn-release-shift" type="click" onClick={() => sendReleaseShiftForm(shiftInfo.id, shiftInfo.name, shiftInfo.role, user[0], dayOfWeek, )}>Submit</button></div>
               : null}
             </div>
           </div>
